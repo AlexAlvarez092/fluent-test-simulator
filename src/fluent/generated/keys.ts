@@ -16,6 +16,13 @@ declare global {
                 }
                 composite: [
                     {
+                        table: 'sys_db_object'
+                        id: '1a2f724e2cab4ba4bf42476d6ac4760f'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '37ff983bf26842758b71ba03f475e14d'
                         key: {
@@ -46,6 +53,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '5cfe23b8c8d843d791e6d5821599c28c'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            element: 'name'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '81000a06116c4423b17c876f420cc8e9'
                         key: {
@@ -66,6 +81,22 @@ declare global {
                         id: 'a7a1e2a2f1d9441f8da83ca9d7c08d15'
                         key: {
                             name: 'x_2119443_test_sim/main'
+                        }
+                    },
+                    {
+                        table: 'ua_table_licensing_config'
+                        id: 'aa789c3ee8dd4ad78bdb932f79092951'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'b672e10cce42469d954d06313fa06dfa'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            element: 'name'
+                            language: 'en'
                         }
                     },
                     {
@@ -98,6 +129,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: 'dbc088eb20ff4234b11c099c84d9bcd6'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            element: 'NULL'
+                        }
+                    },
+                    {
                         table: 'sys_ui_page'
                         id: 'f36527aeee9c4f97b76394ef37ba5be7'
                         key: {
@@ -109,6 +148,15 @@ declare global {
                         id: 'f74ee8ed21944ff38fda41fe018e8459'
                         key: {
                             name: 'x_2119443_test_sim.user'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'fac2b803a08346a7bf41c1ce3ad91e6d'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            element: 'NULL'
+                            language: 'en'
                         }
                     },
                 ]
