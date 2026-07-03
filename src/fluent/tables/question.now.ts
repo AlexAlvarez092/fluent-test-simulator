@@ -18,3 +18,45 @@ export const x_2119443_test_sim_question = Table({
         docs: UrlColumn({})
     },
 })
+
+import { List, Form, default_view } from '@servicenow/sdk/core'
+
+Form({
+    table: 'x_2119443_test_sim_question',
+    view: default_view,
+    sections: [
+        {
+            caption: 'Details',
+            content: [
+                {
+                    layout: 'two-column',
+                    leftElements: [
+                        { field: 'collection', type: 'table_field' }
+                    ],
+                    rightElements: [
+                        { field: 'type', type: 'table_field' }
+                    ]
+                },
+                {
+                    layout: 'one-column',
+                    elements: [
+                        { field: 'question', type: 'table_field' },
+                        { field: 'rationale', type: 'table_field' },
+                        { field: 'docs', type: 'table_field' }
+                    ]
+                }
+            ],
+        },
+    ],
+})
+
+List({
+    table: 'x_2119443_test_sim_question',
+    view: default_view,
+    columns: [
+        { element: 'question', position: 0 },
+        { element: 'collection', position: 1 },
+        { element: 'type', position: 2 }
+    ],
+})
+
