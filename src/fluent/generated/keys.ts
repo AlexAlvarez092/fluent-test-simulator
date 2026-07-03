@@ -24,6 +24,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_user_role'
+                        id: '423ad4aad7114375bed65afe3b8c8a19'
+                        key: {
+                            name: 'x_2119443_test_sim.admin'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '441ac68d1f4a41a0b921a7920127ee5d'
                         key: {
@@ -95,6 +102,13 @@ declare global {
                         id: 'f36527aeee9c4f97b76394ef37ba5be7'
                         key: {
                             endpoint: 'x_2119443_test_sim_incident_manager.do'
+                        }
+                    },
+                    {
+                        table: 'sys_user_role'
+                        id: 'f74ee8ed21944ff38fda41fe018e8459'
+                        key: {
+                            name: 'x_2119443_test_sim.user'
                         }
                     },
                 ]
