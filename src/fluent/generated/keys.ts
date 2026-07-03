@@ -25,6 +25,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '0e3edd459c6045e9805ab60f7a39ff58'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'is_correct'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '0f318f9b7cd44c4a94d1c861aac68cb7'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'NULL'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: '1a2f724e2cab4ba4bf42476d6ac4760f'
                         key: {
@@ -107,6 +124,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '4bba6a35aee34715bc6cab284f8c866c'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'question'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '4c86d9dc66ae4abcacbf2963196c1104'
                         key: {
                             name: 'x_2119443_test_sim_question'
@@ -140,10 +166,35 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: '5e25e05b1bd94f1ba2df9621bc3e5e69'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: '61198a1a41224273ad4b6306133617f9'
                         key: {
                             name: 'x_2119443_test_sim_question'
                             element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6dc5e6921e2d4deba6a84f1687e82dc1'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'question'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '80e96c185c754689a6e09e790559d22d'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'is_correct'
+                            language: 'en'
                         }
                     },
                     {
@@ -167,6 +218,22 @@ declare global {
                         id: '8423b6219076456eb62c2ab7e71744d8'
                         key: {
                             name: 'x_2119443_test_sim_question'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '858087198429474c8c34c8d65388e226'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'answer'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'ua_table_licensing_config'
+                        id: '88173451ac494ad5ac5391cee78960a6'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
                         }
                     },
                     {
@@ -213,6 +280,13 @@ declare global {
                         id: 'aa789c3ee8dd4ad78bdb932f79092951'
                         key: {
                             name: 'x_2119443_test_sim_collection'
+                        }
+                    },
+                    {
+                        table: 'sys_db_object'
+                        id: 'b4deba3ee98d469baaa34abf16b1d727'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
                         }
                     },
                     {
@@ -290,6 +364,14 @@ declare global {
                         id: 'f74ee8ed21944ff38fda41fe018e8459'
                         key: {
                             name: 'x_2119443_test_sim.user'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: 'fa6dc696cb0346f28d856c0361d04369'
+                        key: {
+                            name: 'x_2119443_test_sim_answer'
+                            element: 'answer'
                         }
                     },
                     {
