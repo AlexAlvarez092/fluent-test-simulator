@@ -48,7 +48,7 @@ Form({
             ],
         },
         {
-            caption: 'Related answers',
+            caption: 'Answers',
             content: [
                 {
                     layout: 'one-column',

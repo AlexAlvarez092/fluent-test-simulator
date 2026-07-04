@@ -28,7 +28,7 @@ Form({
             ],
         },
         {
-            caption: 'Related questions',
+            caption: 'Questions',
             content: [
                 {
                     layout: 'one-column',
