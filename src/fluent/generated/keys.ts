@@ -320,6 +320,22 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_section'
+                        id: '578b1de49b014cd0ae60ca1609900758'
+                        deleted: false
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            caption: 'Related questions'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '58bba834ccaf4733bda3f43b31202f22'
                         key: {
@@ -339,6 +355,20 @@ declare global {
                             }
                             element: 'docs'
                             position: '7'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form'
+                        id: '59303da14668477aaee9f0f3654658d5'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
                         }
                     },
                     {
@@ -430,6 +460,29 @@ declare global {
                         key: {
                             name: 'x_2119443_test_sim_answer'
                             element: 'question'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '6e7107edc7cb46bfb2f48d9c87158c89'
+                        deleted: true
+                        key: {
+                            sys_ui_section: {
+                                id: '9d7aa06d56f243e89b38819710fd7386'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.collection'
+                            position: '1'
                         }
                     },
                     {
@@ -556,6 +609,61 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '926c579c963f427a84c93605efe385c6'
+                        deleted: false
+                        key: {
+                            sys_ui_section: {
+                                id: '578b1de49b014cd0ae60ca1609900758'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Related questions'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.collection'
+                            position: '0'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_list'
+                        id: '9c134d6d2d0a486286d513bb3612ff02'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                            element: 'NULL'
+                            relationship: 'NULL'
+                            parent: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_section'
+                        id: '9d7aa06d56f243e89b38819710fd7386'
+                        key: {
+                            name: 'x_2119443_test_sim_collection'
+                            caption: 'Details'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
                         table: 'sys_ui_list_element'
                         id: '9d9d6fb257d04316ac9d8d9de709e66e'
                         key: {
@@ -601,6 +709,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'a8696cbf6c354c8fad3ed166f0909aca'
+                        deleted: true
+                        key: {
+                            sys_ui_section: {
+                                id: '9d7aa06d56f243e89b38819710fd7386'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.question'
+                            position: '1'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'a8d44c1c570a469baf979c51a256cff1'
                         key: {
@@ -614,6 +745,40 @@ declare global {
                         id: 'aa789c3ee8dd4ad78bdb932f79092951'
                         key: {
                             name: 'x_2119443_test_sim_collection'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form_section'
+                        id: 'ab720ce1c8c54effb7d8840a03b05e32'
+                        deleted: false
+                        key: {
+                            sys_ui_form: {
+                                id: '59303da14668477aaee9f0f3654658d5'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: '578b1de49b014cd0ae60ca1609900758'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Related questions'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
                         }
                     },
                     {
@@ -672,6 +837,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_list_element'
+                        id: 'c4d7974c16804d9f9eb049f30afd1a08'
+                        key: {
+                            list_id: {
+                                id: '9c134d6d2d0a486286d513bb3612ff02'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'name'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact'
                         id: 'cd71a92692a04d61a29ce275323d4ee6'
                         key: {
@@ -679,10 +867,66 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'cd7da894b6be48419e56ceb73109af35'
+                        deleted: true
+                        key: {
+                            sys_ui_section: {
+                                id: '578b1de49b014cd0ae60ca1609900758'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Related questions'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.question'
+                            position: '0'
+                        }
+                    },
+                    {
                         table: 'sys_ux_lib_asset'
                         id: 'd39c6f1455eb42cfab635a833e37799c'
                         key: {
                             name: 'x_2119443_test_sim/main.js.map'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form_section'
+                        id: 'd51a963a43e54368b279cb56af29b7cc'
+                        key: {
+                            sys_ui_form: {
+                                id: '59303da14668477aaee9f0f3654658d5'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: '9d7aa06d56f243e89b38819710fd7386'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
                         }
                     },
                     {
@@ -698,6 +942,28 @@ declare global {
                         key: {
                             name: 'x_2119443_test_sim_collection'
                             element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'e823bd42efd847e4a7c2f00d8a5b1230'
+                        key: {
+                            sys_ui_section: {
+                                id: '9d7aa06d56f243e89b38819710fd7386'
+                                key: {
+                                    name: 'x_2119443_test_sim_collection'
+                                    caption: 'Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'name'
+                            position: '0'
                         }
                     },
                     {
