@@ -58,6 +58,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '0bd513ede39c4904b18e1ccecaac518e'
+                        key: {
+                            sys_ui_section: {
+                                id: 'bab6ec0e4cca43e4ba9d97f85b098f76'
+                                key: {
+                                    name: 'x_2119443_test_sim_question'
+                                    caption: 'Related answers'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_answer.question'
+                            position: '0'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '0e3edd459c6045e9805ab60f7a39ff58'
                         key: {
@@ -145,6 +167,7 @@ declare global {
                     {
                         table: 'sys_ui_element'
                         id: '2da04fee733183106fb2f7303ab8b755'
+                        deleted: true
                         key: {
                             sys_ui_section: {
                                 id: '6da04fee733183106fb2f7303ab8b718'
@@ -336,6 +359,39 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_form_section'
+                        id: '5851241e70304156b841b3bdd6586e0b'
+                        key: {
+                            sys_ui_form: {
+                                id: '5e005bc2b0bb4b0796a12f0993ff7382'
+                                key: {
+                                    name: 'x_2119443_test_sim_question'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: 'bab6ec0e4cca43e4ba9d97f85b098f76'
+                                key: {
+                                    name: 'x_2119443_test_sim_question'
+                                    caption: 'Related answers'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '58bba834ccaf4733bda3f43b31202f22'
                         key: {
@@ -442,6 +498,7 @@ declare global {
                     {
                         table: 'sys_ui_section'
                         id: '6da04fee733183106fb2f7303ab8b718'
+                        deleted: true
                         key: {
                             name: 'x_2119443_test_sim_collection'
                             caption: 'NULL'
@@ -798,6 +855,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_section'
+                        id: 'bab6ec0e4cca43e4ba9d97f85b098f76'
+                        key: {
+                            name: 'x_2119443_test_sim_question'
+                            caption: 'Related answers'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: 'bebd44b27f2b4dbb9757d5e59de9b27f'
                         key: {
@@ -942,6 +1014,29 @@ declare global {
                         key: {
                             name: 'x_2119443_test_sim_collection'
                             element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'e090cd0b9fb34d489520f4e9bd1dd0b5'
+                        deleted: true
+                        key: {
+                            sys_ui_section: {
+                                id: 'bab6ec0e4cca43e4ba9d97f85b098f76'
+                                key: {
+                                    name: 'x_2119443_test_sim_question'
+                                    caption: 'Related answers'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_question.answer'
+                            position: '0'
                         }
                     },
                     {

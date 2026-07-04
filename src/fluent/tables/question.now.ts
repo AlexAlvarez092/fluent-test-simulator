@@ -5,7 +5,7 @@ export const x_2119443_test_sim_question = Table({
     label: 'Question',
     display: 'question',
     schema: {
-        question: StringColumn({ mandatory: true }),
+        question: StringColumn({ mandatory: true, maxLength: 4000 }),
         collection: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_collection' }),
         type: ChoiceColumn({
             default: 'single',
@@ -47,6 +47,21 @@ Form({
                 }
             ],
         },
+        {
+            caption: 'Related answers',
+            content: [
+                {
+                    layout: 'one-column',
+                    elements: [
+                        {
+                            type: 'list',
+                            listType: '12M',
+                            listRef: 'x_2119443_test_sim_answer.question',
+                        },
+                    ]
+                }
+            ]
+        }
     ],
 })
 
