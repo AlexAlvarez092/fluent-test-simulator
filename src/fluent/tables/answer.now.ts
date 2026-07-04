@@ -50,3 +50,37 @@ List({
     ],
 })
 
+import { Acl } from '@servicenow/sdk/core'
+
+Acl({
+    $id: Now.ID['answer_create'],
+    type: 'record',
+    table: 'x_2119443_test_sim_answer',
+    operation: 'create',
+    roles: ['x_2119443_test_sim.admin']
+})
+
+Acl({
+    $id: Now.ID['answer_read'],
+    type: 'record',
+    table: 'x_2119443_test_sim_answer',
+    operation: 'read',
+    roles: ['x_2119443_test_sim.user']
+})
+
+Acl({
+    $id: Now.ID['answer_write'],
+    type: 'record',
+    table: 'x_2119443_test_sim_answer',
+    operation: 'write',
+    roles: ['x_2119443_test_sim.admin']
+})
+
+Acl({
+    $id: Now.ID['answer_delete'],
+    type: 'record',
+    table: 'x_2119443_test_sim_answer',
+    operation: 'delete',
+    roles: ['x_2119443_test_sim.admin']
+})
+

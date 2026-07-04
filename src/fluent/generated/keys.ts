@@ -5,16 +5,77 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    answer_create: {
+                        table: 'sys_security_acl'
+                        id: '5784d9517ed349c09cf192c056c5b3cb'
+                    }
+                    answer_delete: {
+                        table: 'sys_security_acl'
+                        id: '8e2bca1186274811b435ad947380252a'
+                    }
+                    answer_read: {
+                        table: 'sys_security_acl'
+                        id: '07ffdbbf61a84733b389920949f01413'
+                    }
+                    answer_write: {
+                        table: 'sys_security_acl'
+                        id: 'fea81f2a1dc44b6791b80349bf37fb70'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: 'a57cf2663b334410a9bab3ca853a595a'
+                    }
+                    collection_create: {
+                        table: 'sys_security_acl'
+                        id: 'd91c0b6c3fac4e559b632f3a3a3f62f3'
+                    }
+                    collection_delete: {
+                        table: 'sys_security_acl'
+                        id: '6b2c8721634e4beab3109713ca06e4f3'
+                    }
+                    collection_read: {
+                        table: 'sys_security_acl'
+                        id: '2370e53ff8d147659f8cf35d2dd55671'
+                    }
+                    collection_write: {
+                        table: 'sys_security_acl'
+                        id: 'e20310520b6f4c44b66834a3f32d36df'
                     }
                     package_json: {
                         table: 'sys_module'
                         id: '402585b55cab48c6ae83c90758d3b786'
                     }
+                    question_create: {
+                        table: 'sys_security_acl'
+                        id: '73063a9f88824ece83882dd01739e595'
+                    }
+                    question_delete: {
+                        table: 'sys_security_acl'
+                        id: '83337a135a5a4bd2abc750f9a6c7a7ca'
+                    }
+                    question_read: {
+                        table: 'sys_security_acl'
+                        id: 'b8a15a4aa47a48629d02e55d25f2f354'
+                    }
+                    question_write: {
+                        table: 'sys_security_acl'
+                        id: '7adb29b9beed4267935f7a8bee21cb75'
+                    }
                 }
                 composite: [
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '0010c222cabc4737b11e69f2437edc10'
+                        key: {
+                            sys_security_acl: 'b8a15a4aa47a48629d02e55d25f2f354'
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459'
+                                key: {
+                                    name: 'x_2119443_test_sim.user'
+                                }
+                            }
+                        }
+                    },
                     {
                         table: 'sys_ui_form_section'
                         id: '055e348354dc46a4b15188b134d241c4'
@@ -149,6 +210,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '2317abd5534a4573aa6c6e7b5dc7541a'
+                        key: {
+                            sys_security_acl: '73063a9f88824ece83882dd01739e595'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '26252050bdec4455a5eb78802093c1e1'
                         key: {
@@ -232,6 +306,19 @@ declare global {
                             }
                             element: 'name'
                             position: '0'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '3021ca39a69246199d7426e7942a509c'
+                        key: {
+                            sys_security_acl: '8e2bca1186274811b435ad947380252a'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
                         }
                     },
                     {
@@ -383,6 +470,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '4c1b3229afe540f1bfbbbf15e6c3ef64'
+                        key: {
+                            sys_security_acl: 'fea81f2a1dc44b6791b80349bf37fb70'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_section'
                         id: '4c3ba64be9db490e915123234193960c'
                         key: {
@@ -404,6 +504,19 @@ declare global {
                             name: 'x_2119443_test_sim_question'
                             element: 'NULL'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '4ecda02c940b4404bc87be92712d9e4d'
+                        key: {
+                            sys_security_acl: '7adb29b9beed4267935f7a8bee21cb75'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
                         }
                     },
                     {
@@ -597,6 +710,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '687fd504e3e3407ea1576d270f0b35fb'
+                        key: {
+                            sys_security_acl: '5784d9517ed349c09cf192c056c5b3cb'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_list_element'
                         id: '6b29702f07ed4f8ca404689e465279f3'
                         key: {
@@ -686,6 +812,19 @@ declare global {
                             }
                             element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_answer.question'
                             position: '0'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '768106e59dfa4a128afdabf3df2ac26f'
+                        key: {
+                            sys_security_acl: 'd91c0b6c3fac4e559b632f3a3a3f62f3'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
                         }
                     },
                     {
@@ -849,6 +988,19 @@ declare global {
                             }
                             element: 'question'
                             position: '5'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '8bf3bf1d18bc4d718b34556ebac7f227'
+                        key: {
+                            sys_security_acl: '83337a135a5a4bd2abc750f9a6c7a7ca'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
                         }
                     },
                     {
@@ -1079,6 +1231,19 @@ declare global {
                             }
                             element: '.split'
                             position: '2'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: 'a72a4f7a01d249a3bafeb236502b3092'
+                        key: {
+                            sys_security_acl: '07ffdbbf61a84733b389920949f01413'
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459'
+                                key: {
+                                    name: 'x_2119443_test_sim.user'
+                                }
+                            }
                         }
                     },
                     {
@@ -1385,6 +1550,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: 'dc0b0713c08945f5a9471063b2d0e87e'
+                        key: {
+                            sys_security_acl: '6b2c8721634e4beab3109713ca06e4f3'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: 'e090cd0b9fb34d489520f4e9bd1dd0b5'
                         deleted: true
@@ -1485,6 +1663,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: 'f9bf39c549c148189cf2773e66026e7c'
+                        key: {
+                            sys_security_acl: '2370e53ff8d147659f8cf35d2dd55671'
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459'
+                                key: {
+                                    name: 'x_2119443_test_sim.user'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'fa6dc696cb0346f28d856c0361d04369'
                         key: {
@@ -1521,6 +1712,19 @@ declare global {
                             }
                             element: 'answer'
                             position: '5'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: 'ff55d61cbf4b4a868b7dcb816189905a'
+                        key: {
+                            sys_security_acl: 'e20310520b6f4c44b66834a3f32d36df'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
                         }
                     },
                 ]
