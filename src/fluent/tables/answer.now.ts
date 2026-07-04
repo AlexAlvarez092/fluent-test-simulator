@@ -5,7 +5,7 @@ export const x_2119443_test_sim_answer = Table({
     label: 'Answer',
     display: 'answer',
     schema: {
-        answer: StringColumn({ mandatory: true }),
+        answer: StringColumn({ mandatory: true, maxLength: 4000 }),
         question: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_question' }),
         is_correct: BooleanColumn({})
     },
