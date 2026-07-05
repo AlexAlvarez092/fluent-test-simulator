@@ -3,9 +3,9 @@ import { Table, StringColumn } from '@servicenow/sdk/core'
 export const x_2119443_test_sim_collection = Table({
     name: 'x_2119443_test_sim_collection',
     label: 'Collection',
-    display: 'name', 
+    display: 'name',
     schema: {
-        name: StringColumn({ mandatory: true }),
+        name: StringColumn({ mandatory: true, maxLength: 1000 }),
     },
 })
 
@@ -20,11 +20,8 @@ Form({
             content: [
                 {
                     layout: 'one-column',
-                    elements: [
-                        { field: 'name', type: 'table_field' },
-                        
-                    ]
-                }
+                    elements: [{ field: 'name', type: 'table_field' }],
+                },
             ],
         },
         {
@@ -38,19 +35,17 @@ Form({
                             listType: '12M',
                             listRef: 'x_2119443_test_sim_question.collection',
                         },
-                    ]
-                }
-            ]
-        }
+                    ],
+                },
+            ],
+        },
     ],
 })
 
 List({
     table: 'x_2119443_test_sim_collection',
     view: default_view,
-    columns: [
-        { element: 'name', position: 0 }
-    ],
+    columns: [{ element: 'name', position: 0 }],
 })
 
 import { Acl } from '@servicenow/sdk/core'
@@ -60,7 +55,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_collection',
     operation: 'create',
-    roles: ['x_2119443_test_sim.admin']
+    roles: ['x_2119443_test_sim.admin'],
 })
 
 Acl({
@@ -68,7 +63,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_collection',
     operation: 'read',
-    roles: ['x_2119443_test_sim.user']
+    roles: ['x_2119443_test_sim.user'],
 })
 
 Acl({
@@ -76,7 +71,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_collection',
     operation: 'write',
-    roles: ['x_2119443_test_sim.admin']
+    roles: ['x_2119443_test_sim.admin'],
 })
 
 Acl({
@@ -84,5 +79,5 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_collection',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.admin']
+    roles: ['x_2119443_test_sim.admin'],
 })
