@@ -61,6 +61,14 @@ declare global {
                         table: 'sys_security_acl';
                         id: '7adb29b9beed4267935f7a8bee21cb75';
                     };
+                    'set-user-on-collection-save': {
+                        table: 'sys_script';
+                        id: '025717a2b8c84ec5a7fa78e672077f07';
+                    };
+                    'src_server_modules_business-rules_set-user-on-collection-save_ts': {
+                        table: 'sys_module';
+                        id: 'ad3d6dcc527e4feea0ef3847068ab2c3';
+                    };
                     user_collection_create: {
                         table: 'sys_security_acl';
                         id: '1464c8dae8384b53a3cfaeb204146af1';
