@@ -1,5 +1,6 @@
 .DS_Store
 .now/
+.github/
 dist/
 node_modules/
 target/
