@@ -11,15 +11,18 @@
     "deploy": "now-sdk install",
     "transform": "now-sdk transform",
     "types": "now-sdk dependencies",
-    "dev": "now-sdk run dev"
+    "dev": "now-sdk run dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@servicenow/sdk": "4.8.1",
     "@servicenow/glide": "27.0.5",
-    "typescript": "5.5.4",
     "@servicenow/isomorphic-rollup": "^1.3.0",
+    "@servicenow/sdk": "4.8.1",
     "@types/react": "19.x",
-    "@types/react-dom": "19.x"
+    "@types/react-dom": "19.x",
+    "prettier": "^3.9.4",
+    "typescript": "5.5.4"
   },
   "dependencies": {
     "react": "19.x",

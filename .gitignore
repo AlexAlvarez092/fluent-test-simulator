@@ -1,9 +1,8 @@
-.now/
-.github/
-dist/
-node_modules/
-target/
-docs/
+node_modules
+dist
+docs
+.now
+.github
 *.tsbuildinfo
 .jest_cache
 .DS_Store
