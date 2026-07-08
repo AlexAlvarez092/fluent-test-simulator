@@ -61,6 +61,22 @@ declare global {
                         table: 'sys_security_acl';
                         id: '7adb29b9beed4267935f7a8bee21cb75';
                     };
+                    user_collection_create: {
+                        table: 'sys_security_acl';
+                        id: '1464c8dae8384b53a3cfaeb204146af1';
+                    };
+                    user_collection_delete: {
+                        table: 'sys_security_acl';
+                        id: 'df2308a197634cc4b4914d52e15e04a6';
+                    };
+                    user_collection_read: {
+                        table: 'sys_security_acl';
+                        id: '7520538ea7294522b84a49341566cb64';
+                    };
+                    user_collection_write: {
+                        table: 'sys_security_acl';
+                        id: 'f000115e5a644fd5b3e8090295659c2c';
+                    };
                 };
                 composite: [
                     {
@@ -188,6 +204,14 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_dictionary';
+                        id: '1176f68f277c410fb2eb3ebecf74ce05';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'user';
+                        };
+                    },
+                    {
                         table: 'sys_db_object';
                         id: '1a2f724e2cab4ba4bf42476d6ac4760f';
                         key: {
@@ -200,6 +224,23 @@ declare global {
                         key: {
                             name: 'x_2119443_test_sim_question';
                             element: 'docs';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list';
+                        id: '1f96123aa6d44057be6fb6300b118bc6';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
+                            element: 'NULL';
+                            relationship: 'NULL';
+                            parent: 'NULL';
                         };
                     },
                     {
@@ -334,6 +375,15 @@ declare global {
                                 };
                             };
                             element: 'question';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '347b4137af0644eb84a89c6c74978787';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'NULL';
+                            language: 'en';
                         };
                     },
                     {
@@ -513,6 +563,14 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_dictionary';
+                        id: '500ef58290dd4155823f32c3dbef4233';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'NULL';
+                        };
+                    },
+                    {
                         table: 'sys_ui_list';
                         id: '5195b69b080a48d7907e60b5df2a51a8';
                         key: {
@@ -536,6 +594,19 @@ declare global {
                             name: 'x_2119443_test_sim_question';
                             element: 'type';
                             language: 'en';
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: '559840f318224ef09c8588652b1f8963';
+                        key: {
+                            sys_security_acl: 'f000115e5a644fd5b3e8090295659c2c';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
                         };
                     },
                     {
@@ -629,6 +700,28 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_element';
+                        id: '627a0489536f4d03a35dbf032880a42f';
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.end_split';
+                            position: '4';
+                        };
+                    },
+                    {
                         table: 'sys_ui_form_section';
                         id: '640c3f6b3c4547eda2da9ff1ede7e143';
                         key: {
@@ -659,6 +752,51 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list_element';
+                        id: '6473c18455f44fc19d672c86524a4768';
+                        key: {
+                            list_id: {
+                                id: '1f96123aa6d44057be6fb6300b118bc6';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'user';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '64f606e3f38b433b9d69e4e83da9a9b5';
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'collection';
+                            position: '3';
                         };
                     },
                     {
@@ -720,11 +858,63 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_form';
+                        id: '6d95d92a4ff9412d9a43b96864169b1b';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
+                        };
+                    },
+                    {
                         table: 'sys_dictionary';
                         id: '6dc5e6921e2d4deba6a84f1687e82dc1';
                         key: {
                             name: 'x_2119443_test_sim_answer';
                             element: 'question';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '6e6568f4f8304d6fa9e50e590e0f3718';
+                        deleted: true;
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'saved_date';
+                            position: '5';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_section';
+                        id: '6e996fd6ac14467b998d99a59add1f79';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            caption: 'Details';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
                         };
                     },
                     {
@@ -809,6 +999,28 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_element';
+                        id: '78fa32d221bd4271ba3bcba3514deefc';
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.begin_split';
+                            position: '0';
+                        };
+                    },
+                    {
                         table: 'sys_security_acl_role';
                         id: '7948a868bc86409a8b32433cf1710357';
                         key: {
@@ -819,6 +1031,28 @@ declare global {
                                     name: 'x_2119443_test_sim.admin';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: '796b20638a974622858f446be002ce4a';
+                        key: {
+                            sys_security_acl: 'df2308a197634cc4b4914d52e15e04a6';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '7a15f812f41447dc926e4930b210e3f5';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'collection';
+                            language: 'en';
                         };
                     },
                     {
@@ -1009,6 +1243,41 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element';
+                        id: '95df385208e24fa0a307a308d9100169';
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.split';
+                            position: '2';
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: '971dbcd8f9ee4bddb682aeb8db2c7e83';
+                        key: {
+                            sys_security_acl: '1464c8dae8384b53a3cfaeb204146af1';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
                         id: '984ea0123f4a4cc982e6a516b698fb05';
                         key: {
                             sys_ui_section: {
@@ -1060,6 +1329,16 @@ declare global {
                             element: 'NULL';
                             relationship: 'NULL';
                             parent: 'NULL';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '9cd5e2b9381b4c4898fa78c02cdef96b';
+                        deleted: true;
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'saved_date';
+                            language: 'en';
                         };
                     },
                     {
@@ -1157,6 +1436,28 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element';
+                        id: 'a21b634dcf8c41e68b7e8d7434bc9fe6';
+                        key: {
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'user';
+                            position: '1';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
                         id: 'a445111546f94bdd82fcdcd2c52585c4';
                         key: {
                             sys_ui_section: {
@@ -1211,6 +1512,48 @@ declare global {
                         id: 'aa789c3ee8dd4ad78bdb932f79092951';
                         key: {
                             name: 'x_2119443_test_sim_collection';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_form_section';
+                        id: 'ab0f7db506da4f65b8643ecf081bd239';
+                        key: {
+                            sys_ui_form: {
+                                id: '6d95d92a4ff9412d9a43b96864169b1b';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            sys_ui_section: {
+                                id: '6e996fd6ac14467b998d99a59add1f79';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: 'ac7295372b5f4563bbb4695989c04e5d';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'user';
+                            language: 'en';
                         };
                     },
                     {
@@ -1291,6 +1634,19 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_security_acl_role';
+                        id: 'bebf22820ebd4fffbbcef087fc805f81';
+                        key: {
+                            sys_security_acl: '7520538ea7294522b84a49341566cb64';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
+                        };
+                    },
+                    {
                         table: 'sys_documentation';
                         id: 'bef8647c19da49b1b73e411ce9ce6c42';
                         key: {
@@ -1345,11 +1701,65 @@ declare global {
                         };
                     },
                     {
+                        table: 'ua_table_licensing_config';
+                        id: 'c6568919cf8f4020af12c1eea6482754';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list_element';
+                        id: 'c88110428b9e4958b50e93b018db764e';
+                        deleted: true;
+                        key: {
+                            list_id: {
+                                id: '1f96123aa6d44057be6fb6300b118bc6';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'saved_date';
+                        };
+                    },
+                    {
                         table: 'sn_glider_source_artifact';
                         id: 'cd71a92692a04d61a29ce275323d4ee6';
                         deleted: true;
                         key: {
                             name: 'x_2119443_test_sim_incident_manager.do - BYOUI Files';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list_element';
+                        id: 'cee1a414ec5a442396d95f0a5703b069';
+                        key: {
+                            list_id: {
+                                id: '1f96123aa6d44057be6fb6300b118bc6';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'collection';
                         };
                     },
                     {
@@ -1390,6 +1800,22 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_db_object';
+                        id: 'd6823fe95d934dcca7efe568fc8fd588';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'd84429e014894c6caa1e7b7eb8424e37';
+                        deleted: true;
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'saved_date';
                         };
                     },
                     {
@@ -1534,6 +1960,14 @@ declare global {
                                     name: 'x_2119443_test_sim.user';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'fa2aeb63b82e4048853f885e3f8a3019';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'collection';
                         };
                     },
                     {
