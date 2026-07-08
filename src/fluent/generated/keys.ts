@@ -25,6 +25,14 @@ declare global {
                         table: 'sys_module'
                         id: 'a57cf2663b334410a9bab3ca853a595a'
                     }
+                    collection_create: {
+                        table: 'sys_security_acl'
+                        id: '4b188f68af6d40e59b276ff75ff7c426'
+                    }
+                    collection_delete: {
+                        table: 'sys_security_acl'
+                        id: 'f0c1275dfbaa491c84e29d2bafe05d0d'
+                    }
                     collection_read: {
                         table: 'sys_security_acl'
                         id: '2370e53ff8d147659f8cf35d2dd55671'
@@ -69,6 +77,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ux_lib_asset'
+                        id: '030656d1319f49f982c072ea3d283ac5'
+                        deleted: true
+                        key: {
+                            name: 'x_2119443_test_sim/vendor-react-dom--966e429a.js.map'
+                        }
+                    },
+                    {
                         table: 'sys_ui_form_section'
                         id: '055e348354dc46a4b15188b134d241c4'
                         key: {
@@ -99,6 +115,13 @@ declare global {
                                     sys_domain: 'global'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '0a06559791f74b768ff9d3afcd222b3b'
+                        key: {
+                            name: 'x_2119443_test_sim/vendor-react-dom--a7b1b9e3.js.map'
                         }
                     },
                     {
@@ -229,6 +252,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '2838d512d0a34b6ea3f35720871aa296'
+                        key: {
+                            application_file: 'd39c6f1455eb42cfab635a833e37799c'
+                            source_artifact: 'e1271c69f51442ff9879aed6a6291428'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '2a3706f0ef804d719772ae325c93710f'
                         key: {
@@ -322,6 +353,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '37ff983bf26842758b71ba03f475e14d'
+                        deleted: true
                         key: {
                             application_file: '5b809b60a2aa408b83e12d66ee5ba01e'
                             source_artifact: 'cd71a92692a04d61a29ce275323d4ee6'
@@ -390,6 +422,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '441ac68d1f4a41a0b921a7920127ee5d'
+                        deleted: true
                         key: {
                             application_file: 'f36527aeee9c4f97b76394ef37ba5be7'
                             source_artifact: 'cd71a92692a04d61a29ce275323d4ee6'
@@ -535,6 +568,7 @@ declare global {
                     {
                         table: 'sys_ux_lib_asset'
                         id: '5b809b60a2aa408b83e12d66ee5ba01e'
+                        deleted: true
                         key: {
                             name: 'x_2119443_test_sim/vendor-react-dom--003b9c7e'
                         }
@@ -624,6 +658,27 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '68e357c54cdd4c59872607aed02c6bab'
+                        key: {
+                            sys_security_acl: '4b188f68af6d40e59b276ff75ff7c426'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '6908b216a4a340f989e69d0034a06d7b'
+                        key: {
+                            application_file: '0a06559791f74b768ff9d3afcd222b3b'
+                            source_artifact: 'e1271c69f51442ff9879aed6a6291428'
+                        }
+                    },
+                    {
                         table: 'sys_ui_list_element'
                         id: '6b29702f07ed4f8ca404689e465279f3'
                         key: {
@@ -679,6 +734,7 @@ declare global {
                     {
                         table: 'sys_security_acl_role'
                         id: '768106e59dfa4a128afdabf3df2ac26f'
+                        deleted: true
                         key: {
                             sys_security_acl: 'd91c0b6c3fac4e559b632f3a3a3f62f3'
                             sys_user_role: {
@@ -735,6 +791,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '7948a868bc86409a8b32433cf1710357'
+                        key: {
+                            sys_security_acl: 'f0c1275dfbaa491c84e29d2bafe05d0d'
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19'
+                                key: {
+                                    name: 'x_2119443_test_sim.admin'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '80e96c185c754689a6e09e790559d22d'
                         key: {
@@ -746,6 +815,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '81000a06116c4423b17c876f420cc8e9'
+                        deleted: true
                         key: {
                             application_file: 'a7a1e2a2f1d9441f8da83ca9d7c08d15'
                             source_artifact: 'cd71a92692a04d61a29ce275323d4ee6'
@@ -890,6 +960,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '8dccab7c504d4b9ca818f77dcb972122'
+                        deleted: true
                         key: {
                             application_file: 'd39c6f1455eb42cfab635a833e37799c'
                             source_artifact: 'cd71a92692a04d61a29ce275323d4ee6'
@@ -938,6 +1009,21 @@ declare global {
                             }
                             element: '.begin_split'
                             position: '0'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '9accd1603b6747e2ac4df5e807f6e83a'
+                        key: {
+                            name: 'x_2119443_test_sim/vendor-react-dom--a7b1b9e3'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '9b2c5d3f95bf45c5bd0e56a0668fa021'
+                        deleted: true
+                        key: {
+                            name: 'x_2119443_test_sim/vendor-react-dom--966e429a'
                         }
                     },
                     {
@@ -1160,6 +1246,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: 'b5da52767dd24b35a02b32acd3a96450'
+                        key: {
+                            application_file: 'f36527aeee9c4f97b76394ef37ba5be7'
+                            source_artifact: 'e1271c69f51442ff9879aed6a6291428'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'b672e10cce42469d954d06313fa06dfa'
                         key: {
@@ -1171,6 +1265,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact_m2m'
                         id: 'bebd44b27f2b4dbb9757d5e59de9b27f'
+                        deleted: true
                         key: {
                             application_file: 'd8a00b91ab984f3086fbbf020eae7d40'
                             source_artifact: 'cd71a92692a04d61a29ce275323d4ee6'
@@ -1233,6 +1328,7 @@ declare global {
                     {
                         table: 'sn_glider_source_artifact'
                         id: 'cd71a92692a04d61a29ce275323d4ee6'
+                        deleted: true
                         key: {
                             name: 'x_2119443_test_sim_incident_manager.do - BYOUI Files'
                         }
@@ -1280,6 +1376,7 @@ declare global {
                     {
                         table: 'sys_ux_lib_asset'
                         id: 'd8a00b91ab984f3086fbbf020eae7d40'
+                        deleted: true
                         key: {
                             name: 'x_2119443_test_sim/vendor-react-dom--003b9c7e.js.map'
                         }
@@ -1295,6 +1392,7 @@ declare global {
                     {
                         table: 'sys_security_acl_role'
                         id: 'dc0b0713c08945f5a9471063b2d0e87e'
+                        deleted: true
                         key: {
                             sys_security_acl: '6b2c8721634e4beab3109713ca06e4f3'
                             sys_user_role: {
@@ -1303,6 +1401,13 @@ declare global {
                                     name: 'x_2119443_test_sim.admin'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact'
+                        id: 'e1271c69f51442ff9879aed6a6291428'
+                        key: {
+                            name: 'x_2119443_test_sim_app.do - BYOUI Files'
                         }
                     },
                     {
@@ -1339,6 +1444,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: 'e24063a7c4af4c25931fac89a4be55ad'
+                        key: {
+                            application_file: '9accd1603b6747e2ac4df5e807f6e83a'
+                            source_artifact: 'e1271c69f51442ff9879aed6a6291428'
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: 'e823bd42efd847e4a7c2f00d8a5b1230'
                         key: {
@@ -1361,6 +1474,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: 'ed915b1c96b9464a831214121b9817e8'
+                        key: {
+                            application_file: 'a7a1e2a2f1d9441f8da83ca9d7c08d15'
+                            source_artifact: 'e1271c69f51442ff9879aed6a6291428'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'f26a610877e74325b26e9f925d119367'
                         key: {
@@ -1372,7 +1493,7 @@ declare global {
                         table: 'sys_ui_page'
                         id: 'f36527aeee9c4f97b76394ef37ba5be7'
                         key: {
-                            endpoint: 'x_2119443_test_sim_incident_manager.do'
+                            endpoint: 'x_2119443_test_sim_app.do'
                         }
                     },
                     {
