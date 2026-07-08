@@ -1,5 +1,5 @@
 // handles importing scss as modules
 declare module '*.scss' {
-    const content: string
-    export default content
+    const content: string;
+    export default content;
 }

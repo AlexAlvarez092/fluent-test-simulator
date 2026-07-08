@@ -1,6 +1,6 @@
 {
-  "scope": "x_2119443_test_sim",
-  "scopeId": "80d93e22733183106fb2f7303ab8b739",
-  "name": "Test Simulator",
-  "tsconfigPath": "./src/server/tsconfig.json"
+    "scope": "x_2119443_test_sim",
+    "scopeId": "80d93e22733183106fb2f7303ab8b739",
+    "name": "Test Simulator",
+    "tsconfigPath": "./src/server/tsconfig.json"
 }

@@ -22,9 +22,9 @@ This is a ServiceNow Fluent application designed as a comprehensive test and exa
 
 - Users can generate tests from a selected collection by specifying the number of questions
 - Test question selection modes:
-  - **Unseen questions**: Questions the user hasn't answered yet
-  - **Failed questions**: Questions the user answered incorrectly in previous tests
-  - **Random selection**: Random mix from all questions in the collection
+    - **Unseen questions**: Questions the user hasn't answered yet
+    - **Failed questions**: Questions the user answered incorrectly in previous tests
+    - **Random selection**: Random mix from all questions in the collection
 - Users can exit/complete tests at any time without answering all questions
 - Test results are saved to user statistics
 

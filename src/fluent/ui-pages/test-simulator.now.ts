@@ -1,6 +1,6 @@
-import '@servicenow/sdk/global'
-import { UiPage } from '@servicenow/sdk/core'
-import homepage from '../../client/index.html'
+import '@servicenow/sdk/global';
+import { UiPage } from '@servicenow/sdk/core';
+import homepage from '../../client/index.html';
 
 UiPage({
     $id: Now.ID['test-simulator-page'],
@@ -9,4 +9,4 @@ UiPage({
     category: 'general',
     html: homepage,
     direct: true,
-})
+});

@@ -1,4 +1,4 @@
-import { Table, StringColumn } from '@servicenow/sdk/core'
+import { Table, StringColumn } from '@servicenow/sdk/core';
 
 export const x_2119443_test_sim_collection = Table({
     name: 'x_2119443_test_sim_collection',
@@ -7,9 +7,9 @@ export const x_2119443_test_sim_collection = Table({
     schema: {
         name: StringColumn({ mandatory: true, maxLength: 1000 }),
     },
-})
+});
 
-import { List, Form, default_view } from '@servicenow/sdk/core'
+import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
     table: 'x_2119443_test_sim_collection',
@@ -40,15 +40,15 @@ Form({
             ],
         },
     ],
-})
+});
 
 List({
     table: 'x_2119443_test_sim_collection',
     view: default_view,
     columns: [{ element: 'name', position: 0 }],
-})
+});
 
-import { Acl } from '@servicenow/sdk/core'
+import { Acl } from '@servicenow/sdk/core';
 
 Acl({
     $id: Now.ID['collection_create'],
@@ -56,7 +56,7 @@ Acl({
     table: 'x_2119443_test_sim_collection',
     operation: 'create',
     roles: ['x_2119443_test_sim.admin'],
-})
+});
 
 Acl({
     $id: Now.ID['collection_read'],
@@ -64,7 +64,7 @@ Acl({
     table: 'x_2119443_test_sim_collection',
     operation: 'read',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['collection_write'],
@@ -72,7 +72,7 @@ Acl({
     table: 'x_2119443_test_sim_collection',
     operation: 'write',
     roles: ['x_2119443_test_sim.admin'],
-})
+});
 
 Acl({
     $id: Now.ID['collection_delete'],
@@ -80,4 +80,4 @@ Acl({
     table: 'x_2119443_test_sim_collection',
     operation: 'delete',
     roles: ['x_2119443_test_sim.admin'],
-})
+});
