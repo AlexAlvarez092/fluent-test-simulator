@@ -1,9 +1,10 @@
-.DS_Store
 .now/
 .github/
 dist/
 node_modules/
 target/
+docs/
 *.tsbuildinfo
 .jest_cache
+.DS_Store
 package-lock.json
