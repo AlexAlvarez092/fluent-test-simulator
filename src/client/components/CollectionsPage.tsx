@@ -2,8 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { CollectionService } from '../services/CollectionService';
 import { UserCollectionService } from '../services/UserCollectionService';
 
+type CollectionRow = {
+    sys_id: string;
+    name: string;
+    is_saved: boolean;
+};
+
 export default function CollectionsPage() {
-    const [collections, setCollections] = useState([]);
+    const [collections, setCollections] = useState<CollectionRow[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [savingId, setSavingId] = useState<string | null>(null);
@@ -16,7 +22,7 @@ export default function CollectionsPage() {
             setLoading(true);
             setError(null);
             const data = await collectionService.list();
-            setCollections(data);
+            setCollections(Array.isArray(data) ? data : []);
         } catch (err: any) {
             setError('Failed to load collections: ' + (err.message || 'Unknown error'));
             console.error(err);
@@ -32,8 +38,12 @@ export default function CollectionsPage() {
     const handleSaveCollection = async (collectionId: string) => {
         try {
             setSavingId(collectionId);
-            // Business Rule on server will automatically set the user field to the authenticated user
             await userCollectionService.saveCollection(collectionId);
+            setCollections((previous) =>
+                previous.map((collection) =>
+                    collection.sys_id === collectionId ? { ...collection, is_saved: true } : collection
+                )
+            );
         } catch (err: any) {
             setError('Failed to save collection: ' + (err.message || 'Unknown error'));
             console.error(err);
@@ -69,24 +79,23 @@ export default function CollectionsPage() {
                                 <td colSpan={2}>No collections found</td>
                             </tr>
                         ) : (
-                            collections.map((collection: any) => {
-                                const collectionId =
-                                    typeof collection.sys_id === 'object' ? collection.sys_id.value : collection.sys_id;
-                                const name =
-                                    typeof collection.name === 'object'
-                                        ? collection.name.display_value
-                                        : collection.name;
+                            collections.map((collection) => {
+                                const collectionId = collection.sys_id;
+                                const name = collection.name;
+                                const isSaved = collection.is_saved;
 
                                 return (
                                     <tr key={collectionId}>
                                         <td>{name}</td>
                                         <td>
-                                            <button
-                                                onClick={() => handleSaveCollection(collectionId)}
-                                                disabled={savingId === collectionId}
-                                            >
-                                                {savingId === collectionId ? 'Saving...' : 'Save'}
-                                            </button>
+                                            {!isSaved && (
+                                                <button
+                                                    onClick={() => handleSaveCollection(collectionId)}
+                                                    disabled={savingId === collectionId}
+                                                >
+                                                    {savingId === collectionId ? 'Saving...' : 'Save'}
+                                                </button>
+                                            )}
                                         </td>
                                     </tr>
                                 );

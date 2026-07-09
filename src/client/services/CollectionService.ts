@@ -6,21 +6,16 @@ declare global {
 }
 
 export class CollectionService {
-    private readonly tableName: string;
+    private readonly customApiPath: string;
 
     constructor() {
-        this.tableName = 'x_2119443_test_sim_collection';
+        this.customApiPath = '/api/x_2119443_test_sim/test_simulator_api/collections';
     }
 
-    // Return all collections
+    // Return all collections with saved status for current user
     async list() {
         try {
-            const searchParams = new URLSearchParams();
-            searchParams.set('sysparm_display_value', 'all');
-            searchParams.set('sysparm_fields', 'sys_id,name');
-            searchParams.set('sysparm_query', 'ORDERBYDESCname');
-
-            const response = await fetch(`/api/now/table/${this.tableName}?${searchParams.toString()}`, {
+            const response = await fetch(this.customApiPath, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
@@ -33,110 +28,25 @@ export class CollectionService {
                 throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
             }
 
-            const { result } = await response.json();
-            return result || [];
-        } catch (error) {
-            console.error('Error fetching collections:', error);
-            throw error;
-        }
-    }
+            const payload = await response.json();
 
-    // Get a single collection by sys_id
-    async get(sysId: string) {
-        try {
-            const searchParams = new URLSearchParams();
-            searchParams.set('sysparm_display_value', 'all');
-
-            const response = await fetch(`/api/now/table/${this.tableName}/${sysId}?${searchParams.toString()}`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    'X-UserToken': window.g_ck,
-                },
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
+            // Scripted REST responses may vary depending on wrapper behavior.
+            // Normalize to a plain array so callers can safely map over it.
+            if (Array.isArray(payload?.result)) {
+                return payload.result;
             }
 
-            const { result } = await response.json();
-            return result;
-        } catch (error) {
-            console.error(`Error fetching collection ${sysId}:`, error);
-            throw error;
-        }
-    }
-
-    // Create a new collection
-    async create(data: { name: string }) {
-        try {
-            const response = await fetch(`/api/now/table/${this.tableName}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'X-UserToken': window.g_ck,
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
+            if (Array.isArray(payload?.result?.result)) {
+                return payload.result.result;
             }
 
-            return response.json();
-        } catch (error) {
-            console.error('Error creating collection:', error);
-            throw error;
-        }
-    }
-
-    // Update a collection
-    async update(sysId: string, data: { name: string }) {
-        try {
-            const response = await fetch(`/api/now/table/${this.tableName}/${sysId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'X-UserToken': window.g_ck,
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
+            if (Array.isArray(payload)) {
+                return payload;
             }
 
-            return response.json();
+            return [];
         } catch (error) {
-            console.error(`Error updating collection ${sysId}:`, error);
-            throw error;
-        }
-    }
-
-    // Delete a collection
-    async delete(sysId: string) {
-        try {
-            const response = await fetch(`/api/now/table/${this.tableName}/${sysId}`, {
-                method: 'DELETE',
-                headers: {
-                    Accept: 'application/json',
-                    'X-UserToken': window.g_ck,
-                },
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
-            }
-
-            return response.ok;
-        } catch (error) {
-            console.error(`Error deleting collection ${sysId}:`, error);
+            console.error('Error fetching collections from custom API:', error);
             throw error;
         }
     }

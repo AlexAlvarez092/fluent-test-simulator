@@ -61,13 +61,25 @@ declare global {
                         table: 'sys_security_acl';
                         id: '7adb29b9beed4267935f7a8bee21cb75';
                     };
-                    'set-user-on-collection-save': {
-                        table: 'sys_script';
-                        id: '025717a2b8c84ec5a7fa78e672077f07';
-                    };
-                    'src_server_modules_business-rules_set-user-on-collection-save_ts': {
+                    'src_server_rest-api_test-simulator-api_ts': {
                         table: 'sys_module';
-                        id: 'ad3d6dcc527e4feea0ef3847068ab2c3';
+                        id: '75acb671e2b94ebfa7e3aa69cdc73129';
+                    };
+                    test_simulator_api: {
+                        table: 'sys_ws_definition';
+                        id: '046c0f8f5beb4d088855493801f2c521';
+                    };
+                    test_simulator_api_collections_list: {
+                        table: 'sys_ws_operation';
+                        id: 'a471e9dc5c9a4b33898bd9d636127e4d';
+                    };
+                    test_simulator_api_collections_save: {
+                        table: 'sys_ws_operation';
+                        id: '0f9d2127a4e94510bba50cd68b1e2fcd';
+                    };
+                    test_simulator_api_execute: {
+                        table: 'sys_security_acl';
+                        id: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
                     };
                     user_collection_create: {
                         table: 'sys_security_acl';
@@ -139,14 +151,6 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
-                        };
-                    },
-                    {
-                        table: 'sys_ux_lib_asset';
-                        id: '0a06559791f74b768ff9d3afcd222b3b';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--a7b1b9e3.js.map';
                         };
                     },
                     {
@@ -410,15 +414,6 @@ declare global {
                         };
                     },
                     {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: '37ff983bf26842758b71ba03f475e14d';
-                        deleted: true;
-                        key: {
-                            application_file: '5b809b60a2aa408b83e12d66ee5ba01e';
-                            source_artifact: 'cd71a92692a04d61a29ce275323d4ee6';
-                        };
-                    },
-                    {
                         table: 'sys_ui_element';
                         id: '3d0c152e44d34a889ef5865036d93748';
                         key: {
@@ -476,15 +471,6 @@ declare global {
                             name: 'x_2119443_test_sim_question';
                             element: 'type';
                             value: 'multiple';
-                        };
-                    },
-                    {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: '441ac68d1f4a41a0b921a7920127ee5d';
-                        deleted: true;
-                        key: {
-                            application_file: 'f36527aeee9c4f97b76394ef37ba5be7';
-                            source_artifact: 'cd71a92692a04d61a29ce275323d4ee6';
                         };
                     },
                     {
@@ -651,14 +637,6 @@ declare global {
                                 };
                             };
                             sys_domain: 'global';
-                        };
-                    },
-                    {
-                        table: 'sys_ux_lib_asset';
-                        id: '5b809b60a2aa408b83e12d66ee5ba01e';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--003b9c7e';
                         };
                     },
                     {
@@ -834,15 +812,6 @@ declare global {
                         };
                     },
                     {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: '6908b216a4a340f989e69d0034a06d7b';
-                        deleted: true;
-                        key: {
-                            application_file: '0a06559791f74b768ff9d3afcd222b3b';
-                            source_artifact: 'e1271c69f51442ff9879aed6a6291428';
-                        };
-                    },
-                    {
                         table: 'sys_ui_list_element';
                         id: '6b29702f07ed4f8ca404689e465279f3';
                         key: {
@@ -888,29 +857,6 @@ declare global {
                         };
                     },
                     {
-                        table: 'sys_ui_element';
-                        id: '6e6568f4f8304d6fa9e50e590e0f3718';
-                        deleted: true;
-                        key: {
-                            sys_ui_section: {
-                                id: '6e996fd6ac14467b998d99a59add1f79';
-                                key: {
-                                    name: 'x_2119443_test_sim_user_collection';
-                                    caption: 'Details';
-                                    view: {
-                                        id: 'Default view';
-                                        key: {
-                                            name: 'NULL';
-                                        };
-                                    };
-                                    sys_domain: 'global';
-                                };
-                            };
-                            element: 'saved_date';
-                            position: '5';
-                        };
-                    },
-                    {
                         table: 'sys_ui_section';
                         id: '6e996fd6ac14467b998d99a59add1f79';
                         key: {
@@ -945,20 +891,6 @@ declare global {
                             };
                             element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_answer.question';
                             position: '0';
-                        };
-                    },
-                    {
-                        table: 'sys_security_acl_role';
-                        id: '768106e59dfa4a128afdabf3df2ac26f';
-                        deleted: true;
-                        key: {
-                            sys_security_acl: 'd91c0b6c3fac4e559b632f3a3a3f62f3';
-                            sys_user_role: {
-                                id: '423ad4aad7114375bed65afe3b8c8a19';
-                                key: {
-                                    name: 'x_2119443_test_sim.admin';
-                                };
-                            };
                         };
                     },
                     {
@@ -1070,15 +1002,6 @@ declare global {
                             name: 'x_2119443_test_sim_answer';
                             element: 'is_correct';
                             language: 'en';
-                        };
-                    },
-                    {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: '81000a06116c4423b17c876f420cc8e9';
-                        deleted: true;
-                        key: {
-                            application_file: 'a7a1e2a2f1d9441f8da83ca9d7c08d15';
-                            source_artifact: 'cd71a92692a04d61a29ce275323d4ee6';
                         };
                     },
                     {
@@ -1218,15 +1141,6 @@ declare global {
                         };
                     },
                     {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: '8dccab7c504d4b9ca818f77dcb972122';
-                        deleted: true;
-                        key: {
-                            application_file: 'd39c6f1455eb42cfab635a833e37799c';
-                            source_artifact: 'cd71a92692a04d61a29ce275323d4ee6';
-                        };
-                    },
-                    {
                         table: 'sys_ui_list_element';
                         id: '8fbf83dc7b9e4f888ec1185b01f3d0f7';
                         key: {
@@ -1307,11 +1221,16 @@ declare global {
                         };
                     },
                     {
-                        table: 'sys_ux_lib_asset';
-                        id: '9accd1603b6747e2ac4df5e807f6e83a';
-                        deleted: true;
+                        table: 'sys_security_acl_role';
+                        id: '98a57fbff90c4b619946fd5cdff50d93';
                         key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--a7b1b9e3';
+                            sys_security_acl: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
                         };
                     },
                     {
@@ -1337,16 +1256,6 @@ declare global {
                             element: 'NULL';
                             relationship: 'NULL';
                             parent: 'NULL';
-                        };
-                    },
-                    {
-                        table: 'sys_documentation';
-                        id: '9cd5e2b9381b4c4898fa78c02cdef96b';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim_user_collection';
-                            element: 'saved_date';
-                            language: 'en';
                         };
                     },
                     {
@@ -1633,15 +1542,6 @@ declare global {
                         };
                     },
                     {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: 'bebd44b27f2b4dbb9757d5e59de9b27f';
-                        deleted: true;
-                        key: {
-                            application_file: 'd8a00b91ab984f3086fbbf020eae7d40';
-                            source_artifact: 'cd71a92692a04d61a29ce275323d4ee6';
-                        };
-                    },
-                    {
                         table: 'sys_security_acl_role';
                         id: 'bebf22820ebd4fffbbcef087fc805f81';
                         key: {
@@ -1716,35 +1616,16 @@ declare global {
                         };
                     },
                     {
-                        table: 'sys_ui_list_element';
-                        id: 'c88110428b9e4958b50e93b018db764e';
-                        deleted: true;
+                        table: 'sys_security_acl_role';
+                        id: 'c7c882236823470396477da5a60531af';
                         key: {
-                            list_id: {
-                                id: '1f96123aa6d44057be6fb6300b118bc6';
+                            sys_security_acl: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
-                                    view: {
-                                        id: 'Default view';
-                                        key: {
-                                            name: 'NULL';
-                                        };
-                                    };
-                                    sys_domain: 'global';
-                                    element: 'NULL';
-                                    relationship: 'NULL';
-                                    parent: 'NULL';
+                                    name: 'x_2119443_test_sim.admin';
                                 };
                             };
-                            element: 'saved_date';
-                        };
-                    },
-                    {
-                        table: 'sn_glider_source_artifact';
-                        id: 'cd71a92692a04d61a29ce275323d4ee6';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim_incident_manager.do - BYOUI Files';
                         };
                     },
                     {
@@ -1819,41 +1700,10 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary';
-                        id: 'd84429e014894c6caa1e7b7eb8424e37';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim_user_collection';
-                            element: 'saved_date';
-                        };
-                    },
-                    {
-                        table: 'sys_ux_lib_asset';
-                        id: 'd8a00b91ab984f3086fbbf020eae7d40';
-                        deleted: true;
-                        key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--003b9c7e.js.map';
-                        };
-                    },
-                    {
-                        table: 'sys_dictionary';
                         id: 'dbc088eb20ff4234b11c099c84d9bcd6';
                         key: {
                             name: 'x_2119443_test_sim_collection';
                             element: 'NULL';
-                        };
-                    },
-                    {
-                        table: 'sys_security_acl_role';
-                        id: 'dc0b0713c08945f5a9471063b2d0e87e';
-                        deleted: true;
-                        key: {
-                            sys_security_acl: '6b2c8721634e4beab3109713ca06e4f3';
-                            sys_user_role: {
-                                id: '423ad4aad7114375bed65afe3b8c8a19';
-                                key: {
-                                    name: 'x_2119443_test_sim.admin';
-                                };
-                            };
                         };
                     },
                     {
@@ -1894,15 +1744,6 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
-                        };
-                    },
-                    {
-                        table: 'sn_glider_source_artifact_m2m';
-                        id: 'e24063a7c4af4c25931fac89a4be55ad';
-                        deleted: true;
-                        key: {
-                            application_file: '9accd1603b6747e2ac4df5e807f6e83a';
-                            source_artifact: 'e1271c69f51442ff9879aed6a6291428';
                         };
                     },
                     {
