@@ -27,7 +27,12 @@ export class UserCollectionService {
                 throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
             }
 
-            return response.json();
+            const payload = await response.json();
+            if (!payload?.result || typeof payload.result !== 'object') {
+                throw new Error('Invalid response contract: expected result object');
+            }
+
+            return payload;
         } catch (error) {
             console.error('Error saving collection:', error);
             throw error;
@@ -53,7 +58,12 @@ export class UserCollectionService {
                 throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
             }
 
-            return response.json();
+            const payload = await response.json();
+            if (!payload?.result || typeof payload.result !== 'object') {
+                throw new Error('Invalid response contract: expected result object');
+            }
+
+            return payload;
         } catch (error) {
             console.error('Error removing collection:', error);
             throw error;

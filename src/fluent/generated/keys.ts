@@ -109,6 +109,14 @@ declare global {
                         table: 'sys_ws_query_parameter';
                         id: '58e057b51ccf421fbd40a97b88770f95';
                     };
+                    test_simulator_api_collections_open_overview: {
+                        table: 'sys_ws_operation';
+                        id: 'f13958821b45479d8772303d6cb13b94';
+                    };
+                    test_simulator_api_collections_open_overview_collection_id_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '42d10dd53cbf45959f4454bc359cfe38';
+                    };
                     test_simulator_api_collections_publish: {
                         table: 'sys_ws_operation';
                         id: 'e974d685bccf428598a4ac8a36d88ea9';
@@ -128,6 +136,18 @@ declare global {
                     test_simulator_api_me_roles: {
                         table: 'sys_ws_operation';
                         id: 'e5307468fcda41fe8fed49c1fdcc4e49';
+                    };
+                    test_simulator_api_tests_create: {
+                        table: 'sys_ws_operation';
+                        id: '83889bc32c16494db75af241132037fd';
+                    };
+                    test_simulator_api_tests_detail: {
+                        table: 'sys_ws_operation';
+                        id: 'b68a05fcbf4249e5b9d349b4377584cb';
+                    };
+                    test_simulator_api_tests_detail_test_id_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '2d6596b111c1402e9092c0454e81f839';
                     };
                     test_simulator_menu: {
                         table: 'sys_app_application';
@@ -303,6 +323,14 @@ declare global {
                             };
                             element: 'result';
                             position: '5';
+                        };
+                    },
+                    {
+                        table: 'sys_ws_query_parameter_map';
+                        id: '0c0eb5a57a8e487896a684377507818d';
+                        key: {
+                            web_service_operation: 'f13958821b45479d8772303d6cb13b94';
+                            web_service_query_parameter: '42d10dd53cbf45959f4454bc359cfe38';
                         };
                     },
                     {
@@ -1505,6 +1533,14 @@ declare global {
                             };
                             element: 'never_seen_questions';
                             position: '0';
+                        };
+                    },
+                    {
+                        table: 'sys_ws_query_parameter_map';
+                        id: '766d11ec301b47bc8853317e3977ef73';
+                        key: {
+                            web_service_operation: 'b68a05fcbf4249e5b9d349b4377584cb';
+                            web_service_query_parameter: '2d6596b111c1402e9092c0454e81f839';
                         };
                     },
                     {

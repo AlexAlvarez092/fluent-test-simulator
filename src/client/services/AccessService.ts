@@ -35,6 +35,10 @@ export class AccessService {
             const payload = await response.json();
             const rawRoles = payload?.result;
 
+            if (!rawRoles || typeof rawRoles !== 'object') {
+                throw new Error('Invalid response contract: expected result object');
+            }
+
             return {
                 is_admin: Boolean(rawRoles?.is_admin),
                 is_user: Boolean(rawRoles?.is_user),

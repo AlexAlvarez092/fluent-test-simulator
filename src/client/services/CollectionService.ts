@@ -36,7 +36,11 @@ export class CollectionService {
             }
 
             const payload = await response.json();
-            return Array.isArray(payload?.result) ? payload.result : [];
+            if (!Array.isArray(payload?.result)) {
+                throw new Error('Invalid response contract: expected result array');
+            }
+
+            return payload.result;
         } catch (error) {
             console.error('Error fetching collections from custom API:', error);
             throw error;
@@ -60,7 +64,12 @@ export class CollectionService {
                 throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
             }
 
-            return response.json();
+            const responsePayload = await response.json();
+            if (!responsePayload?.result || typeof responsePayload.result !== 'object') {
+                throw new Error('Invalid response contract: expected result object');
+            }
+
+            return responsePayload;
         } catch (error) {
             console.error('Error publishing collection:', error);
             throw error;

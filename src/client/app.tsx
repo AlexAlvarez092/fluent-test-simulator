@@ -4,6 +4,7 @@ import CollectionsPage from './components/CollectionsPage';
 import Navigation from './components/Navigation';
 import PublishCollectionPage from './components/PublishCollectionPage';
 import OpenCollectionPage from './components/OpenCollectionPage';
+import TestRunPage from './components/TestRunPage';
 import { AccessService } from './services/AccessService';
 
 type AccessState = 'loading' | 'allowed' | 'denied' | 'error';
@@ -16,6 +17,7 @@ type SelectedCollection = {
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedCollection, setSelectedCollection] = useState<SelectedCollection | null>(null);
+    const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
     const [accessState, setAccessState] = useState<AccessState>('loading');
     const [isAdmin, setIsAdmin] = useState(false);
     const [accessError, setAccessError] = useState<string | null>(null);
@@ -50,6 +52,11 @@ export default function App() {
         setCurrentPage('open-collection');
     };
 
+    const handleOpenTest = (testId: string) => {
+        setSelectedTestId(testId);
+        setCurrentPage('test-run');
+    };
+
     if (accessState === 'loading') {
         return <div>Checking access...</div>;
     }
@@ -80,7 +87,10 @@ export default function App() {
             {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
             {currentPage === 'collections' && <CollectionsPage />}
             {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
-            {currentPage === 'open-collection' && <OpenCollectionPage collection={selectedCollection} />}
+            {currentPage === 'open-collection' && (
+                <OpenCollectionPage collection={selectedCollection} onOpenTest={handleOpenTest} />
+            )}
+            {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
         </div>
     );
 }

@@ -1,11 +1,14 @@
-import { Acl, RestApi } from '@servicenow/sdk/core';
+import { Acl, RestApi } from '@servicenow/sdk/core'
 import {
+    createCollectionTest,
     getCurrentUserRoles,
     getCollectionsList,
+    getOpenCollectionOverview,
+    getTestDetail,
     publishCollection,
     removeCollectionForCurrentUser,
     saveCollectionForCurrentUser,
-} from '../../server/rest-api/test-simulator-api';
+} from '../../server/rest-api/test-simulator-api'
 
 const testSimulatorApiAcl = Acl({
     $id: Now.ID['test_simulator_api_execute'],
@@ -15,7 +18,7 @@ const testSimulatorApiAcl = Acl({
     roles: ['x_2119443_test_sim.user', 'x_2119443_test_sim.admin'],
     securityAttribute: 'user_is_authenticated',
     adminOverrides: false,
-});
+})
 
 const testSimulatorApiAuthenticatedAcl = Acl({
     $id: Now.ID['test_simulator_api_authenticated_execute'],
@@ -24,7 +27,7 @@ const testSimulatorApiAuthenticatedAcl = Acl({
     operation: 'execute',
     securityAttribute: 'user_is_authenticated',
     adminOverrides: false,
-});
+})
 
 RestApi({
     $id: Now.ID['test_simulator_api'],
@@ -118,5 +121,62 @@ RestApi({
                 }
             }`,
         },
+        {
+            $id: Now.ID['test_simulator_api_collections_open_overview'],
+            name: 'Open collection overview',
+            method: 'GET',
+            path: '/collections/open-overview',
+            script: getOpenCollectionOverview,
+            parameters: [
+                {
+                    $id: Now.ID['test_simulator_api_collections_open_overview_collection_id_param'],
+                    name: 'collection_id',
+                    required: true,
+                    exampleValue: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                    shortDescription: 'Saved collection sys_id',
+                },
+            ],
+            authentication: true,
+            authorization: true,
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+        },
+        {
+            $id: Now.ID['test_simulator_api_tests_create'],
+            name: 'Create test from collection',
+            method: 'POST',
+            path: '/tests/create',
+            script: createCollectionTest,
+            authentication: true,
+            authorization: true,
+            consumes: 'application/json',
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+            requestExample: `{
+                "collection_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "question_count": 20,
+                "mode": "last_attempt_failed"
+            }`,
+        },
+        {
+            $id: Now.ID['test_simulator_api_tests_detail'],
+            name: 'Get test detail',
+            method: 'GET',
+            path: '/tests/detail',
+            script: getTestDetail,
+            parameters: [
+                {
+                    $id: Now.ID['test_simulator_api_tests_detail_test_id_param'],
+                    name: 'test_id',
+                    required: true,
+                    exampleValue: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                    shortDescription: 'Test sys_id',
+                },
+            ],
+            authentication: true,
+            authorization: true,
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+        },
     ],
-});
+})
