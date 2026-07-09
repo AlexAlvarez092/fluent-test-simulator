@@ -97,6 +97,10 @@ declare global {
                         table: 'sys_ws_definition';
                         id: '046c0f8f5beb4d088855493801f2c521';
                     };
+                    test_simulator_api_authenticated_execute: {
+                        table: 'sys_security_acl';
+                        id: 'c937814a6bbe4f3f929dc902648b97e5';
+                    };
                     test_simulator_api_collections_list: {
                         table: 'sys_ws_operation';
                         id: 'a471e9dc5c9a4b33898bd9d636127e4d';
@@ -120,6 +124,10 @@ declare global {
                     test_simulator_api_execute: {
                         table: 'sys_security_acl';
                         id: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
+                    };
+                    test_simulator_api_me_roles: {
+                        table: 'sys_ws_operation';
+                        id: 'e5307468fcda41fe8fed49c1fdcc4e49';
                     };
                     test_simulator_menu: {
                         table: 'sys_app_application';

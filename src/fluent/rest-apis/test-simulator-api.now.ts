@@ -1,5 +1,6 @@
 import { Acl, RestApi } from '@servicenow/sdk/core';
 import {
+    getCurrentUserRoles,
     getCollectionsList,
     publishCollection,
     removeCollectionForCurrentUser,
@@ -16,6 +17,15 @@ const testSimulatorApiAcl = Acl({
     adminOverrides: false,
 });
 
+const testSimulatorApiAuthenticatedAcl = Acl({
+    $id: Now.ID['test_simulator_api_authenticated_execute'],
+    name: 'test_simulator_api_authenticated',
+    type: 'rest_endpoint',
+    operation: 'execute',
+    securityAttribute: 'user_is_authenticated',
+    adminOverrides: false,
+});
+
 RestApi({
     $id: Now.ID['test_simulator_api'],
     name: 'Test Simulator API',
@@ -25,6 +35,17 @@ RestApi({
     produces: 'application/json',
     enforceAcl: [testSimulatorApiAcl],
     routes: [
+        {
+            $id: Now.ID['test_simulator_api_me_roles'],
+            name: 'Current user roles',
+            method: 'GET',
+            path: '/me/roles',
+            script: getCurrentUserRoles,
+            authentication: true,
+            authorization: true,
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAuthenticatedAcl],
+        },
         {
             $id: Now.ID['test_simulator_api_collections_list'],
             name: 'Collections list',

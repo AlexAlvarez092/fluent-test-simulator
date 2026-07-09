@@ -16,6 +16,26 @@ function toBoolean(value: any) {
     return value === true || value === 'true' || value === 1 || value === '1';
 }
 
+export function getCurrentUserRoles(request: any, response: any) {
+    const isAdmin = gs.hasRole('x_2119443_test_sim.admin');
+    const isUser = gs.hasRole('x_2119443_test_sim.user');
+
+    let access: 'admin' | 'user' | 'none' = 'none';
+    if (isAdmin) {
+        access = 'admin';
+    } else if (isUser) {
+        access = 'user';
+    }
+
+    response.setBody({
+        result: {
+            is_admin: isAdmin,
+            is_user: isUser,
+            access,
+        },
+    });
+}
+
 export function getCollectionsList(request: any, response: any) {
     const currentUserId = gs.getUserID();
     const savedOnlyParam = request?.queryParams?.saved_only;
