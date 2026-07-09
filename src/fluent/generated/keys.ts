@@ -89,6 +89,22 @@ declare global {
                         table: 'sys_security_acl';
                         id: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
                     };
+                    test_simulator_menu: {
+                        table: 'sys_app_application';
+                        id: 'c8c7ec1cb79a4cb89974fdc95eade74c';
+                    };
+                    test_simulator_menu_module_collections: {
+                        table: 'sys_app_module';
+                        id: '8756b1a69f0743c8b7372168695e66dd';
+                    };
+                    test_simulator_menu_module_home: {
+                        table: 'sys_app_module';
+                        id: 'dd76f4b8533b4b08b6358dc07dced9b7';
+                    };
+                    test_simulator_self_service_module_home: {
+                        table: 'sys_app_module';
+                        id: '4ec5f388df244ea084090426fab6015e';
+                    };
                     user_collection_create: {
                         table: 'sys_security_acl';
                         id: '1464c8dae8384b53a3cfaeb204146af1';
