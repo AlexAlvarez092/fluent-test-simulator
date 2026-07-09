@@ -1,5 +1,21 @@
 import { GlideRecord, gs } from '@servicenow/glide';
 
+function parseBody(request: any) {
+    if (request.body && request.body.data) {
+        return request.body.data;
+    }
+
+    if (request.body && request.body.dataString) {
+        return JSON.parse(request.body.dataString);
+    }
+
+    return {};
+}
+
+function toBoolean(value: any) {
+    return value === true || value === 'true' || value === 1 || value === '1';
+}
+
 export function getCollectionsList(request: any, response: any) {
     const currentUserId = gs.getUserID();
     const savedOnlyParam = request?.queryParams?.saved_only;
@@ -43,13 +59,7 @@ export function getCollectionsList(request: any, response: any) {
 
 export function saveCollectionForCurrentUser(request: any, response: any) {
     const currentUserId = gs.getUserID();
-
-    let body: any = {};
-    if (request.body && request.body.data) {
-        body = request.body.data;
-    } else if (request.body && request.body.dataString) {
-        body = JSON.parse(request.body.dataString);
-    }
+    const body: any = parseBody(request);
 
     const collectionId = body.collection_id || body.collectionId || body.collection;
     if (!collectionId) {
@@ -94,13 +104,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
 
 export function removeCollectionForCurrentUser(request: any, response: any) {
     const currentUserId = gs.getUserID();
-
-    let body: any = {};
-    if (request.body && request.body.data) {
-        body = request.body.data;
-    } else if (request.body && request.body.dataString) {
-        body = JSON.parse(request.body.dataString);
-    }
+    const body: any = parseBody(request);
 
     const collectionId = body.collection_id || body.collectionId || body.collection;
     if (!collectionId) {
@@ -127,4 +131,130 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
             removed,
         },
     });
+}
+
+export function publishCollection(request: any, response: any) {
+    if (!gs.hasRole('x_2119443_test_sim.admin')) {
+        response.setStatus(403);
+        response.setBody({ error: 'Only admins can publish collections' });
+        return;
+    }
+
+    const payload: any = parseBody(request);
+    const collectionPayload = payload.collection || payload;
+
+    if (!collectionPayload || !collectionPayload.name) {
+        response.setStatus(400);
+        response.setBody({ error: 'collection.name is required' });
+        return;
+    }
+
+    const questions = Array.isArray(collectionPayload.questions) ? collectionPayload.questions : [];
+    if (questions.length === 0) {
+        response.setStatus(400);
+        response.setBody({ error: 'At least one question is required' });
+        return;
+    }
+
+    const createdQuestionIds: string[] = [];
+    const createdAnswerIds: string[] = [];
+    let createdCollectionId = '';
+
+    try {
+        const collection = new GlideRecord('x_2119443_test_sim_collection');
+        collection.initialize();
+        collection.setValue('name', String(collectionPayload.name));
+        createdCollectionId = String(collection.insert());
+
+        for (let qIndex = 0; qIndex < questions.length; qIndex += 1) {
+            const questionPayload = questions[qIndex] || {};
+            if (!questionPayload.question) {
+                throw new Error(`Question at index ${qIndex} is missing field 'question'`);
+            }
+
+            const answers = Array.isArray(questionPayload.answers) ? questionPayload.answers : [];
+            if (answers.length === 0) {
+                throw new Error(`Question at index ${qIndex} must include at least one answer`);
+            }
+
+            const question = new GlideRecord('x_2119443_test_sim_question');
+            question.initialize();
+            question.setValue('collection', createdCollectionId);
+            question.setValue('question', String(questionPayload.question));
+
+            if (questionPayload.type) {
+                question.setValue('type', String(questionPayload.type));
+            }
+
+            if (questionPayload.rationale) {
+                question.setValue('rationale', String(questionPayload.rationale));
+            }
+
+            if (questionPayload.docs) {
+                question.setValue('docs', String(questionPayload.docs));
+            }
+
+            const createdQuestionId = String(question.insert());
+            createdQuestionIds.push(createdQuestionId);
+
+            let hasCorrectAnswer = false;
+
+            for (let aIndex = 0; aIndex < answers.length; aIndex += 1) {
+                const answerPayload = answers[aIndex] || {};
+                if (!answerPayload.answer) {
+                    throw new Error(`Answer at index ${aIndex} in question ${qIndex} is missing field 'answer'`);
+                }
+
+                const isCorrect = toBoolean(answerPayload.is_correct ?? answerPayload.isCorrect ?? false);
+                if (isCorrect) {
+                    hasCorrectAnswer = true;
+                }
+
+                const answer = new GlideRecord('x_2119443_test_sim_answer');
+                answer.initialize();
+                answer.setValue('question', createdQuestionId);
+                answer.setValue('answer', String(answerPayload.answer));
+                answer.setValue('is_correct', isCorrect);
+                const createdAnswerId = String(answer.insert());
+                createdAnswerIds.push(createdAnswerId);
+            }
+
+            if (!hasCorrectAnswer) {
+                throw new Error(`Question at index ${qIndex} must have at least one correct answer`);
+            }
+        }
+
+        response.setStatus(201);
+        response.setBody({
+            result: {
+                collection_id: createdCollectionId,
+                questions_created: createdQuestionIds.length,
+                answers_created: createdAnswerIds.length,
+            },
+        });
+    } catch (error: any) {
+        for (let i = createdAnswerIds.length - 1; i >= 0; i -= 1) {
+            const grAnswer = new GlideRecord('x_2119443_test_sim_answer');
+            if (grAnswer.get(createdAnswerIds[i])) {
+                grAnswer.deleteRecord();
+            }
+        }
+
+        for (let i = createdQuestionIds.length - 1; i >= 0; i -= 1) {
+            const grQuestion = new GlideRecord('x_2119443_test_sim_question');
+            if (grQuestion.get(createdQuestionIds[i])) {
+                grQuestion.deleteRecord();
+            }
+        }
+
+        if (createdCollectionId) {
+            const grCollection = new GlideRecord('x_2119443_test_sim_collection');
+            if (grCollection.get(createdCollectionId)) {
+                grCollection.deleteRecord();
+            }
+        }
+
+        response.setStatus(400);
+        response.setBody({ error: error?.message || 'Failed to publish collection' });
+    }
 }

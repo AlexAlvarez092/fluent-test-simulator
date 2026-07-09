@@ -1,6 +1,7 @@
 import { Acl, RestApi } from '@servicenow/sdk/core';
 import {
     getCollectionsList,
+    publishCollection,
     removeCollectionForCurrentUser,
     saveCollectionForCurrentUser,
 } from '../../server/rest-api/test-simulator-api';
@@ -67,6 +68,35 @@ RestApi({
             authentication: true,
             authorization: true,
             enforceAcl: [testSimulatorApiAcl],
+        },
+        {
+            $id: Now.ID['test_simulator_api_collections_publish'],
+            name: 'Publish collection with questions and answers',
+            method: 'POST',
+            path: '/collections/publish',
+            script: publishCollection,
+            consumes: 'application/json',
+            produces: 'application/json',
+            authentication: true,
+            authorization: true,
+            enforceAcl: [testSimulatorApiAcl],
+            requestExample: `{
+                "collection": {
+                    "name": "Java Basics",
+                    "questions": [
+                        {
+                            "question": "What is the JVM?",
+                            "type": "single",
+                            "rationale": "Core Java concept",
+                            "docs": "https://example.com/jvm",
+                            "answers": [
+                                { "answer": "Java Virtual Machine", "is_correct": true },
+                                { "answer": "Java Vendor Module", "is_correct": false }
+                            ]
+                        }
+                    ]
+                }
+            }`,
         },
     ],
 });
