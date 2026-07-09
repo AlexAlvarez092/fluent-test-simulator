@@ -1,5 +1,9 @@
 import { Acl, RestApi } from '@servicenow/sdk/core';
-import { getCollectionsList, saveCollectionForCurrentUser } from '../../server/rest-api/test-simulator-api';
+import {
+    getCollectionsList,
+    removeCollectionForCurrentUser,
+    saveCollectionForCurrentUser,
+} from '../../server/rest-api/test-simulator-api';
 
 const testSimulatorApiAcl = Acl({
     $id: Now.ID['test_simulator_api_execute'],
@@ -50,6 +54,18 @@ RestApi({
             authorization: true,
             consumes: 'application/json',
             produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+        },
+        {
+            $id: Now.ID['test_simulator_api_collections_remove'],
+            name: 'Remove saved collection',
+            method: 'POST',
+            path: '/collections/remove',
+            script: removeCollectionForCurrentUser,
+            consumes: 'application/json',
+            produces: 'application/json',
+            authentication: true,
+            authorization: true,
             enforceAcl: [testSimulatorApiAcl],
         },
     ],

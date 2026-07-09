@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CollectionService } from '../services/CollectionService';
+import { UserCollectionService } from '../services/UserCollectionService';
 
 type CollectionRow = {
     sys_id: string;
@@ -11,8 +12,10 @@ export default function HomePage() {
     const [savedCollections, setSavedCollections] = useState<CollectionRow[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [removingId, setRemovingId] = useState<string | null>(null);
 
     const collectionService = useMemo(() => new CollectionService(), []);
+    const userCollectionService = useMemo(() => new UserCollectionService(), []);
 
     useEffect(() => {
         const loadSavedCollections = async () => {
@@ -32,6 +35,20 @@ export default function HomePage() {
         void loadSavedCollections();
     }, [collectionService]);
 
+    const handleRemoveCollection = async (collectionId: string) => {
+        try {
+            setRemovingId(collectionId);
+            setError(null);
+            await userCollectionService.removeCollection(collectionId);
+            setSavedCollections((previous) => previous.filter((collection) => collection.sys_id !== collectionId));
+        } catch (err: any) {
+            setError('Failed to remove collection: ' + (err.message || 'Unknown error'));
+            console.error(err);
+        } finally {
+            setRemovingId(null);
+        }
+    };
+
     return (
         <div>
             <h1>Test Simulator</h1>
@@ -50,11 +67,33 @@ export default function HomePage() {
             ) : savedCollections.length === 0 ? (
                 <div>You have no saved collections yet.</div>
             ) : (
-                <ul>
-                    {savedCollections.map((collection) => (
-                        <li key={collection.sys_id}>{collection.name}</li>
-                    ))}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {savedCollections.map((collection) => {
+                            const isRemoving = removingId === collection.sys_id;
+
+                            return (
+                                <tr key={collection.sys_id}>
+                                    <td>{collection.name}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => handleRemoveCollection(collection.sys_id)}
+                                            disabled={isRemoving}
+                                        >
+                                            {isRemoving ? 'Removing...' : 'Remove'}
+                                        </button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
             )}
         </div>
     );

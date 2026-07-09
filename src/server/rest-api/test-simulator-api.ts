@@ -91,3 +91,40 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
         },
     });
 }
+
+export function removeCollectionForCurrentUser(request: any, response: any) {
+    const currentUserId = gs.getUserID();
+
+    let body: any = {};
+    if (request.body && request.body.data) {
+        body = request.body.data;
+    } else if (request.body && request.body.dataString) {
+        body = JSON.parse(request.body.dataString);
+    }
+
+    const collectionId = body.collection_id || body.collectionId || body.collection;
+    if (!collectionId) {
+        response.setStatus(400);
+        response.setBody({ error: 'collection_id is required' });
+        return;
+    }
+
+    const existing = new GlideRecord('x_2119443_test_sim_user_collection');
+    existing.addQuery('user', currentUserId);
+    existing.addQuery('collection', collectionId);
+    existing.query();
+
+    let removed = 0;
+    while (existing.next()) {
+        existing.deleteRecord();
+        removed += 1;
+    }
+
+    response.setBody({
+        result: {
+            user: currentUserId,
+            collection: collectionId,
+            removed,
+        },
+    });
+}
