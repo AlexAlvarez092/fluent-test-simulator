@@ -73,6 +73,22 @@ declare global {
                         table: 'sys_security_acl';
                         id: '5dec2295cf0e4cf79127653140e346c1';
                     };
+                    test_question_create: {
+                        table: 'sys_security_acl';
+                        id: 'aea18198398b42ef8584e15e86d47731';
+                    };
+                    test_question_delete: {
+                        table: 'sys_security_acl';
+                        id: 'd8ea190e02df4616a336e08d17560350';
+                    };
+                    test_question_read: {
+                        table: 'sys_security_acl';
+                        id: 'ebaf0fdd05a440abb90c56baf32d4375';
+                    };
+                    test_question_write: {
+                        table: 'sys_security_acl';
+                        id: '8778c4f8d93b4979b6a35f2f23b62705';
+                    };
                     test_read: {
                         table: 'sys_security_acl';
                         id: '5019c6f612894345813d219222eab42f';
@@ -158,6 +174,29 @@ declare global {
                         deleted: false;
                         key: {
                             name: 'x_2119443_test_sim/vendor-react-dom--966e429a.js.map';
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: '034fc965ce4741acbcbc4456320901f4';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_section';
+                        id: '04dd1f20f15841b19f38c0ffc170e305';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            caption: 'Details';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
                         };
                     },
                     {
@@ -330,6 +369,15 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_documentation';
+                        id: '15cd21beb12f48969f4d1acc57c2aa98';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'selected_answers';
+                            language: 'en';
+                        };
+                    },
+                    {
                         table: 'sys_dictionary';
                         id: '16c20c7763254de8bbbf0e1a0ee071cf';
                         key: {
@@ -338,10 +386,28 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_documentation';
+                        id: '18d5eb4196084035b57d4c2f331183ef';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'test';
+                            language: 'en';
+                        };
+                    },
+                    {
                         table: 'sys_db_object';
                         id: '1a2f724e2cab4ba4bf42476d6ac4760f';
                         key: {
                             name: 'x_2119443_test_sim_collection';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '1cb87801cad448c198fae33961e39176';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'NULL';
+                            language: 'en';
                         };
                     },
                     {
@@ -374,6 +440,15 @@ declare global {
                             element: 'NULL';
                             relationship: 'NULL';
                             parent: 'NULL';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '2307bb589ecd476b84623ef9990cd700';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                            language: 'en';
                         };
                     },
                     {
@@ -511,6 +586,20 @@ declare global {
                             };
                             element: '.begin_split';
                             position: '0';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_form';
+                        id: '2d184a58bedc4308ac085e93ccf995ee';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
                         };
                     },
                     {
@@ -681,6 +770,28 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_element';
+                        id: '3fed9dbbcc294775b79bcc12b019a04a';
+                        key: {
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.split';
+                            position: '2';
+                        };
+                    },
+                    {
                         table: 'sys_ui_list_element';
                         id: '402911e6aa5f438e91d1cbda8f4e5011';
                         key: {
@@ -741,6 +852,29 @@ declare global {
                         key: {
                             application_file: '9b2c5d3f95bf45c5bd0e56a0668fa021';
                             source_artifact: 'e1271c69f51442ff9879aed6a6291428';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list_element';
+                        id: '4a5d46871d754fefa104a0cf0002dc7d';
+                        key: {
+                            list_id: {
+                                id: '96c2c4375de44b508ae38e55d631dbfd';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'status';
                         };
                     },
                     {
@@ -939,6 +1073,15 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_documentation';
+                        id: '5d7c9d20e52545ffb37d3e87220f438f';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'question';
+                            language: 'en';
+                        };
+                    },
+                    {
                         table: 'sys_choice';
                         id: '5de308e82f7f4ff5a00f95c7c8b22e0a';
                         key: {
@@ -983,6 +1126,28 @@ declare global {
                         key: {
                             application_file: '030656d1319f49f982c072ea3d283ac5';
                             source_artifact: 'e1271c69f51442ff9879aed6a6291428';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '6188ca166ff34f4d9ec4d958299b9dff';
+                        key: {
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'status';
+                            position: '3';
                         };
                     },
                     {
@@ -1173,6 +1338,28 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element';
+                        id: '6f58ab0690ac43008fec7eb191d1f41b';
+                        key: {
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.end_split';
+                            position: '4';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
                         id: '6fb425c94b3e4439ba0d7c585d313264';
                         key: {
                             sys_ui_section: {
@@ -1213,6 +1400,13 @@ declare global {
                             };
                             element: '.split';
                             position: '2';
+                        };
+                    },
+                    {
+                        table: 'ua_table_licensing_config';
+                        id: '774bf874cbbe4751bda2e8a78b4dc770';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
                         };
                     },
                     {
@@ -1351,11 +1545,53 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_choice';
+                        id: '7cbbb279763842c78369caafe2a37b16';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                            value: 'unanswered';
+                        };
+                    },
+                    {
                         table: 'sys_dictionary';
                         id: '80c188b1f96647eebaf1da8f2e04ad32';
                         key: {
                             name: 'x_2119443_test_sim_test';
                             element: 'status';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_form_section';
+                        id: '80dc548b157441d8b7ee179847b4aa68';
+                        key: {
+                            sys_ui_form: {
+                                id: '2d184a58bedc4308ac085e93ccf995ee';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            sys_ui_section: {
+                                id: 'fc81537dc534416f8f3f3ed996e75035';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Question Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
                         };
                     },
                     {
@@ -1576,6 +1812,51 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_list_element';
+                        id: '90059f04af0d4fc7bd91776d92c43510';
+                        key: {
+                            list_id: {
+                                id: '96c2c4375de44b508ae38e55d631dbfd';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'test';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '93a8a3039e944a1690d88529abfbeca7';
+                        key: {
+                            sys_ui_section: {
+                                id: 'fc81537dc534416f8f3f3ed996e75035';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Question Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'question';
+                            position: '0';
+                        };
+                    },
+                    {
                         table: 'sys_ui_element';
                         id: '95df385208e24fa0a307a308d9100169';
                         key: {
@@ -1605,6 +1886,23 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_list';
+                        id: '96c2c4375de44b508ae38e55d631dbfd';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
+                            element: 'NULL';
+                            relationship: 'NULL';
+                            parent: 'NULL';
+                        };
+                    },
+                    {
                         table: 'sys_security_acl_role';
                         id: '971dbcd8f9ee4bddb682aeb8db2c7e83';
                         key: {
@@ -1615,6 +1913,28 @@ declare global {
                                     name: 'x_2119443_test_sim.user';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '9758de6669dd4de89558f5939735b5e6';
+                        key: {
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: '.begin_split';
+                            position: '0';
                         };
                     },
                     {
@@ -1757,6 +2077,19 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_security_acl_role';
+                        id: '9e523239fe7244a9aa1f1ba814dfdcf3';
+                        key: {
+                            sys_security_acl: 'd8ea190e02df4616a336e08d17560350';
+                            sys_user_role: {
+                                id: '423ad4aad7114375bed65afe3b8c8a19';
+                                key: {
+                                    name: 'x_2119443_test_sim.admin';
+                                };
+                            };
+                        };
+                    },
+                    {
                         table: 'sys_choice_set';
                         id: '9eb4ef6526a94513a4d99d16343dbb9c';
                         key: {
@@ -1777,6 +2110,19 @@ declare global {
                         key: {
                             name: 'x_2119443_test_sim_test';
                             element: 'NULL';
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: 'a05e712970fd475ca89a4e7489445121';
+                        key: {
+                            sys_security_acl: 'aea18198398b42ef8584e15e86d47731';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
                         };
                     },
                     {
@@ -1842,6 +2188,28 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element';
+                        id: 'a5bcb3c57b064cabbf583df9810e4dbd';
+                        key: {
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'test';
+                            position: '1';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
                         id: 'a641419ef1b4440e8c4caf98d73f8b9f';
                         key: {
                             sys_ui_section: {
@@ -1873,6 +2241,29 @@ declare global {
                                     name: 'x_2119443_test_sim.user';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_ui_list_element';
+                        id: 'a77de67520264381b419069b6613b975';
+                        key: {
+                            list_id: {
+                                id: '96c2c4375de44b508ae38e55d631dbfd';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                    element: 'NULL';
+                                    relationship: 'NULL';
+                                    parent: 'NULL';
+                                };
+                            };
+                            element: 'question';
                         };
                     },
                     {
@@ -2021,6 +2412,13 @@ declare global {
                     },
                     {
                         table: 'sys_db_object';
+                        id: 'b333045cf9e145a4b280f8c4879aacc8';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                        };
+                    },
+                    {
+                        table: 'sys_db_object';
                         id: 'b4deba3ee98d469baaa34abf16b1d727';
                         key: {
                             name: 'x_2119443_test_sim_answer';
@@ -2041,6 +2439,15 @@ declare global {
                             name: 'x_2119443_test_sim_collection';
                             element: 'name';
                             language: 'en';
+                        };
+                    },
+                    {
+                        table: 'sys_choice';
+                        id: 'bcb039712c2b4be6b9cb5b81826019dc';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                            value: 'correct';
                         };
                     },
                     {
@@ -2088,6 +2495,14 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_dictionary';
+                        id: 'c4954f49562a41799995e7716e4e4e96';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'question';
+                        };
+                    },
+                    {
                         table: 'sys_ui_list_element';
                         id: 'c4d7974c16804d9f9eb049f30afd1a08';
                         key: {
@@ -2118,6 +2533,39 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_form_section';
+                        id: 'c75e6eb4741348c6b30a3b2e7582f733';
+                        key: {
+                            sys_ui_form: {
+                                id: '2d184a58bedc4308ac085e93ccf995ee';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            sys_ui_section: {
+                                id: '04dd1f20f15841b19f38c0ffc170e305';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                        };
+                    },
+                    {
                         table: 'sys_security_acl_role';
                         id: 'c7c882236823470396477da5a60531af';
                         key: {
@@ -2128,6 +2576,27 @@ declare global {
                                     name: 'x_2119443_test_sim.admin';
                                 };
                             };
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: 'ca520af93b0942c783d30c29ffb20155';
+                        key: {
+                            sys_security_acl: '8778c4f8d93b4979b6a35f2f23b62705';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'ccba95ebfa8b45899f54ecf9ccb78475';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'NULL';
                         };
                     },
                     {
@@ -2177,12 +2646,55 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_choice_set';
+                        id: 'd090139641c74f5e916004a2c5ec1b57';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                        };
+                    },
+                    {
                         table: 'sys_documentation';
                         id: 'd0a18bf0a2ef49f8aef5aee856d758b8';
                         key: {
                             name: 'x_2119443_test_sim_test';
                             element: 'result';
                             language: 'en';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: 'd15c6afb3dfc4c0799a0b912de7930f1';
+                        key: {
+                            sys_ui_section: {
+                                id: 'fc81537dc534416f8f3f3ed996e75035';
+                                key: {
+                                    name: 'x_2119443_test_sim_test_question';
+                                    caption: 'Question Details';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'selected_answers';
+                            position: '1';
+                        };
+                    },
+                    {
+                        table: 'sys_security_acl_role';
+                        id: 'd17e978a25ec4066839d62e40d8ba5c3';
+                        key: {
+                            sys_security_acl: 'ebaf0fdd05a440abb90c56baf32d4375';
+                            sys_user_role: {
+                                id: 'f74ee8ed21944ff38fda41fe018e8459';
+                                key: {
+                                    name: 'x_2119443_test_sim.user';
+                                };
+                            };
                         };
                     },
                     {
@@ -2289,6 +2801,23 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_choice';
+                        id: 'e3379caf80554ee283f85a420c95afd8';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'status';
+                            value: 'failed';
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'e3ff86e35f2240e19f3a93d2dddc4081';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'test';
+                        };
+                    },
+                    {
                         table: 'sys_ui_element';
                         id: 'e823bd42efd847e4a7c2f00d8a5b1230';
                         key: {
@@ -2308,6 +2837,14 @@ declare global {
                             };
                             element: 'name';
                             position: '0';
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'ed843f8935444de1a96d7a1513f70cde';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            element: 'selected_answers';
                         };
                     },
                     {
@@ -2406,6 +2943,21 @@ declare global {
                             };
                             element: 'answer';
                             position: '5';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_section';
+                        id: 'fc81537dc534416f8f3f3ed996e75035';
+                        key: {
+                            name: 'x_2119443_test_sim_test_question';
+                            caption: 'Question Details';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
                         };
                     },
                     {
