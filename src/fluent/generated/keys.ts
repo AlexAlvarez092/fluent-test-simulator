@@ -73,6 +73,10 @@ declare global {
                         table: 'sys_ws_operation';
                         id: 'a471e9dc5c9a4b33898bd9d636127e4d';
                     };
+                    test_simulator_api_collections_list_saved_only_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '58e057b51ccf421fbd40a97b88770f95';
+                    };
                     test_simulator_api_collections_save: {
                         table: 'sys_ws_operation';
                         id: '0f9d2127a4e94510bba50cd68b1e2fcd';
@@ -1656,6 +1660,14 @@ declare global {
                         id: 'd39c6f1455eb42cfab635a833e37799c';
                         key: {
                             name: 'x_2119443_test_sim/main.js.map';
+                        };
+                    },
+                    {
+                        table: 'sys_ws_query_parameter_map';
+                        id: 'd4b5dddb2083408f92f88fdb290644cc';
+                        key: {
+                            web_service_operation: 'a471e9dc5c9a4b33898bd9d636127e4d';
+                            web_service_query_parameter: '58e057b51ccf421fbd40a97b88770f95';
                         };
                     },
                     {

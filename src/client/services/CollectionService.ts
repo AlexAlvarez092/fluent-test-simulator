@@ -13,9 +13,16 @@ export class CollectionService {
     }
 
     // Return all collections with saved status for current user
-    async list() {
+    async list(options?: { savedOnly?: boolean }) {
         try {
-            const response = await fetch(this.customApiPath, {
+            const query = new URLSearchParams();
+            if (options?.savedOnly) {
+                query.set('saved_only', 'true');
+            }
+
+            const url = query.toString() ? `${this.customApiPath}?${query.toString()}` : this.customApiPath;
+
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',

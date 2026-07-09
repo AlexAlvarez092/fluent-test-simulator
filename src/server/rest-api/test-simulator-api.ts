@@ -2,6 +2,8 @@ import { GlideRecord, gs } from '@servicenow/glide';
 
 export function getCollectionsList(request: any, response: any) {
     const currentUserId = gs.getUserID();
+    const savedOnlyParam = request?.queryParams?.saved_only;
+    const savedOnly = savedOnlyParam === 'true' || savedOnlyParam === '1';
     const savedByCollection: Record<string, boolean> = {};
 
     const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
@@ -23,10 +25,16 @@ export function getCollectionsList(request: any, response: any) {
 
     while (collection.next()) {
         const collectionId = collection.getUniqueValue();
+        const isSaved = savedByCollection[collectionId] === true;
+
+        if (savedOnly && !isSaved) {
+            continue;
+        }
+
         result.push({
             sys_id: collectionId,
             name: collection.getValue('name'),
-            is_saved: savedByCollection[collectionId] === true,
+            is_saved: isSaved,
         });
     }
 

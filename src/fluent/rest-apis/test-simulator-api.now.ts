@@ -26,6 +26,15 @@ RestApi({
             method: 'GET',
             path: '/collections',
             script: getCollectionsList,
+            parameters: [
+                {
+                    $id: Now.ID['test_simulator_api_collections_list_saved_only_param'],
+                    name: 'saved_only',
+                    required: false,
+                    exampleValue: 'true',
+                    shortDescription: 'If true, returns only collections saved by the authenticated user',
+                },
+            ],
             authentication: true,
             authorization: true,
             produces: 'application/json',
