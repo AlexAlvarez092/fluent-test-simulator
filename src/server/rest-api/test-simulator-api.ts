@@ -55,6 +55,20 @@ function getQueryParam(request: any, name: string): string | undefined {
     return undefined;
 }
 
+function getCollectionQuestionIds(collectionId: string): string[] {
+    const questionIds: string[] = [];
+
+    const question = new GlideRecord('x_2119443_test_sim_question');
+    question.addQuery('collection', collectionId);
+    question.query();
+
+    while (question.next()) {
+        questionIds.push(question.getUniqueValue());
+    }
+
+    return questionIds;
+}
+
 export function getCurrentUserRoles(request: any, response: any) {
     const isAdmin = gs.hasRole('x_2119443_test_sim.admin');
     const isUser = gs.hasRole('x_2119443_test_sim.user');
@@ -130,7 +144,15 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
     existing.addQuery('collection', collectionId);
     existing.query();
 
+    const questionIds = getCollectionQuestionIds(String(collectionId));
+    const neverSeenValue = questionIds.join(',');
+
     if (existing.next()) {
+        if (!existing.getValue('never_seen_questions')) {
+            existing.setValue('never_seen_questions', neverSeenValue);
+            existing.update();
+        }
+
         response.setBody({
             sys_id: existing.getUniqueValue(),
             user: currentUserId,
@@ -144,6 +166,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
     record.initialize();
     record.setValue('user', currentUserId);
     record.setValue('collection', collectionId);
+    record.setValue('never_seen_questions', neverSeenValue);
     const insertedId = record.insert();
 
     response.setStatus(201);
