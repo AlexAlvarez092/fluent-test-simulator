@@ -13,7 +13,46 @@ function parseBody(request: any) {
 }
 
 function toBoolean(value: any) {
-    return value === true || value === 'true' || value === 1 || value === '1';
+    if (typeof value === 'string') {
+        const normalized = value.trim().toLowerCase();
+        return normalized === 'true' || normalized === '1';
+    }
+
+    return value === true || value === 1;
+}
+
+function getQueryParam(request: any, name: string): string | undefined {
+    const raw = request?.queryParams?.[name];
+
+    if (raw !== undefined && raw !== null) {
+        if (typeof raw === 'object') {
+            if (Array.isArray(raw) && raw.length > 0) {
+                return String(raw[0]);
+            }
+
+            if ('value' in raw) {
+                return String(raw.value);
+            }
+        }
+
+        return String(raw);
+    }
+
+    if (typeof request?.getQueryParameter === 'function') {
+        const value = request.getQueryParameter(name);
+        if (value !== undefined && value !== null) {
+            return String(value);
+        }
+    }
+
+    if (typeof request?.getParameter === 'function') {
+        const value = request.getParameter(name);
+        if (value !== undefined && value !== null) {
+            return String(value);
+        }
+    }
+
+    return undefined;
 }
 
 export function getCurrentUserRoles(request: any, response: any) {
@@ -36,8 +75,8 @@ export function getCurrentUserRoles(request: any, response: any) {
 
 export function getCollectionsList(request: any, response: any) {
     const currentUserId = gs.getUserID();
-    const savedOnlyParam = request?.queryParams?.saved_only;
-    const savedOnly = savedOnlyParam === 'true' || savedOnlyParam === '1';
+    const savedOnlyParam = getQueryParam(request, 'saved_only');
+    const savedOnly = toBoolean(savedOnlyParam);
     const savedByCollection: Record<string, boolean> = {};
 
     const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
