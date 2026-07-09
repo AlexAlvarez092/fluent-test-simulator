@@ -8,7 +8,11 @@ type CollectionRow = {
     is_saved: boolean;
 };
 
-export default function HomePage() {
+interface HomePageProps {
+    onOpenCollection: (collection: { sys_id: string; name: string }) => void;
+}
+
+export default function HomePage({ onOpenCollection }: HomePageProps) {
     const [savedCollections, setSavedCollections] = useState<CollectionRow[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -71,7 +75,8 @@ export default function HomePage() {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Action</th>
+                            <th>Open</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,6 +86,18 @@ export default function HomePage() {
                             return (
                                 <tr key={collection.sys_id}>
                                     <td>{collection.name}</td>
+                                    <td>
+                                        <button
+                                            onClick={() =>
+                                                onOpenCollection({
+                                                    sys_id: collection.sys_id,
+                                                    name: collection.name,
+                                                })
+                                            }
+                                        >
+                                            Open
+                                        </button>
+                                    </td>
                                     <td>
                                         <button
                                             onClick={() => handleRemoveCollection(collection.sys_id)}

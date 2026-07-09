@@ -3,12 +3,19 @@ import HomePage from './components/HomePage';
 import CollectionsPage from './components/CollectionsPage';
 import Navigation from './components/Navigation';
 import PublishCollectionPage from './components/PublishCollectionPage';
+import OpenCollectionPage from './components/OpenCollectionPage';
 import { AccessService } from './services/AccessService';
 
 type AccessState = 'loading' | 'allowed' | 'denied' | 'error';
 
+type SelectedCollection = {
+    sys_id: string;
+    name: string;
+};
+
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
+    const [selectedCollection, setSelectedCollection] = useState<SelectedCollection | null>(null);
     const [accessState, setAccessState] = useState<AccessState>('loading');
     const [isAdmin, setIsAdmin] = useState(false);
     const [accessError, setAccessError] = useState<string | null>(null);
@@ -38,6 +45,11 @@ export default function App() {
         setCurrentPage(page);
     };
 
+    const handleOpenCollection = (collection: SelectedCollection) => {
+        setSelectedCollection(collection);
+        setCurrentPage('open-collection');
+    };
+
     if (accessState === 'loading') {
         return <div>Checking access...</div>;
     }
@@ -65,9 +77,10 @@ export default function App() {
     return (
         <div>
             <Navigation onNavigate={handleNavigate} currentPage={currentPage} isAdmin={isAdmin} />
-            {currentPage === 'home' && <HomePage />}
+            {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
             {currentPage === 'collections' && <CollectionsPage />}
             {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
+            {currentPage === 'open-collection' && <OpenCollectionPage collection={selectedCollection} />}
         </div>
     );
 }

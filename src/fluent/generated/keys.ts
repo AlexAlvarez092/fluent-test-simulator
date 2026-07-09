@@ -267,6 +267,14 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_dictionary';
+                        id: '08ccff0aaa8147aab04bb43a81470d2f';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'never_seen_questions';
+                        };
+                    },
+                    {
                         table: 'sys_choice';
                         id: '0b831b0a90a34bf1a522c0ad72383bb0';
                         key: {
@@ -295,6 +303,21 @@ declare global {
                             };
                             element: 'result';
                             position: '5';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_section';
+                        id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            caption: 'Question Progress Lists';
+                            view: {
+                                id: 'Default view';
+                                key: {
+                                    name: 'NULL';
+                                };
+                            };
+                            sys_domain: 'global';
                         };
                     },
                     {
@@ -378,6 +401,28 @@ declare global {
                             };
                             element: 'status';
                             position: '2';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '152b340d02724ea0b0e84821c05a0511';
+                        key: {
+                            sys_ui_section: {
+                                id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Question Progress Lists';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'correct_questions';
+                            position: '1';
                         };
                     },
                     {
@@ -615,6 +660,14 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_dictionary';
+                        id: '2d8d2a07af244e3eba34a6aec28bf108';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'correct_questions';
+                        };
+                    },
+                    {
                         table: 'sys_security_acl_role';
                         id: '3021ca39a69246199d7426e7942a509c';
                         key: {
@@ -757,6 +810,15 @@ declare global {
                                 };
                             };
                             sys_domain: 'global';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: '3ede440b333446efadad80f8c044c542';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'last_attempt_failed_questions';
+                            language: 'en';
                         };
                     },
                     {
@@ -1125,6 +1187,15 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_documentation';
+                        id: '5ec83286fc6c437aa7dda1b678dfe6b9';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'correct_questions';
+                            language: 'en';
+                        };
+                    },
+                    {
                         table: 'sys_dictionary';
                         id: '61198a1a41224273ad4b6306133617f9';
                         key: {
@@ -1238,6 +1309,28 @@ declare global {
                                 };
                             };
                             element: 'user';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
+                        id: '647692c031e3493ca9b22092573dc3d0';
+                        key: {
+                            sys_ui_section: {
+                                id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Question Progress Lists';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'last_attempt_failed_questions';
+                            position: '3';
                         };
                     },
                     {
@@ -1394,6 +1487,28 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element';
+                        id: '757f2d5a9728410898da4157c749fd87';
+                        key: {
+                            sys_ui_section: {
+                                id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Question Progress Lists';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'never_seen_questions';
+                            position: '0';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_element';
                         id: '76ec1a0381ef41cfa1aad2d895fc9f63';
                         key: {
                             sys_ui_section: {
@@ -1419,6 +1534,47 @@ declare global {
                         id: '774bf874cbbe4751bda2e8a78b4dc770';
                         key: {
                             name: 'x_2119443_test_sim_test_question';
+                        };
+                    },
+                    {
+                        table: 'sys_ui_form_section';
+                        id: '784c47eec4b44e75b092dfbcd4cf4183';
+                        key: {
+                            sys_ui_form: {
+                                id: '6d95d92a4ff9412d9a43b96864169b1b';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            sys_ui_section: {
+                                id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Question Progress Lists';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: '78bfcd2747434fe8b2153029be5f150e';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'last_attempt_failed_questions';
                         };
                     },
                     {
@@ -1994,6 +2150,28 @@ declare global {
                         };
                     },
                     {
+                        table: 'sys_ui_element';
+                        id: '9a615c737eab4e41a4497e69f20d1c5f';
+                        key: {
+                            sys_ui_section: {
+                                id: '0c373d6ed4c141af86ea7ef1bfe98df2';
+                                key: {
+                                    name: 'x_2119443_test_sim_user_collection';
+                                    caption: 'Question Progress Lists';
+                                    view: {
+                                        id: 'Default view';
+                                        key: {
+                                            name: 'NULL';
+                                        };
+                                    };
+                                    sys_domain: 'global';
+                                };
+                            };
+                            element: 'ever_failed_questions';
+                            position: '2';
+                        };
+                    },
+                    {
                         table: 'sys_ux_lib_asset';
                         id: '9b2c5d3f95bf45c5bd0e56a0668fa021';
                         deleted: false;
@@ -2218,6 +2396,14 @@ declare global {
                             };
                             element: 'test';
                             position: '1';
+                        };
+                    },
+                    {
+                        table: 'sys_dictionary';
+                        id: 'a606bb1ec04a41ee8d953da260c7f789';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'ever_failed_questions';
                         };
                     },
                     {
@@ -2504,6 +2690,15 @@ declare global {
                             };
                             element: 'rationale';
                             position: '6';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: 'c152a633a378454ba42313d5dad67767';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'never_seen_questions';
+                            language: 'en';
                         };
                     },
                     {
@@ -2888,6 +3083,15 @@ declare global {
                         id: 'f36527aeee9c4f97b76394ef37ba5be7';
                         key: {
                             endpoint: 'x_2119443_test_sim_app.do';
+                        };
+                    },
+                    {
+                        table: 'sys_documentation';
+                        id: 'f522ad188cb4401cb9482c82502ced85';
+                        key: {
+                            name: 'x_2119443_test_sim_user_collection';
+                            element: 'ever_failed_questions';
+                            language: 'en';
                         };
                     },
                     {

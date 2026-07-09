@@ -1,4 +1,4 @@
-import { Table, ReferenceColumn } from '@servicenow/sdk/core'
+import { Table, ReferenceColumn, ListColumn } from '@servicenow/sdk/core'
 
 export const x_2119443_test_sim_user_collection = Table({
     name: 'x_2119443_test_sim_user_collection',
@@ -7,6 +7,10 @@ export const x_2119443_test_sim_user_collection = Table({
     schema: {
         user: ReferenceColumn({ referenceTable: 'sys_user', mandatory: true }),
         collection: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_collection', mandatory: true }),
+        never_seen_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
+        correct_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
+        ever_failed_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
+        last_attempt_failed_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
     },
 })
 
@@ -23,6 +27,20 @@ Form({
                     layout: 'two-column',
                     leftElements: [{ field: 'user', type: 'table_field' }],
                     rightElements: [{ field: 'collection', type: 'table_field' }],
+                }
+            ],
+        },
+        {
+            caption: 'Question Progress Lists',
+            content: [
+                {
+                    layout: 'one-column',
+                    elements: [
+                        { field: 'never_seen_questions', type: 'table_field' },
+                        { field: 'correct_questions', type: 'table_field' },
+                        { field: 'ever_failed_questions', type: 'table_field' },
+                        { field: 'last_attempt_failed_questions', type: 'table_field' },
+                    ],
                 }
             ],
         },
