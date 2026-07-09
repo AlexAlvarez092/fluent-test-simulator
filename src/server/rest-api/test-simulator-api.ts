@@ -28,11 +28,9 @@ export function getCurrentUserRoles(request: any, response: any) {
     }
 
     response.setBody({
-        result: {
-            is_admin: isAdmin,
-            is_user: isUser,
-            access,
-        },
+        is_admin: isAdmin,
+        is_user: isUser,
+        access,
     });
 }
 
@@ -74,7 +72,7 @@ export function getCollectionsList(request: any, response: any) {
         });
     }
 
-    response.setBody({ result });
+    response.setBody(result);
 }
 
 export function saveCollectionForCurrentUser(request: any, response: any) {
@@ -95,12 +93,10 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
 
     if (existing.next()) {
         response.setBody({
-            result: {
-                sys_id: existing.getUniqueValue(),
-                user: currentUserId,
-                collection: collectionId,
-                created: false,
-            },
+            sys_id: existing.getUniqueValue(),
+            user: currentUserId,
+            collection: collectionId,
+            created: false,
         });
         return;
     }
@@ -113,12 +109,10 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
 
     response.setStatus(201);
     response.setBody({
-        result: {
-            sys_id: insertedId,
-            user: currentUserId,
-            collection: collectionId,
-            created: true,
-        },
+        sys_id: insertedId,
+        user: currentUserId,
+        collection: collectionId,
+        created: true,
     });
 }
 
@@ -145,11 +139,9 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
     }
 
     response.setBody({
-        result: {
-            user: currentUserId,
-            collection: collectionId,
-            removed,
-        },
+        user: currentUserId,
+        collection: collectionId,
+        removed,
     });
 }
 
@@ -246,11 +238,9 @@ export function publishCollection(request: any, response: any) {
 
         response.setStatus(201);
         response.setBody({
-            result: {
-                collection_id: createdCollectionId,
-                questions_created: createdQuestionIds.length,
-                answers_created: createdAnswerIds.length,
-            },
+            collection_id: createdCollectionId,
+            questions_created: createdQuestionIds.length,
+            answers_created: createdAnswerIds.length,
         });
     } catch (error: any) {
         for (let i = createdAnswerIds.length - 1; i >= 0; i -= 1) {

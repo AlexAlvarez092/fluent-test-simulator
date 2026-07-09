@@ -36,22 +36,7 @@ export class CollectionService {
             }
 
             const payload = await response.json();
-
-            // Scripted REST responses may vary depending on wrapper behavior.
-            // Normalize to a plain array so callers can safely map over it.
-            if (Array.isArray(payload?.result)) {
-                return payload.result;
-            }
-
-            if (Array.isArray(payload?.result?.result)) {
-                return payload.result.result;
-            }
-
-            if (Array.isArray(payload)) {
-                return payload;
-            }
-
-            return [];
+            return Array.isArray(payload?.result) ? payload.result : [];
         } catch (error) {
             console.error('Error fetching collections from custom API:', error);
             throw error;

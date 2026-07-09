@@ -33,7 +33,13 @@ export class AccessService {
             }
 
             const payload = await response.json();
-            return payload?.result || { is_admin: false, is_user: false, access: 'none' };
+            const rawRoles = payload?.result;
+
+            return {
+                is_admin: Boolean(rawRoles?.is_admin),
+                is_user: Boolean(rawRoles?.is_user),
+                access: rawRoles?.access === 'admin' || rawRoles?.access === 'user' ? rawRoles.access : 'none',
+            };
         } catch (error) {
             console.error('Error fetching current user roles:', error);
             throw error;

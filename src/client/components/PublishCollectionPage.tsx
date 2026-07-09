@@ -25,7 +25,8 @@ export default function PublishCollectionPage() {
         try {
             setSubmitting(true);
             const response = await collectionService.publish(parsedPayload);
-            const collectionId = response?.result?.collection_id;
+            const publishResult = response?.result;
+            const collectionId = publishResult?.collection_id;
             setSuccess(
                 collectionId
                     ? `Collection published successfully (${collectionId})`

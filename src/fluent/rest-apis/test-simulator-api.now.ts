@@ -33,7 +33,6 @@ RestApi({
     shortDescription: 'Application REST API for Test Simulator',
     consumes: 'application/json',
     produces: 'application/json',
-    enforceAcl: [testSimulatorApiAcl],
     routes: [
         {
             $id: Now.ID['test_simulator_api_me_roles'],
