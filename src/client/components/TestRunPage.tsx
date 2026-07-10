@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { SubmitTestResult, TestDetail, TestService } from '../services/TestService';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { SaveTestProgressResult, SubmitTestResult, TestDetail, TestService } from '../services/TestService';
 
 type AnswerSelection = Record<string, string[]>;
 
@@ -15,8 +15,12 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
     const [error, setError] = useState<string | null>(null);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [submitResult, setSubmitResult] = useState<SubmitTestResult | null>(null);
+    const [saveResult, setSaveResult] = useState<SaveTestProgressResult | null>(null);
     const [submitting, setSubmitting] = useState(false);
+    const [saving, setSaving] = useState(false);
     const [selection, setSelection] = useState<AnswerSelection>({});
+    const [hasPendingAutoSave, setHasPendingAutoSave] = useState(false);
+    const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
         const load = async () => {
@@ -29,8 +33,15 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                 setError(null);
                 const detail = await testService.getTestDetail(testId);
                 setTestDetail(detail);
-                setSelection({});
+                const nextSelection: AnswerSelection = {};
+                for (let i = 0; i < detail.questions.length; i += 1) {
+                    const question = detail.questions[i];
+                    nextSelection[question.question_id] = question.selected_answer_ids || [];
+                }
+                setSelection(nextSelection);
                 setSubmitResult(null);
+                setSaveResult(null);
+                setHasPendingAutoSave(false);
                 setSubmitError(null);
             } catch (err: any) {
                 setError('Failed to load test detail: ' + (err.message || 'Unknown error'));
@@ -48,6 +59,7 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
             ...previous,
             [questionId]: [answerId],
         }));
+        setHasPendingAutoSave(true);
     };
 
     const toggleMultipleAnswer = (questionId: string, answerId: string, checked: boolean) => {
@@ -60,7 +72,54 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                 [questionId]: next,
             };
         });
+        setHasPendingAutoSave(true);
     };
+
+    useEffect(() => {
+        if (!testDetail || testDetail.test.status === 'completed' || !hasPendingAutoSave || submitting) {
+            return;
+        }
+
+        if (autoSaveTimerRef.current) {
+            clearTimeout(autoSaveTimerRef.current);
+        }
+
+        autoSaveTimerRef.current = setTimeout(() => {
+            const save = async () => {
+                try {
+                    setSaving(true);
+                    setSubmitError(null);
+                    setSubmitResult(null);
+
+                    const answers = testDetail.questions.map((question) => ({
+                        question_id: question.question_id,
+                        selected_answer_ids: selection[question.question_id] || [],
+                    }));
+
+                    const result = await testService.saveTestProgress({
+                        test_id: testDetail.test.sys_id,
+                        answers,
+                    });
+
+                    setSaveResult(result);
+                    setHasPendingAutoSave(false);
+                } catch (err: any) {
+                    setSubmitError('Failed to save progress: ' + (err.message || 'Unknown error'));
+                    console.error(err);
+                } finally {
+                    setSaving(false);
+                }
+            };
+
+            void save();
+        }, 700);
+
+        return () => {
+            if (autoSaveTimerRef.current) {
+                clearTimeout(autoSaveTimerRef.current);
+            }
+        };
+    }, [hasPendingAutoSave, selection, submitting, testDetail, testService]);
 
     const handleSubmit = async () => {
         if (!testDetail) {
@@ -70,6 +129,12 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
         try {
             setSubmitting(true);
             setSubmitError(null);
+            setSaveResult(null);
+            setHasPendingAutoSave(false);
+
+            if (autoSaveTimerRef.current) {
+                clearTimeout(autoSaveTimerRef.current);
+            }
 
             const answers = testDetail.questions.map((question) => ({
                 question_id: question.question_id,
@@ -121,6 +186,12 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                     <h2>{testDetail.test.collection_name}</h2>
                     <p>Test ID: {testDetail.test.sys_id}</p>
                     <p>Status: {testDetail.test.status}</p>
+                    {testDetail.test.status !== 'completed' && (
+                        <p>
+                            Auto-save:{' '}
+                            {saving ? 'Saving...' : hasPendingAutoSave ? 'Pending changes...' : 'All changes saved'}
+                        </p>
+                    )}
 
                     {submitError && (
                         <div>
@@ -140,10 +211,17 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                         </div>
                     )}
 
+                    {saveResult && (
+                        <div>
+                            <p>Progress saved.</p>
+                            <p>Questions saved: {saveResult.saved_questions_count}</p>
+                        </div>
+                    )}
+
                     {testDetail.questions.map((question, index) => {
                         const selected = selection[question.question_id] || [];
                         const isMultiple = question.type === 'multiple';
-                        const isLocked = submitting || testDetail.test.status === 'completed';
+                        const isLocked = submitting || saving || testDetail.test.status === 'completed';
 
                         return (
                             <div key={question.test_question_id}>

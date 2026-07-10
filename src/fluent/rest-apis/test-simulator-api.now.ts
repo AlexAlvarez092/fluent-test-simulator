@@ -8,6 +8,7 @@ import {
     publishCollection,
     removeCollectionForCurrentUser,
     saveCollectionForCurrentUser,
+    saveTestProgress,
     submitTest,
 } from '../../server/rest-api/test-simulator-api'
 
@@ -154,6 +155,18 @@ RestApi({
             ],
             authentication: true,
             authorization: true,
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+        },
+        {
+            $id: Now.ID['test_simulator_api_tests_save_progress'],
+            name: 'Save test progress',
+            method: 'POST',
+            path: '/tests/save-progress',
+            script: saveTestProgress,
+            authentication: true,
+            authorization: true,
+            consumes: 'application/json',
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
         },

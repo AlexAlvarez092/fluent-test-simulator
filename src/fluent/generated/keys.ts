@@ -149,6 +149,10 @@ declare global {
                         table: 'sys_ws_query_parameter';
                         id: '2d6596b111c1402e9092c0454e81f839';
                     };
+                    test_simulator_api_tests_save_progress: {
+                        table: 'sys_ws_operation';
+                        id: '3c3b7365f27543babf3af41621429fe4';
+                    };
                     test_simulator_api_tests_submit: {
                         table: 'sys_ws_operation';
                         id: 'dfe2ccb882bc4d15a212312086dc9563';

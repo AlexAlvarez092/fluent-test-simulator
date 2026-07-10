@@ -19,6 +19,7 @@ export type TestDetail = {
         type: string;
         rationale: string;
         docs: string;
+        selected_answer_ids: string[];
         answers: Array<{
             sys_id: string;
             answer: string;
@@ -46,12 +47,27 @@ export type SubmitTestResult = {
     }>;
 };
 
+export type SaveTestProgressPayload = {
+    test_id: string;
+    answers: Array<{
+        question_id: string;
+        selected_answer_ids: string[];
+    }>;
+};
+
+export type SaveTestProgressResult = {
+    test_id: string;
+    saved_questions_count: number;
+};
+
 export class TestService {
     private readonly testDetailPath: string;
+    private readonly saveProgressPath: string;
     private readonly submitPath: string;
 
     constructor() {
         this.testDetailPath = '/api/x_2119443_test_sim/test_simulator_api/tests/detail';
+        this.saveProgressPath = '/api/x_2119443_test_sim/test_simulator_api/tests/save-progress';
         this.submitPath = '/api/x_2119443_test_sim/test_simulator_api/tests/submit';
     }
 
@@ -78,6 +94,30 @@ export class TestService {
         }
 
         return payload.result as TestDetail;
+    }
+
+    async saveTestProgress(payload: SaveTestProgressPayload): Promise<SaveTestProgressResult> {
+        const response = await fetch(this.saveProgressPath, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-UserToken': window.g_ck,
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!data?.result || typeof data.result !== 'object') {
+            throw new Error('Invalid response contract: expected result object');
+        }
+
+        return data.result as SaveTestProgressResult;
     }
 
     async submitTest(payload: SubmitTestPayload): Promise<SubmitTestResult> {

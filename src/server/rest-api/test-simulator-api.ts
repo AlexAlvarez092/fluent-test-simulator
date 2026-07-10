@@ -596,6 +596,7 @@ export function getTestDetail(request: any, response: any) {
             type: string;
             rationale: string;
             docs: string;
+            selected_answer_ids: string[];
             answers: Array<{ sys_id: string; answer: string }>;
         }>,
     };
@@ -636,11 +637,135 @@ export function getTestDetail(request: any, response: any) {
             type: question.getValue('type') || 'single',
             rationale: question.getValue('rationale') || '',
             docs: question.getValue('docs') || '',
+            selected_answer_ids: parseGlideList(testQuestion.getValue('selected_answers')),
             answers,
         });
     }
 
     response.setBody(result);
+}
+
+export function saveTestProgress(request: any, response: any) {
+    const currentUserId = gs.getUserID();
+    const body: any = parseBody(request);
+
+    const testId = body.test_id;
+    const answers = body.answers;
+
+    if (!testId || typeof testId !== 'string') {
+        response.setStatus(400);
+        response.setBody({ error: 'test_id is required' });
+        return;
+    }
+
+    if (!Array.isArray(answers)) {
+        response.setStatus(400);
+        response.setBody({ error: 'answers array is required' });
+        return;
+    }
+
+    const test = new GlideRecord('x_2119443_test_sim_test');
+    test.addQuery('sys_id', testId);
+    test.addQuery('user', currentUserId);
+    test.query();
+
+    if (!test.next()) {
+        response.setStatus(404);
+        response.setBody({ error: 'Test not found for current user' });
+        return;
+    }
+
+    if (test.getValue('status') !== 'in_progress') {
+        response.setStatus(409);
+        response.setBody({ error: 'Test is already completed' });
+        return;
+    }
+
+    const expectedByQuestionId: Record<string, string> = {};
+    const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
+    testQuestion.addQuery('test', testId);
+    testQuestion.query();
+
+    while (testQuestion.next()) {
+        const questionId = testQuestion.getValue('question') || '';
+        if (questionId) {
+            expectedByQuestionId[questionId] = testQuestion.getUniqueValue();
+        }
+    }
+
+    if (Object.keys(expectedByQuestionId).length === 0) {
+        response.setStatus(400);
+        response.setBody({ error: 'Test has no questions' });
+        return;
+    }
+
+    const updatedQuestionIds: string[] = [];
+
+    for (let i = 0; i < answers.length; i += 1) {
+        const row = answers[i];
+        const questionId = row?.question_id;
+        const selectedAnswerIds = normalizeSelectedAnswerIds(row?.selected_answer_ids);
+
+        if (!questionId || typeof questionId !== 'string') {
+            response.setStatus(400);
+            response.setBody({ error: 'answers[].question_id is required' });
+            return;
+        }
+
+        if (!Array.isArray(row?.selected_answer_ids)) {
+            response.setStatus(400);
+            response.setBody({ error: 'answers[].selected_answer_ids must be an array' });
+            return;
+        }
+
+        const testQuestionId = expectedByQuestionId[questionId];
+        if (!testQuestionId) {
+            response.setStatus(400);
+            response.setBody({ error: `Question '${questionId}' is not part of this test` });
+            return;
+        }
+
+        if (updatedQuestionIds.indexOf(questionId) >= 0) {
+            response.setStatus(400);
+            response.setBody({ error: `Duplicate answer for question '${questionId}'` });
+            return;
+        }
+
+        const validAnswerIdsMap: Record<string, true> = {};
+        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        answer.addQuery('question', questionId);
+        answer.query();
+
+        while (answer.next()) {
+            validAnswerIdsMap[answer.getUniqueValue()] = true;
+        }
+
+        for (let j = 0; j < selectedAnswerIds.length; j += 1) {
+            const selectedId = selectedAnswerIds[j];
+            if (!validAnswerIdsMap[selectedId]) {
+                response.setStatus(400);
+                response.setBody({ error: `Answer '${selectedId}' does not belong to question '${questionId}'` });
+                return;
+            }
+        }
+
+        const testQuestionToUpdate = new GlideRecord('x_2119443_test_sim_test_question');
+        if (!testQuestionToUpdate.get(testQuestionId)) {
+            response.setStatus(400);
+            response.setBody({ error: `Test question '${testQuestionId}' not found` });
+            return;
+        }
+
+        testQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
+        testQuestionToUpdate.update();
+
+        updatedQuestionIds.push(questionId);
+    }
+
+    response.setBody({
+        test_id: testId,
+        saved_questions_count: updatedQuestionIds.length,
+    });
 }
 
 export function submitTest(request: any, response: any) {
