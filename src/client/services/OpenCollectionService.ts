@@ -28,6 +28,24 @@ export class OpenCollectionService {
         this.createTestPath = '/api/x_2119443_test_sim/test_simulator_api/tests/create';
     }
 
+    private async getErrorMessage(response: Response): Promise<string> {
+        let payload: any = null;
+
+        try {
+            payload = await response.json();
+        } catch (error) {
+            return `HTTP error ${response.status}`;
+        }
+
+        const message = payload?.error;
+
+        if (typeof message === 'string' && message.trim().length > 0) {
+            return message;
+        }
+
+        return `HTTP error ${response.status}`;
+    }
+
     async getOverview(collectionId: string): Promise<OpenCollectionOverview> {
         const query = new URLSearchParams();
         query.set('collection_id', collectionId);
@@ -41,8 +59,7 @@ export class OpenCollectionService {
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+            throw new Error(await this.getErrorMessage(response));
         }
 
         const payload = await response.json();
@@ -55,7 +72,7 @@ export class OpenCollectionService {
 
     async createTest(input: {
         collection_id: string;
-        question_count: 10 | 20 | 40;
+        question_count: '10' | '20' | '40';
         mode: 'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed';
     }) {
         const response = await fetch(this.createTestPath, {
@@ -69,8 +86,7 @@ export class OpenCollectionService {
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+            throw new Error(await this.getErrorMessage(response));
         }
 
         const payload = await response.json();

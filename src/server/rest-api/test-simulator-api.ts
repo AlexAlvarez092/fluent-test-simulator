@@ -453,7 +453,7 @@ export function createCollectionTest(request: any, response: any) {
 
     const collectionId = body.collection_id;
     const requestedCountRaw = body.question_count;
-    const requestedCount = typeof requestedCountRaw === 'number' ? requestedCountRaw : NaN;
+    const requestedCount = typeof requestedCountRaw === 'string' ? parseInt(requestedCountRaw, 10) : NaN;
     const mode = body.mode;
 
     if (!collectionId) {
@@ -462,9 +462,9 @@ export function createCollectionTest(request: any, response: any) {
         return;
     }
 
-    if (![10, 20, 40].includes(requestedCount)) {
+    if (typeof requestedCountRaw !== 'string' || !['10', '20', '40'].includes(requestedCountRaw)) {
         response.setStatus(400);
-        response.setBody({ error: 'question_count must be one of: 10, 20, 40' });
+        response.setBody({ error: "question_count must be one of: '10', '20', '40'" });
         return;
     }
 
@@ -537,8 +537,8 @@ export function createCollectionTest(request: any, response: any) {
             test_id: createdTestId,
             collection_id: collectionId,
             mode,
-            requested_question_count: requestedCount,
-            selected_question_count: selectedQuestionIds.length,
+            requested_question_count: requestedCountRaw,
+            selected_question_count: String(selectedQuestionIds.length),
         });
     } catch (error: any) {
         for (let i = createdTestQuestionIds.length - 1; i >= 0; i -= 1) {

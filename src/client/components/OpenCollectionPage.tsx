@@ -20,8 +20,30 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
     const [createError, setCreateError] = useState<string | null>(null);
     const [createSuccess, setCreateSuccess] = useState<string | null>(null);
     const [creatingTest, setCreatingTest] = useState(false);
-    const [questionCount, setQuestionCount] = useState<10 | 20 | 40>(10);
+    const [questionCount, setQuestionCount] = useState<'10' | '20' | '40'>('10');
     const [mode, setMode] = useState<'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed'>('never_seen');
+
+    const getFriendlyCreateErrorMessage = (
+        modeValue: 'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed',
+        rawError: string
+    ) => {
+        const modeLabelMap: Record<typeof modeValue, string> = {
+            never_seen: 'Never Seen',
+            random: 'Random',
+            last_attempt_failed: 'Last Attempt Failed',
+            ever_failed: 'Ever Failed',
+        };
+
+        if (rawError.includes('No questions available for mode')) {
+            return `No questions are currently available for '${modeLabelMap[modeValue]}' mode. Try another mode.`;
+        }
+
+        if (rawError.includes('Unable to select questions for the new test')) {
+            return 'Unable to build a test with the selected options. Please try a different mode or question count.';
+        }
+
+        return `Failed to create test: ${rawError}`;
+    };
 
     const loadOverview = async () => {
         if (!collection?.sys_id) {
@@ -72,7 +94,8 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
             setCreateSuccess(`Test created successfully (${createdTestId})`);
             onOpenTest(createdTestId);
         } catch (err: any) {
-            setCreateError('Failed to create test: ' + (err.message || 'Unknown error'));
+            const rawMessage = err.message || 'Unknown error';
+            setCreateError(getFriendlyCreateErrorMessage(mode, rawMessage));
             console.error(err);
         } finally {
             setCreatingTest(false);
@@ -93,6 +116,11 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
         correct_count: 0,
         ever_failed_count: 0,
         last_attempt_failed_count: 0,
+    };
+
+    const formatStatus = (status: string) => {
+        const normalized = status.replaceAll('_', ' ').toLowerCase();
+        return normalized.charAt(0).toUpperCase() + normalized.slice(1);
     };
 
     return (
@@ -148,8 +176,8 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                 <label htmlFor="question-count">Number of questions</label>
                 <select
                     id="question-count"
-                    value={String(questionCount)}
-                    onChange={(event) => setQuestionCount(Number(event.target.value) as 10 | 20 | 40)}
+                    value={questionCount}
+                    onChange={(event) => setQuestionCount(event.target.value as '10' | '20' | '40')}
                 >
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -184,7 +212,6 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                 <table>
                     <thead>
                         <tr>
-                            <th>Test ID</th>
                             <th>Status</th>
                             <th>Result (%)</th>
                             <th>Created On</th>
@@ -197,8 +224,7 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
 
                             return (
                                 <tr key={test.sys_id}>
-                                    <td>{test.sys_id}</td>
-                                    <td>{test.status}</td>
+                                    <td>{formatStatus(test.status)}</td>
                                     <td>{test.result}</td>
                                     <td>{test.created_on}</td>
                                     <td>
