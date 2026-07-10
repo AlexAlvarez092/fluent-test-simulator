@@ -950,8 +950,10 @@ export function submitTest(request: any, response: any) {
         }
     }
 
+    const scorePercent = Math.round((correctCount / expectedQuestionIds.length) * 100);
+
     test.setValue('status', 'completed');
-    test.setValue('result', correctCount);
+    test.setValue('result', scorePercent);
     test.update();
 
     const neverSeenMap = toMembershipMap(parseGlideList(userCollection.getValue('never_seen_questions')));
@@ -988,7 +990,7 @@ export function submitTest(request: any, response: any) {
         total_questions: expectedQuestionIds.length,
         correct_count: correctCount,
         failed_count: failedCount,
-        score_percent: Math.round((correctCount / expectedQuestionIds.length) * 100),
+        score_percent: scorePercent,
         question_results: questionResults,
     });
 }

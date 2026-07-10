@@ -186,7 +186,7 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                         <tr>
                             <th>Test ID</th>
                             <th>Status</th>
-                            <th>Result</th>
+                            <th>Result (%)</th>
                             <th>Created On</th>
                             <th>Action</th>
                         </tr>
