@@ -161,6 +161,10 @@ declare global {
                         table: 'sys_app_application';
                         id: 'c8c7ec1cb79a4cb89974fdc95eade74c';
                     };
+                    test_simulator_menu_module_answers: {
+                        table: 'sys_app_module';
+                        id: '8a337fe9807a488c9729ae8dc7579468';
+                    };
                     test_simulator_menu_module_collections: {
                         table: 'sys_app_module';
                         id: '8756b1a69f0743c8b7372168695e66dd';
@@ -168,6 +172,22 @@ declare global {
                     test_simulator_menu_module_home: {
                         table: 'sys_app_module';
                         id: 'dd76f4b8533b4b08b6358dc07dced9b7';
+                    };
+                    test_simulator_menu_module_questions: {
+                        table: 'sys_app_module';
+                        id: '6270f4a55c4c49598daa7d82b3daa364';
+                    };
+                    test_simulator_menu_module_test_questions: {
+                        table: 'sys_app_module';
+                        id: 'd4efc65ebe684ad6a0f9eb2c34671960';
+                    };
+                    test_simulator_menu_module_tests: {
+                        table: 'sys_app_module';
+                        id: '3ef7ea0bb5af4af7965ab6d2d4a8ff22';
+                    };
+                    test_simulator_menu_module_user_collections: {
+                        table: 'sys_app_module';
+                        id: 'afc62ed90cd14791a55eff95f83f92c4';
                     };
                     test_simulator_self_service_module_home: {
                         table: 'sys_app_module';
