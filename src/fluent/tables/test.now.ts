@@ -1,4 +1,4 @@
-import { Table, ReferenceColumn, ChoiceColumn, IntegerColumn } from '@servicenow/sdk/core';
+import { Table, ReferenceColumn, ChoiceColumn, IntegerColumn } from '@servicenow/sdk/core'
 
 export const x_2119443_test_sim_test = Table({
     name: 'x_2119443_test_sim_test',
@@ -22,9 +22,9 @@ export const x_2119443_test_sim_test = Table({
         }),
         result: IntegerColumn({ mandatory: true, default: 0 }),
     },
-});
+})
 
-import { List, Form, default_view } from '@servicenow/sdk/core';
+import { List, Form, default_view } from '@servicenow/sdk/core'
 
 Form({
     table: 'x_2119443_test_sim_test',
@@ -48,7 +48,7 @@ Form({
             ],
         },
     ],
-});
+})
 
 List({
     table: 'x_2119443_test_sim_test',
@@ -60,9 +60,9 @@ List({
         { element: 'status', position: 3 },
         { element: 'result', position: 4 },
     ],
-});
+})
 
-import { Acl } from '@servicenow/sdk/core';
+import { Acl } from '@servicenow/sdk/core'
 
 Acl({
     $id: Now.ID['test_create'],
@@ -70,7 +70,7 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'create',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['test_read'],
@@ -78,7 +78,7 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'read',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['test_write'],
@@ -86,7 +86,7 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'write',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['test_delete'],
@@ -94,4 +94,4 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'delete',
     roles: ['x_2119443_test_sim.admin'],
-});
+})
