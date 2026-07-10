@@ -188,17 +188,31 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                             <th>Status</th>
                             <th>Result</th>
                             <th>Created On</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {overview.tests.map((test) => (
-                            <tr key={test.sys_id}>
-                                <td>{test.sys_id}</td>
-                                <td>{test.status}</td>
-                                <td>{test.result}</td>
-                                <td>{test.created_on}</td>
-                            </tr>
-                        ))}
+                        {overview.tests.map((test) => {
+                            const canContinue = test.status === 'in_progress';
+
+                            return (
+                                <tr key={test.sys_id}>
+                                    <td>{test.sys_id}</td>
+                                    <td>{test.status}</td>
+                                    <td>{test.result}</td>
+                                    <td>{test.created_on}</td>
+                                    <td>
+                                        {canContinue ? (
+                                            <button type="button" onClick={() => onOpenTest(test.sys_id)}>
+                                                Continue
+                                            </button>
+                                        ) : (
+                                            <span>-</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             )}
