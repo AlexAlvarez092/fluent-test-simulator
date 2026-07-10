@@ -449,6 +449,14 @@ export function getOpenCollectionOverview(request: any, response: any) {
     const correct = parseGlideList(userCollection.getValue('correct_questions'));
     const everFailed = parseGlideList(userCollection.getValue('ever_failed_questions'));
     const lastAttemptFailed = parseGlideList(userCollection.getValue('last_attempt_failed_questions'));
+    const questions: Array<{
+        sys_id: string;
+        question: string;
+        type: string;
+        rationale: string;
+        docs: string;
+        answers: Array<{ sys_id: string; answer: string; is_correct: string }>;
+    }> = [];
 
     const tests: Array<{ sys_id: string; status: string; result: string; created_on: string }> = [];
     const test = new GlideRecord('x_2119443_test_sim_test');
@@ -466,6 +474,37 @@ export function getOpenCollectionOverview(request: any, response: any) {
         });
     }
 
+    const question = new GlideRecord('x_2119443_test_sim_question');
+    question.addQuery('collection', collectionId);
+    question.orderBy('sys_created_on');
+    question.query();
+
+    while (question.next()) {
+        const questionId = question.getUniqueValue();
+        const answers: Array<{ sys_id: string; answer: string; is_correct: string }> = [];
+        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        answer.addQuery('question', questionId);
+        answer.orderBy('sys_created_on');
+        answer.query();
+
+        while (answer.next()) {
+            answers.push({
+                sys_id: answer.getUniqueValue(),
+                answer: answer.getValue('answer') || '',
+                is_correct: String(toBoolean(answer.getValue('is_correct'))),
+            });
+        }
+
+        questions.push({
+            sys_id: questionId,
+            question: question.getValue('question') || '',
+            type: question.getValue('type') || 'single',
+            rationale: question.getValue('rationale') || '',
+            docs: question.getValue('docs') || '',
+            answers,
+        });
+    }
+
     response.setBody({
         stats: {
             never_seen_count: String(neverSeen.length),
@@ -474,6 +513,7 @@ export function getOpenCollectionOverview(request: any, response: any) {
             last_attempt_failed_count: String(lastAttemptFailed.length),
         },
         tests,
+        questions,
     });
 }
 
@@ -612,6 +652,8 @@ export function getTestDetail(request: any, response: any) {
         return;
     }
 
+    const isCompletedTest = (test.getValue('status') || 'in_progress') === 'completed';
+
     const result = {
         test: {
             sys_id: test.getUniqueValue(),
@@ -629,7 +671,7 @@ export function getTestDetail(request: any, response: any) {
             rationale: string;
             docs: string;
             selected_answer_ids: string[];
-            answers: Array<{ sys_id: string; answer: string; is_correct: string }>;
+            answers: Array<{ sys_id: string; answer: string; is_correct?: string }>;
         }>,
     };
 
@@ -649,18 +691,23 @@ export function getTestDetail(request: any, response: any) {
             continue;
         }
 
-        const answers: Array<{ sys_id: string; answer: string; is_correct: string }> = [];
+        const answers: Array<{ sys_id: string; answer: string; is_correct?: string }> = [];
         const answer = new GlideRecord('x_2119443_test_sim_answer');
         answer.addQuery('question', questionId);
         answer.orderBy('sys_created_on');
         answer.query();
 
         while (answer.next()) {
-            answers.push({
+            const answerRow: { sys_id: string; answer: string; is_correct?: string } = {
                 sys_id: answer.getUniqueValue(),
                 answer: answer.getValue('answer') || '',
-                is_correct: String(toBoolean(answer.getValue('is_correct'))),
-            });
+            };
+
+            if (isCompletedTest) {
+                answerRow.is_correct = String(toBoolean(answer.getValue('is_correct')));
+            }
+
+            answers.push(answerRow);
         }
 
         result.questions.push({

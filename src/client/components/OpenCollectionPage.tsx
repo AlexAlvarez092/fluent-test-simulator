@@ -220,7 +220,8 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                     </thead>
                     <tbody>
                         {overview.tests.map((test) => {
-                            const canContinue = test.status === 'in_progress';
+                            const isInProgress = test.status === 'in_progress';
+                            const canOpen = isInProgress || test.status === 'completed';
 
                             return (
                                 <tr key={test.sys_id}>
@@ -228,9 +229,9 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                                     <td>{test.result}</td>
                                     <td>{test.created_on}</td>
                                     <td>
-                                        {canContinue ? (
+                                        {canOpen ? (
                                             <button type="button" onClick={() => onOpenTest(test.sys_id)}>
-                                                Continue
+                                                {isInProgress ? 'Continue' : 'Review'}
                                             </button>
                                         ) : (
                                             <span>-</span>
@@ -241,6 +242,34 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                         })}
                     </tbody>
                 </table>
+            )}
+
+            <h2>Collection Questions</h2>
+            {loading ? (
+                <div>Loading questions...</div>
+            ) : !overview?.questions?.length ? (
+                <div>No questions found for this collection.</div>
+            ) : (
+                <div>
+                    {overview.questions.map((question, index) => (
+                        <div key={question.sys_id}>
+                            <h3>
+                                {index + 1}. {question.question}
+                            </h3>
+                            <p>Type: {question.type}</p>
+                            {question.rationale && <p>Rationale: {question.rationale}</p>}
+                            {question.docs && <p>Docs: {question.docs}</p>}
+                            <ul>
+                                {question.answers.map((answer) => (
+                                    <li key={answer.sys_id}>
+                                        {answer.answer}
+                                        {answer.is_correct ? ' (Correct)' : ''}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );
