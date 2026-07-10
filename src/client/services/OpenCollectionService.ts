@@ -37,7 +37,7 @@ export class OpenCollectionService {
             return `HTTP error ${response.status}`;
         }
 
-        const message = payload?.error;
+        const message = payload?.result?.error;
 
         if (typeof message === 'string' && message.trim().length > 0) {
             return message;

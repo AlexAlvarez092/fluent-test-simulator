@@ -87,7 +87,7 @@ export class TestService {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+            throw new Error(errorData?.result?.error || `HTTP error ${response.status}`);
         }
 
         const payload = await response.json();
@@ -121,7 +121,7 @@ export class TestService {
                           ? question.answers.map((answer: any) => ({
                                 sys_id: String(answer?.sys_id || ''),
                                 answer: String(answer?.answer || ''),
-                              is_correct: String(answer?.is_correct || 'false') === 'true',
+                                is_correct: String(answer?.is_correct || 'false') === 'true',
                             }))
                           : [],
                   }))
@@ -142,7 +142,7 @@ export class TestService {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+            throw new Error(errorData?.result?.error || `HTTP error ${response.status}`);
         }
 
         const data = await response.json();
@@ -169,7 +169,7 @@ export class TestService {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+            throw new Error(errorData?.result?.error || `HTTP error ${response.status}`);
         }
 
         const data = await response.json();

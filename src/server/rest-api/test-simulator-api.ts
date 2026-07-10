@@ -265,6 +265,15 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
     existing.addQuery('collection', collectionId);
     existing.query();
 
+    const legacyTests = new GlideRecord('x_2119443_test_sim_test');
+    legacyTests.addQuery('user', currentUserId);
+    legacyTests.addQuery('collection', collectionId);
+    legacyTests.query();
+
+    while (legacyTests.next()) {
+        legacyTests.deleteRecord();
+    }
+
     let removed = 0;
     while (existing.next()) {
         existing.deleteRecord();
@@ -537,6 +546,7 @@ export function createCollectionTest(request: any, response: any) {
     try {
         const test = new GlideRecord('x_2119443_test_sim_test');
         test.initialize();
+        test.setValue('user_collection', userCollection.getUniqueValue());
         test.setValue('collection', collectionId);
         test.setValue('user', currentUserId);
         test.setValue('status', 'in_progress');

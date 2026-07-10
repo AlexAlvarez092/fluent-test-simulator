@@ -5,6 +5,11 @@ export const x_2119443_test_sim_test = Table({
     label: 'Test',
     display: 'collection',
     schema: {
+        user_collection: ReferenceColumn({
+            referenceTable: 'x_2119443_test_sim_user_collection',
+            mandatory: true,
+            cascadeRule: 'delete',
+        }),
         collection: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_collection', mandatory: true }),
         user: ReferenceColumn({ referenceTable: 'sys_user', mandatory: true }),
         status: ChoiceColumn({
@@ -31,6 +36,7 @@ Form({
                 {
                     layout: 'two-column',
                     leftElements: [
+                        { field: 'user_collection', type: 'table_field' },
                         { field: 'collection', type: 'table_field' },
                         { field: 'status', type: 'table_field' },
                     ],
@@ -48,10 +54,11 @@ List({
     table: 'x_2119443_test_sim_test',
     view: default_view,
     columns: [
-        { element: 'collection', position: 0 },
-        { element: 'user', position: 1 },
-        { element: 'status', position: 2 },
-        { element: 'result', position: 3 },
+        { element: 'user_collection', position: 0 },
+        { element: 'collection', position: 1 },
+        { element: 'user', position: 2 },
+        { element: 'status', position: 3 },
+        { element: 'result', position: 4 },
     ],
 });
 

@@ -6,7 +6,11 @@ export const x_2119443_test_sim_test_question = Table({
     display: 'question',
     schema: {
         question: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_question', mandatory: true }),
-        test: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_test', mandatory: true }),
+        test: ReferenceColumn({
+            referenceTable: 'x_2119443_test_sim_test',
+            mandatory: true,
+            cascadeRule: 'delete',
+        }),
         status: ChoiceColumn({
             mandatory: true,
             default: 'unanswered',

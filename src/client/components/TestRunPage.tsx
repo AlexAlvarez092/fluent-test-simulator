@@ -253,7 +253,10 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                                         />
                                         {answer.answer}
                                         {isCompleted && answer.is_correct && ' (Correct)'}
-                                        {isCompleted && selected.includes(answer.sys_id) && !answer.is_correct && ' (Your wrong answer)'}
+                                        {isCompleted &&
+                                            selected.includes(answer.sys_id) &&
+                                            !answer.is_correct &&
+                                            ' (Your wrong answer)'}
                                     </label>
                                 ))}
                             </div>
