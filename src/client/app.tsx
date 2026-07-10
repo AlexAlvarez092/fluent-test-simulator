@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import PublishCollectionPage from './components/PublishCollectionPage';
 import OpenCollectionPage from './components/OpenCollectionPage';
 import TestRunPage from './components/TestRunPage';
+import CollectionQuestionsPage from './components/CollectionQuestionsPage';
 import { AccessService } from './services/AccessService';
 
 type AccessState = 'loading' | 'allowed' | 'denied' | 'error';
@@ -57,6 +58,14 @@ export default function App() {
         setCurrentPage('test-run');
     };
 
+    const handleOpenCollectionQuestions = () => {
+        setCurrentPage('collection-questions');
+    };
+
+    const handleBackToCollection = () => {
+        setCurrentPage('open-collection');
+    };
+
     if (accessState === 'loading') {
         return <div>Checking access...</div>;
     }
@@ -88,7 +97,14 @@ export default function App() {
             {currentPage === 'collections' && <CollectionsPage />}
             {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
             {currentPage === 'open-collection' && (
-                <OpenCollectionPage collection={selectedCollection} onOpenTest={handleOpenTest} />
+                <OpenCollectionPage
+                    collection={selectedCollection}
+                    onOpenTest={handleOpenTest}
+                    onOpenQuestions={handleOpenCollectionQuestions}
+                />
+            )}
+            {currentPage === 'collection-questions' && (
+                <CollectionQuestionsPage collection={selectedCollection} onBack={handleBackToCollection} />
             )}
             {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
         </div>

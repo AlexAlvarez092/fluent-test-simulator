@@ -9,9 +9,10 @@ type SelectedCollection = {
 interface OpenCollectionPageProps {
     collection: SelectedCollection | null;
     onOpenTest: (testId: string) => void;
+    onOpenQuestions: () => void;
 }
 
-export default function OpenCollectionPage({ collection, onOpenTest }: OpenCollectionPageProps) {
+export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuestions }: OpenCollectionPageProps) {
     const openCollectionService = useMemo(() => new OpenCollectionService(), []);
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
@@ -138,24 +139,29 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
             {loading ? (
                 <div>Loading statistics...</div>
             ) : (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Never Seen</th>
-                            <th>Correct</th>
-                            <th>Ever Failed</th>
-                            <th>Last Attempt Failed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{stats.never_seen_count}</td>
-                            <td>{stats.correct_count}</td>
-                            <td>{stats.ever_failed_count}</td>
-                            <td>{stats.last_attempt_failed_count}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Never Seen</th>
+                                <th>Correct</th>
+                                <th>Ever Failed</th>
+                                <th>Last Attempt Failed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{stats.never_seen_count}</td>
+                                <td>{stats.correct_count}</td>
+                                <td>{stats.ever_failed_count}</td>
+                                <td>{stats.last_attempt_failed_count}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" onClick={onOpenQuestions}>
+                        View All Questions
+                    </button>
+                </div>
             )}
 
             <h2>Create New Test</h2>
@@ -244,33 +250,6 @@ export default function OpenCollectionPage({ collection, onOpenTest }: OpenColle
                 </table>
             )}
 
-            <h2>Collection Questions</h2>
-            {loading ? (
-                <div>Loading questions...</div>
-            ) : !overview?.questions?.length ? (
-                <div>No questions found for this collection.</div>
-            ) : (
-                <div>
-                    {overview.questions.map((question, index) => (
-                        <div key={question.sys_id}>
-                            <h3>
-                                {index + 1}. {question.question}
-                            </h3>
-                            <p>Type: {question.type}</p>
-                            {question.rationale && <p>Rationale: {question.rationale}</p>}
-                            {question.docs && <p>Docs: {question.docs}</p>}
-                            <ul>
-                                {question.answers.map((answer) => (
-                                    <li key={answer.sys_id}>
-                                        {answer.answer}
-                                        {answer.is_correct ? ' (Correct)' : ''}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            )}
         </div>
     );
 }
