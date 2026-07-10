@@ -613,12 +613,13 @@ export function getTestDetail(request: any, response: any) {
         questions: [] as Array<{
             test_question_id: string;
             question_id: string;
+            status: string;
             question: string;
             type: string;
             rationale: string;
             docs: string;
             selected_answer_ids: string[];
-            answers: Array<{ sys_id: string; answer: string }>;
+            answers: Array<{ sys_id: string; answer: string; is_correct: string }>;
         }>,
     };
 
@@ -638,7 +639,7 @@ export function getTestDetail(request: any, response: any) {
             continue;
         }
 
-        const answers: Array<{ sys_id: string; answer: string }> = [];
+        const answers: Array<{ sys_id: string; answer: string; is_correct: string }> = [];
         const answer = new GlideRecord('x_2119443_test_sim_answer');
         answer.addQuery('question', questionId);
         answer.orderBy('sys_created_on');
@@ -648,12 +649,14 @@ export function getTestDetail(request: any, response: any) {
             answers.push({
                 sys_id: answer.getUniqueValue(),
                 answer: answer.getValue('answer') || '',
+                is_correct: String(toBoolean(answer.getValue('is_correct'))),
             });
         }
 
         result.questions.push({
             test_question_id: testQuestion.getUniqueValue(),
             question_id: questionId,
+            status: testQuestion.getValue('status') || 'unanswered',
             question: question.getValue('question') || '',
             type: question.getValue('type') || 'single',
             rationale: question.getValue('rationale') || '',

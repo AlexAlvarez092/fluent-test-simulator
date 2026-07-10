@@ -222,12 +222,14 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                         const selected = selection[question.question_id] || [];
                         const isMultiple = question.type === 'multiple';
                         const isLocked = submitting || saving || testDetail.test.status === 'completed';
+                        const isCompleted = testDetail.test.status === 'completed';
 
                         return (
                             <div key={question.test_question_id}>
                                 <h3>
                                     {index + 1}. {question.question}
                                 </h3>
+                                {isCompleted && <p>Question result: {question.status}</p>}
 
                                 {question.answers.map((answer) => (
                                     <label key={answer.sys_id}>
@@ -250,6 +252,8 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                                             }}
                                         />
                                         {answer.answer}
+                                        {isCompleted && answer.is_correct && ' (Correct)'}
+                                        {isCompleted && selected.includes(answer.sys_id) && !answer.is_correct && ' (Your wrong answer)'}
                                     </label>
                                 ))}
                             </div>

@@ -15,6 +15,7 @@ export type TestDetail = {
     questions: Array<{
         test_question_id: string;
         question_id: string;
+        status: string;
         question: string;
         type: string;
         rationale: string;
@@ -23,6 +24,7 @@ export type TestDetail = {
         answers: Array<{
             sys_id: string;
             answer: string;
+            is_correct: boolean;
         }>;
     }>;
 };
@@ -107,6 +109,7 @@ export class TestService {
                 ? result.questions.map((question: any) => ({
                       test_question_id: String(question?.test_question_id || ''),
                       question_id: String(question?.question_id || ''),
+                      status: String(question?.status || ''),
                       question: String(question?.question || ''),
                       type: String(question?.type || ''),
                       rationale: String(question?.rationale || ''),
@@ -118,6 +121,7 @@ export class TestService {
                           ? question.answers.map((answer: any) => ({
                                 sys_id: String(answer?.sys_id || ''),
                                 answer: String(answer?.answer || ''),
+                              is_correct: String(answer?.is_correct || 'false') === 'true',
                             }))
                           : [],
                   }))
