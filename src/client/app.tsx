@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import Breadcrumbs, { BreadcrumbItem } from './components/Breadcrumbs';
 import HomePage from './components/HomePage';
 import CollectionsPage from './components/CollectionsPage';
 import Navigation from './components/Navigation';
@@ -66,6 +67,51 @@ export default function App() {
         setCurrentPage('open-collection');
     };
 
+    const breadcrumbItems: BreadcrumbItem[] = (() => {
+        if (currentPage === 'home') {
+            return [{ key: 'home', label: 'Home' }];
+        }
+
+        if (currentPage === 'collections') {
+            return [
+                { key: 'home', label: 'Home', page: 'home' },
+                { key: 'collections', label: 'Collections' },
+            ];
+        }
+
+        if (currentPage === 'publish') {
+            return [
+                { key: 'home', label: 'Home', page: 'home' },
+                { key: 'publish', label: 'Publish Collection' },
+            ];
+        }
+
+        if (currentPage === 'open-collection') {
+            return [
+                { key: 'home', label: 'Home', page: 'home' },
+                { key: 'collection', label: selectedCollection?.name || 'Collection' },
+            ];
+        }
+
+        if (currentPage === 'collection-questions') {
+            return [
+                { key: 'home', label: 'Home', page: 'home' },
+                { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
+                { key: 'questions', label: 'All Questions' },
+            ];
+        }
+
+        if (currentPage === 'test-run') {
+            return [
+                { key: 'home', label: 'Home', page: 'home' },
+                { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
+                { key: 'test', label: selectedTestId ? `Test ${selectedTestId}` : 'Test' },
+            ];
+        }
+
+        return [{ key: 'home', label: 'Home', page: 'home' }];
+    })();
+
     if (accessState === 'loading') {
         return <div>Checking access...</div>;
     }
@@ -93,6 +139,7 @@ export default function App() {
     return (
         <div>
             <Navigation onNavigate={handleNavigate} currentPage={currentPage} isAdmin={isAdmin} />
+            <Breadcrumbs items={breadcrumbItems} onNavigate={handleNavigate} />
             {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
             {currentPage === 'collections' && <CollectionsPage />}
             {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}

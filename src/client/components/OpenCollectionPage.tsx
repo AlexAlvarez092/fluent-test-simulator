@@ -249,7 +249,6 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                     </tbody>
                 </table>
             )}
-
         </div>
     );
 }
