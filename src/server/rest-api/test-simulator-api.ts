@@ -126,6 +126,20 @@ function normalizeSelectedAnswerIds(value: any): string[] {
     return Object.keys(map);
 }
 
+function isStringArray(value: any): value is string[] {
+    if (!Array.isArray(value)) {
+        return false;
+    }
+
+    for (let i = 0; i < value.length; i += 1) {
+        if (typeof value[i] !== 'string') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export function getCurrentUserRoles(request: any, response: any) {
     const isAdmin = gs.hasRole('x_2119443_test_sim.admin');
     const isUser = gs.hasRole('x_2119443_test_sim.user');
@@ -138,8 +152,8 @@ export function getCurrentUserRoles(request: any, response: any) {
     }
 
     response.setBody({
-        is_admin: isAdmin,
-        is_user: isUser,
+        is_admin: String(isAdmin),
+        is_user: String(isUser),
         access,
     });
 }
@@ -165,7 +179,7 @@ export function getCollectionsList(request: any, response: any) {
     collection.orderByDesc('name');
     collection.query();
 
-    const result: Array<{ sys_id: string; name: string; is_saved: boolean }> = [];
+    const result: Array<{ sys_id: string; name: string; is_saved: string }> = [];
 
     while (collection.next()) {
         const collectionId = collection.getUniqueValue();
@@ -178,7 +192,7 @@ export function getCollectionsList(request: any, response: any) {
         result.push({
             sys_id: collectionId,
             name: collection.getValue('name'),
-            is_saved: isSaved,
+            is_saved: String(isSaved),
         });
     }
 
@@ -214,7 +228,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
             sys_id: existing.getUniqueValue(),
             user: currentUserId,
             collection: collectionId,
-            created: false,
+            created: 'false',
         });
         return;
     }
@@ -231,7 +245,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
         sys_id: insertedId,
         user: currentUserId,
         collection: collectionId,
-        created: true,
+        created: 'true',
     });
 }
 
@@ -260,7 +274,7 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
     response.setBody({
         user: currentUserId,
         collection: collectionId,
-        removed,
+        removed: String(removed),
     });
 }
 
@@ -342,7 +356,14 @@ export function publishCollection(request: any, response: any) {
                     throw new Error(`Answer at index ${aIndex} in question ${qIndex} is missing field 'answer'`);
                 }
 
-                const isCorrect = toBoolean(answerPayload.is_correct ?? false);
+                const isCorrectRaw = answerPayload.is_correct;
+                if (isCorrectRaw !== undefined && typeof isCorrectRaw !== 'string') {
+                    throw new Error(
+                        `Answer at index ${aIndex} in question ${qIndex} must provide 'is_correct' as string`
+                    );
+                }
+
+                const isCorrect = toBoolean(isCorrectRaw ?? 'false');
                 if (isCorrect) {
                     hasCorrectAnswer = true;
                 }
@@ -364,8 +385,8 @@ export function publishCollection(request: any, response: any) {
         response.setStatus(201);
         response.setBody({
             collection_id: createdCollectionId,
-            questions_created: createdQuestionIds.length,
-            answers_created: createdAnswerIds.length,
+            questions_created: String(createdQuestionIds.length),
+            answers_created: String(createdAnswerIds.length),
         });
     } catch (error: any) {
         for (let i = createdAnswerIds.length - 1; i >= 0; i -= 1) {
@@ -420,7 +441,7 @@ export function getOpenCollectionOverview(request: any, response: any) {
     const everFailed = parseGlideList(userCollection.getValue('ever_failed_questions'));
     const lastAttemptFailed = parseGlideList(userCollection.getValue('last_attempt_failed_questions'));
 
-    const tests: Array<{ sys_id: string; status: string; result: number; created_on: string }> = [];
+    const tests: Array<{ sys_id: string; status: string; result: string; created_on: string }> = [];
     const test = new GlideRecord('x_2119443_test_sim_test');
     test.addQuery('user', currentUserId);
     test.addQuery('collection', collectionId);
@@ -431,17 +452,17 @@ export function getOpenCollectionOverview(request: any, response: any) {
         tests.push({
             sys_id: test.getUniqueValue(),
             status: test.getValue('status') || 'in_progress',
-            result: parseInt(test.getValue('result') || '0', 10),
+            result: String(parseInt(test.getValue('result') || '0', 10)),
             created_on: test.getValue('sys_created_on') || '',
         });
     }
 
     response.setBody({
         stats: {
-            never_seen_count: neverSeen.length,
-            correct_count: correct.length,
-            ever_failed_count: everFailed.length,
-            last_attempt_failed_count: lastAttemptFailed.length,
+            never_seen_count: String(neverSeen.length),
+            correct_count: String(correct.length),
+            ever_failed_count: String(everFailed.length),
+            last_attempt_failed_count: String(lastAttemptFailed.length),
         },
         tests,
     });
@@ -587,7 +608,7 @@ export function getTestDetail(request: any, response: any) {
             collection_id: test.getValue('collection') || '',
             collection_name: test.getDisplayValue('collection') || '',
             status: test.getValue('status') || 'in_progress',
-            result: parseInt(test.getValue('result') || '0', 10),
+            result: String(parseInt(test.getValue('result') || '0', 10)),
         },
         questions: [] as Array<{
             test_question_id: string;
@@ -704,7 +725,8 @@ export function saveTestProgress(request: any, response: any) {
     for (let i = 0; i < answers.length; i += 1) {
         const row = answers[i];
         const questionId = row?.question_id;
-        const selectedAnswerIds = normalizeSelectedAnswerIds(row?.selected_answer_ids);
+        const selectedAnswerIdsRaw = row?.selected_answer_ids;
+        const selectedAnswerIds = normalizeSelectedAnswerIds(selectedAnswerIdsRaw);
 
         if (!questionId || typeof questionId !== 'string') {
             response.setStatus(400);
@@ -712,9 +734,9 @@ export function saveTestProgress(request: any, response: any) {
             return;
         }
 
-        if (!Array.isArray(row?.selected_answer_ids)) {
+        if (!isStringArray(selectedAnswerIdsRaw)) {
             response.setStatus(400);
-            response.setBody({ error: 'answers[].selected_answer_ids must be an array' });
+            response.setBody({ error: 'answers[].selected_answer_ids must be a string[]' });
             return;
         }
 
@@ -764,7 +786,7 @@ export function saveTestProgress(request: any, response: any) {
 
     response.setBody({
         test_id: testId,
-        saved_questions_count: updatedQuestionIds.length,
+        saved_questions_count: String(updatedQuestionIds.length),
     });
 }
 
@@ -840,7 +862,8 @@ export function submitTest(request: any, response: any) {
     for (let i = 0; i < answers.length; i += 1) {
         const row = answers[i];
         const questionId = row?.question_id;
-        const selectedAnswerIds = normalizeSelectedAnswerIds(row?.selected_answer_ids);
+        const selectedAnswerIdsRaw = row?.selected_answer_ids;
+        const selectedAnswerIds = normalizeSelectedAnswerIds(selectedAnswerIdsRaw);
 
         if (!questionId || typeof questionId !== 'string') {
             response.setStatus(400);
@@ -848,9 +871,9 @@ export function submitTest(request: any, response: any) {
             return;
         }
 
-        if (!Array.isArray(row?.selected_answer_ids)) {
+        if (!isStringArray(selectedAnswerIdsRaw)) {
             response.setStatus(400);
-            response.setBody({ error: 'answers[].selected_answer_ids must be an array' });
+            response.setBody({ error: 'answers[].selected_answer_ids must be a string[]' });
             return;
         }
 
@@ -987,10 +1010,10 @@ export function submitTest(request: any, response: any) {
 
     response.setBody({
         test_id: testId,
-        total_questions: expectedQuestionIds.length,
-        correct_count: correctCount,
-        failed_count: failedCount,
-        score_percent: scorePercent,
+        total_questions: String(expectedQuestionIds.length),
+        correct_count: String(correctCount),
+        failed_count: String(failedCount),
+        score_percent: String(scorePercent),
         question_results: questionResults,
     });
 }

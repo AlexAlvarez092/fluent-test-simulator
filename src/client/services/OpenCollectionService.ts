@@ -67,7 +67,24 @@ export class OpenCollectionService {
             throw new Error('Invalid response contract: expected result object');
         }
 
-        return payload.result as OpenCollectionOverview;
+        const result = payload.result as any;
+
+        return {
+            stats: {
+                never_seen_count: parseInt(String(result?.stats?.never_seen_count || '0'), 10),
+                correct_count: parseInt(String(result?.stats?.correct_count || '0'), 10),
+                ever_failed_count: parseInt(String(result?.stats?.ever_failed_count || '0'), 10),
+                last_attempt_failed_count: parseInt(String(result?.stats?.last_attempt_failed_count || '0'), 10),
+            },
+            tests: Array.isArray(result?.tests)
+                ? result.tests.map((test: any) => ({
+                      sys_id: String(test?.sys_id || ''),
+                      status: String(test?.status || ''),
+                      result: parseInt(String(test?.result || '0'), 10),
+                      created_on: String(test?.created_on || ''),
+                  }))
+                : [],
+        };
     }
 
     async createTest(input: {

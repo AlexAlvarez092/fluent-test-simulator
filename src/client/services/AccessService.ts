@@ -40,8 +40,8 @@ export class AccessService {
             }
 
             return {
-                is_admin: Boolean(rawRoles?.is_admin),
-                is_user: Boolean(rawRoles?.is_user),
+                is_admin: rawRoles?.is_admin === 'true',
+                is_user: rawRoles?.is_user === 'true',
                 access: rawRoles?.access === 'admin' || rawRoles?.access === 'user' ? rawRoles.access : 'none',
             };
         } catch (error) {

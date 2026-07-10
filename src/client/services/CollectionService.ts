@@ -40,7 +40,11 @@ export class CollectionService {
                 throw new Error('Invalid response contract: expected result array');
             }
 
-            return payload.result;
+            return payload.result.map((row: any) => ({
+                sys_id: String(row?.sys_id || ''),
+                name: String(row?.name || ''),
+                is_saved: String(row?.is_saved || 'false') === 'true',
+            }));
         } catch (error) {
             console.error('Error fetching collections from custom API:', error);
             throw error;

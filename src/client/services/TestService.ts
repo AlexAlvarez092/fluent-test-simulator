@@ -93,7 +93,36 @@ export class TestService {
             throw new Error('Invalid response contract: expected result object');
         }
 
-        return payload.result as TestDetail;
+        const result = payload.result as TestDetail;
+
+        return {
+            test: {
+                sys_id: String(result?.test?.sys_id || ''),
+                collection_id: String(result?.test?.collection_id || ''),
+                collection_name: String(result?.test?.collection_name || ''),
+                status: String(result?.test?.status || ''),
+                result: parseInt(String(result?.test?.result || '0'), 10),
+            },
+            questions: Array.isArray(result?.questions)
+                ? result.questions.map((question: any) => ({
+                      test_question_id: String(question?.test_question_id || ''),
+                      question_id: String(question?.question_id || ''),
+                      question: String(question?.question || ''),
+                      type: String(question?.type || ''),
+                      rationale: String(question?.rationale || ''),
+                      docs: String(question?.docs || ''),
+                      selected_answer_ids: Array.isArray(question?.selected_answer_ids)
+                          ? question.selected_answer_ids.map((id: any) => String(id || ''))
+                          : [],
+                      answers: Array.isArray(question?.answers)
+                          ? question.answers.map((answer: any) => ({
+                                sys_id: String(answer?.sys_id || ''),
+                                answer: String(answer?.answer || ''),
+                            }))
+                          : [],
+                  }))
+                : [],
+        };
     }
 
     async saveTestProgress(payload: SaveTestProgressPayload): Promise<SaveTestProgressResult> {
@@ -117,7 +146,10 @@ export class TestService {
             throw new Error('Invalid response contract: expected result object');
         }
 
-        return data.result as SaveTestProgressResult;
+        return {
+            test_id: String(data.result?.test_id || ''),
+            saved_questions_count: parseInt(String(data.result?.saved_questions_count || '0'), 10),
+        };
     }
 
     async submitTest(payload: SubmitTestPayload): Promise<SubmitTestResult> {
@@ -141,6 +173,18 @@ export class TestService {
             throw new Error('Invalid response contract: expected result object');
         }
 
-        return data.result as SubmitTestResult;
+        return {
+            test_id: String(data.result?.test_id || ''),
+            total_questions: parseInt(String(data.result?.total_questions || '0'), 10),
+            correct_count: parseInt(String(data.result?.correct_count || '0'), 10),
+            failed_count: parseInt(String(data.result?.failed_count || '0'), 10),
+            score_percent: parseInt(String(data.result?.score_percent || '0'), 10),
+            question_results: Array.isArray(data.result?.question_results)
+                ? data.result.question_results.map((item: any) => ({
+                      question_id: String(item?.question_id || ''),
+                      status: item?.status === 'correct' ? 'correct' : 'failed',
+                  }))
+                : [],
+        };
     }
 }
