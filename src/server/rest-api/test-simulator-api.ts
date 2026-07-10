@@ -93,6 +93,39 @@ function pickRandomItems(items: string[], maxCount: number): string[] {
     return shuffled.slice(0, Math.max(0, maxCount));
 }
 
+function toMembershipMap(items: string[]): Record<string, true> {
+    const map: Record<string, true> = {};
+
+    for (let i = 0; i < items.length; i += 1) {
+        const value = String(items[i] || '').trim();
+        if (value) {
+            map[value] = true;
+        }
+    }
+
+    return map;
+}
+
+function mapKeys(map: Record<string, true>): string[] {
+    return Object.keys(map);
+}
+
+function normalizeSelectedAnswerIds(value: any): string[] {
+    if (!Array.isArray(value)) {
+        return [];
+    }
+
+    const map: Record<string, true> = {};
+    for (let i = 0; i < value.length; i += 1) {
+        const id = String(value[i] || '').trim();
+        if (id) {
+            map[id] = true;
+        }
+    }
+
+    return Object.keys(map);
+}
+
 export function getCurrentUserRoles(request: any, response: any) {
     const isAdmin = gs.hasRole('x_2119443_test_sim.admin');
     const isUser = gs.hasRole('x_2119443_test_sim.user');
@@ -608,4 +641,229 @@ export function getTestDetail(request: any, response: any) {
     }
 
     response.setBody(result);
+}
+
+export function submitTest(request: any, response: any) {
+    const currentUserId = gs.getUserID();
+    const body: any = parseBody(request);
+
+    const testId = body.test_id;
+    const answers = body.answers;
+
+    if (!testId || typeof testId !== 'string') {
+        response.setStatus(400);
+        response.setBody({ error: 'test_id is required' });
+        return;
+    }
+
+    if (!Array.isArray(answers)) {
+        response.setStatus(400);
+        response.setBody({ error: 'answers array is required' });
+        return;
+    }
+
+    const test = new GlideRecord('x_2119443_test_sim_test');
+    test.addQuery('sys_id', testId);
+    test.addQuery('user', currentUserId);
+    test.query();
+
+    if (!test.next()) {
+        response.setStatus(404);
+        response.setBody({ error: 'Test not found for current user' });
+        return;
+    }
+
+    if (test.getValue('status') !== 'in_progress') {
+        response.setStatus(409);
+        response.setBody({ error: 'Test is already completed' });
+        return;
+    }
+
+    const collectionId = test.getValue('collection') || '';
+    const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
+    userCollection.addQuery('user', currentUserId);
+    userCollection.addQuery('collection', collectionId);
+    userCollection.query();
+
+    if (!userCollection.next()) {
+        response.setStatus(404);
+        response.setBody({ error: 'Saved collection not found for current user' });
+        return;
+    }
+
+    const expectedByQuestionId: Record<string, string> = {};
+    const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
+    testQuestion.addQuery('test', testId);
+    testQuestion.query();
+
+    while (testQuestion.next()) {
+        const questionId = testQuestion.getValue('question') || '';
+        if (questionId) {
+            expectedByQuestionId[questionId] = testQuestion.getUniqueValue();
+        }
+    }
+
+    const expectedQuestionIds = Object.keys(expectedByQuestionId);
+    if (expectedQuestionIds.length === 0) {
+        response.setStatus(400);
+        response.setBody({ error: 'Test has no questions' });
+        return;
+    }
+
+    const submittedByQuestionId: Record<string, string[]> = {};
+
+    for (let i = 0; i < answers.length; i += 1) {
+        const row = answers[i];
+        const questionId = row?.question_id;
+        const selectedAnswerIds = normalizeSelectedAnswerIds(row?.selected_answer_ids);
+
+        if (!questionId || typeof questionId !== 'string') {
+            response.setStatus(400);
+            response.setBody({ error: 'answers[].question_id is required' });
+            return;
+        }
+
+        if (!Array.isArray(row?.selected_answer_ids)) {
+            response.setStatus(400);
+            response.setBody({ error: 'answers[].selected_answer_ids must be an array' });
+            return;
+        }
+
+        if (!expectedByQuestionId[questionId]) {
+            response.setStatus(400);
+            response.setBody({ error: `Question '${questionId}' is not part of this test` });
+            return;
+        }
+
+        if (submittedByQuestionId[questionId]) {
+            response.setStatus(400);
+            response.setBody({ error: `Duplicate answer for question '${questionId}'` });
+            return;
+        }
+
+        submittedByQuestionId[questionId] = selectedAnswerIds;
+    }
+
+    if (Object.keys(submittedByQuestionId).length !== expectedQuestionIds.length) {
+        response.setStatus(400);
+        response.setBody({ error: 'All test questions must be answered in submit payload' });
+        return;
+    }
+
+    let correctCount = 0;
+    let failedCount = 0;
+    const correctQuestionIds: string[] = [];
+    const failedQuestionIds: string[] = [];
+    const processedQuestionIds: string[] = [];
+    const questionResults: Array<{ question_id: string; status: 'correct' | 'failed' }> = [];
+
+    for (let i = 0; i < expectedQuestionIds.length; i += 1) {
+        const questionId = expectedQuestionIds[i];
+        const selectedAnswerIds = submittedByQuestionId[questionId] || [];
+
+        const validAnswerIdsMap: Record<string, true> = {};
+        const correctAnswerIdsMap: Record<string, true> = {};
+
+        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        answer.addQuery('question', questionId);
+        answer.query();
+
+        while (answer.next()) {
+            const answerId = answer.getUniqueValue();
+            validAnswerIdsMap[answerId] = true;
+
+            if (toBoolean(answer.getValue('is_correct'))) {
+                correctAnswerIdsMap[answerId] = true;
+            }
+        }
+
+        for (let j = 0; j < selectedAnswerIds.length; j += 1) {
+            const selectedId = selectedAnswerIds[j];
+            if (!validAnswerIdsMap[selectedId]) {
+                response.setStatus(400);
+                response.setBody({ error: `Answer '${selectedId}' does not belong to question '${questionId}'` });
+                return;
+            }
+        }
+
+        const selectedMap = toMembershipMap(selectedAnswerIds);
+        const selectedCount = mapKeys(selectedMap).length;
+        const correctCountForQuestion = mapKeys(correctAnswerIdsMap).length;
+
+        let isCorrect = selectedCount === correctCountForQuestion;
+        if (isCorrect) {
+            const correctIds = mapKeys(correctAnswerIdsMap);
+            for (let j = 0; j < correctIds.length; j += 1) {
+                if (!selectedMap[correctIds[j]]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+        }
+
+        const testQuestionId = expectedByQuestionId[questionId];
+        const testQuestionToUpdate = new GlideRecord('x_2119443_test_sim_test_question');
+        if (!testQuestionToUpdate.get(testQuestionId)) {
+            response.setStatus(400);
+            response.setBody({ error: `Test question '${testQuestionId}' not found` });
+            return;
+        }
+
+        testQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
+        testQuestionToUpdate.setValue('status', isCorrect ? 'correct' : 'failed');
+        testQuestionToUpdate.update();
+
+        processedQuestionIds.push(questionId);
+        if (isCorrect) {
+            correctCount += 1;
+            correctQuestionIds.push(questionId);
+            questionResults.push({ question_id: questionId, status: 'correct' });
+        } else {
+            failedCount += 1;
+            failedQuestionIds.push(questionId);
+            questionResults.push({ question_id: questionId, status: 'failed' });
+        }
+    }
+
+    test.setValue('status', 'completed');
+    test.setValue('result', correctCount);
+    test.update();
+
+    const neverSeenMap = toMembershipMap(parseGlideList(userCollection.getValue('never_seen_questions')));
+    const correctMap = toMembershipMap(parseGlideList(userCollection.getValue('correct_questions')));
+    const everFailedMap = toMembershipMap(parseGlideList(userCollection.getValue('ever_failed_questions')));
+    const lastAttemptFailedMap = toMembershipMap(
+        parseGlideList(userCollection.getValue('last_attempt_failed_questions'))
+    );
+
+    for (let i = 0; i < processedQuestionIds.length; i += 1) {
+        delete neverSeenMap[processedQuestionIds[i]];
+    }
+
+    for (let i = 0; i < correctQuestionIds.length; i += 1) {
+        const questionId = correctQuestionIds[i];
+        correctMap[questionId] = true;
+        delete lastAttemptFailedMap[questionId];
+    }
+
+    for (let i = 0; i < failedQuestionIds.length; i += 1) {
+        const questionId = failedQuestionIds[i];
+        everFailedMap[questionId] = true;
+        lastAttemptFailedMap[questionId] = true;
+    }
+
+    userCollection.setValue('never_seen_questions', mapKeys(neverSeenMap).join(','));
+    userCollection.setValue('correct_questions', mapKeys(correctMap).join(','));
+    userCollection.setValue('ever_failed_questions', mapKeys(everFailedMap).join(','));
+    userCollection.setValue('last_attempt_failed_questions', mapKeys(lastAttemptFailedMap).join(','));
+    userCollection.update();
+
+    response.setBody({
+        test_id: testId,
+        total_questions: expectedQuestionIds.length,
+        correct_count: correctCount,
+        failed_count: failedCount,
+        score_percent: Math.round((correctCount / expectedQuestionIds.length) * 100),
+        question_results: questionResults,
+    });
 }

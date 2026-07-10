@@ -26,11 +26,33 @@ export type TestDetail = {
     }>;
 };
 
+export type SubmitTestPayload = {
+    test_id: string;
+    answers: Array<{
+        question_id: string;
+        selected_answer_ids: string[];
+    }>;
+};
+
+export type SubmitTestResult = {
+    test_id: string;
+    total_questions: number;
+    correct_count: number;
+    failed_count: number;
+    score_percent: number;
+    question_results: Array<{
+        question_id: string;
+        status: 'correct' | 'failed';
+    }>;
+};
+
 export class TestService {
     private readonly testDetailPath: string;
+    private readonly submitPath: string;
 
     constructor() {
         this.testDetailPath = '/api/x_2119443_test_sim/test_simulator_api/tests/detail';
+        this.submitPath = '/api/x_2119443_test_sim/test_simulator_api/tests/submit';
     }
 
     async getTestDetail(testId: string): Promise<TestDetail> {
@@ -56,5 +78,29 @@ export class TestService {
         }
 
         return payload.result as TestDetail;
+    }
+
+    async submitTest(payload: SubmitTestPayload): Promise<SubmitTestResult> {
+        const response = await fetch(this.submitPath, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-UserToken': window.g_ck,
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error?.message || errorData.error || `HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!data?.result || typeof data.result !== 'object') {
+            throw new Error('Invalid response contract: expected result object');
+        }
+
+        return data.result as SubmitTestResult;
     }
 }

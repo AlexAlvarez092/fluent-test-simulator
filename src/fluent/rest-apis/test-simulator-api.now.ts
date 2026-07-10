@@ -8,6 +8,7 @@ import {
     publishCollection,
     removeCollectionForCurrentUser,
     saveCollectionForCurrentUser,
+    submitTest,
 } from '../../server/rest-api/test-simulator-api'
 
 const testSimulatorApiAcl = Acl({
@@ -103,23 +104,6 @@ RestApi({
             authentication: true,
             authorization: true,
             enforceAcl: [testSimulatorApiAcl],
-            requestExample: `{
-                "collection": {
-                    "name": "Java Basics",
-                    "questions": [
-                        {
-                            "question": "What is the JVM?",
-                            "type": "single",
-                            "rationale": "Core Java concept",
-                            "docs": "https://example.com/jvm",
-                            "answers": [
-                                { "answer": "Java Virtual Machine", "is_correct": true },
-                                { "answer": "Java Vendor Module", "is_correct": false }
-                            ]
-                        }
-                    ]
-                }
-            }`,
         },
         {
             $id: Now.ID['test_simulator_api_collections_open_overview'],
@@ -152,11 +136,6 @@ RestApi({
             consumes: 'application/json',
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
-            requestExample: `{
-                "collection_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "question_count": 20,
-                "mode": "last_attempt_failed"
-            }`,
         },
         {
             $id: Now.ID['test_simulator_api_tests_detail'],
@@ -175,6 +154,18 @@ RestApi({
             ],
             authentication: true,
             authorization: true,
+            produces: 'application/json',
+            enforceAcl: [testSimulatorApiAcl],
+        },
+        {
+            $id: Now.ID['test_simulator_api_tests_submit'],
+            name: 'Submit test answers',
+            method: 'POST',
+            path: '/tests/submit',
+            script: submitTest,
+            authentication: true,
+            authorization: true,
+            consumes: 'application/json',
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
         },
