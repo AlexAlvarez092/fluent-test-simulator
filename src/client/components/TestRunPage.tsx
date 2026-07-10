@@ -184,7 +184,7 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
             ) : (
                 <div>
                     <h2>{testDetail.test.collection_name}</h2>
-                    <p>Test ID: {testDetail.test.sys_id}</p>
+                    <p>Created On: {testDetail.test.created_on}</p>
                     <p>Status: {testDetail.test.status}</p>
                     {testDetail.test.status !== 'completed' && (
                         <p>

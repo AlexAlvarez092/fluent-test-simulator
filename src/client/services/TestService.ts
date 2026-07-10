@@ -9,6 +9,7 @@ export type TestDetail = {
         sys_id: string;
         collection_id: string;
         collection_name: string;
+        created_on: string;
         status: string;
         result: number;
     };
@@ -102,6 +103,7 @@ export class TestService {
                 sys_id: String(result?.test?.sys_id || ''),
                 collection_id: String(result?.test?.collection_id || ''),
                 collection_name: String(result?.test?.collection_name || ''),
+                created_on: String(result?.test?.created_on || ''),
                 status: String(result?.test?.status || ''),
                 result: parseInt(String(result?.test?.result || '0'), 10),
             },

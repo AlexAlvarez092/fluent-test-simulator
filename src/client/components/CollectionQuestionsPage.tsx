@@ -8,10 +8,9 @@ type SelectedCollection = {
 
 interface CollectionQuestionsPageProps {
     collection: SelectedCollection | null;
-    onBack: () => void;
 }
 
-export default function CollectionQuestionsPage({ collection, onBack }: CollectionQuestionsPageProps) {
+export default function CollectionQuestionsPage({ collection }: CollectionQuestionsPageProps) {
     const openCollectionService = useMemo(() => new OpenCollectionService(), []);
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
@@ -52,9 +51,6 @@ export default function CollectionQuestionsPage({ collection, onBack }: Collecti
     return (
         <div>
             <h1>{collection.name}</h1>
-            <button type="button" onClick={onBack}>
-                Back to Collection
-            </button>
 
             {error && (
                 <div>

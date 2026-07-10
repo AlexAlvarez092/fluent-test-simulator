@@ -26,12 +26,7 @@ export default function PublishCollectionPage() {
             setSubmitting(true);
             const response = await collectionService.publish(parsedPayload);
             const publishResult = response?.result;
-            const collectionId = publishResult?.collection_id;
-            setSuccess(
-                collectionId
-                    ? `Collection published successfully (${collectionId})`
-                    : 'Collection published successfully'
-            );
+            setSuccess(publishResult ? 'Collection published successfully' : 'Collection published successfully');
             setPayloadText('');
         } catch (err: any) {
             setError('Failed to publish collection: ' + (err.message || 'Unknown error'));

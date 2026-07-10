@@ -582,6 +582,7 @@ export function createCollectionTest(request: any, response: any) {
 
     const createdTestQuestionIds: string[] = [];
     let createdTestId = '';
+    let createdOn = '';
 
     try {
         const test = new GlideRecord('x_2119443_test_sim_test');
@@ -592,6 +593,11 @@ export function createCollectionTest(request: any, response: any) {
         test.setValue('status', 'in_progress');
         test.setValue('result', 0);
         createdTestId = String(test.insert());
+
+        const createdTest = new GlideRecord('x_2119443_test_sim_test');
+        if (createdTest.get(createdTestId)) {
+            createdOn = createdTest.getValue('sys_created_on') || '';
+        }
 
         for (let i = 0; i < selectedQuestionIds.length; i += 1) {
             const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
@@ -607,6 +613,7 @@ export function createCollectionTest(request: any, response: any) {
         response.setBody({
             test_id: createdTestId,
             collection_id: collectionId,
+            created_on: createdOn,
             mode,
             requested_question_count: requestedCountRaw,
             selected_question_count: String(selectedQuestionIds.length),
@@ -659,6 +666,7 @@ export function getTestDetail(request: any, response: any) {
             sys_id: test.getUniqueValue(),
             collection_id: test.getValue('collection') || '',
             collection_name: test.getDisplayValue('collection') || '',
+            created_on: test.getValue('sys_created_on') || '',
             status: test.getValue('status') || 'in_progress',
             result: String(parseInt(test.getValue('result') || '0', 10)),
         },

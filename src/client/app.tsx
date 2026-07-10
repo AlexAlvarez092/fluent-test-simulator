@@ -20,6 +20,7 @@ export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedCollection, setSelectedCollection] = useState<SelectedCollection | null>(null);
     const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
+    const [selectedTestCreatedOn, setSelectedTestCreatedOn] = useState<string | null>(null);
     const [accessState, setAccessState] = useState<AccessState>('loading');
     const [isAdmin, setIsAdmin] = useState(false);
     const [accessError, setAccessError] = useState<string | null>(null);
@@ -54,17 +55,14 @@ export default function App() {
         setCurrentPage('open-collection');
     };
 
-    const handleOpenTest = (testId: string) => {
+    const handleOpenTest = (testId: string, createdOn?: string) => {
         setSelectedTestId(testId);
+        setSelectedTestCreatedOn(createdOn || null);
         setCurrentPage('test-run');
     };
 
     const handleOpenCollectionQuestions = () => {
         setCurrentPage('collection-questions');
-    };
-
-    const handleBackToCollection = () => {
-        setCurrentPage('open-collection');
     };
 
     const breadcrumbItems: BreadcrumbItem[] = (() => {
@@ -105,7 +103,7 @@ export default function App() {
             return [
                 { key: 'home', label: 'Home', page: 'home' },
                 { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
-                { key: 'test', label: selectedTestId ? `Test ${selectedTestId}` : 'Test' },
+                { key: 'test', label: selectedTestCreatedOn || 'Test' },
             ];
         }
 
@@ -150,9 +148,7 @@ export default function App() {
                     onOpenQuestions={handleOpenCollectionQuestions}
                 />
             )}
-            {currentPage === 'collection-questions' && (
-                <CollectionQuestionsPage collection={selectedCollection} onBack={handleBackToCollection} />
-            )}
+            {currentPage === 'collection-questions' && <CollectionQuestionsPage collection={selectedCollection} />}
             {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
         </div>
     );

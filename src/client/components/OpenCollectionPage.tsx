@@ -8,7 +8,7 @@ type SelectedCollection = {
 
 interface OpenCollectionPageProps {
     collection: SelectedCollection | null;
-    onOpenTest: (testId: string) => void;
+    onOpenTest: (testId: string, createdOn?: string) => void;
     onOpenQuestions: () => void;
 }
 
@@ -92,8 +92,8 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                 throw new Error('Invalid response contract: test_id is required');
             }
 
-            setCreateSuccess(`Test created successfully (${createdTestId})`);
-            onOpenTest(createdTestId);
+            setCreateSuccess('Test created successfully');
+            onOpenTest(createdTestId, created.created_on);
         } catch (err: any) {
             const rawMessage = err.message || 'Unknown error';
             setCreateError(getFriendlyCreateErrorMessage(mode, rawMessage));
@@ -236,7 +236,10 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                                     <td>{test.created_on}</td>
                                     <td>
                                         {canOpen ? (
-                                            <button type="button" onClick={() => onOpenTest(test.sys_id)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onOpenTest(test.sys_id, test.created_on)}
+                                            >
                                                 {isInProgress ? 'Continue' : 'Review'}
                                             </button>
                                         ) : (
