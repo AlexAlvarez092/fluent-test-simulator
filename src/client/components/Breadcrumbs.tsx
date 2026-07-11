@@ -17,12 +17,12 @@ export default function Breadcrumbs({ items, onNavigate }: BreadcrumbsProps) {
     }
 
     return (
-        <nav aria-label="Breadcrumbs">
+        <nav className="app-breadcrumbs" aria-label="Breadcrumbs">
             {items.map((item, index) => {
                 const isLast = index === items.length - 1;
 
                 return (
-                    <span key={item.key}>
+                    <span key={item.key} className="app-breadcrumb-item">
                         {item.page && !isLast ? (
                             <button type="button" onClick={() => onNavigate(item.page as string)}>
                                 {item.label}

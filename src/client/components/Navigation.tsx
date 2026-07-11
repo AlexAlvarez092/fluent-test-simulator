@@ -8,7 +8,7 @@ interface NavigationProps {
 
 export default function Navigation({ onNavigate, currentPage, isAdmin }: NavigationProps) {
     return (
-        <nav>
+        <nav className="app-nav" aria-label="Main navigation">
             <button onClick={() => onNavigate('home')}>Home</button>
             <button onClick={() => onNavigate('collections')}>Collections</button>
             {isAdmin && <button onClick={() => onNavigate('publish')}>Publish Collection</button>}

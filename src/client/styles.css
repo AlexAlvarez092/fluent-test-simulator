@@ -1,0 +1,160 @@
+:root {
+    --app-bg: #ffffff;
+    --app-surface: #f8fafc;
+    --app-border: #d9e1ea;
+    --app-text: #1f2933;
+    --app-muted: #5f6c7b;
+    --app-accent: #0b69a3;
+    --app-accent-hover: #095985;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background: var(--app-bg);
+    color: var(--app-text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+}
+
+.app-shell {
+    width: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 20px 16px 28px;
+}
+
+.app-content {
+    margin-top: 12px;
+    background: var(--app-bg);
+}
+
+.app-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--app-border);
+    border-radius: 8px;
+    background: var(--app-surface);
+}
+
+.app-breadcrumbs {
+    margin-top: 12px;
+    padding: 8px 2px;
+    color: var(--app-muted);
+    font-size: 14px;
+}
+
+.app-breadcrumb-item button {
+    border: none;
+    background: transparent;
+    color: var(--app-accent);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+}
+
+.app-message-card {
+    margin-top: 16px;
+    border: 1px solid var(--app-border);
+    border-radius: 8px;
+    background: var(--app-surface);
+    padding: 16px;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    color: var(--app-text);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    border: 1px solid var(--app-border);
+}
+
+th,
+td {
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--app-border);
+    padding: 10px 12px;
+}
+
+th {
+    background: #f1f5f9;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input,
+select,
+textarea,
+button {
+    font: inherit;
+}
+
+select,
+textarea,
+input[type='text'] {
+    width: 100%;
+    max-width: 720px;
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #fff;
+    color: var(--app-text);
+}
+
+button {
+    border: 1px solid var(--app-accent);
+    border-radius: 6px;
+    background: var(--app-accent);
+    color: #fff;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background: var(--app-accent-hover);
+    border-color: var(--app-accent-hover);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+    width: auto;
+    margin-right: 8px;
+}
+
+@media (max-width: 720px) {
+    .app-shell {
+        padding: 14px 12px 20px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+}

@@ -111,45 +111,55 @@ export default function App() {
     })();
 
     if (accessState === 'loading') {
-        return <div>Checking access...</div>;
+        return (
+            <div className="app-shell">
+                <div className="app-message-card">Checking access...</div>
+            </div>
+        );
     }
 
     if (accessState === 'error') {
         return (
-            <div>
-                <h1>Access Check Failed</h1>
-                <p>Unable to verify your roles for Test Simulator.</p>
-                <p>{accessError}</p>
+            <div className="app-shell">
+                <div className="app-message-card">
+                    <h1>Access Check Failed</h1>
+                    <p>Unable to verify your roles for Test Simulator.</p>
+                    <p>{accessError}</p>
+                </div>
             </div>
         );
     }
 
     if (accessState === 'denied') {
         return (
-            <div>
-                <h1>Access Denied</h1>
-                <p>You do not have the required role to access Test Simulator.</p>
-                <p>Required: x_2119443_test_sim.user or x_2119443_test_sim.admin</p>
+            <div className="app-shell">
+                <div className="app-message-card">
+                    <h1>Access Denied</h1>
+                    <p>You do not have the required role to access Test Simulator.</p>
+                    <p>Required: x_2119443_test_sim.user or x_2119443_test_sim.admin</p>
+                </div>
             </div>
         );
     }
 
     return (
-        <div>
+        <div className="app-shell">
             <Navigation onNavigate={handleNavigate} currentPage={currentPage} isAdmin={isAdmin} />
             <Breadcrumbs items={breadcrumbItems} onNavigate={handleNavigate} />
-            {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
-            {currentPage === 'collections' && <CollectionsPage />}
-            {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
-            {currentPage === 'open-collection' && (
-                <OpenCollectionPage
-                    collection={selectedCollection}
-                    onOpenTest={handleOpenTest}
-                    onOpenQuestions={handleOpenCollectionQuestions}
-                />
-            )}
-            {currentPage === 'collection-questions' && <CollectionQuestionsPage collection={selectedCollection} />}
-            {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
+            <main className="app-content">
+                {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
+                {currentPage === 'collections' && <CollectionsPage />}
+                {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
+                {currentPage === 'open-collection' && (
+                    <OpenCollectionPage
+                        collection={selectedCollection}
+                        onOpenTest={handleOpenTest}
+                        onOpenQuestions={handleOpenCollectionQuestions}
+                    />
+                )}
+                {currentPage === 'collection-questions' && <CollectionQuestionsPage collection={selectedCollection} />}
+                {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
+            </main>
         </div>
     );
 }
