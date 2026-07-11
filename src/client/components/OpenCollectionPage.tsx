@@ -6,10 +6,12 @@ type SelectedCollection = {
     name: string;
 };
 
+type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_attempt_failed';
+
 interface OpenCollectionPageProps {
     collection: SelectedCollection | null;
     onOpenTest: (testId: string, createdOn?: string) => void;
-    onOpenQuestions: () => void;
+    onOpenQuestions: (filter: QuestionFilter) => void;
 }
 
 export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuestions }: OpenCollectionPageProps) {
@@ -118,11 +120,18 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
         ever_failed_count: 0,
         last_attempt_failed_count: 0,
     };
+    const allQuestionsCount = overview?.questions?.length || 0;
 
     const formatStatus = (status: string) => {
         const normalized = status.replaceAll('_', ' ').toLowerCase();
         return normalized.charAt(0).toUpperCase() + normalized.slice(1);
     };
+
+    const renderStatsLink = (label: string, value: number, filter: QuestionFilter) => (
+        <button type="button" className="stats-count-link" onClick={() => onOpenQuestions(filter)} aria-label={label}>
+            {value}
+        </button>
+    );
 
     return (
         <div>
@@ -147,20 +156,33 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                                 <th>Correct</th>
                                 <th>Ever Failed</th>
                                 <th>Last Attempt Failed</th>
+                                <th>All</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{stats.never_seen_count}</td>
-                                <td>{stats.correct_count}</td>
-                                <td>{stats.ever_failed_count}</td>
-                                <td>{stats.last_attempt_failed_count}</td>
+                                <td>
+                                    {renderStatsLink('Open Never Seen questions', stats.never_seen_count, 'never_seen')}
+                                </td>
+                                <td>{renderStatsLink('Open Correct questions', stats.correct_count, 'correct')}</td>
+                                <td>
+                                    {renderStatsLink(
+                                        'Open Ever Failed questions',
+                                        stats.ever_failed_count,
+                                        'ever_failed'
+                                    )}
+                                </td>
+                                <td>
+                                    {renderStatsLink(
+                                        'Open Last Attempt Failed questions',
+                                        stats.last_attempt_failed_count,
+                                        'last_attempt_failed'
+                                    )}
+                                </td>
+                                <td>{renderStatsLink('Open All questions', allQuestionsCount, 'all')}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <button type="button" onClick={onOpenQuestions}>
-                        View All Questions
-                    </button>
                 </div>
             )}
 

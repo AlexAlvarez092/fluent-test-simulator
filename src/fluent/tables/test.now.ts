@@ -1,4 +1,4 @@
-import { Table, ReferenceColumn, ChoiceColumn, IntegerColumn } from '@servicenow/sdk/core'
+import { Table, ReferenceColumn, ChoiceColumn, IntegerColumn } from '@servicenow/sdk/core';
 
 export const x_2119443_test_sim_test = Table({
     name: 'x_2119443_test_sim_test',
@@ -16,15 +16,38 @@ export const x_2119443_test_sim_test = Table({
             mandatory: true,
             default: 'in_progress',
             choices: {
-                in_progress: 'In progress',
-                completed: 'Completed',
+                in_progress: {
+                    label: 'In progress',
+                    sequence: 1,
+                },
+                completed: {
+                    label: 'Completed',
+                    sequence: 2,
+                },
             },
         }),
         result: IntegerColumn({ mandatory: true, default: 0 }),
     },
-})
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'collection',
+        },
+        {
+            name: 'index2',
+            unique: false,
+            element: 'user_collection',
+        },
+        {
+            name: 'index3',
+            unique: false,
+            element: 'user',
+        },
+    ],
+});
 
-import { List, Form, default_view } from '@servicenow/sdk/core'
+import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
     table: 'x_2119443_test_sim_test',
@@ -48,21 +71,15 @@ Form({
             ],
         },
     ],
-})
+});
 
 List({
     table: 'x_2119443_test_sim_test',
     view: default_view,
-    columns: [
-        { element: 'user_collection', position: 0 },
-        { element: 'collection', position: 1 },
-        { element: 'user', position: 2 },
-        { element: 'status', position: 3 },
-        { element: 'result', position: 4 },
-    ],
-})
+    columns: ['user_collection', 'collection', 'user', 'status', 'result'],
+});
 
-import { Acl } from '@servicenow/sdk/core'
+import { Acl } from '@servicenow/sdk/core';
 
 Acl({
     $id: Now.ID['test_create'],
@@ -70,7 +87,7 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'create',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['test_read'],
@@ -78,7 +95,7 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'read',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['test_write'],
@@ -86,12 +103,12 @@ Acl({
     table: 'x_2119443_test_sim_test',
     operation: 'write',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['test_delete'],
     type: 'record',
     table: 'x_2119443_test_sim_test',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.admin'],
-})
+    roles: ['x_2119443_test_sim.user'],
+});

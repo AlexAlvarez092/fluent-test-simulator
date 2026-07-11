@@ -5,9 +5,8 @@ declare global {
 }
 
 export type CurrentUserRoles = {
-    is_admin: boolean;
     is_user: boolean;
-    access: 'admin' | 'user' | 'none';
+    access: 'user' | 'none';
 };
 
 export class AccessService {
@@ -40,9 +39,8 @@ export class AccessService {
             }
 
             return {
-                is_admin: rawRoles?.is_admin === 'true',
                 is_user: rawRoles?.is_user === 'true',
-                access: rawRoles?.access === 'admin' || rawRoles?.access === 'user' ? rawRoles.access : 'none',
+                access: rawRoles?.access === 'user' ? rawRoles.access : 'none',
             };
         } catch (error) {
             console.error('Error fetching current user roles:', error);

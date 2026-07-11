@@ -11,6 +11,12 @@ export type OpenCollectionOverview = {
         ever_failed_count: number;
         last_attempt_failed_count: number;
     };
+    question_groups: {
+        never_seen: string[];
+        correct: string[];
+        ever_failed: string[];
+        last_attempt_failed: string[];
+    };
     questions: Array<{
         sys_id: string;
         question: string;
@@ -87,6 +93,20 @@ export class OpenCollectionService {
                 correct_count: parseInt(String(result?.stats?.correct_count || '0'), 10),
                 ever_failed_count: parseInt(String(result?.stats?.ever_failed_count || '0'), 10),
                 last_attempt_failed_count: parseInt(String(result?.stats?.last_attempt_failed_count || '0'), 10),
+            },
+            question_groups: {
+                never_seen: Array.isArray(result?.question_groups?.never_seen)
+                    ? result.question_groups.never_seen.map((id: any) => String(id || ''))
+                    : [],
+                correct: Array.isArray(result?.question_groups?.correct)
+                    ? result.question_groups.correct.map((id: any) => String(id || ''))
+                    : [],
+                ever_failed: Array.isArray(result?.question_groups?.ever_failed)
+                    ? result.question_groups.ever_failed.map((id: any) => String(id || ''))
+                    : [],
+                last_attempt_failed: Array.isArray(result?.question_groups?.last_attempt_failed)
+                    ? result.question_groups.last_attempt_failed.map((id: any) => String(id || ''))
+                    : [],
             },
             questions: Array.isArray(result?.questions)
                 ? result.questions.map((question: any) => ({

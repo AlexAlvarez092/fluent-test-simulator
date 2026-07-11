@@ -6,11 +6,14 @@ type SelectedCollection = {
     name: string;
 };
 
+type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_attempt_failed';
+
 interface CollectionQuestionsPageProps {
     collection: SelectedCollection | null;
+    filter: QuestionFilter;
 }
 
-export default function CollectionQuestionsPage({ collection }: CollectionQuestionsPageProps) {
+export default function CollectionQuestionsPage({ collection, filter }: CollectionQuestionsPageProps) {
     const openCollectionService = useMemo(() => new OpenCollectionService(), []);
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
@@ -48,6 +51,39 @@ export default function CollectionQuestionsPage({ collection }: CollectionQuesti
         );
     }
 
+    const filterTitleMap: Record<QuestionFilter, string> = {
+        all: 'All Questions',
+        never_seen: 'Never Seen Questions',
+        correct: 'Correct Questions',
+        ever_failed: 'Ever Failed Questions',
+        last_attempt_failed: 'Last Attempt Failed Questions',
+    };
+
+    const allQuestions = overview?.questions || [];
+    const groupIds = overview?.question_groups || {
+        never_seen: [],
+        correct: [],
+        ever_failed: [],
+        last_attempt_failed: [],
+    };
+
+    const filterSet =
+        filter === 'all'
+            ? null
+            : new Set(
+                  filter === 'never_seen'
+                      ? groupIds.never_seen
+                      : filter === 'correct'
+                        ? groupIds.correct
+                        : filter === 'ever_failed'
+                          ? groupIds.ever_failed
+                          : groupIds.last_attempt_failed
+              );
+
+    const filteredQuestions = filterSet
+        ? allQuestions.filter((question) => filterSet.has(question.sys_id))
+        : allQuestions;
+
     return (
         <div>
             <h1>{collection.name}</h1>
@@ -59,14 +95,14 @@ export default function CollectionQuestionsPage({ collection }: CollectionQuesti
                 </div>
             )}
 
-            <h2>Collection Questions</h2>
+            <h2>{filterTitleMap[filter]}</h2>
             {loading ? (
                 <div>Loading questions...</div>
-            ) : !overview?.questions?.length ? (
-                <div>No questions found for this collection.</div>
+            ) : !filteredQuestions.length ? (
+                <div>No questions found for this filter.</div>
             ) : (
                 <div>
-                    {overview.questions.map((question, index) => (
+                    {filteredQuestions.map((question, index) => (
                         <div key={question.sys_id}>
                             <h3>
                                 {index + 1}. {question.question}

@@ -16,13 +16,23 @@ type SelectedCollection = {
     name: string;
 };
 
+type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_attempt_failed';
+
+const questionFilterLabel: Record<QuestionFilter, string> = {
+    all: 'All Questions',
+    never_seen: 'Never Seen Questions',
+    correct: 'Correct Questions',
+    ever_failed: 'Ever Failed Questions',
+    last_attempt_failed: 'Last Attempt Failed Questions',
+};
+
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedCollection, setSelectedCollection] = useState<SelectedCollection | null>(null);
     const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
     const [selectedTestCreatedOn, setSelectedTestCreatedOn] = useState<string | null>(null);
+    const [selectedQuestionFilter, setSelectedQuestionFilter] = useState<QuestionFilter>('all');
     const [accessState, setAccessState] = useState<AccessState>('loading');
-    const [isAdmin, setIsAdmin] = useState(false);
     const [accessError, setAccessError] = useState<string | null>(null);
 
     const accessService = useMemo(() => new AccessService(), []);
@@ -34,9 +44,7 @@ export default function App() {
                 setAccessError(null);
 
                 const roles = await accessService.getCurrentUserRoles();
-                const hasAnyAccess = Boolean(roles?.is_admin || roles?.is_user);
-                setIsAdmin(Boolean(roles?.is_admin));
-                setAccessState(hasAnyAccess ? 'allowed' : 'denied');
+                setAccessState(roles?.is_user ? 'allowed' : 'denied');
             } catch (error: any) {
                 setAccessState('error');
                 setAccessError(error?.message || 'Unknown error');
@@ -48,10 +56,14 @@ export default function App() {
 
     const handleNavigate = (page: string) => {
         setCurrentPage(page);
+        if (page !== 'collection-questions') {
+            setSelectedQuestionFilter('all');
+        }
     };
 
     const handleOpenCollection = (collection: SelectedCollection) => {
         setSelectedCollection(collection);
+        setSelectedQuestionFilter('all');
         setCurrentPage('open-collection');
     };
 
@@ -61,7 +73,8 @@ export default function App() {
         setCurrentPage('test-run');
     };
 
-    const handleOpenCollectionQuestions = () => {
+    const handleOpenCollectionQuestions = (filter: QuestionFilter) => {
+        setSelectedQuestionFilter(filter);
         setCurrentPage('collection-questions');
     };
 
@@ -95,7 +108,7 @@ export default function App() {
             return [
                 { key: 'home', label: 'Home', page: 'home' },
                 { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
-                { key: 'questions', label: 'All Questions' },
+                { key: 'questions', label: questionFilterLabel[selectedQuestionFilter] },
             ];
         }
 
@@ -136,7 +149,7 @@ export default function App() {
                 <div className="app-message-card">
                     <h1>Access Denied</h1>
                     <p>You do not have the required role to access Test Simulator.</p>
-                    <p>Required: x_2119443_test_sim.user or x_2119443_test_sim.admin</p>
+                    <p>Required: x_2119443_test_sim.user</p>
                 </div>
             </div>
         );
@@ -144,12 +157,12 @@ export default function App() {
 
     return (
         <div className="app-shell">
-            <Navigation onNavigate={handleNavigate} currentPage={currentPage} isAdmin={isAdmin} />
+            <Navigation onNavigate={handleNavigate} currentPage={currentPage} />
             <Breadcrumbs items={breadcrumbItems} onNavigate={handleNavigate} />
             <main className="app-content">
                 {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
                 {currentPage === 'collections' && <CollectionsPage />}
-                {currentPage === 'publish' && isAdmin && <PublishCollectionPage />}
+                {currentPage === 'publish' && <PublishCollectionPage />}
                 {currentPage === 'open-collection' && (
                     <OpenCollectionPage
                         collection={selectedCollection}
@@ -157,7 +170,9 @@ export default function App() {
                         onOpenQuestions={handleOpenCollectionQuestions}
                     />
                 )}
-                {currentPage === 'collection-questions' && <CollectionQuestionsPage collection={selectedCollection} />}
+                {currentPage === 'collection-questions' && (
+                    <CollectionQuestionsPage collection={selectedCollection} filter={selectedQuestionFilter} />
+                )}
                 {currentPage === 'test-run' && <TestRunPage testId={selectedTestId} />}
             </main>
         </div>

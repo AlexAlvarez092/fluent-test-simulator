@@ -17,7 +17,7 @@ const testSimulatorApiAcl = Acl({
     name: 'test_simulator_api',
     type: 'rest_endpoint',
     operation: 'execute',
-    roles: ['x_2119443_test_sim.user', 'x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
     securityAttribute: 'user_is_authenticated',
     adminOverrides: false,
 })
@@ -49,6 +49,7 @@ RestApi({
             authorization: true,
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAuthenticatedAcl],
+            consumes: 'application/json',
         },
         {
             $id: Now.ID['test_simulator_api_collections_list'],
@@ -69,6 +70,7 @@ RestApi({
             authorization: true,
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
+            consumes: 'application/json',
         },
         {
             $id: Now.ID['test_simulator_api_collections_save'],
@@ -125,6 +127,7 @@ RestApi({
             authorization: true,
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
+            consumes: 'application/json',
         },
         {
             $id: Now.ID['test_simulator_api_tests_create'],
@@ -157,6 +160,7 @@ RestApi({
             authorization: true,
             produces: 'application/json',
             enforceAcl: [testSimulatorApiAcl],
+            consumes: 'application/json',
         },
         {
             $id: Now.ID['test_simulator_api_tests_save_progress'],

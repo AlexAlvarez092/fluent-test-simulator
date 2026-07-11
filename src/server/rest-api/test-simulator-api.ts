@@ -141,18 +141,10 @@ function isStringArray(value: any): value is string[] {
 }
 
 export function getCurrentUserRoles(request: any, response: any) {
-    const isAdmin = gs.hasRole('x_2119443_test_sim.admin');
     const isUser = gs.hasRole('x_2119443_test_sim.user');
-
-    let access: 'admin' | 'user' | 'none' = 'none';
-    if (isAdmin) {
-        access = 'admin';
-    } else if (isUser) {
-        access = 'user';
-    }
+    const access: 'user' | 'none' = isUser ? 'user' : 'none';
 
     response.setBody({
-        is_admin: String(isAdmin),
         is_user: String(isUser),
         access,
     });
@@ -288,9 +280,9 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
 }
 
 export function publishCollection(request: any, response: any) {
-    if (!gs.hasRole('x_2119443_test_sim.admin')) {
+    if (!gs.hasRole('x_2119443_test_sim.user')) {
         response.setStatus(403);
-        response.setBody({ error: 'Only admins can publish collections' });
+        response.setBody({ error: 'Only users with role x_2119443_test_sim.user can publish collections' });
         return;
     }
 
@@ -511,6 +503,12 @@ export function getOpenCollectionOverview(request: any, response: any) {
             correct_count: String(correct.length),
             ever_failed_count: String(everFailed.length),
             last_attempt_failed_count: String(lastAttemptFailed.length),
+        },
+        question_groups: {
+            never_seen: neverSeen,
+            correct: correct,
+            ever_failed: everFailed,
+            last_attempt_failed: lastAttemptFailed,
         },
         tests,
         questions,

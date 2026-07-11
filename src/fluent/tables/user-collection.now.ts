@@ -1,4 +1,4 @@
-import { Table, ReferenceColumn, ListColumn } from '@servicenow/sdk/core'
+import { Table, ReferenceColumn, ListColumn } from '@servicenow/sdk/core';
 
 export const x_2119443_test_sim_user_collection = Table({
     name: 'x_2119443_test_sim_user_collection',
@@ -12,9 +12,21 @@ export const x_2119443_test_sim_user_collection = Table({
         ever_failed_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
         last_attempt_failed_questions: ListColumn({ referenceTable: 'x_2119443_test_sim_question' }),
     },
-})
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'collection',
+        },
+        {
+            name: 'index2',
+            unique: false,
+            element: 'user',
+        },
+    ],
+});
 
-import { List, Form, default_view } from '@servicenow/sdk/core'
+import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
     table: 'x_2119443_test_sim_user_collection',
@@ -27,7 +39,7 @@ Form({
                     layout: 'two-column',
                     leftElements: [{ field: 'user', type: 'table_field' }],
                     rightElements: [{ field: 'collection', type: 'table_field' }],
-                }
+                },
             ],
         },
         {
@@ -41,22 +53,19 @@ Form({
                         { field: 'ever_failed_questions', type: 'table_field' },
                         { field: 'last_attempt_failed_questions', type: 'table_field' },
                     ],
-                }
+                },
             ],
         },
     ],
-})
+});
 
 List({
     table: 'x_2119443_test_sim_user_collection',
     view: default_view,
-    columns: [
-        { element: 'user', position: 0 },
-        { element: 'collection', position: 1 },
-    ],
-})
+    columns: ['user', 'collection'],
+});
 
-import { Acl } from '@servicenow/sdk/core'
+import { Acl } from '@servicenow/sdk/core';
 
 Acl({
     $id: Now.ID['user_collection_create'],
@@ -64,7 +73,7 @@ Acl({
     table: 'x_2119443_test_sim_user_collection',
     operation: 'create',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['user_collection_read'],
@@ -72,7 +81,7 @@ Acl({
     table: 'x_2119443_test_sim_user_collection',
     operation: 'read',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['user_collection_write'],
@@ -80,7 +89,7 @@ Acl({
     table: 'x_2119443_test_sim_user_collection',
     operation: 'write',
     roles: ['x_2119443_test_sim.user'],
-})
+});
 
 Acl({
     $id: Now.ID['user_collection_delete'],
@@ -88,4 +97,4 @@ Acl({
     table: 'x_2119443_test_sim_user_collection',
     operation: 'delete',
     roles: ['x_2119443_test_sim.user'],
-})
+});

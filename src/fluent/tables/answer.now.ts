@@ -9,6 +9,13 @@ export const x_2119443_test_sim_answer = Table({
         question: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_question' }),
         is_correct: BooleanColumn({}),
     },
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'question',
+        },
+    ],
 });
 
 import { List, Form, default_view } from '@servicenow/sdk/core';
@@ -37,11 +44,7 @@ Form({
 List({
     table: 'x_2119443_test_sim_answer',
     view: default_view,
-    columns: [
-        { element: 'answer', position: 0 },
-        { element: 'question', position: 1 },
-        { element: 'is_correct', position: 2 },
-    ],
+    columns: ['answer', 'question', 'is_correct'],
 });
 
 import { Acl } from '@servicenow/sdk/core';
@@ -51,7 +54,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_answer',
     operation: 'create',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });
 
 Acl({
@@ -67,7 +70,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_answer',
     operation: 'write',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });
 
 Acl({
@@ -75,5 +78,5 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_answer',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });

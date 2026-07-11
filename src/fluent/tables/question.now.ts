@@ -10,13 +10,26 @@ export const x_2119443_test_sim_question = Table({
         type: ChoiceColumn({
             default: 'single',
             choices: {
-                single: 'Single',
-                multiple: 'Multiple',
+                single: {
+                    label: 'Single',
+                    sequence: 1,
+                },
+                multiple: {
+                    label: 'Multiple',
+                    sequence: 2,
+                },
             },
         }),
         rationale: StringColumn({}),
         docs: UrlColumn({}),
     },
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'collection',
+        },
+    ],
 });
 
 import { List, Form, default_view } from '@servicenow/sdk/core';
@@ -64,11 +77,7 @@ Form({
 List({
     table: 'x_2119443_test_sim_question',
     view: default_view,
-    columns: [
-        { element: 'question', position: 0 },
-        { element: 'collection', position: 1 },
-        { element: 'type', position: 2 },
-    ],
+    columns: ['question', 'collection', 'type'],
 });
 
 import { Acl } from '@servicenow/sdk/core';
@@ -78,7 +87,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_question',
     operation: 'create',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });
 
 Acl({
@@ -94,7 +103,7 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_question',
     operation: 'write',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });
 
 Acl({
@@ -102,5 +111,5 @@ Acl({
     type: 'record',
     table: 'x_2119443_test_sim_question',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.admin'],
+    roles: ['x_2119443_test_sim.user'],
 });

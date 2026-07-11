@@ -1,4 +1,4 @@
-import { Record } from '@servicenow/sdk/core'
+import { Record } from '@servicenow/sdk/core';
 
 Record({
     $id: Now.ID['test_simulator_self_service_module_home'],
@@ -13,5 +13,9 @@ Record({
         override_menu_roles: true,
         active: true,
         order: 105,
+        require_confirmation: false,
+        sys_domain: 'global',
+        sys_domain_path: '/',
+        uncancelable: false,
     },
-})
+});
