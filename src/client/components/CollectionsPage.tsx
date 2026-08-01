@@ -13,6 +13,7 @@ export default function CollectionsPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [savingId, setSavingId] = useState<string | null>(null);
+    const [hoveredId, setHoveredId] = useState<string | null>(null);
 
     const collectionService = useMemo(() => new CollectionService(), []);
     const userCollectionService = useMemo(() => new UserCollectionService(), []);
@@ -67,12 +68,6 @@ export default function CollectionsPage() {
                 <div>Loading...</div>
             ) : (
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         {collections.length === 0 ? (
                             <tr>
@@ -85,10 +80,14 @@ export default function CollectionsPage() {
                                 const isSaved = collection.is_saved;
 
                                 return (
-                                    <tr key={collectionId}>
+                                    <tr
+                                        key={collectionId}
+                                        onMouseEnter={() => setHoveredId(collectionId)}
+                                        onMouseLeave={() => setHoveredId(null)}
+                                    >
                                         <td>{name}</td>
                                         <td>
-                                            {!isSaved && (
+                                            {!isSaved && hoveredId === collectionId && (
                                                 <button
                                                     onClick={() => handleSaveCollection(collectionId)}
                                                     disabled={savingId === collectionId}

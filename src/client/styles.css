@@ -1,11 +1,14 @@
 :root {
     --app-bg: #ffffff;
-    --app-surface: #f8fafc;
-    --app-border: #d9e1ea;
-    --app-text: #1f2933;
-    --app-muted: #5f6c7b;
-    --app-accent: #0b69a3;
-    --app-accent-hover: #095985;
+    --app-bg-soft: #fbfcfd;
+    --app-surface: #ffffff;
+    --app-border: #e4e8ee;
+    --app-border-strong: #d7dce4;
+    --app-text: #131722;
+    --app-muted: #5e6675;
+    --app-link: #2d5ea8;
+    --app-link-hover: #1e4a8d;
+    --focus-ring: rgba(45, 94, 168, 0.18);
 }
 
 * {
@@ -20,56 +23,84 @@ body,
 }
 
 body {
-    background: var(--app-bg);
+    background: linear-gradient(180deg, #ffffff 0%, var(--app-bg-soft) 100%);
     color: var(--app-text);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.5;
+    font-family: 'Public Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+    line-height: 1.55;
+    letter-spacing: 0.002em;
 }
 
 .app-shell {
     width: 100%;
-    max-width: 1040px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 20px 16px 28px;
+    padding: 28px 20px 36px;
 }
 
 .app-content {
     margin-top: 12px;
-    background: var(--app-bg);
+}
+
+.app-content > div {
+    border: 1px solid var(--app-border);
+    border-radius: 14px;
+    background: var(--app-surface);
+    padding: 22px;
 }
 
 .app-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid var(--app-border);
-    border-radius: 8px;
+    border-radius: 12px;
     background: var(--app-surface);
 }
 
+.app-nav button {
+    border-color: transparent;
+    background: #f7f9fc;
+    color: #2b3445;
+    font-weight: 500;
+}
+
+.app-nav button:hover:not(:disabled) {
+    background: #eef3fa;
+    border-color: #e2e8f3;
+    color: #1d2940;
+}
+
 .app-breadcrumbs {
-    margin-top: 12px;
-    padding: 8px 2px;
+    margin-top: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--app-border);
+    border-radius: 10px;
+    background: var(--app-surface);
     color: var(--app-muted);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .app-breadcrumb-item button {
     border: none;
     background: transparent;
-    color: var(--app-accent);
-    text-decoration: underline;
+    color: var(--app-link);
+    text-decoration: none;
     cursor: pointer;
     padding: 0;
+}
+
+.app-breadcrumb-item button:hover {
+    color: var(--app-link-hover);
+    text-decoration: underline;
 }
 
 .app-message-card {
     margin-top: 16px;
     border: 1px solid var(--app-border);
-    border-radius: 8px;
+    border-radius: 12px;
     background: var(--app-surface);
-    padding: 16px;
+    padding: 18px;
 }
 
 h1,
@@ -79,11 +110,41 @@ h3 {
     color: var(--app-text);
 }
 
+h1 {
+    margin-bottom: 14px;
+    font-size: 1.6rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    margin-top: 24px;
+    margin-bottom: 10px;
+    padding-top: 16px;
+    border-top: 1px solid #edf1f6;
+    font-size: 1.08rem;
+    font-weight: 620;
+}
+
+h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+p {
+    margin: 6px 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 12px 0 20px;
+    margin: 12px 0 0;
     border: 1px solid var(--app-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--app-surface);
 }
 
 th,
@@ -94,14 +155,26 @@ td {
     padding: 10px 12px;
 }
 
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
 th {
-    background: #f1f5f9;
+    background: #fafbfd;
+    color: #39465d;
     font-weight: 600;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
+    color: #2f3848;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+    max-width: 760px;
 }
 
 input,
@@ -115,45 +188,76 @@ select,
 textarea,
 input[type='text'] {
     width: 100%;
-    max-width: 720px;
-    border: 1px solid var(--app-border);
-    border-radius: 6px;
-    padding: 8px 10px;
+    max-width: 100%;
+    border: 1px solid var(--app-border-strong);
+    border-radius: 8px;
+    padding: 9px 11px;
     background: #fff;
     color: var(--app-text);
 }
 
+textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
 button {
-    border: 1px solid var(--app-accent);
-    border-radius: 6px;
-    background: var(--app-accent);
-    color: #fff;
+    border: 1px solid var(--app-border-strong);
+    border-radius: 8px;
+    background: #ffffff;
+    color: #273041;
     padding: 7px 12px;
     cursor: pointer;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
 }
 
 button:hover:not(:disabled) {
-    background: var(--app-accent-hover);
-    border-color: var(--app-accent-hover);
+    background: #f6f8fb;
+    border-color: #cfd7e2;
+}
+
+button[type='submit'] {
+    font-weight: 600;
+    background: #f3f6fb;
+    border-color: #d2dae6;
 }
 
 button:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    border-color: #8ca8d4;
+    box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .stats-count-link {
     border: none;
     background: transparent;
-    color: var(--app-accent);
+    color: var(--app-link);
     padding: 0;
     text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .stats-count-link:hover:not(:disabled) {
-    color: var(--app-accent-hover);
+    color: var(--app-link-hover);
     background: transparent;
     border: none;
+}
+
+ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
 }
 
 input[type='radio'],
@@ -162,13 +266,18 @@ input[type='checkbox'] {
     margin-right: 8px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
     .app-shell {
-        padding: 14px 12px 20px;
+        padding: 18px 14px 24px;
+    }
+
+    .app-content > div {
+        padding: 16px;
+        border-radius: 12px;
     }
 
     th,
     td {
-        padding: 8px;
+        padding: 8px 9px;
     }
 }
