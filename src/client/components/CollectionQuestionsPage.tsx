@@ -91,7 +91,9 @@ export default function CollectionQuestionsPage({ collection, filter }: Collecti
             {error && (
                 <div>
                     {error}
-                    <button onClick={() => setError(null)}>Dismiss</button>
+                    <button title="Dismiss message" onClick={() => setError(null)}>
+                        Dismiss
+                    </button>
                 </div>
             )}
 

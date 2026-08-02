@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import Breadcrumbs, { BreadcrumbItem } from './components/Breadcrumbs';
 import HomePage from './components/HomePage';
 import CollectionsPage from './components/CollectionsPage';
 import Navigation from './components/Navigation';
@@ -17,14 +16,6 @@ type SelectedCollection = {
 };
 
 type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_attempt_failed';
-
-const questionFilterLabel: Record<QuestionFilter, string> = {
-    all: 'All Questions',
-    never_seen: 'Never Seen Questions',
-    correct: 'Correct Questions',
-    ever_failed: 'Ever Failed Questions',
-    last_attempt_failed: 'Last Attempt Failed Questions',
-};
 
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
@@ -78,51 +69,6 @@ export default function App() {
         setCurrentPage('collection-questions');
     };
 
-    const breadcrumbItems: BreadcrumbItem[] = (() => {
-        if (currentPage === 'home') {
-            return [{ key: 'home', label: 'Home' }];
-        }
-
-        if (currentPage === 'collections') {
-            return [
-                { key: 'home', label: 'Home', page: 'home' },
-                { key: 'collections', label: 'Collections' },
-            ];
-        }
-
-        if (currentPage === 'publish') {
-            return [
-                { key: 'home', label: 'Home', page: 'home' },
-                { key: 'publish', label: 'Publish Collection' },
-            ];
-        }
-
-        if (currentPage === 'open-collection') {
-            return [
-                { key: 'home', label: 'Home', page: 'home' },
-                { key: 'collection', label: selectedCollection?.name || 'Collection' },
-            ];
-        }
-
-        if (currentPage === 'collection-questions') {
-            return [
-                { key: 'home', label: 'Home', page: 'home' },
-                { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
-                { key: 'questions', label: questionFilterLabel[selectedQuestionFilter] },
-            ];
-        }
-
-        if (currentPage === 'test-run') {
-            return [
-                { key: 'home', label: 'Home', page: 'home' },
-                { key: 'collection', label: selectedCollection?.name || 'Collection', page: 'open-collection' },
-                { key: 'test', label: selectedTestCreatedOn || 'Test' },
-            ];
-        }
-
-        return [{ key: 'home', label: 'Home', page: 'home' }];
-    })();
-
     if (accessState === 'loading') {
         return (
             <div className="app-shell">
@@ -158,7 +104,6 @@ export default function App() {
     return (
         <div className="app-shell">
             <Navigation onNavigate={handleNavigate} currentPage={currentPage} />
-            <Breadcrumbs items={breadcrumbItems} onNavigate={handleNavigate} />
             <main className="app-content">
                 {currentPage === 'home' && <HomePage onOpenCollection={handleOpenCollection} />}
                 {currentPage === 'collections' && <CollectionsPage />}

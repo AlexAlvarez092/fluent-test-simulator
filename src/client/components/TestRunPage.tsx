@@ -173,7 +173,9 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
             {error && (
                 <div>
                     {error}
-                    <button onClick={() => setError(null)}>Dismiss</button>
+                    <button title="Dismiss message" onClick={() => setError(null)}>
+                        Dismiss
+                    </button>
                 </div>
             )}
 
@@ -196,7 +198,9 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                     {submitError && (
                         <div>
                             {submitError}
-                            <button onClick={() => setSubmitError(null)}>Dismiss</button>
+                            <button title="Dismiss message" onClick={() => setSubmitError(null)}>
+                                Dismiss
+                            </button>
                         </div>
                     )}
 
@@ -265,6 +269,7 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
 
                     <button
                         type="button"
+                        title="Submit quiz"
                         onClick={handleSubmit}
                         disabled={submitting || testDetail.test.status === 'completed'}
                     >

@@ -43,14 +43,18 @@ export default function PublishCollectionPage() {
             {error && (
                 <div>
                     {error}
-                    <button onClick={() => setError(null)}>Dismiss</button>
+                    <button title="Dismiss message" onClick={() => setError(null)}>
+                        Dismiss
+                    </button>
                 </div>
             )}
 
             {success && (
                 <div>
                     {success}
-                    <button onClick={() => setSuccess(null)}>Dismiss</button>
+                    <button title="Dismiss message" onClick={() => setSuccess(null)}>
+                        Dismiss
+                    </button>
                 </div>
             )}
 
@@ -67,7 +71,7 @@ export default function PublishCollectionPage() {
                     required
                 />
                 <br />
-                <button type="submit" disabled={submitting}>
+                <button type="submit" title="Publish collection" disabled={submitting}>
                     {submitting ? 'Publishing...' : 'Publish'}
                 </button>
             </form>

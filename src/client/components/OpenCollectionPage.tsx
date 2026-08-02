@@ -23,6 +23,7 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
     const [createError, setCreateError] = useState<string | null>(null);
     const [createSuccess, setCreateSuccess] = useState<string | null>(null);
     const [creatingTest, setCreatingTest] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [questionCount, setQuestionCount] = useState<'10' | '20' | '40'>('10');
     const [mode, setMode] = useState<'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed'>('never_seen');
 
@@ -128,10 +129,56 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
     };
 
     const renderStatsLink = (label: string, value: number, filter: QuestionFilter) => (
-        <button type="button" className="stats-count-link" onClick={() => onOpenQuestions(filter)} aria-label={label}>
+        <button
+            type="button"
+            className="stats-count-link"
+            data-label={String(value)}
+            title={label}
+            onClick={() => onOpenQuestions(filter)}
+            aria-label={label}
+        >
             {value}
         </button>
     );
+
+    const renderSectionLoadingIcon = () => (
+        <span className="section-loading-icon" data-loading={loading ? 'true' : 'false'} aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 3c4.97 0 9 4.03 9 9"
+                >
+                    <animateTransform
+                        attributeName="transform"
+                        dur="1.5s"
+                        repeatCount="indefinite"
+                        type="rotate"
+                        values="0 12 12;360 12 12"
+                    />
+                </path>
+            </svg>
+        </span>
+    );
+
+    const handleOpenCreateModal = () => {
+        setCreateError(null);
+        setCreateSuccess(null);
+        setIsCreateModalOpen(true);
+    };
+
+    const handleCloseCreateModal = () => {
+        if (creatingTest) {
+            return;
+        }
+
+        setCreateError(null);
+        setCreateSuccess(null);
+        setIsCreateModalOpen(false);
+    };
 
     return (
         <div>
@@ -140,16 +187,32 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
             {error && (
                 <div>
                     {error}
-                    <button onClick={() => setError(null)}>Dismiss</button>
+                    <button title="Dismiss message" onClick={() => setError(null)}>
+                        Dismiss
+                    </button>
                 </div>
             )}
 
-            <h2>Statistics</h2>
+            <div className="section-title-row">
+                <div className="section-heading-with-loading">
+                    {renderSectionLoadingIcon()}
+                    <h2>Statistics</h2>
+                </div>
+                <button
+                    type="button"
+                    className="text-action-button"
+                    data-label="+ New quiz"
+                    title="Create quiz"
+                    onClick={handleOpenCreateModal}
+                >
+                    + New quiz
+                </button>
+            </div>
             {loading ? (
-                <div>Loading statistics...</div>
+                <div className="stats-content-slot" aria-hidden="true"></div>
             ) : (
-                <div>
-                    <table>
+                <div className="stats-content-slot">
+                    <table className="stats-table">
                         <thead>
                             <tr>
                                 <th>Never Seen</th>
@@ -186,84 +249,63 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                 </div>
             )}
 
-            <h2>Create New Test</h2>
-            {createError && (
-                <div>
-                    {createError}
-                    <button onClick={() => setCreateError(null)}>Dismiss</button>
+            <div className="section-title-row section-title-row-secondary">
+                <div className="section-heading-with-loading">
+                    {renderSectionLoadingIcon()}
+                    <h2>Previous Tests</h2>
                 </div>
-            )}
-            {createSuccess && (
-                <div>
-                    {createSuccess}
-                    <button onClick={() => setCreateSuccess(null)}>Dismiss</button>
-                </div>
-            )}
-
-            <form onSubmit={handleCreateTest}>
-                <label htmlFor="question-count">Number of questions</label>
-                <select
-                    id="question-count"
-                    value={questionCount}
-                    onChange={(event) => setQuestionCount(event.target.value as '10' | '20' | '40')}
-                >
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="40">40</option>
-                </select>
-
-                <label htmlFor="test-mode">Test mode</label>
-                <select
-                    id="test-mode"
-                    value={mode}
-                    onChange={(event) =>
-                        setMode(event.target.value as 'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed')
-                    }
-                >
-                    <option value="never_seen">Never Seen</option>
-                    <option value="random">Random</option>
-                    <option value="last_attempt_failed">Last Attempt Failed</option>
-                    <option value="ever_failed">Ever Failed</option>
-                </select>
-
-                <button type="submit" disabled={creatingTest}>
-                    {creatingTest ? 'Creating...' : 'Create Test'}
-                </button>
-            </form>
-
-            <h2>Previous Tests</h2>
+            </div>
             {loading ? (
-                <div>Loading tests...</div>
+                <div className="tests-content-slot" aria-hidden="true"></div>
             ) : !overview?.tests?.length ? (
                 <div>No tests yet for this collection.</div>
             ) : (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Status</th>
-                            <th>Result (%)</th>
-                            <th>Created On</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+                <table className="tests-content-slot tests-table">
                     <tbody>
                         {overview.tests.map((test) => {
                             const isInProgress = test.status === 'in_progress';
                             const canOpen = isInProgress || test.status === 'completed';
+                            const actionLabel = isInProgress ? 'Continue' : 'Review';
 
                             return (
-                                <tr key={test.sys_id}>
+                                <tr
+                                    key={test.sys_id}
+                                    className={
+                                        canOpen
+                                            ? 'tests-row collection-row collection-row-clickable tests-row-clickable'
+                                            : 'tests-row collection-row'
+                                    }
+                                    onClick={canOpen ? () => onOpenTest(test.sys_id, test.created_on) : undefined}
+                                    onKeyDown={
+                                        canOpen
+                                            ? (event) => {
+                                                  if (event.key === 'Enter' || event.key === ' ') {
+                                                      event.preventDefault();
+                                                      onOpenTest(test.sys_id, test.created_on);
+                                                  }
+                                              }
+                                            : undefined
+                                    }
+                                    tabIndex={canOpen ? 0 : undefined}
+                                    title={canOpen ? 'Open quiz' : 'Quiz unavailable'}
+                                    aria-label={
+                                        canOpen
+                                            ? `${actionLabel} test created on ${test.created_on}`
+                                            : `Test ${formatStatus(test.status)}`
+                                    }
+                                >
                                     <td>{formatStatus(test.status)}</td>
-                                    <td>{test.result}</td>
+                                    <td>{test.result}%</td>
                                     <td>{test.created_on}</td>
                                     <td>
                                         {canOpen ? (
-                                            <button
-                                                type="button"
-                                                onClick={() => onOpenTest(test.sys_id, test.created_on)}
+                                            <span
+                                                className="text-action-button tests-action-button"
+                                                data-label={actionLabel}
+                                                aria-hidden="true"
                                             >
-                                                {isInProgress ? 'Continue' : 'Review'}
-                                            </button>
+                                                {actionLabel}
+                                            </span>
                                         ) : (
                                             <span>-</span>
                                         )}
@@ -273,6 +315,120 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                         })}
                     </tbody>
                 </table>
+            )}
+
+            {isCreateModalOpen && (
+                <div className="app-modal-backdrop" role="presentation" onClick={handleCloseCreateModal}>
+                    <div
+                        className="app-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="create-test-modal-title"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="app-modal-header">
+                            <h2 id="create-test-modal-title">Create New Quiz</h2>
+                            <button
+                                type="button"
+                                className="text-action-button"
+                                data-label="Close"
+                                title="Close dialog"
+                                onClick={handleCloseCreateModal}
+                                disabled={creatingTest}
+                            >
+                                Close
+                            </button>
+                        </div>
+
+                        {createError && (
+                            <div>
+                                {createError}
+                                <button type="button" title="Dismiss message" onClick={() => setCreateError(null)}>
+                                    Dismiss
+                                </button>
+                            </div>
+                        )}
+                        {createSuccess && (
+                            <div>
+                                {createSuccess}
+                                <button
+                                    type="button"
+                                    title="Dismiss message"
+                                    onClick={() => setCreateSuccess(null)}
+                                >
+                                    Dismiss
+                                </button>
+                            </div>
+                        )}
+
+                        <form className="modal-create-form" onSubmit={handleCreateTest}>
+                            <div className="modal-form-row">
+                                <label htmlFor="question-count">Number of questions</label>
+                                <select
+                                    id="question-count"
+                                    value={questionCount}
+                                    onChange={(event) => setQuestionCount(event.target.value as '10' | '20' | '40')}
+                                >
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
+
+                            <div className="modal-form-row">
+                                <label htmlFor="test-mode">Quiz mode</label>
+                                <select
+                                    id="test-mode"
+                                    value={mode}
+                                    onChange={(event) =>
+                                        setMode(
+                                            event.target.value as
+                                                'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed'
+                                        )
+                                    }
+                                >
+                                    <option value="never_seen">Never Seen</option>
+                                    <option value="random">Random</option>
+                                    <option value="last_attempt_failed">Last Attempt Failed</option>
+                                    <option value="ever_failed">Ever Failed</option>
+                                </select>
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="submit-with-spinner"
+                                data-label="Create Quiz"
+                                title="Create quiz"
+                                disabled={creatingTest}
+                            >
+                                {creatingTest ? (
+                                    <span className="button-loading-icon" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M12 3c4.97 0 9 4.03 9 9"
+                                            >
+                                                <animateTransform
+                                                    attributeName="transform"
+                                                    dur="1.5s"
+                                                    repeatCount="indefinite"
+                                                    type="rotate"
+                                                    values="0 12 12;360 12 12"
+                                                />
+                                            </path>
+                                        </svg>
+                                    </span>
+                                ) : (
+                                    'Create Quiz'
+                                )}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             )}
         </div>
     );
