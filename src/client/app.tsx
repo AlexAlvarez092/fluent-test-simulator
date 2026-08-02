@@ -148,6 +148,7 @@ export default function App() {
                     <CollectionQuestionsPage
                         collection={selectedCollection}
                         filter={selectedQuestionFilter}
+                        onBackToCollection={handleBackToCollection}
                         onError={handlePageError}
                     />
                 )}

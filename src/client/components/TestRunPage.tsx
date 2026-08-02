@@ -273,7 +273,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
             )}
 
             {loading ? (
-                <div>Loading quiz...</div>
+                <div className="inline-loading-state" aria-live="polite" aria-label="Loading quiz" />
             ) : !testDetail ? (
                 <div>Quiz not found.</div>
             ) : (
@@ -298,36 +298,41 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                                 <h3>
                                     {index + 1}. {question.question}
                                 </h3>
-                                {isCompleted && <p>Question result: {question.status}</p>}
+                                {question.answers.map((answer) => {
+                                    const isSelected = selected.includes(answer.sys_id);
+                                    const answerStateClass =
+                                        isCompleted && answer.is_correct
+                                            ? 'is-correct'
+                                            : isCompleted && isSelected && !answer.is_correct
+                                              ? 'is-wrong'
+                                              : '';
 
-                                {question.answers.map((answer) => (
-                                    <label key={answer.sys_id}>
-                                        <input
-                                            type={isMultiple ? 'checkbox' : 'radio'}
-                                            name={`q-${question.question_id}`}
-                                            value={answer.sys_id}
-                                            checked={selected.includes(answer.sys_id)}
-                                            disabled={isLocked}
-                                            onChange={(event) => {
-                                                if (isMultiple) {
-                                                    toggleMultipleAnswer(
-                                                        question.question_id,
-                                                        answer.sys_id,
-                                                        event.target.checked
-                                                    );
-                                                } else {
-                                                    setSingleAnswer(question.question_id, answer.sys_id);
-                                                }
-                                            }}
-                                        />
-                                        {answer.answer}
-                                        {isCompleted && answer.is_correct && ' (Correct)'}
-                                        {isCompleted &&
-                                            selected.includes(answer.sys_id) &&
-                                            !answer.is_correct &&
-                                            ' (Your wrong answer)'}
-                                    </label>
-                                ))}
+                                    return (
+                                        <label key={answer.sys_id} className="answer-option">
+                                            <input
+                                                type={isMultiple ? 'checkbox' : 'radio'}
+                                                name={`q-${question.question_id}`}
+                                                value={answer.sys_id}
+                                                checked={isSelected}
+                                                disabled={isLocked}
+                                                onChange={(event) => {
+                                                    if (isMultiple) {
+                                                        toggleMultipleAnswer(
+                                                            question.question_id,
+                                                            answer.sys_id,
+                                                            event.target.checked
+                                                        );
+                                                    } else {
+                                                        setSingleAnswer(question.question_id, answer.sys_id);
+                                                    }
+                                                }}
+                                            />
+                                            <span className={`answer-option-text ${answerStateClass}`}>
+                                                {answer.answer}
+                                            </span>
+                                        </label>
+                                    );
+                                })}
                             </div>
                         );
                     })}
@@ -341,7 +346,54 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                             onClick={handleSubmit}
                             disabled={submitting}
                         >
-                            {submitting ? 'Submitting...' : 'Submit'}
+                            {submitting ? (
+                                <span className="button-loading-icon" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M12 3c4.97 0 9 4.03 9 9"
+                                        >
+                                            <animateTransform
+                                                attributeName="transform"
+                                                dur="1.5s"
+                                                repeatCount="indefinite"
+                                                type="rotate"
+                                                values="0 12 12;360 12 12"
+                                            />
+                                        </path>
+                                    </svg>
+                                </span>
+                            ) : (
+                                <span className="submit-button-content">
+                                    <span className="button-leading-icon" aria-hidden="true">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            className="icon-default"
+                                        >
+                                            <path
+                                                fill="currentColor"
+                                                d="m5.916 12.5l3.746 3.746q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16l-4.389-4.389q-.13-.13-.183-.267q-.053-.136-.053-.298t.053-.298t.184-.267l4.388-4.389q.14-.14.344-.15t.364.15t.16.354t-.16.354L5.916 11.5h12.469q.269 0 .442-.173t.173-.442V8q0-.213.143-.357T19.5 7.5t.357.143T20 8v2.885q0 .67-.472 1.143q-.472.472-1.143.472z"
+                                            />
+                                        </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            className="icon-hover"
+                                        >
+                                            <path
+                                                fill="currentColor"
+                                                d="m6.8 13l2.9 2.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7L6.8 11H19V8q0-.425.288-.712T20 7t.713.288T21 8v3q0 .825-.587 1.413T19 13z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <span>Submit</span>
+                                </span>
+                            )}
                         </button>
                     )}
                 </div>

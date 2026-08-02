@@ -9,6 +9,7 @@
     --app-link: #2d5ea8;
     --app-link-hover: #1e4a8d;
     --focus-ring: rgba(45, 94, 168, 0.18);
+    --app-icon-size: 24px;
 }
 
 * {
@@ -23,9 +24,10 @@ body,
 }
 
 body {
-    background: linear-gradient(180deg, #ffffff 0%, var(--app-bg-soft) 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcff 58%, #f7f9fc 100%);
     color: var(--app-text);
     font-family: 'Public Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+    font-weight: 400;
     line-height: 1.55;
     letter-spacing: 0.002em;
 }
@@ -44,7 +46,7 @@ body {
 .app-content > div {
     border: none;
     border-radius: 14px;
-    background: var(--app-surface);
+    background: transparent;
     padding: 22px;
 }
 
@@ -56,7 +58,7 @@ body {
     padding: 10px 12px;
     border: none;
     border-radius: 12px;
-    background: var(--app-surface);
+    background: transparent;
 }
 
 .app-nav-brand {
@@ -65,7 +67,7 @@ body {
     gap: 10px;
     color: #1b2434;
     font-size: 1.03rem;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1;
     letter-spacing: 0.003em;
 }
@@ -75,8 +77,8 @@ body {
 }
 
 .app-nav-brand svg {
-    width: 20px;
-    height: 20px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
     display: block;
     flex-shrink: 0;
     fill: currentColor;
@@ -123,7 +125,7 @@ body {
 
 .app-nav-link.is-active {
     color: #182335;
-    font-weight: 560;
+    font-weight: 400;
 }
 
 .text-action-button {
@@ -162,7 +164,7 @@ body {
     margin-top: 16px;
     border: none;
     border-radius: 12px;
-    background: var(--app-surface);
+    background: transparent;
     padding: 18px;
 }
 
@@ -219,8 +221,8 @@ h1 {
 .back-icon-stack {
     position: relative;
     display: inline-flex;
-    width: 18px;
-    height: 18px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
     flex-shrink: 0;
 }
 
@@ -251,8 +253,8 @@ h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
     color: #22324b;
     flex-shrink: 0;
     opacity: 0;
@@ -271,6 +273,12 @@ h1 {
 
 .title-text-aligned-message {
     padding-left: 28px;
+}
+
+.inline-loading-state {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
 }
 
 h2 {
@@ -305,6 +313,21 @@ h2 {
     margin-right: -10px;
 }
 
+.section-title-row .new-quiz-button {
+    border: none;
+    background: transparent;
+    font-weight: 400;
+}
+
+.section-title-row .new-quiz-button::after {
+    content: none;
+}
+
+.section-title-row .new-quiz-button:hover:not(:disabled),
+.section-title-row .new-quiz-button:focus-visible {
+    font-weight: 560;
+}
+
 .section-heading-with-loading {
     display: inline-flex;
     align-items: center;
@@ -315,8 +338,8 @@ h2 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
     color: #22324b;
     opacity: 0;
     visibility: hidden;
@@ -381,15 +404,46 @@ tbody tr:last-child td {
 }
 
 th {
-    background: #fafbfd;
+    background: transparent;
     color: #39465d;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     color: #2f3848;
+}
+
+.answer-option {
+    margin-bottom: 8px;
+    color: #2f3848;
+}
+
+label.answer-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+label.answer-option input {
+    margin-top: 0.22em;
+    flex-shrink: 0;
+}
+
+.answer-option-text {
+    color: inherit;
+    font-weight: 400;
+}
+
+.answer-option-text.is-correct {
+    color: #1f7a3a;
+    font-weight: 560;
+}
+
+.answer-option-text.is-wrong {
+    color: #b12626;
+    font-weight: 560;
 }
 
 form {
@@ -413,7 +467,7 @@ input[type='text'] {
     border: 1px solid var(--app-border-strong);
     border-radius: 8px;
     padding: 9px 11px;
-    background: #fff;
+    background: transparent;
     color: var(--app-text);
 }
 
@@ -425,7 +479,7 @@ textarea {
 button {
     border: 1px solid var(--app-border-strong);
     border-radius: 8px;
-    background: #ffffff;
+    background: transparent;
     color: #273041;
     padding: 7px 12px;
     cursor: pointer;
@@ -433,14 +487,15 @@ button {
 }
 
 button:hover:not(:disabled) {
-    background: #f6f8fb;
+    background: transparent;
     border-color: #cfd7e2;
+    font-weight: 560;
 }
 
 button[type='submit'] {
-    font-weight: 600;
-    background: #f3f6fb;
-    border-color: #d2dae6;
+    font-weight: 400;
+    background: transparent;
+    border-color: var(--app-border-strong);
 }
 
 button:disabled {
@@ -510,8 +565,8 @@ textarea:focus-visible {
 }
 
 .icon-button svg {
-    width: 24px;
-    height: 24px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
     fill: currentColor;
     transition: color 140ms ease;
 }
@@ -519,8 +574,8 @@ textarea:focus-visible {
 .icon-variant-stack {
     position: relative;
     display: inline-flex;
-    width: 24px;
-    height: 24px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
 }
 
 .icon-variant-stack .icon-default,
@@ -632,7 +687,7 @@ textarea:focus-visible {
 
 .saved-collections-table .saved-remove-cell.is-clickable:focus-visible {
     outline: none;
-    background: #f9fbff;
+    background: transparent;
 }
 
 .saved-collections-table .saved-remove-cell.is-busy,
@@ -686,7 +741,7 @@ textarea:focus-visible {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(15, 23, 39, 0.14);
+    background: rgba(15, 23, 39, 0.22);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -733,7 +788,7 @@ textarea:focus-visible {
 
 .submit-with-spinner {
     min-height: 38px;
-    width: 11ch;
+    min-width: 13ch;
     align-self: center;
     justify-self: center;
     border: none;
@@ -745,6 +800,50 @@ textarea:focus-visible {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.submit-button-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.button-leading-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
+    flex-shrink: 0;
+}
+
+.button-leading-icon svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    transition: opacity 120ms ease;
+}
+
+.button-leading-icon .icon-hover {
+    opacity: 0;
+}
+
+.text-action-button:hover .button-leading-icon .icon-default,
+.text-action-button:focus-visible .button-leading-icon .icon-default,
+.submit-with-spinner:hover .button-leading-icon .icon-default,
+.submit-with-spinner:focus-visible .button-leading-icon .icon-default {
+    opacity: 0;
+}
+
+.text-action-button:hover .button-leading-icon .icon-hover,
+.text-action-button:focus-visible .button-leading-icon .icon-hover,
+.submit-with-spinner:hover .button-leading-icon .icon-hover,
+.submit-with-spinner:focus-visible .button-leading-icon .icon-hover {
+    opacity: 1;
 }
 
 .submit-with-spinner:hover:not(:disabled) {
@@ -762,8 +861,8 @@ textarea:focus-visible {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
 }
 
 .button-loading-icon svg {

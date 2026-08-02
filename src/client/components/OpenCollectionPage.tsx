@@ -214,12 +214,28 @@ export default function OpenCollectionPage({
                 </div>
                 <button
                     type="button"
-                    className="text-action-button"
-                    data-label="+ New quiz"
+                    className="text-action-button new-quiz-button"
+                    data-label="New quiz"
                     title="Create quiz"
                     onClick={handleOpenCreateModal}
                 >
-                    + New quiz
+                    <span className="submit-button-content">
+                        <span className="button-leading-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
+                                <path
+                                    fill="currentColor"
+                                    d="M11.5 12.5h-5q-.213 0-.356-.144T6 11.999t.144-.356t.356-.143h5v-5q0-.213.144-.356T12.001 6t.356.144t.143.356v5h5q.213 0 .356.144t.144.357t-.144.356t-.356.143h-5v5q0 .213-.144.356t-.357.144t-.356-.144t-.143-.356z"
+                                />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-hover">
+                                <path
+                                    fill="currentColor"
+                                    d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z"
+                                />
+                            </svg>
+                        </span>
+                        <span>New quiz</span>
+                    </span>
                 </button>
             </div>
             {loading ? (
@@ -356,7 +372,31 @@ export default function OpenCollectionPage({
                                 onClick={handleCloseCreateModal}
                                 disabled={creatingTest}
                             >
-                                Close
+                                <span className="submit-button-content">
+                                    <span className="button-leading-icon" aria-hidden="true">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            className="icon-default"
+                                        >
+                                            <path
+                                                fill="currentColor"
+                                                d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
+                                            />
+                                        </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            className="icon-hover"
+                                        >
+                                            <path
+                                                fill="currentColor"
+                                                d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <span>Close</span>
+                                </span>
                             </button>
                         </div>
 
@@ -439,7 +479,31 @@ export default function OpenCollectionPage({
                                         </svg>
                                     </span>
                                 ) : (
-                                    'Create Quiz'
+                                    <span className="submit-button-content">
+                                        <span className="button-leading-icon" aria-hidden="true">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                className="icon-default"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="m5.916 12.5l3.746 3.746q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16l-4.389-4.389q-.13-.13-.183-.267q-.053-.136-.053-.298t.053-.298t.184-.267l4.388-4.389q.14-.14.344-.15t.364.15t.16.354t-.16.354L5.916 11.5h12.469q.269 0 .442-.173t.173-.442V8q0-.213.143-.357T19.5 7.5t.357.143T20 8v2.885q0 .67-.472 1.143q-.472.472-1.143.472z"
+                                                />
+                                            </svg>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                className="icon-hover"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="m6.8 13l2.9 2.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7L6.8 11H19V8q0-.425.288-.712T20 7t.713.288T21 8v3q0 .825-.587 1.413T19 13z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        <span>Create Quiz</span>
+                                    </span>
                                 )}
                             </button>
                         </form>

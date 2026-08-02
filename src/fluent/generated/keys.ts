@@ -130,6 +130,10 @@ declare global {
                         table: 'sys_module';
                         id: '75acb671e2b94ebfa7e3aa69cdc73129';
                     };
+                    'styles.css': {
+                        table: 'sys_ux_theme_asset';
+                        id: 'eb8dc0d301ef4bdbac725693dfb592b2';
+                    };
                     test_create: {
                         table: 'sys_security_acl';
                         id: 'ffa20f69f6ee4142a534afd4e12469fe';
