@@ -1,3 +1,5 @@
+import { CreateTestInput, OpenCollectionStats, OpenCollectionTestSummary } from '../shared/models/OpenCollectionTypes';
+
 declare global {
     interface Window {
         g_ck: string;
@@ -5,12 +7,7 @@ declare global {
 }
 
 export type OpenCollectionOverview = {
-    stats: {
-        never_seen_count: number;
-        correct_count: number;
-        ever_failed_count: number;
-        last_attempt_failed_count: number;
-    };
+    stats: OpenCollectionStats;
     question_groups: {
         never_seen: string[];
         correct: string[];
@@ -29,14 +26,7 @@ export type OpenCollectionOverview = {
             is_correct: boolean;
         }>;
     }>;
-    tests: Array<{
-        sys_id: string;
-        status: string;
-        result: number;
-        created_on: string;
-        correct_count: number;
-        total_questions: number;
-    }>;
+    tests: OpenCollectionTestSummary[];
 };
 
 export class OpenCollectionService {
@@ -139,11 +129,7 @@ export class OpenCollectionService {
         };
     }
 
-    async createTest(input: {
-        collection_id: string;
-        question_count: '10' | '20' | '40';
-        mode: 'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed';
-    }) {
+    async createTest(input: CreateTestInput) {
         const response = await fetch(this.createTestPath, {
             method: 'POST',
             headers: {
