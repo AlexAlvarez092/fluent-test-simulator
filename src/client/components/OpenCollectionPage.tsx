@@ -12,9 +12,15 @@ interface OpenCollectionPageProps {
     collection: SelectedCollection | null;
     onOpenTest: (testId: string, createdOn?: string) => void;
     onOpenQuestions: (filter: QuestionFilter) => void;
+    onError: () => void;
 }
 
-export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuestions }: OpenCollectionPageProps) {
+export default function OpenCollectionPage({
+    collection,
+    onOpenTest,
+    onOpenQuestions,
+    onError,
+}: OpenCollectionPageProps) {
     const openCollectionService = useMemo(() => new OpenCollectionService(), []);
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
@@ -43,10 +49,10 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
         }
 
         if (rawError.includes('Unable to select questions for the new test')) {
-            return 'Unable to build a test with the selected options. Please try a different mode or question count.';
+            return 'Unable to build a quiz with the selected options. Please try a different mode or question count.';
         }
 
-        return `Failed to create test: ${rawError}`;
+        return `Failed to create quiz: ${rawError}`;
     };
 
     const loadOverview = async () => {
@@ -61,6 +67,7 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
             setOverview(data);
         } catch (err: any) {
             setError('Failed to load collection overview: ' + (err.message || 'Unknown error'));
+            onError();
             console.error(err);
         } finally {
             setLoading(false);
@@ -95,11 +102,12 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                 throw new Error('Invalid response contract: test_id is required');
             }
 
-            setCreateSuccess('Test created successfully');
+            setCreateSuccess('Quiz created successfully');
             onOpenTest(createdTestId, created.created_on);
         } catch (err: any) {
             const rawMessage = err.message || 'Unknown error';
             setCreateError(getFriendlyCreateErrorMessage(mode, rawMessage));
+            onError();
             console.error(err);
         } finally {
             setCreatingTest(false);
@@ -113,6 +121,12 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                 <p>No collection selected.</p>
             </div>
         );
+    }
+
+    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
+
+    if (unauthorizedError) {
+        return <div>{unauthorizedError}</div>;
     }
 
     const stats = overview?.stats || {
@@ -252,69 +266,75 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
             <div className="section-title-row section-title-row-secondary">
                 <div className="section-heading-with-loading">
                     {renderSectionLoadingIcon()}
-                    <h2>Previous Tests</h2>
+                    <h2>Previous Quizzes</h2>
                 </div>
             </div>
             {loading ? (
                 <div className="tests-content-slot" aria-hidden="true"></div>
             ) : !overview?.tests?.length ? (
-                <div>No tests yet for this collection.</div>
+                <div className="tests-content-slot tests-empty-message">No quizzes yet for this collection.</div>
             ) : (
-                <table className="tests-content-slot tests-table">
-                    <tbody>
-                        {overview.tests.map((test) => {
-                            const isInProgress = test.status === 'in_progress';
-                            const canOpen = isInProgress || test.status === 'completed';
-                            const actionLabel = isInProgress ? 'Continue' : 'Review';
+                <div className="tests-content-slot">
+                    <table className="tests-table">
+                        <tbody>
+                            {overview.tests.map((test) => {
+                                const isInProgress = test.status === 'in_progress';
+                                const canOpen = isInProgress || test.status === 'completed';
+                                const actionLabel = isInProgress ? 'Continue' : 'Review';
 
-                            return (
-                                <tr
-                                    key={test.sys_id}
-                                    className={
-                                        canOpen
-                                            ? 'tests-row collection-row collection-row-clickable tests-row-clickable'
-                                            : 'tests-row collection-row'
-                                    }
-                                    onClick={canOpen ? () => onOpenTest(test.sys_id, test.created_on) : undefined}
-                                    onKeyDown={
-                                        canOpen
-                                            ? (event) => {
-                                                  if (event.key === 'Enter' || event.key === ' ') {
-                                                      event.preventDefault();
-                                                      onOpenTest(test.sys_id, test.created_on);
+                                return (
+                                    <tr
+                                        key={test.sys_id}
+                                        className={
+                                            canOpen
+                                                ? 'tests-row collection-row collection-row-clickable tests-row-clickable'
+                                                : 'tests-row collection-row'
+                                        }
+                                        onClick={canOpen ? () => onOpenTest(test.sys_id, test.created_on) : undefined}
+                                        onKeyDown={
+                                            canOpen
+                                                ? (event) => {
+                                                      if (event.key === 'Enter' || event.key === ' ') {
+                                                          event.preventDefault();
+                                                          onOpenTest(test.sys_id, test.created_on);
+                                                      }
                                                   }
-                                              }
-                                            : undefined
-                                    }
-                                    tabIndex={canOpen ? 0 : undefined}
-                                    title={canOpen ? 'Open quiz' : 'Quiz unavailable'}
-                                    aria-label={
-                                        canOpen
-                                            ? `${actionLabel} test created on ${test.created_on}`
-                                            : `Test ${formatStatus(test.status)}`
-                                    }
-                                >
-                                    <td>{formatStatus(test.status)}</td>
-                                    <td>{test.result}%</td>
-                                    <td>{test.created_on}</td>
-                                    <td>
-                                        {canOpen ? (
-                                            <span
-                                                className="text-action-button tests-action-button"
-                                                data-label={actionLabel}
-                                                aria-hidden="true"
-                                            >
-                                                {actionLabel}
-                                            </span>
-                                        ) : (
-                                            <span>-</span>
-                                        )}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                                                : undefined
+                                        }
+                                        tabIndex={canOpen ? 0 : undefined}
+                                        title={canOpen ? 'Open quiz' : 'Quiz unavailable'}
+                                        aria-label={
+                                            canOpen
+                                                ? `${actionLabel} quiz created on ${test.created_on}`
+                                                : `Quiz ${formatStatus(test.status)}`
+                                        }
+                                    >
+                                        <td>{formatStatus(test.status)}</td>
+                                        <td>
+                                            {test.status === 'completed' && test.total_questions > 0
+                                                ? `${test.correct_count}/${test.total_questions}`
+                                                : ''}
+                                        </td>
+                                        <td>{test.created_on}</td>
+                                        <td>
+                                            {canOpen ? (
+                                                <span
+                                                    className="text-action-button tests-action-button"
+                                                    data-label={actionLabel}
+                                                    aria-hidden="true"
+                                                >
+                                                    {actionLabel}
+                                                </span>
+                                            ) : (
+                                                <span>-</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             )}
 
             {isCreateModalOpen && (
@@ -351,11 +371,7 @@ export default function OpenCollectionPage({ collection, onOpenTest, onOpenQuest
                         {createSuccess && (
                             <div>
                                 {createSuccess}
-                                <button
-                                    type="button"
-                                    title="Dismiss message"
-                                    onClick={() => setCreateSuccess(null)}
-                                >
+                                <button type="button" title="Dismiss message" onClick={() => setCreateSuccess(null)}>
                                     Dismiss
                                 </button>
                             </div>

@@ -1,26 +1,35 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { SaveTestProgressResult, SubmitTestResult, TestDetail, TestService } from '../services/TestService';
+import { TestDetail, TestService } from '../services/TestService';
 
 type AnswerSelection = Record<string, string[]>;
 
 interface TestRunPageProps {
     testId: string | null;
+    onQuizSubmitted: () => void;
+    onBackToCollection: () => void;
+    onError: () => void;
 }
 
-export default function TestRunPage({ testId }: TestRunPageProps) {
+export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollection, onError }: TestRunPageProps) {
     const testService = useMemo(() => new TestService(), []);
 
     const [testDetail, setTestDetail] = useState<TestDetail | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [submitError, setSubmitError] = useState<string | null>(null);
-    const [submitResult, setSubmitResult] = useState<SubmitTestResult | null>(null);
-    const [saveResult, setSaveResult] = useState<SaveTestProgressResult | null>(null);
     const [submitting, setSubmitting] = useState(false);
     const [saving, setSaving] = useState(false);
     const [selection, setSelection] = useState<AnswerSelection>({});
     const [hasPendingAutoSave, setHasPendingAutoSave] = useState(false);
     const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const isHeaderLoading = loading || saving || submitting || hasPendingAutoSave;
+    const unauthorizedError = [error, submitError].find((message): message is string =>
+        Boolean(message && message.includes('HTTP error 401'))
+    );
+
+    if (unauthorizedError) {
+        return <div>{unauthorizedError}</div>;
+    }
 
     useEffect(() => {
         const load = async () => {
@@ -39,12 +48,11 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                     nextSelection[question.question_id] = question.selected_answer_ids || [];
                 }
                 setSelection(nextSelection);
-                setSubmitResult(null);
-                setSaveResult(null);
                 setHasPendingAutoSave(false);
                 setSubmitError(null);
             } catch (err: any) {
-                setError('Failed to load test detail: ' + (err.message || 'Unknown error'));
+                setError('Failed to load quiz detail: ' + (err.message || 'Unknown error'));
+                onError();
                 console.error(err);
             } finally {
                 setLoading(false);
@@ -89,22 +97,20 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                 try {
                     setSaving(true);
                     setSubmitError(null);
-                    setSubmitResult(null);
 
                     const answers = testDetail.questions.map((question) => ({
                         question_id: question.question_id,
                         selected_answer_ids: selection[question.question_id] || [],
                     }));
 
-                    const result = await testService.saveTestProgress({
+                    await testService.saveTestProgress({
                         test_id: testDetail.test.sys_id,
                         answers,
                     });
-
-                    setSaveResult(result);
                     setHasPendingAutoSave(false);
                 } catch (err: any) {
                     setSubmitError('Failed to save progress: ' + (err.message || 'Unknown error'));
+                    onError();
                     console.error(err);
                 } finally {
                     setSaving(false);
@@ -129,7 +135,6 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
         try {
             setSubmitting(true);
             setSubmitError(null);
-            setSaveResult(null);
             setHasPendingAutoSave(false);
 
             if (autoSaveTimerRef.current) {
@@ -141,16 +146,14 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                 selected_answer_ids: selection[question.question_id] || [],
             }));
 
-            const result = await testService.submitTest({
+            await testService.submitTest({
                 test_id: testDetail.test.sys_id,
                 answers,
             });
-
-            setSubmitResult(result);
-            const refreshed = await testService.getTestDetail(testDetail.test.sys_id);
-            setTestDetail(refreshed);
+            onQuizSubmitted();
         } catch (err: any) {
-            setSubmitError('Failed to submit test: ' + (err.message || 'Unknown error'));
+            setSubmitError('Failed to submit quiz: ' + (err.message || 'Unknown error'));
+            onError();
             console.error(err);
         } finally {
             setSubmitting(false);
@@ -160,15 +163,105 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
     if (!testId) {
         return (
             <div>
-                <h1>Test</h1>
-                <p>No test selected.</p>
+                <div className="quiz-page-header-row">
+                    <h1 className="page-title-with-loading">
+                        <span
+                            className="title-loading-icon"
+                            data-loading={isHeaderLoading ? 'true' : 'false'}
+                            aria-hidden="true"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M12 3c4.97 0 9 4.03 9 9"
+                                >
+                                    <animateTransform
+                                        attributeName="transform"
+                                        dur="1.5s"
+                                        repeatCount="indefinite"
+                                        type="rotate"
+                                        values="0 12 12;360 12 12"
+                                    />
+                                </path>
+                            </svg>
+                        </span>
+                        Quiz
+                    </h1>
+                    <button
+                        type="button"
+                        className="text-action-button back-to-collection-button"
+                        data-label="Back to collection"
+                        title="Back to collection"
+                        onClick={onBackToCollection}
+                    >
+                        <span className="back-icon-stack" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
+                                <path d="m6.523 12.5l3.735 3.735q.146.146.153.344q.006.198-.153.363q-.166.166-.357.168t-.357-.162l-4.382-4.383q-.243-.242-.243-.565t.243-.566l4.382-4.382q.147-.146.347-.153q.201-.007.367.159q.16.165.162.353q.003.189-.162.354L6.523 11.5h12.38q.214 0 .358.143t.143.357t-.143.357t-.357.143z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-hover">
+                                <path d="m7.85 13l2.85 2.85q.3.3.288.7t-.288.7q-.3.3-.712.313t-.713-.288L4.7 12.7q-.3-.3-.3-.7t.3-.7l4.575-4.575q.3-.3.713-.287t.712.312q.275.3.288.7t-.288.7L7.85 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" />
+                            </svg>
+                        </span>
+                        Back to collection
+                    </button>
+                </div>
+                <p>No quiz selected.</p>
             </div>
         );
     }
 
     return (
         <div>
-            <h1>Test</h1>
+            <div className="quiz-page-header-row">
+                <h1 className="page-title-with-loading">
+                    <span
+                        className="title-loading-icon"
+                        data-loading={isHeaderLoading ? 'true' : 'false'}
+                        aria-hidden="true"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 3c4.97 0 9 4.03 9 9"
+                            >
+                                <animateTransform
+                                    attributeName="transform"
+                                    dur="1.5s"
+                                    repeatCount="indefinite"
+                                    type="rotate"
+                                    values="0 12 12;360 12 12"
+                                />
+                            </path>
+                        </svg>
+                    </span>
+                    Quiz
+                </h1>
+                <button
+                    type="button"
+                    className="text-action-button back-to-collection-button"
+                    data-label="Back to collection"
+                    title="Back to collection"
+                    onClick={onBackToCollection}
+                >
+                    <span className="back-icon-stack" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
+                            <path d="m6.523 12.5l3.735 3.735q.146.146.153.344q.006.198-.153.363q-.166.166-.357.168t-.357-.162l-4.382-4.383q-.243-.242-.243-.565t.243-.566l4.382-4.382q.147-.146.347-.153q.201-.007.367.159q.16.165.162.353q.003.189-.162.354L6.523 11.5h12.38q.214 0 .358.143t.143.357t-.143.357t-.357.143z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-hover">
+                            <path d="m7.85 13l2.85 2.85q.3.3.288.7t-.288.7q-.3.3-.712.313t-.713-.288L4.7 12.7q-.3-.3-.3-.7t.3-.7l4.575-4.575q.3-.3.713-.287t.712.312q.275.3.288.7t-.288.7L7.85 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" />
+                        </svg>
+                    </span>
+                    Back to collection
+                </button>
+            </div>
 
             {error && (
                 <div>
@@ -180,45 +273,17 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
             )}
 
             {loading ? (
-                <div>Loading test...</div>
+                <div>Loading quiz...</div>
             ) : !testDetail ? (
-                <div>Test not found.</div>
+                <div>Quiz not found.</div>
             ) : (
                 <div>
-                    <h2>{testDetail.test.collection_name}</h2>
-                    <p>Created On: {testDetail.test.created_on}</p>
-                    <p>Status: {testDetail.test.status}</p>
-                    {testDetail.test.status !== 'completed' && (
-                        <p>
-                            Auto-save:{' '}
-                            {saving ? 'Saving...' : hasPendingAutoSave ? 'Pending changes...' : 'All changes saved'}
-                        </p>
-                    )}
-
                     {submitError && (
                         <div>
                             {submitError}
                             <button title="Dismiss message" onClick={() => setSubmitError(null)}>
                                 Dismiss
                             </button>
-                        </div>
-                    )}
-
-                    {submitResult && (
-                        <div>
-                            <p>Submitted successfully.</p>
-                            <p>
-                                Score: {submitResult.correct_count}/{submitResult.total_questions} (
-                                {submitResult.score_percent}
-                                %)
-                            </p>
-                        </div>
-                    )}
-
-                    {saveResult && (
-                        <div>
-                            <p>Progress saved.</p>
-                            <p>Questions saved: {saveResult.saved_questions_count}</p>
                         </div>
                     )}
 
@@ -267,14 +332,18 @@ export default function TestRunPage({ testId }: TestRunPageProps) {
                         );
                     })}
 
-                    <button
-                        type="button"
-                        title="Submit quiz"
-                        onClick={handleSubmit}
-                        disabled={submitting || testDetail.test.status === 'completed'}
-                    >
-                        {submitting ? 'Submitting...' : 'Submit'}
-                    </button>
+                    {testDetail.test.status !== 'completed' && (
+                        <button
+                            type="button"
+                            className="submit-with-spinner quiz-submit-button"
+                            data-label="Submit Quiz"
+                            title="Submit quiz"
+                            onClick={handleSubmit}
+                            disabled={submitting}
+                        >
+                            {submitting ? 'Submitting...' : 'Submit'}
+                        </button>
+                    )}
                 </div>
             )}
         </div>

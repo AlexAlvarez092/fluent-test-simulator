@@ -11,9 +11,10 @@ type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_a
 interface CollectionQuestionsPageProps {
     collection: SelectedCollection | null;
     filter: QuestionFilter;
+    onError: () => void;
 }
 
-export default function CollectionQuestionsPage({ collection, filter }: CollectionQuestionsPageProps) {
+export default function CollectionQuestionsPage({ collection, filter, onError }: CollectionQuestionsPageProps) {
     const openCollectionService = useMemo(() => new OpenCollectionService(), []);
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
@@ -33,6 +34,7 @@ export default function CollectionQuestionsPage({ collection, filter }: Collecti
                 setOverview(data);
             } catch (err: any) {
                 setError('Failed to load collection questions: ' + (err.message || 'Unknown error'));
+                onError();
                 console.error(err);
             } finally {
                 setLoading(false);
@@ -41,6 +43,12 @@ export default function CollectionQuestionsPage({ collection, filter }: Collecti
 
         void loadOverview();
     }, [collection?.sys_id, openCollectionService]);
+
+    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
+
+    if (unauthorizedError) {
+        return <div>{unauthorizedError}</div>;
+    }
 
     if (!collection) {
         return (

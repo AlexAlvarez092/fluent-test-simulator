@@ -34,6 +34,8 @@ export type OpenCollectionOverview = {
         status: string;
         result: number;
         created_on: string;
+        correct_count: number;
+        total_questions: number;
     }>;
 };
 
@@ -130,6 +132,8 @@ export class OpenCollectionService {
                       status: String(test?.status || ''),
                       result: parseInt(String(test?.result || '0'), 10),
                       created_on: String(test?.created_on || ''),
+                      correct_count: parseInt(String(test?.correct_count || '0'), 10),
+                      total_questions: parseInt(String(test?.total_questions || '0'), 10),
                   }))
                 : [],
         };

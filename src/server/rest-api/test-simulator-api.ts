@@ -450,7 +450,14 @@ export function getOpenCollectionOverview(request: any, response: any) {
         answers: Array<{ sys_id: string; answer: string; is_correct: string }>;
     }> = [];
 
-    const tests: Array<{ sys_id: string; status: string; result: string; created_on: string }> = [];
+    const tests: Array<{
+        sys_id: string;
+        status: string;
+        result: string;
+        created_on: string;
+        correct_count: string;
+        total_questions: string;
+    }> = [];
     const test = new GlideRecord('x_2119443_test_sim_test');
     test.addQuery('user', currentUserId);
     test.addQuery('collection', collectionId);
@@ -458,11 +465,29 @@ export function getOpenCollectionOverview(request: any, response: any) {
     test.query();
 
     while (test.next()) {
+        const testId = test.getUniqueValue();
+        let totalQuestions = 0;
+        let correctCount = 0;
+
+        const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
+        testQuestion.addQuery('test', testId);
+        testQuestion.query();
+
+        while (testQuestion.next()) {
+            totalQuestions += 1;
+
+            if ((testQuestion.getValue('status') || '') === 'correct') {
+                correctCount += 1;
+            }
+        }
+
         tests.push({
-            sys_id: test.getUniqueValue(),
+            sys_id: testId,
             status: test.getValue('status') || 'in_progress',
             result: String(parseInt(test.getValue('result') || '0', 10)),
             created_on: test.getValue('sys_created_on') || '',
+            correct_count: String(correctCount),
+            total_questions: String(totalQuestions),
         });
     }
 

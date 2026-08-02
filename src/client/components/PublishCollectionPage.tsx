@@ -1,7 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { CollectionService } from '../services/CollectionService';
 
-export default function PublishCollectionPage() {
+interface PublishCollectionPageProps {
+    onError: () => void;
+}
+
+export default function PublishCollectionPage({ onError }: PublishCollectionPageProps) {
     const [payloadText, setPayloadText] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -19,6 +23,7 @@ export default function PublishCollectionPage() {
             parsedPayload = JSON.parse(payloadText);
         } catch (_error) {
             setError('The body must be valid JSON');
+            onError();
             return;
         }
 
@@ -30,11 +35,18 @@ export default function PublishCollectionPage() {
             setPayloadText('');
         } catch (err: any) {
             setError('Failed to publish collection: ' + (err.message || 'Unknown error'));
+            onError();
             console.error(err);
         } finally {
             setSubmitting(false);
         }
     };
+
+    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
+
+    if (unauthorizedError) {
+        return <div>{unauthorizedError}</div>;
+    }
 
     return (
         <div>
