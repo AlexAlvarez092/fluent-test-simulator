@@ -85,6 +85,10 @@ export default function App() {
         setHasAppError(true);
     };
 
+    const handleCollectionPublished = () => {
+        setCurrentPage('collections');
+    };
+
     if (accessState === 'loading') {
         return (
             <div className="app-shell">
@@ -132,7 +136,9 @@ export default function App() {
                 {currentPage === 'collections' && (
                     <CollectionsPage onOpenCollection={handleOpenCollection} onError={handlePageError} />
                 )}
-                {currentPage === 'publish' && <PublishCollectionPage onError={handlePageError} />}
+                {currentPage === 'publish' && (
+                    <PublishCollectionPage onError={handlePageError} onPublished={handleCollectionPublished} />
+                )}
                 {currentPage === 'open-collection' && (
                     <OpenCollectionPage
                         collection={selectedCollection}
