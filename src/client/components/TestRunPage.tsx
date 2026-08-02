@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TestDetail, TestService } from '../services/TestService';
+import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import QuizPageHeader from '../shared/components/QuizPageHeader';
+import { reportAsyncError } from '../shared/services/errorHandling';
 
 type AnswerSelection = Record<string, string[]>;
 
@@ -40,8 +43,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 setSelection(nextSelection);
                 setHasPendingAutoSave(false);
             } catch (err: any) {
-                onError();
-                console.error(err);
+                reportAsyncError(err, onError);
             } finally {
                 setLoading(false);
             }
@@ -96,8 +98,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                     });
                     setHasPendingAutoSave(false);
                 } catch (err: any) {
-                    onError();
-                    console.error(err);
+                    reportAsyncError(err, onError);
                 } finally {
                     setSaving(false);
                 }
@@ -137,62 +138,20 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
             });
             onQuizSubmitted();
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setSubmitting(false);
         }
     };
 
+    const quizHeader = (
+        <QuizPageHeader title="Quiz" loading={isHeaderLoading} onBackToCollection={onBackToCollection} />
+    );
+
     if (!testId) {
         return (
             <div>
-                <div className="quiz-page-header-row">
-                    <h1 className="page-title-with-loading">
-                        <span
-                            className="title-loading-icon"
-                            data-loading={isHeaderLoading ? 'true' : 'false'}
-                            aria-hidden="true"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 3c4.97 0 9 4.03 9 9"
-                                >
-                                    <animateTransform
-                                        attributeName="transform"
-                                        dur="1.5s"
-                                        repeatCount="indefinite"
-                                        type="rotate"
-                                        values="0 12 12;360 12 12"
-                                    />
-                                </path>
-                            </svg>
-                        </span>
-                        Quiz
-                    </h1>
-                    <button
-                        type="button"
-                        className="text-action-button back-to-collection-button"
-                        data-label="Back to collection"
-                        title="Back to collection"
-                        onClick={onBackToCollection}
-                    >
-                        <span className="back-icon-stack" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
-                                <path d="m6.523 12.5l3.735 3.735q.146.146.153.344q.006.198-.153.363q-.166.166-.357.168t-.357-.162l-4.382-4.383q-.243-.242-.243-.565t.243-.566l4.382-4.382q.147-.146.347-.153q.201-.007.367.159q.16.165.162.353q.003.189-.162.354L6.523 11.5h12.38q.214 0 .358.143t.143.357t-.143.357t-.357.143z" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-hover">
-                                <path d="m7.85 13l2.85 2.85q.3.3.288.7t-.288.7q-.3.3-.712.313t-.713-.288L4.7 12.7q-.3-.3-.3-.7t.3-.7l4.575-4.575q.3-.3.713-.287t.712.312q.275.3.288.7t-.288.7L7.85 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" />
-                            </svg>
-                        </span>
-                        Back to collection
-                    </button>
-                </div>
+                {quizHeader}
                 <p>No quiz selected.</p>
             </div>
         );
@@ -200,52 +159,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
     return (
         <div>
-            <div className="quiz-page-header-row">
-                <h1 className="page-title-with-loading">
-                    <span
-                        className="title-loading-icon"
-                        data-loading={isHeaderLoading ? 'true' : 'false'}
-                        aria-hidden="true"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                fill="none"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M12 3c4.97 0 9 4.03 9 9"
-                            >
-                                <animateTransform
-                                    attributeName="transform"
-                                    dur="1.5s"
-                                    repeatCount="indefinite"
-                                    type="rotate"
-                                    values="0 12 12;360 12 12"
-                                />
-                            </path>
-                        </svg>
-                    </span>
-                    Quiz
-                </h1>
-                <button
-                    type="button"
-                    className="text-action-button back-to-collection-button"
-                    data-label="Back to collection"
-                    title="Back to collection"
-                    onClick={onBackToCollection}
-                >
-                    <span className="back-icon-stack" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
-                            <path d="m6.523 12.5l3.735 3.735q.146.146.153.344q.006.198-.153.363q-.166.166-.357.168t-.357-.162l-4.382-4.383q-.243-.242-.243-.565t.243-.566l4.382-4.382q.147-.146.347-.153q.201-.007.367.159q.16.165.162.353q.003.189-.162.354L6.523 11.5h12.38q.214 0 .358.143t.143.357t-.143.357t-.357.143z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-hover">
-                            <path d="m7.85 13l2.85 2.85q.3.3.288.7t-.288.7q-.3.3-.712.313t-.713-.288L4.7 12.7q-.3-.3-.3-.7t.3-.7l4.575-4.575q.3-.3.713-.287t.712.312q.275.3.288.7t-.288.7L7.85 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" />
-                        </svg>
-                    </span>
-                    Back to collection
-                </button>
-            </div>
+            {quizHeader}
 
             {loading ? (
                 <div className="inline-loading-state" aria-live="polite" aria-label="Loading quiz" />
@@ -313,26 +227,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                             disabled={submitting}
                         >
                             {submitting ? (
-                                <span className="button-loading-icon" aria-hidden="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M12 3c4.97 0 9 4.03 9 9"
-                                        >
-                                            <animateTransform
-                                                attributeName="transform"
-                                                dur="1.5s"
-                                                repeatCount="indefinite"
-                                                type="rotate"
-                                                values="0 12 12;360 12 12"
-                                            />
-                                        </path>
-                                    </svg>
-                                </span>
+                                <LoadingSpinnerIcon className="button-loading-icon" />
                             ) : (
                                 <span className="submit-button-content">
                                     <span className="button-leading-icon" aria-hidden="true">

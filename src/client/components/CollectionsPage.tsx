@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { CollectionService } from '../services/CollectionService';
 import { UserCollectionService } from '../services/UserCollectionService';
+import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import PageTitleWithLoading from '../shared/components/PageTitleWithLoading';
+import { reportAsyncError } from '../shared/services/errorHandling';
 
 type CollectionRow = {
     sys_id: string;
@@ -27,8 +30,7 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
             const data = await collectionService.list();
             setCollections(Array.isArray(data) ? data : []);
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setLoading(false);
         }
@@ -49,8 +51,7 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
             );
             return true;
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
             return false;
         } finally {
             setSavingId(null);
@@ -75,29 +76,7 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
 
     return (
         <div>
-            <h1 className="page-title-with-loading">
-                <span className="title-loading-icon" data-loading={loading ? 'true' : 'false'} aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 3c4.97 0 9 4.03 9 9"
-                        >
-                            <animateTransform
-                                attributeName="transform"
-                                dur="1.5s"
-                                repeatCount="indefinite"
-                                type="rotate"
-                                values="0 12 12;360 12 12"
-                            />
-                        </path>
-                    </svg>
-                </span>
-                Collections
-            </h1>
+            <PageTitleWithLoading title="Collections" loading={loading} />
 
             {loading ? null : (
                 <table className="collections-table">
@@ -149,28 +128,7 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
                                                 aria-hidden="true"
                                             >
                                                 {isSaving ? (
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24"
-                                                        aria-hidden="true"
-                                                    >
-                                                        <path
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="2"
-                                                            d="M12 3c4.97 0 9 4.03 9 9"
-                                                        >
-                                                            <animateTransform
-                                                                attributeName="transform"
-                                                                dur="1.5s"
-                                                                repeatCount="indefinite"
-                                                                type="rotate"
-                                                                values="0 12 12;360 12 12"
-                                                            />
-                                                        </path>
-                                                    </svg>
+                                                    <LoadingSpinnerIcon />
                                                 ) : isSaved ? (
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { CollectionService } from '../services/CollectionService';
+import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import { reportAsyncError } from '../shared/services/errorHandling';
 
 interface PublishCollectionPageProps {
     onError: () => void;
@@ -32,8 +34,7 @@ export default function PublishCollectionPage({ onError }: PublishCollectionPage
             setSuccess('Collection published successfully');
             setPayloadText('');
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setSubmitting(false);
         }
@@ -75,30 +76,7 @@ export default function PublishCollectionPage({ onError }: PublishCollectionPage
                 />
                 <br />
                 <button type="submit" title="Publish collection" disabled={submitting}>
-                    {submitting ? (
-                        <span className="button-loading-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 3c4.97 0 9 4.03 9 9"
-                                >
-                                    <animateTransform
-                                        attributeName="transform"
-                                        dur="1.5s"
-                                        repeatCount="indefinite"
-                                        type="rotate"
-                                        values="0 12 12;360 12 12"
-                                    />
-                                </path>
-                            </svg>
-                        </span>
-                    ) : (
-                        'Publish'
-                    )}
+                    {submitting ? <LoadingSpinnerIcon className="button-loading-icon" /> : 'Publish'}
                 </button>
             </form>
         </div>

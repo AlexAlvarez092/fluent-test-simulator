@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { OpenCollectionOverview, OpenCollectionService } from '../services/OpenCollectionService';
+import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import SectionHeadingWithLoading from '../shared/components/SectionHeadingWithLoading';
+import { reportAsyncError } from '../shared/services/errorHandling';
 
 type SelectedCollection = {
     sys_id: string;
@@ -40,8 +43,7 @@ export default function OpenCollectionPage({
             const data = await openCollectionService.getOverview(collection.sys_id);
             setOverview(data);
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setLoading(false);
         }
@@ -75,8 +77,7 @@ export default function OpenCollectionPage({
 
             onOpenTest(createdTestId, created.created_on);
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setCreatingTest(false);
         }
@@ -117,29 +118,6 @@ export default function OpenCollectionPage({
         </button>
     );
 
-    const renderSectionLoadingIcon = () => (
-        <span className="section-loading-icon" data-loading={loading ? 'true' : 'false'} aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 3c4.97 0 9 4.03 9 9"
-                >
-                    <animateTransform
-                        attributeName="transform"
-                        dur="1.5s"
-                        repeatCount="indefinite"
-                        type="rotate"
-                        values="0 12 12;360 12 12"
-                    />
-                </path>
-            </svg>
-        </span>
-    );
-
     const handleOpenCreateModal = () => {
         setIsCreateModalOpen(true);
     };
@@ -157,10 +135,7 @@ export default function OpenCollectionPage({
             <h1>{collection.name}</h1>
 
             <div className="section-title-row">
-                <div className="section-heading-with-loading">
-                    {renderSectionLoadingIcon()}
-                    <h2>Statistics</h2>
-                </div>
+                <SectionHeadingWithLoading title="Statistics" loading={loading} />
                 <button
                     type="button"
                     className="text-action-button new-quiz-button"
@@ -229,10 +204,7 @@ export default function OpenCollectionPage({
             )}
 
             <div className="section-title-row section-title-row-secondary">
-                <div className="section-heading-with-loading">
-                    {renderSectionLoadingIcon()}
-                    <h2>Previous Quizzes</h2>
-                </div>
+                <SectionHeadingWithLoading title="Previous Quizzes" loading={loading} />
             </div>
             {loading ? (
                 <div className="tests-content-slot" aria-hidden="true"></div>
@@ -390,26 +362,7 @@ export default function OpenCollectionPage({
                                 disabled={creatingTest}
                             >
                                 {creatingTest ? (
-                                    <span className="button-loading-icon" aria-hidden="true">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M12 3c4.97 0 9 4.03 9 9"
-                                            >
-                                                <animateTransform
-                                                    attributeName="transform"
-                                                    dur="1.5s"
-                                                    repeatCount="indefinite"
-                                                    type="rotate"
-                                                    values="0 12 12;360 12 12"
-                                                />
-                                            </path>
-                                        </svg>
-                                    </span>
+                                    <LoadingSpinnerIcon className="button-loading-icon" />
                                 ) : (
                                     <span className="submit-button-content">
                                         <span className="button-leading-icon" aria-hidden="true">

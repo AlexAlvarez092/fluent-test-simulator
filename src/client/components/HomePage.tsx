@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CollectionService } from '../services/CollectionService';
 import { UserCollectionService } from '../services/UserCollectionService';
+import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import PageTitleWithLoading from '../shared/components/PageTitleWithLoading';
+import { reportAsyncError } from '../shared/services/errorHandling';
 
 type CollectionRow = {
     sys_id: string;
@@ -28,8 +31,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                 const data = await collectionService.list({ savedOnly: true });
                 setSavedCollections(Array.isArray(data) ? data : []);
             } catch (err: any) {
-                onError();
-                console.error(err);
+                reportAsyncError(err, onError);
             } finally {
                 setLoading(false);
             }
@@ -44,8 +46,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
             await userCollectionService.removeCollection(collectionId);
             setSavedCollections((previous) => previous.filter((collection) => collection.sys_id !== collectionId));
         } catch (err: any) {
-            onError();
-            console.error(err);
+            reportAsyncError(err, onError);
         } finally {
             setRemovingId(null);
         }
@@ -53,29 +54,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
 
     return (
         <div>
-            <h1 className="page-title-with-loading">
-                <span className="title-loading-icon" data-loading={loading ? 'true' : 'false'} aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 3c4.97 0 9 4.03 9 9"
-                        >
-                            <animateTransform
-                                attributeName="transform"
-                                dur="1.5s"
-                                repeatCount="indefinite"
-                                type="rotate"
-                                values="0 12 12;360 12 12"
-                            />
-                        </path>
-                    </svg>
-                </span>
-                Your Saved Collections
-            </h1>
+            <PageTitleWithLoading title="Your Saved Collections" loading={loading} />
 
             {loading ? null : savedCollections.length === 0 ? (
                 <div className="title-text-aligned-message">You have no saved collections yet.</div>
@@ -161,24 +140,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                                             aria-hidden="true"
                                         >
                                             {isRemoving ? (
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                    <path
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="M12 3c4.97 0 9 4.03 9 9"
-                                                    >
-                                                        <animateTransform
-                                                            attributeName="transform"
-                                                            dur="1.5s"
-                                                            repeatCount="indefinite"
-                                                            type="rotate"
-                                                            values="0 12 12;360 12 12"
-                                                        />
-                                                    </path>
-                                                </svg>
+                                                <LoadingSpinnerIcon />
                                             ) : (
                                                 <span className="icon-variant-stack" aria-hidden="true">
                                                     <svg
