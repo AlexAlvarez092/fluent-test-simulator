@@ -1,4 +1,4 @@
-import { Table, StringColumn, ReferenceColumn, ChoiceColumn, UrlColumn } from '@servicenow/sdk/core';
+import { Table, StringColumn, ReferenceColumn, ChoiceColumn, UrlColumn } from '@servicenow/sdk/core'
 
 export const x_2119443_test_sim_question = Table({
     name: 'x_2119443_test_sim_question',
@@ -20,7 +20,7 @@ export const x_2119443_test_sim_question = Table({
                 },
             },
         }),
-        rationale: StringColumn({}),
+        rationale: StringColumn({ maxLength: 4000 }),
         docs: UrlColumn({}),
     },
     index: [
@@ -30,9 +30,9 @@ export const x_2119443_test_sim_question = Table({
             element: 'collection',
         },
     ],
-});
+})
 
-import { List, Form, default_view } from '@servicenow/sdk/core';
+import { List, Form, default_view } from '@servicenow/sdk/core'
 
 Form({
     table: 'x_2119443_test_sim_question',
@@ -72,15 +72,15 @@ Form({
             ],
         },
     ],
-});
+})
 
 List({
     table: 'x_2119443_test_sim_question',
     view: default_view,
     columns: ['question', 'collection', 'type'],
-});
+})
 
-import { Acl } from '@servicenow/sdk/core';
+import { Acl } from '@servicenow/sdk/core'
 
 Acl({
     $id: Now.ID['question_create'],
@@ -88,7 +88,7 @@ Acl({
     table: 'x_2119443_test_sim_question',
     operation: 'create',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['question_read'],
@@ -96,7 +96,7 @@ Acl({
     table: 'x_2119443_test_sim_question',
     operation: 'read',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['question_write'],
@@ -104,7 +104,7 @@ Acl({
     table: 'x_2119443_test_sim_question',
     operation: 'write',
     roles: ['x_2119443_test_sim.user'],
-});
+})
 
 Acl({
     $id: Now.ID['question_delete'],
@@ -112,4 +112,4 @@ Acl({
     table: 'x_2119443_test_sim_question',
     operation: 'delete',
     roles: ['x_2119443_test_sim.user'],
-});
+})

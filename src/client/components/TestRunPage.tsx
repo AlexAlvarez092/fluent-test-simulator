@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TestDetail, TestService } from '../services/TestService';
 import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
+import QuestionInfoTooltip from '../shared/components/QuestionInfoTooltip';
 import QuizPageHeader from '../shared/components/QuizPageHeader';
 import { reportAsyncError } from '../shared/services/errorHandling';
 
@@ -175,8 +176,11 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
                         return (
                             <div key={question.test_question_id}>
-                                <h3>
-                                    {index + 1}. {question.question}
+                                <h3 className="question-title-with-info">
+                                    <span>
+                                        {index + 1}. {question.question}
+                                    </span>
+                                    <QuestionInfoTooltip rationale={question.rationale} docs={question.docs} />
                                 </h3>
                                 {question.answers.map((answer) => {
                                     const isSelected = selected.includes(answer.sys_id);

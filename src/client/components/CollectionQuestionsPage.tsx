@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { OpenCollectionOverview, OpenCollectionService } from '../services/OpenCollectionService';
 import QuizPageHeader from '../shared/components/QuizPageHeader';
+import QuestionInfoTooltip from '../shared/components/QuestionInfoTooltip';
 import { reportAsyncError } from '../shared/services/errorHandling';
 
 type SelectedCollection = {
@@ -103,11 +104,12 @@ export default function CollectionQuestionsPage({
                 <div>
                     {filteredQuestions.map((question, index) => (
                         <div key={question.sys_id}>
-                            <h3>
-                                {index + 1}. {question.question}
+                            <h3 className="question-title-with-info">
+                                <span>
+                                    {index + 1}. {question.question}
+                                </span>
+                                <QuestionInfoTooltip rationale={question.rationale} docs={question.docs} />
                             </h3>
-                            {question.rationale && <p>Rationale: {question.rationale}</p>}
-                            {question.docs && <p>Docs: {question.docs}</p>}
                             <ul>
                                 {question.answers.map((answer) => (
                                     <li key={answer.sys_id} className="answer-option">

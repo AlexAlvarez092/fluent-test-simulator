@@ -7,6 +7,7 @@ import OpenCollectionPage from './components/OpenCollectionPage';
 import TestRunPage from './components/TestRunPage';
 import CollectionQuestionsPage from './components/CollectionQuestionsPage';
 import ErrorPage from './components/ErrorPage';
+import LoadingSpinnerIcon from './shared/components/LoadingSpinnerIcon';
 import { AccessService } from './services/AccessService';
 
 type AccessState = 'loading' | 'allowed' | 'denied' | 'error';
@@ -93,26 +94,7 @@ export default function App() {
         return (
             <div className="app-shell">
                 <div className="app-message-card" aria-live="polite" aria-label="Loading">
-                    <span className="title-loading-icon" data-loading="true" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                fill="none"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M12 3c4.97 0 9 4.03 9 9"
-                            >
-                                <animateTransform
-                                    attributeName="transform"
-                                    dur="1.5s"
-                                    repeatCount="indefinite"
-                                    type="rotate"
-                                    values="0 12 12;360 12 12"
-                                />
-                            </path>
-                        </svg>
-                    </span>
+                    <LoadingSpinnerIcon className="app-startup-loading-icon" loading={true} />
                 </div>
             </div>
         );
