@@ -1,7 +1,6 @@
 import React from 'react';
 import SectionHeadingWithLoading from '../shared/components/SectionHeadingWithLoading';
 import { OpenCollectionTestSummary } from '../shared/models/OpenCollectionTypes';
-import { isActivationKey } from '../shared/services/keyboard';
 
 interface OpenCollectionTestsSectionProps {
     loading: boolean;
@@ -43,16 +42,6 @@ export default function OpenCollectionTestsSection({ loading, tests, onOpenTest 
                                                 : 'tests-row collection-row'
                                         }
                                         onClick={canOpen ? () => onOpenTest(test.sys_id, test.created_on) : undefined}
-                                        onKeyDown={
-                                            canOpen
-                                                ? (event) => {
-                                                      if (isActivationKey(event.key)) {
-                                                          event.preventDefault();
-                                                          onOpenTest(test.sys_id, test.created_on);
-                                                      }
-                                                  }
-                                                : undefined
-                                        }
                                         tabIndex={canOpen ? 0 : undefined}
                                         title={canOpen ? 'Open quiz' : 'Quiz unavailable'}
                                         aria-label={

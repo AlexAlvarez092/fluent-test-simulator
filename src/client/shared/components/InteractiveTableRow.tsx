@@ -1,5 +1,4 @@
 import React from 'react';
-import { isActivationKey } from '../services/keyboard';
 
 interface InteractiveTableRowProps {
     rowKey: string;
@@ -27,16 +26,6 @@ export default function InteractiveTableRow({
             key={rowKey}
             className={isInteractive ? 'collection-row collection-row-clickable' : 'collection-row'}
             onClick={isInteractive ? onActivate : undefined}
-            onKeyDown={
-                isInteractive
-                    ? (event) => {
-                          if (isActivationKey(event.key)) {
-                              event.preventDefault();
-                              onActivate();
-                          }
-                      }
-                    : undefined
-            }
             tabIndex={isInteractive ? 0 : undefined}
             title={isInteractive ? interactiveTitle : busyTitle}
             aria-label={isInteractive ? interactiveAriaLabel : busyAriaLabel}

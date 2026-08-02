@@ -5,7 +5,6 @@ import CollectionActionIcon from '../shared/components/CollectionActionIcon';
 import InteractiveTableRow from '../shared/components/InteractiveTableRow';
 import PageTitleWithLoading from '../shared/components/PageTitleWithLoading';
 import { reportAsyncError } from '../shared/services/errorHandling';
-import { isActivationKey } from '../shared/services/keyboard';
 
 type CollectionRow = {
     sys_id: string;
@@ -93,17 +92,6 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                                                 : (event) => {
                                                       event.stopPropagation();
                                                       void handleRemoveCollection(collection.sys_id);
-                                                  }
-                                        }
-                                        onKeyDown={
-                                            isRemoving
-                                                ? undefined
-                                                : (event) => {
-                                                      if (isActivationKey(event.key)) {
-                                                          event.preventDefault();
-                                                          event.stopPropagation();
-                                                          void handleRemoveCollection(collection.sys_id);
-                                                      }
                                                   }
                                         }
                                         tabIndex={isRemoving ? undefined : 0}
