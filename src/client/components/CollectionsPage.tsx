@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { CollectionService } from '../services/CollectionService';
 import { UserCollectionService } from '../services/UserCollectionService';
+import InteractiveTableRow from '../shared/components/InteractiveTableRow';
 import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
 import PageTitleWithLoading from '../shared/components/PageTitleWithLoading';
 import { reportAsyncError } from '../shared/services/errorHandling';
@@ -93,31 +94,17 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
                                 const isSaving = savingId === collectionId;
                                 const canInteract = !isSaving;
                                 const rowActionLabel = isSaved ? 'Open collection' : 'Save collection and open';
+                                const activateRow = () => void handleCollectionAction(collection);
 
                                 return (
-                                    <tr
-                                        key={collectionId}
-                                        className={
-                                            canInteract ? 'collection-row collection-row-clickable' : 'collection-row'
-                                        }
-                                        onClick={
-                                            canInteract ? () => void handleCollectionAction(collection) : undefined
-                                        }
-                                        onKeyDown={
-                                            canInteract
-                                                ? (event) => {
-                                                      if (event.key === 'Enter' || event.key === ' ') {
-                                                          event.preventDefault();
-                                                          void handleCollectionAction(collection);
-                                                      }
-                                                  }
-                                                : undefined
-                                        }
-                                        tabIndex={canInteract ? 0 : undefined}
-                                        title={canInteract ? rowActionLabel : 'Saving collection'}
-                                        aria-label={
-                                            canInteract ? `${rowActionLabel} ${name}` : `Saving collection ${name}`
-                                        }
+                                    <InteractiveTableRow
+                                        rowKey={collectionId}
+                                        isInteractive={canInteract}
+                                        interactiveTitle={rowActionLabel}
+                                        busyTitle="Saving collection"
+                                        interactiveAriaLabel={`${rowActionLabel} ${name}`}
+                                        busyAriaLabel={`Saving collection ${name}`}
+                                        onActivate={activateRow}
                                     >
                                         <td>
                                             <span
@@ -160,7 +147,7 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
                                             </span>
                                         </td>
                                         <td>{name}</td>
-                                    </tr>
+                                    </InteractiveTableRow>
                                 );
                             })
                         )}

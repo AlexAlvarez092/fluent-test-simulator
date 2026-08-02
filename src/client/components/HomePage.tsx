@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CollectionService } from '../services/CollectionService';
 import { UserCollectionService } from '../services/UserCollectionService';
+import InteractiveTableRow from '../shared/components/InteractiveTableRow';
 import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
 import PageTitleWithLoading from '../shared/components/PageTitleWithLoading';
 import { reportAsyncError } from '../shared/services/errorHandling';
@@ -64,42 +65,21 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                         {savedCollections.map((collection) => {
                             const isRemoving = removingId === collection.sys_id;
                             const canInteract = !isRemoving;
+                            const openCollection = () =>
+                                onOpenCollection({
+                                    sys_id: collection.sys_id,
+                                    name: collection.name,
+                                });
 
                             return (
-                                <tr
-                                    key={collection.sys_id}
-                                    className={
-                                        canInteract ? 'collection-row collection-row-clickable' : 'collection-row'
-                                    }
-                                    onClick={
-                                        canInteract
-                                            ? () =>
-                                                  onOpenCollection({
-                                                      sys_id: collection.sys_id,
-                                                      name: collection.name,
-                                                  })
-                                            : undefined
-                                    }
-                                    onKeyDown={
-                                        canInteract
-                                            ? (event) => {
-                                                  if (event.key === 'Enter' || event.key === ' ') {
-                                                      event.preventDefault();
-                                                      onOpenCollection({
-                                                          sys_id: collection.sys_id,
-                                                          name: collection.name,
-                                                      });
-                                                  }
-                                              }
-                                            : undefined
-                                    }
-                                    tabIndex={canInteract ? 0 : undefined}
-                                    title={canInteract ? 'Open collection' : 'Removing collection'}
-                                    aria-label={
-                                        canInteract
-                                            ? `Open collection ${collection.name}`
-                                            : `Collection ${collection.name} is being removed`
-                                    }
+                                <InteractiveTableRow
+                                    rowKey={collection.sys_id}
+                                    isInteractive={canInteract}
+                                    interactiveTitle="Open collection"
+                                    busyTitle="Removing collection"
+                                    interactiveAriaLabel={`Open collection ${collection.name}`}
+                                    busyAriaLabel={`Collection ${collection.name} is being removed`}
+                                    onActivate={openCollection}
                                 >
                                     <td
                                         className={
@@ -166,7 +146,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                                     <td className={isRemoving ? 'saved-open-cell is-busy' : 'saved-open-cell'}>
                                         {collection.name}
                                     </td>
-                                </tr>
+                                </InteractiveTableRow>
                             );
                         })}
                     </tbody>
