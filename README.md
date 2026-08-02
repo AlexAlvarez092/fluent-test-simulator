@@ -1,59 +1,72 @@
 # Test Simulator
 
-This is a ServiceNow Fluent application designed as a comprehensive test and exam preparation platform. The system manages collections of questions organized by topic (e.g., ITIL Fundamentals, certification exam prep) and enables users to create customized tests, track their performance, and manage their learning progress.
+ServiceNow Fluent application for creating and running quiz sessions from question collections.
 
-## Core Features
+## What is implemented
 
-### Collections Management
+### Collections
 
-- Users can browse and explore a repository of question collections organized by topic/certification
-- Users can save collections to their personal dashboard for easy access
-- Users can remove collections from their personal space
-- Administrators can create, modify, and delete collections
+- Browse all available collections
+- Save a collection for the current user
+- Remove a saved collection
+- Open a collection and review its current stats
 
-### Personal Dashboard
+### Open collection view
 
-- Displays all collections saved by the user
-- Shows test statistics and performance metrics (pass/fail rates, score progression, etc.)
-- Provides quick access to collections for test generation
-- Allows management of saved collections (removal, access)
+- See question counters by group:
+    - Never Seen
+    - Correct
+    - Ever Failed
+    - Last Attempt Failed
+    - All
+- Open filtered question lists for each group
+- See previous quizzes and continue/review them
+- Create a new quiz from the selected collection
 
-### Test Creation & Customization
+### Quiz creation
 
-- Users can generate tests from a selected collection by specifying the number of questions
-- Test question selection modes:
-    - **Unseen questions**: Questions the user hasn't answered yet
-    - **Failed questions**: Questions the user answered incorrectly in previous tests
-    - **Random selection**: Random mix from all questions in the collection
-- Users can exit/complete tests at any time without answering all questions
-- Test results are saved to user statistics
+- Question counts: 10, 20, 40
+- Modes:
+    - never_seen
+    - random
+    - last_attempt_failed
+    - ever_failed
 
-### Test Taking Experience
+### Quiz run
 
-- Users can view correct answer(s) after completing each question
-- Users can access theoretical explanation for each question
-- Users can view external documentation links for deeper learning
-- Users can flag/report errors in questions
-- Users can save questions for later review
-- Test progress is tracked and can be resumed or abandoned
+- Supports single and multiple choice questions
+- Autosaves progress while answering
+- Submit quiz and view completed results state
+- Correct/incorrect answer highlighting in completed quizzes
+- Hover info icon next to each question title when data exists:
+    - shows rationale text
+    - shows documentation link when present
 
-### User Roles & Permissions
+### Publish page
 
-**Standard Users:**
+- Publish a collection payload (collection, questions, answers) to the backend API
 
-- Browse and search collections
-- Save/remove collections from personal dashboard
-- Create and take tests with flexible question modes
-- View performance statistics
-- Review answers and explanations
-- Report question errors
-- Save questions for review
+## Frontend pages
 
-**Administrators:**
+- Home (saved collections)
+- Collections (all collections)
+- Publish
+- Open Collection
+- Collection Questions
+- Test Run
+- Error page
 
-- Full CRUD operations on collections
-- Create, modify, and delete questions and answers
-- Manage question metadata (topic, difficulty, correct answers, explanations, documentation links)
-- View and manage user statistics
-- Handle error reports on questions
-- Configure collection settings
+## Scripts
+
+- npm run dev: start local development mode with now-sdk
+- npm run build: build artifact with now-sdk
+- npm run deploy: install/deploy with now-sdk
+- npm run transform: run now-sdk transform
+- npm run types: sync now-sdk dependencies/types
+- npm run format: run Prettier write
+- npm run format:check: run Prettier check
+
+## Notes
+
+- API calls use ServiceNow token header X-UserToken from window.g_ck.
+- Error handling in page-level flows redirects to the app error page when requests fail.
