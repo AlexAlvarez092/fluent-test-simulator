@@ -3,6 +3,7 @@ import { OpenCollectionOverview, OpenCollectionService } from '../services/OpenC
 import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
 import SectionHeadingWithLoading from '../shared/components/SectionHeadingWithLoading';
 import { reportAsyncError } from '../shared/services/errorHandling';
+import { isActivationKey } from '../shared/services/keyboard';
 
 type SelectedCollection = {
     sys_id: string;
@@ -231,7 +232,7 @@ export default function OpenCollectionPage({
                                         onKeyDown={
                                             canOpen
                                                 ? (event) => {
-                                                      if (event.key === 'Enter' || event.key === ' ') {
+                                                      if (isActivationKey(event.key)) {
                                                           event.preventDefault();
                                                           onOpenTest(test.sys_id, test.created_on);
                                                       }

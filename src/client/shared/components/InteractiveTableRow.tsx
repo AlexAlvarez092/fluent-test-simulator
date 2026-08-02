@@ -1,4 +1,5 @@
 import React from 'react';
+import { isActivationKey } from '../services/keyboard';
 
 interface InteractiveTableRowProps {
     rowKey: string;
@@ -29,7 +30,7 @@ export default function InteractiveTableRow({
             onKeyDown={
                 isInteractive
                     ? (event) => {
-                          if (event.key === 'Enter' || event.key === ' ') {
+                          if (isActivationKey(event.key)) {
                               event.preventDefault();
                               onActivate();
                           }
