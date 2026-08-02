@@ -25,35 +25,10 @@ export default function OpenCollectionPage({
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [createError, setCreateError] = useState<string | null>(null);
-    const [createSuccess, setCreateSuccess] = useState<string | null>(null);
     const [creatingTest, setCreatingTest] = useState(false);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [questionCount, setQuestionCount] = useState<'10' | '20' | '40'>('10');
     const [mode, setMode] = useState<'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed'>('never_seen');
-
-    const getFriendlyCreateErrorMessage = (
-        modeValue: 'never_seen' | 'random' | 'last_attempt_failed' | 'ever_failed',
-        rawError: string
-    ) => {
-        const modeLabelMap: Record<typeof modeValue, string> = {
-            never_seen: 'Never Seen',
-            random: 'Random',
-            last_attempt_failed: 'Last Attempt Failed',
-            ever_failed: 'Ever Failed',
-        };
-
-        if (rawError.includes('No questions available for mode')) {
-            return `No questions are currently available for '${modeLabelMap[modeValue]}' mode. Try another mode.`;
-        }
-
-        if (rawError.includes('Unable to select questions for the new test')) {
-            return 'Unable to build a quiz with the selected options. Please try a different mode or question count.';
-        }
-
-        return `Failed to create quiz: ${rawError}`;
-    };
 
     const loadOverview = async () => {
         if (!collection?.sys_id) {
@@ -62,11 +37,9 @@ export default function OpenCollectionPage({
 
         try {
             setLoading(true);
-            setError(null);
             const data = await openCollectionService.getOverview(collection.sys_id);
             setOverview(data);
         } catch (err: any) {
-            setError('Failed to load collection overview: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
         } finally {
@@ -82,14 +55,12 @@ export default function OpenCollectionPage({
         event.preventDefault();
 
         if (!collection?.sys_id) {
-            setCreateError('Collection is required');
+            onError();
             return;
         }
 
         try {
             setCreatingTest(true);
-            setCreateError(null);
-            setCreateSuccess(null);
 
             const created = await openCollectionService.createTest({
                 collection_id: collection.sys_id,
@@ -102,11 +73,8 @@ export default function OpenCollectionPage({
                 throw new Error('Invalid response contract: test_id is required');
             }
 
-            setCreateSuccess('Quiz created successfully');
             onOpenTest(createdTestId, created.created_on);
         } catch (err: any) {
-            const rawMessage = err.message || 'Unknown error';
-            setCreateError(getFriendlyCreateErrorMessage(mode, rawMessage));
             onError();
             console.error(err);
         } finally {
@@ -121,12 +89,6 @@ export default function OpenCollectionPage({
                 <p>No collection selected.</p>
             </div>
         );
-    }
-
-    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
     }
 
     const stats = overview?.stats || {
@@ -179,8 +141,6 @@ export default function OpenCollectionPage({
     );
 
     const handleOpenCreateModal = () => {
-        setCreateError(null);
-        setCreateSuccess(null);
         setIsCreateModalOpen(true);
     };
 
@@ -189,23 +149,12 @@ export default function OpenCollectionPage({
             return;
         }
 
-        setCreateError(null);
-        setCreateSuccess(null);
         setIsCreateModalOpen(false);
     };
 
     return (
         <div>
             <h1>{collection.name}</h1>
-
-            {error && (
-                <div>
-                    {error}
-                    <button title="Dismiss message" onClick={() => setError(null)}>
-                        Dismiss
-                    </button>
-                </div>
-            )}
 
             <div className="section-title-row">
                 <div className="section-heading-with-loading">
@@ -399,23 +348,6 @@ export default function OpenCollectionPage({
                                 </span>
                             </button>
                         </div>
-
-                        {createError && (
-                            <div>
-                                {createError}
-                                <button type="button" title="Dismiss message" onClick={() => setCreateError(null)}>
-                                    Dismiss
-                                </button>
-                            </div>
-                        )}
-                        {createSuccess && (
-                            <div>
-                                {createSuccess}
-                                <button type="button" title="Dismiss message" onClick={() => setCreateSuccess(null)}>
-                                    Dismiss
-                                </button>
-                            </div>
-                        )}
 
                         <form className="modal-create-form" onSubmit={handleCreateTest}>
                             <div className="modal-form-row">

@@ -15,21 +15,12 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
     const [testDetail, setTestDetail] = useState<TestDetail | null>(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [submitError, setSubmitError] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
     const [saving, setSaving] = useState(false);
     const [selection, setSelection] = useState<AnswerSelection>({});
     const [hasPendingAutoSave, setHasPendingAutoSave] = useState(false);
     const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isHeaderLoading = loading || saving || submitting || hasPendingAutoSave;
-    const unauthorizedError = [error, submitError].find((message): message is string =>
-        Boolean(message && message.includes('HTTP error 401'))
-    );
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
-    }
 
     useEffect(() => {
         const load = async () => {
@@ -39,7 +30,6 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
             try {
                 setLoading(true);
-                setError(null);
                 const detail = await testService.getTestDetail(testId);
                 setTestDetail(detail);
                 const nextSelection: AnswerSelection = {};
@@ -49,9 +39,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 }
                 setSelection(nextSelection);
                 setHasPendingAutoSave(false);
-                setSubmitError(null);
             } catch (err: any) {
-                setError('Failed to load quiz detail: ' + (err.message || 'Unknown error'));
                 onError();
                 console.error(err);
             } finally {
@@ -96,7 +84,6 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
             const save = async () => {
                 try {
                     setSaving(true);
-                    setSubmitError(null);
 
                     const answers = testDetail.questions.map((question) => ({
                         question_id: question.question_id,
@@ -109,7 +96,6 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                     });
                     setHasPendingAutoSave(false);
                 } catch (err: any) {
-                    setSubmitError('Failed to save progress: ' + (err.message || 'Unknown error'));
                     onError();
                     console.error(err);
                 } finally {
@@ -134,7 +120,6 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
         try {
             setSubmitting(true);
-            setSubmitError(null);
             setHasPendingAutoSave(false);
 
             if (autoSaveTimerRef.current) {
@@ -152,7 +137,6 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
             });
             onQuizSubmitted();
         } catch (err: any) {
-            setSubmitError('Failed to submit quiz: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
         } finally {
@@ -263,30 +247,12 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 </button>
             </div>
 
-            {error && (
-                <div>
-                    {error}
-                    <button title="Dismiss message" onClick={() => setError(null)}>
-                        Dismiss
-                    </button>
-                </div>
-            )}
-
             {loading ? (
                 <div className="inline-loading-state" aria-live="polite" aria-label="Loading quiz" />
             ) : !testDetail ? (
                 <div>Quiz not found.</div>
             ) : (
                 <div>
-                    {submitError && (
-                        <div>
-                            {submitError}
-                            <button title="Dismiss message" onClick={() => setSubmitError(null)}>
-                                Dismiss
-                            </button>
-                        </div>
-                    )}
-
                     {testDetail.questions.map((question, index) => {
                         const selected = selection[question.question_id] || [];
                         const isMultiple = question.type === 'multiple';

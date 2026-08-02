@@ -25,7 +25,6 @@ export default function CollectionQuestionsPage({
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadOverview = async () => {
@@ -35,11 +34,9 @@ export default function CollectionQuestionsPage({
 
             try {
                 setLoading(true);
-                setError(null);
                 const data = await openCollectionService.getOverview(collection.sys_id);
                 setOverview(data);
             } catch (err: any) {
-                setError('Failed to load collection questions: ' + (err.message || 'Unknown error'));
                 onError();
                 console.error(err);
             } finally {
@@ -49,12 +46,6 @@ export default function CollectionQuestionsPage({
 
         void loadOverview();
     }, [collection?.sys_id, openCollectionService]);
-
-    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
-    }
 
     if (!collection) {
         return (
@@ -143,15 +134,6 @@ export default function CollectionQuestionsPage({
                 </button>
             </div>
 
-            {error && (
-                <div>
-                    {error}
-                    <button title="Dismiss message" onClick={() => setError(null)}>
-                        Dismiss
-                    </button>
-                </div>
-            )}
-
             <h2>{filterTitleMap[filter]}</h2>
             {loading ? (
                 <div className="inline-loading-state" aria-live="polite" aria-label="Loading questions" />
@@ -164,7 +146,6 @@ export default function CollectionQuestionsPage({
                             <h3>
                                 {index + 1}. {question.question}
                             </h3>
-                            <p>Type: {question.type}</p>
                             {question.rationale && <p>Rationale: {question.rationale}</p>}
                             {question.docs && <p>Docs: {question.docs}</p>}
                             <ul>

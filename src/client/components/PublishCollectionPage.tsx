@@ -23,30 +23,21 @@ export default function PublishCollectionPage({ onError }: PublishCollectionPage
             parsedPayload = JSON.parse(payloadText);
         } catch (_error) {
             setError('The body must be valid JSON');
-            onError();
             return;
         }
 
         try {
             setSubmitting(true);
-            const response = await collectionService.publish(parsedPayload);
-            const publishResult = response?.result;
-            setSuccess(publishResult ? 'Collection published successfully' : 'Collection published successfully');
+            await collectionService.publish(parsedPayload);
+            setSuccess('Collection published successfully');
             setPayloadText('');
         } catch (err: any) {
-            setError('Failed to publish collection: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
         } finally {
             setSubmitting(false);
         }
     };
-
-    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
-    }
 
     return (
         <div>

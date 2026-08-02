@@ -16,7 +16,6 @@ interface CollectionsPageProps {
 export default function CollectionsPage({ onOpenCollection, onError }: CollectionsPageProps) {
     const [collections, setCollections] = useState<CollectionRow[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [savingId, setSavingId] = useState<string | null>(null);
 
     const collectionService = useMemo(() => new CollectionService(), []);
@@ -25,11 +24,9 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
     const refreshCollections = async () => {
         try {
             setLoading(true);
-            setError(null);
             const data = await collectionService.list();
             setCollections(Array.isArray(data) ? data : []);
         } catch (err: any) {
-            setError('Failed to load collections: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
         } finally {
@@ -52,7 +49,6 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
             );
             return true;
         } catch (err: any) {
-            setError('Failed to save collection: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
             return false;
@@ -76,12 +72,6 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
             onOpenCollection({ sys_id: collection.sys_id, name: collection.name });
         }
     };
-
-    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
-    }
 
     return (
         <div>
@@ -108,15 +98,6 @@ export default function CollectionsPage({ onOpenCollection, onError }: Collectio
                 </span>
                 Collections
             </h1>
-
-            {error && (
-                <div>
-                    {error}
-                    <button title="Dismiss message" onClick={() => setError(null)}>
-                        Dismiss
-                    </button>
-                </div>
-            )}
 
             {loading ? null : (
                 <table className="collections-table">

@@ -24,7 +24,6 @@ export default function App() {
     const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
     const [selectedQuestionFilter, setSelectedQuestionFilter] = useState<QuestionFilter>('all');
     const [accessState, setAccessState] = useState<AccessState>('loading');
-    const [accessError, setAccessError] = useState<string | null>(null);
     const [hasAppError, setHasAppError] = useState(false);
 
     const accessService = useMemo(() => new AccessService(), []);
@@ -33,7 +32,6 @@ export default function App() {
         const loadAccess = async () => {
             try {
                 setAccessState('loading');
-                setAccessError(null);
 
                 const roles = await accessService.getCurrentUserRoles();
                 if (!roles?.is_user) {
@@ -45,7 +43,6 @@ export default function App() {
                 setAccessState('allowed');
             } catch (error: any) {
                 setAccessState('error');
-                setAccessError(error?.message || 'Unknown error');
                 setHasAppError(true);
             }
         };

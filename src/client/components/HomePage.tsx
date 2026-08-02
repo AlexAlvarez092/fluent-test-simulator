@@ -16,7 +16,6 @@ interface HomePageProps {
 export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
     const [savedCollections, setSavedCollections] = useState<CollectionRow[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [removingId, setRemovingId] = useState<string | null>(null);
 
     const collectionService = useMemo(() => new CollectionService(), []);
@@ -26,11 +25,9 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
         const loadSavedCollections = async () => {
             try {
                 setLoading(true);
-                setError(null);
                 const data = await collectionService.list({ savedOnly: true });
                 setSavedCollections(Array.isArray(data) ? data : []);
             } catch (err: any) {
-                setError('Failed to load saved collections: ' + (err.message || 'Unknown error'));
                 onError();
                 console.error(err);
             } finally {
@@ -44,23 +41,15 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
     const handleRemoveCollection = async (collectionId: string) => {
         try {
             setRemovingId(collectionId);
-            setError(null);
             await userCollectionService.removeCollection(collectionId);
             setSavedCollections((previous) => previous.filter((collection) => collection.sys_id !== collectionId));
         } catch (err: any) {
-            setError('Failed to remove collection: ' + (err.message || 'Unknown error'));
             onError();
             console.error(err);
         } finally {
             setRemovingId(null);
         }
     };
-
-    const unauthorizedError = error && error.includes('HTTP error 401') ? error : null;
-
-    if (unauthorizedError) {
-        return <div>{unauthorizedError}</div>;
-    }
 
     return (
         <div>
@@ -87,15 +76,6 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
                 </span>
                 Your Saved Collections
             </h1>
-
-            {error && (
-                <div>
-                    {error}
-                    <button title="Dismiss message" onClick={() => setError(null)}>
-                        Dismiss
-                    </button>
-                </div>
-            )}
 
             {loading ? null : savedCollections.length === 0 ? (
                 <div className="title-text-aligned-message">You have no saved collections yet.</div>
