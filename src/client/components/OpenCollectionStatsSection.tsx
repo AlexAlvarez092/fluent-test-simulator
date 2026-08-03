@@ -37,7 +37,7 @@ export default function OpenCollectionStatsSection({
                 <button
                     type="button"
                     className="text-action-button new-quiz-button"
-                    data-label="New quiz"
+                    data-label="Create quiz"
                     title="Create quiz"
                     onClick={onOpenCreateModal}
                 >
@@ -56,7 +56,7 @@ export default function OpenCollectionStatsSection({
                                 />
                             </svg>
                         </span>
-                        <span>New quiz</span>
+                        <span>Create quiz</span>
                     </span>
                 </button>
             </div>
@@ -68,29 +68,29 @@ export default function OpenCollectionStatsSection({
                     <table className="stats-table">
                         <thead>
                             <tr>
-                                <th>Never Seen</th>
+                                <th>Never seen</th>
                                 <th>Correct</th>
-                                <th>Ever Failed</th>
-                                <th>Last Attempt Failed</th>
+                                <th>Ever failed</th>
+                                <th>Last attempt failed</th>
                                 <th>All</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-                                    {renderStatsLink('Open Never Seen questions', stats.never_seen_count, 'never_seen')}
+                                    {renderStatsLink('Open never seen questions', stats.never_seen_count, 'never_seen')}
                                 </td>
-                                <td>{renderStatsLink('Open Correct questions', stats.correct_count, 'correct')}</td>
+                                <td>{renderStatsLink('Open correct questions', stats.correct_count, 'correct')}</td>
                                 <td>
                                     {renderStatsLink(
-                                        'Open Ever Failed questions',
+                                        'Open ever failed questions',
                                         stats.ever_failed_count,
                                         'ever_failed'
                                     )}
                                 </td>
                                 <td>
                                     {renderStatsLink(
-                                        'Open Last Attempt Failed questions',
+                                        'Open last attempt failed questions',
                                         stats.last_attempt_failed_count,
                                         'last_attempt_failed'
                                     )}

@@ -225,7 +225,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                         <button
                             type="button"
                             className="submit-with-spinner quiz-submit-button"
-                            data-label="Submit Quiz"
+                            data-label="Submit quiz"
                             title="Submit quiz"
                             onClick={handleSubmit}
                             disabled={submitting}

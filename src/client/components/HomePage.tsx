@@ -55,7 +55,7 @@ export default function HomePage({ onOpenCollection, onError }: HomePageProps) {
 
     return (
         <div>
-            <PageTitleWithLoading title="Your Saved Collections" loading={loading} />
+            <PageTitleWithLoading title="Your saved collections" loading={loading} />
 
             {loading ? null : savedCollections.length === 0 ? (
                 <div className="title-text-aligned-message">You have no saved collections yet.</div>

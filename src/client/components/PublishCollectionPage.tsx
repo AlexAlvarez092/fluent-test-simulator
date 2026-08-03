@@ -38,11 +38,9 @@ export default function PublishCollectionPage({ onError, onPublished }: PublishC
         }
     };
 
-    const canReset = payloadText.trim().length > 0 && !submitting;
-
     return (
         <div className="publish-page">
-            <h1>Publish Collection</h1>
+            <h1>Publish collection</h1>
 
             {error && (
                 <div className="publish-feedback publish-feedback-error" role="status" aria-live="polite">
@@ -67,7 +65,7 @@ export default function PublishCollectionPage({ onError, onPublished }: PublishC
                         value={payloadText}
                         onChange={(event) => setPayloadText(event.target.value)}
                         rows={18}
-                        placeholder='{"collection":{"name":"My Collection","questions":[...]}}'
+                        placeholder='{"collection":{"name":"My collection","questions":[...]}}'
                         required
                     />
                 </div>
@@ -75,7 +73,7 @@ export default function PublishCollectionPage({ onError, onPublished }: PublishC
                 <button
                     type="submit"
                     className="submit-with-spinner publish-submit-button"
-                    data-label="Publish Collection"
+                    data-label="Publish collection"
                     title="Publish collection"
                     disabled={submitting}
                 >
@@ -97,7 +95,7 @@ export default function PublishCollectionPage({ onError, onPublished }: PublishC
                                     />
                                 </svg>
                             </span>
-                            <span>Publish Collection</span>
+                            <span>Publish collection</span>
                         </span>
                     )}
                 </button>

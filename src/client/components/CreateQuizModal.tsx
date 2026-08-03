@@ -37,7 +37,7 @@ export default function CreateQuizModal({
                 onClick={(event) => event.stopPropagation()}
             >
                 <div className="app-modal-header">
-                    <h2 id="create-test-modal-title">Create New Quiz</h2>
+                    <h2 id="create-test-modal-title">Create new quiz</h2>
                     <button
                         type="button"
                         className="text-action-button"
@@ -87,17 +87,17 @@ export default function CreateQuizModal({
                             value={mode}
                             onChange={(event) => onModeChange(event.target.value as QuizMode)}
                         >
-                            <option value="never_seen">Never Seen</option>
+                            <option value="never_seen">Never seen</option>
                             <option value="random">Random</option>
-                            <option value="last_attempt_failed">Last Attempt Failed</option>
-                            <option value="ever_failed">Ever Failed</option>
+                            <option value="last_attempt_failed">Last attempt failed</option>
+                            <option value="ever_failed">Ever failed</option>
                         </select>
                     </div>
 
                     <button
                         type="submit"
                         className="submit-with-spinner"
-                        data-label="Create Quiz"
+                        data-label="Create quiz"
                         title="Create quiz"
                         disabled={creatingTest}
                     >
@@ -123,7 +123,7 @@ export default function CreateQuizModal({
                                         />
                                     </svg>
                                 </span>
-                                <span>Create Quiz</span>
+                                <span>Create quiz</span>
                             </span>
                         )}
                     </button>

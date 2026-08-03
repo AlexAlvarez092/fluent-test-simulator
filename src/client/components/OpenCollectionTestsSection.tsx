@@ -17,7 +17,7 @@ export default function OpenCollectionTestsSection({ loading, tests, onOpenTest 
     return (
         <>
             <div className="section-title-row section-title-row-secondary">
-                <SectionHeadingWithLoading title="Previous Quizzes" loading={loading} />
+                <SectionHeadingWithLoading title="Previous quizzes" loading={loading} />
             </div>
 
             {loading ? (

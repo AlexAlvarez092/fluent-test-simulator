@@ -11,7 +11,7 @@ export default function ErrorPage() {
                     />
                 </svg>
             </span>
-            <p>Ha habido un error o no tienes permisos para acceder esta pagina</p>
+            <p>There was an error or you do not have permission to access this page.</p>
         </div>
     );
 }

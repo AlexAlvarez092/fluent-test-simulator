@@ -52,18 +52,18 @@ export default function CollectionQuestionsPage({
     if (!collection) {
         return (
             <div>
-                <h1>Collection Questions</h1>
+                <h1>Collection questions</h1>
                 <p>No collection selected.</p>
             </div>
         );
     }
 
     const filterTitleMap: Record<QuestionFilter, string> = {
-        all: 'All Questions',
-        never_seen: 'Never Seen Questions',
-        correct: 'Correct Questions',
-        ever_failed: 'Ever Failed Questions',
-        last_attempt_failed: 'Last Attempt Failed Questions',
+        all: 'All questions',
+        never_seen: 'Never seen questions',
+        correct: 'Correct questions',
+        ever_failed: 'Ever failed questions',
+        last_attempt_failed: 'Last attempt failed questions',
     };
 
     const allQuestions = overview?.questions || [];
