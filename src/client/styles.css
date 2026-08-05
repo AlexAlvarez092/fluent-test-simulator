@@ -570,6 +570,59 @@ label.answer-option input {
     font-weight: 560;
 }
 
+.quiz-questions-list {
+    display: grid;
+    gap: 14px;
+}
+
+.quiz-question-item {
+    will-change: transform, opacity, filter;
+}
+
+@supports (animation-timeline: view()) {
+    .quiz-question-item {
+        animation: quiz-item-reveal linear both;
+        animation-timeline: view();
+        animation-range-start: entry 20%;
+        animation-range-end: exit 80%;
+    }
+}
+
+@keyframes quiz-item-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.94);
+        filter: blur(10px);
+    }
+
+    24% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+    76% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-64px) scale(0.96);
+        filter: blur(10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quiz-question-item {
+        animation: none;
+        transform: none;
+        filter: none;
+        opacity: 1;
+    }
+}
+
 form {
     display: grid;
     gap: 10px;

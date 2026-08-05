@@ -167,7 +167,7 @@ export default function QuizRunPage({ quizId, onQuizSubmitted, onBackToCollectio
             ) : !quizDetail ? (
                 <div>Quiz not found.</div>
             ) : (
-                <div>
+                <div className="quiz-questions-list">
                     {quizDetail.questions.map((question, index) => {
                         const selected = selection[question.question_id] || [];
                         const isMultiple = question.type === 'multiple';
@@ -175,7 +175,7 @@ export default function QuizRunPage({ quizId, onQuizSubmitted, onBackToCollectio
                         const isCompleted = quizDetail.quiz.status === 'completed';
 
                         return (
-                            <div key={question.quiz_question_id}>
+                            <div key={question.quiz_question_id} className="quiz-question-item">
                                 <h3 className="question-title-with-info">
                                     <span>
                                         {index + 1}. {question.question}
