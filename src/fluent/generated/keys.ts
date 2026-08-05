@@ -126,145 +126,145 @@ declare global {
                         table: 'sys_security_acl';
                         id: '7adb29b9beed4267935f7a8bee21cb75';
                     };
-                    'src_server_rest-api_test-simulator-api_ts': {
+                    quiz_create: {
+                        table: 'sys_security_acl';
+                        id: 'ffa20f69f6ee4142a534afd4e12469fe';
+                    };
+                    quiz_delete: {
+                        table: 'sys_security_acl';
+                        id: '5dec2295cf0e4cf79127653140e346c1';
+                    };
+                    quiz_question_create: {
+                        table: 'sys_security_acl';
+                        id: 'aea18198398b42ef8584e15e86d47731';
+                    };
+                    quiz_question_delete: {
+                        table: 'sys_security_acl';
+                        id: 'd8ea190e02df4616a336e08d17560350';
+                    };
+                    quiz_question_read: {
+                        table: 'sys_security_acl';
+                        id: 'ebaf0fdd05a440abb90c56baf32d4375';
+                    };
+                    quiz_question_write: {
+                        table: 'sys_security_acl';
+                        id: '8778c4f8d93b4979b6a35f2f23b62705';
+                    };
+                    quiz_read: {
+                        table: 'sys_security_acl';
+                        id: '5019c6f612894345813d219222eab42f';
+                    };
+                    quiz_simulator_api: {
+                        table: 'sys_ws_definition';
+                        id: '046c0f8f5beb4d088855493801f2c521';
+                    };
+                    quiz_simulator_api_authenticated_execute: {
+                        table: 'sys_security_acl';
+                        id: 'c937814a6bbe4f3f929dc902648b97e5';
+                    };
+                    quiz_simulator_api_collections_list: {
+                        table: 'sys_ws_operation';
+                        id: 'a471e9dc5c9a4b33898bd9d636127e4d';
+                    };
+                    quiz_simulator_api_collections_list_saved_only_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '58e057b51ccf421fbd40a97b88770f95';
+                    };
+                    quiz_simulator_api_collections_open_overview: {
+                        table: 'sys_ws_operation';
+                        id: 'f13958821b45479d8772303d6cb13b94';
+                    };
+                    quiz_simulator_api_collections_open_overview_collection_id_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '42d10dd53cbf45959f4454bc359cfe38';
+                    };
+                    quiz_simulator_api_collections_publish: {
+                        table: 'sys_ws_operation';
+                        id: 'e974d685bccf428598a4ac8a36d88ea9';
+                    };
+                    quiz_simulator_api_collections_remove: {
+                        table: 'sys_ws_operation';
+                        id: '9e487cef169d4d7e91444e24c56a5c78';
+                    };
+                    quiz_simulator_api_collections_save: {
+                        table: 'sys_ws_operation';
+                        id: '0f9d2127a4e94510bba50cd68b1e2fcd';
+                    };
+                    quiz_simulator_api_execute: {
+                        table: 'sys_security_acl';
+                        id: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
+                    };
+                    quiz_simulator_api_me_roles: {
+                        table: 'sys_ws_operation';
+                        id: 'e5307468fcda41fe8fed49c1fdcc4e49';
+                    };
+                    quiz_simulator_api_quizzes_create: {
+                        table: 'sys_ws_operation';
+                        id: '83889bc32c16494db75af241132037fd';
+                    };
+                    quiz_simulator_api_quizzes_detail: {
+                        table: 'sys_ws_operation';
+                        id: 'b68a05fcbf4249e5b9d349b4377584cb';
+                    };
+                    quiz_simulator_api_quizzes_detail_quiz_id_param: {
+                        table: 'sys_ws_query_parameter';
+                        id: '2d6596b111c1402e9092c0454e81f839';
+                    };
+                    quiz_simulator_api_quizzes_save_progress: {
+                        table: 'sys_ws_operation';
+                        id: '3c3b7365f27543babf3af41621429fe4';
+                    };
+                    quiz_simulator_api_quizzes_submit: {
+                        table: 'sys_ws_operation';
+                        id: 'dfe2ccb882bc4d15a212312086dc9563';
+                    };
+                    quiz_simulator_menu: {
+                        table: 'sys_app_application';
+                        id: 'c8c7ec1cb79a4cb89974fdc95eade74c';
+                    };
+                    quiz_simulator_menu_module_answers: {
+                        table: 'sys_app_module';
+                        id: '8a337fe9807a488c9729ae8dc7579468';
+                    };
+                    quiz_simulator_menu_module_collections: {
+                        table: 'sys_app_module';
+                        id: '8756b1a69f0743c8b7372168695e66dd';
+                    };
+                    quiz_simulator_menu_module_home: {
+                        table: 'sys_app_module';
+                        id: 'dd76f4b8533b4b08b6358dc07dced9b7';
+                    };
+                    quiz_simulator_menu_module_questions: {
+                        table: 'sys_app_module';
+                        id: '6270f4a55c4c49598daa7d82b3daa364';
+                    };
+                    quiz_simulator_menu_module_quiz_questions: {
+                        table: 'sys_app_module';
+                        id: 'd4efc65ebe684ad6a0f9eb2c34671960';
+                    };
+                    quiz_simulator_menu_module_quizzes: {
+                        table: 'sys_app_module';
+                        id: '3ef7ea0bb5af4af7965ab6d2d4a8ff22';
+                    };
+                    quiz_simulator_menu_module_user_collections: {
+                        table: 'sys_app_module';
+                        id: 'afc62ed90cd14791a55eff95f83f92c4';
+                    };
+                    quiz_simulator_self_service_module_home: {
+                        table: 'sys_app_module';
+                        id: '4ec5f388df244ea084090426fab6015e';
+                    };
+                    quiz_write: {
+                        table: 'sys_security_acl';
+                        id: '2784e8387e30439ca30bdabddf145e2d';
+                    };
+                    'src_server_rest-api_quiz-simulator-api_ts': {
                         table: 'sys_module';
                         id: '75acb671e2b94ebfa7e3aa69cdc73129';
                     };
                     'styles.css': {
                         table: 'sys_ux_theme_asset';
                         id: 'eb8dc0d301ef4bdbac725693dfb592b2';
-                    };
-                    test_create: {
-                        table: 'sys_security_acl';
-                        id: 'ffa20f69f6ee4142a534afd4e12469fe';
-                    };
-                    test_delete: {
-                        table: 'sys_security_acl';
-                        id: '5dec2295cf0e4cf79127653140e346c1';
-                    };
-                    test_question_create: {
-                        table: 'sys_security_acl';
-                        id: 'aea18198398b42ef8584e15e86d47731';
-                    };
-                    test_question_delete: {
-                        table: 'sys_security_acl';
-                        id: 'd8ea190e02df4616a336e08d17560350';
-                    };
-                    test_question_read: {
-                        table: 'sys_security_acl';
-                        id: 'ebaf0fdd05a440abb90c56baf32d4375';
-                    };
-                    test_question_write: {
-                        table: 'sys_security_acl';
-                        id: '8778c4f8d93b4979b6a35f2f23b62705';
-                    };
-                    test_read: {
-                        table: 'sys_security_acl';
-                        id: '5019c6f612894345813d219222eab42f';
-                    };
-                    test_simulator_api: {
-                        table: 'sys_ws_definition';
-                        id: '046c0f8f5beb4d088855493801f2c521';
-                    };
-                    test_simulator_api_authenticated_execute: {
-                        table: 'sys_security_acl';
-                        id: 'c937814a6bbe4f3f929dc902648b97e5';
-                    };
-                    test_simulator_api_collections_list: {
-                        table: 'sys_ws_operation';
-                        id: 'a471e9dc5c9a4b33898bd9d636127e4d';
-                    };
-                    test_simulator_api_collections_list_saved_only_param: {
-                        table: 'sys_ws_query_parameter';
-                        id: '58e057b51ccf421fbd40a97b88770f95';
-                    };
-                    test_simulator_api_collections_open_overview: {
-                        table: 'sys_ws_operation';
-                        id: 'f13958821b45479d8772303d6cb13b94';
-                    };
-                    test_simulator_api_collections_open_overview_collection_id_param: {
-                        table: 'sys_ws_query_parameter';
-                        id: '42d10dd53cbf45959f4454bc359cfe38';
-                    };
-                    test_simulator_api_collections_publish: {
-                        table: 'sys_ws_operation';
-                        id: 'e974d685bccf428598a4ac8a36d88ea9';
-                    };
-                    test_simulator_api_collections_remove: {
-                        table: 'sys_ws_operation';
-                        id: '9e487cef169d4d7e91444e24c56a5c78';
-                    };
-                    test_simulator_api_collections_save: {
-                        table: 'sys_ws_operation';
-                        id: '0f9d2127a4e94510bba50cd68b1e2fcd';
-                    };
-                    test_simulator_api_execute: {
-                        table: 'sys_security_acl';
-                        id: 'c23b08a3a48f4b58a6b56c9bfa644f1e';
-                    };
-                    test_simulator_api_me_roles: {
-                        table: 'sys_ws_operation';
-                        id: 'e5307468fcda41fe8fed49c1fdcc4e49';
-                    };
-                    test_simulator_api_tests_create: {
-                        table: 'sys_ws_operation';
-                        id: '83889bc32c16494db75af241132037fd';
-                    };
-                    test_simulator_api_tests_detail: {
-                        table: 'sys_ws_operation';
-                        id: 'b68a05fcbf4249e5b9d349b4377584cb';
-                    };
-                    test_simulator_api_tests_detail_test_id_param: {
-                        table: 'sys_ws_query_parameter';
-                        id: '2d6596b111c1402e9092c0454e81f839';
-                    };
-                    test_simulator_api_tests_save_progress: {
-                        table: 'sys_ws_operation';
-                        id: '3c3b7365f27543babf3af41621429fe4';
-                    };
-                    test_simulator_api_tests_submit: {
-                        table: 'sys_ws_operation';
-                        id: 'dfe2ccb882bc4d15a212312086dc9563';
-                    };
-                    test_simulator_menu: {
-                        table: 'sys_app_application';
-                        id: 'c8c7ec1cb79a4cb89974fdc95eade74c';
-                    };
-                    test_simulator_menu_module_answers: {
-                        table: 'sys_app_module';
-                        id: '8a337fe9807a488c9729ae8dc7579468';
-                    };
-                    test_simulator_menu_module_collections: {
-                        table: 'sys_app_module';
-                        id: '8756b1a69f0743c8b7372168695e66dd';
-                    };
-                    test_simulator_menu_module_home: {
-                        table: 'sys_app_module';
-                        id: 'dd76f4b8533b4b08b6358dc07dced9b7';
-                    };
-                    test_simulator_menu_module_questions: {
-                        table: 'sys_app_module';
-                        id: '6270f4a55c4c49598daa7d82b3daa364';
-                    };
-                    test_simulator_menu_module_test_questions: {
-                        table: 'sys_app_module';
-                        id: 'd4efc65ebe684ad6a0f9eb2c34671960';
-                    };
-                    test_simulator_menu_module_tests: {
-                        table: 'sys_app_module';
-                        id: '3ef7ea0bb5af4af7965ab6d2d4a8ff22';
-                    };
-                    test_simulator_menu_module_user_collections: {
-                        table: 'sys_app_module';
-                        id: 'afc62ed90cd14791a55eff95f83f92c4';
-                    };
-                    test_simulator_self_service_module_home: {
-                        table: 'sys_app_module';
-                        id: '4ec5f388df244ea084090426fab6015e';
-                    };
-                    test_write: {
-                        table: 'sys_security_acl';
-                        id: '2784e8387e30439ca30bdabddf145e2d';
                     };
                     user_collection_create: {
                         table: 'sys_security_acl';
@@ -292,7 +292,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -302,14 +302,14 @@ declare global {
                         id: '030656d1319f49f982c072ea3d283ac5';
                         deleted: false;
                         key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--966e429a.js.map';
+                            name: 'x_2119443_quiz_sim/vendor-react-dom--966e429a.js.map';
                         };
                     },
                     {
                         table: 'sys_dictionary';
                         id: '034fc965ce4741acbcbc4456320901f4';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                         };
                     },
@@ -322,7 +322,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -331,7 +331,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '04dd1f20f15841b19f38c0ffc170e305';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -349,7 +349,7 @@ declare global {
                             sys_ui_form: {
                                 id: '5e005bc2b0bb4b0796a12f0993ff7382';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -362,7 +362,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -383,7 +383,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -406,7 +406,7 @@ declare global {
                             list_id: {
                                 id: '085774ac734e03106fb2f7303ab8b7bc';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection_inport';
+                                    name: 'x_2119443_quiz_sim_collection_inport';
                                     view: 'Default view';
                                     sys_domain: 'global';
                                     element: 'NULL';
@@ -421,7 +421,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '08ccff0aaa8147aab04bb43a81470d2f';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'never_seen_questions';
                         };
                     },
@@ -429,7 +429,7 @@ declare global {
                         table: 'sys_choice';
                         id: '0b831b0a90a34bf1a522c0ad72383bb0';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'type';
                             value: 'single';
                         };
@@ -442,13 +442,13 @@ declare global {
                             sys_ui_section: {
                                 id: 'bab6ec0e4cca43e4ba9d97f85b098f76';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Related answers';
                                     view: 'Default view';
                                     sys_domain: 'global';
                                 };
                             };
-                            element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_answer.question';
+                            element: '12M.x_2119443_quiz_sim_question.x_2119443_quiz_sim_answer.question';
                             position: '0';
                         };
                     },
@@ -460,7 +460,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -487,7 +487,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             caption: 'Question Progress Lists';
                             view: {
                                 id: 'Default view';
@@ -502,7 +502,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '0c3ef26c9c464a7fb2051b2766e488a4';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -516,7 +516,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '0e3edd459c6045e9805ab60f7a39ff58';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'is_correct';
                         };
                     },
@@ -524,7 +524,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '0f318f9b7cd44c4a94d1c861aac68cb7';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -536,7 +536,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -555,7 +555,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '1176f68f277c410fb2eb3ebecf74ce05';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'user';
                         };
                     },
@@ -567,7 +567,7 @@ declare global {
                             sys_ui_section: {
                                 id: '958369ba7375c3106fb2f7303ab8b713';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection_inport';
+                                    name: 'x_2119443_quiz_sim_collection_inport';
                                     caption: 'NULL';
                                     view: 'Default view';
                                     sys_domain: 'global';
@@ -585,7 +585,7 @@ declare global {
                             sys_ui_section: {
                                 id: '958369ba7375c3106fb2f7303ab8b713';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection_inport';
+                                    name: 'x_2119443_quiz_sim_collection_inport';
                                     caption: 'NULL';
                                     view: 'Default view';
                                     sys_domain: 'global';
@@ -603,7 +603,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -625,7 +625,7 @@ declare global {
                             sys_ui_section: {
                                 id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Question Progress Lists';
                                     view: {
                                         id: 'Default view';
@@ -644,7 +644,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '15cd21beb12f48969f4d1acc57c2aa98';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'selected_answers';
                             language: 'en';
                         };
@@ -653,7 +653,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '16c20c7763254de8bbbf0e1a0ee071cf';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'result';
                         };
                     },
@@ -661,8 +661,8 @@ declare global {
                         table: 'sys_documentation';
                         id: '18d5eb4196084035b57d4c2f331183ef';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
-                            element: 'test';
+                            name: 'x_2119443_quiz_sim_quiz_question';
+                            element: 'quiz';
                             language: 'en';
                         };
                     },
@@ -670,14 +670,14 @@ declare global {
                         table: 'sys_db_object';
                         id: '1a2f724e2cab4ba4bf42476d6ac4760f';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                         };
                     },
                     {
                         table: 'sys_documentation';
                         id: '1cb87801cad448c198fae33961e39176';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -686,14 +686,14 @@ declare global {
                         table: 'sys_db_object';
                         id: '1da1dfa1b2cb47348489c9d3066af49f';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                         };
                     },
                     {
                         table: 'sys_dictionary';
                         id: '1e2cfee4b3444886961d7af4a4c10a3c';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'docs';
                         };
                     },
@@ -701,7 +701,7 @@ declare global {
                         table: 'sys_ui_list';
                         id: '1f96123aa6d44057be6fb6300b118bc6';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -718,7 +718,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '2307bb589ecd476b84623ef9990cd700';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                             language: 'en';
                         };
@@ -727,7 +727,7 @@ declare global {
                         table: 'sys_ui_list';
                         id: '230aa5a8607c4705bcac7db345efb079';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -749,7 +749,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -761,7 +761,7 @@ declare global {
                             sys_ui_section: {
                                 id: '83352c54d8144f969fd048934285da7d';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'Questions';
                                     view: {
                                         id: 'Default view';
@@ -772,7 +772,7 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
-                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.collection';
+                            element: '12M.x_2119443_quiz_sim_collection.x_2119443_quiz_sim_question.collection';
                             position: '0';
                         };
                     },
@@ -784,7 +784,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -803,7 +803,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '27656469ed674ff288b379bba45ffdcb';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             caption: 'Answers';
                             view: {
                                 id: 'Default view';
@@ -826,7 +826,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '2a3706f0ef804d719772ae325c93710f';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'question';
                             language: 'en';
                         };
@@ -836,14 +836,14 @@ declare global {
                         id: '2aef99727375c3106fb2f7303ab8b76c';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                         };
                     },
                     {
                         table: 'sys_documentation';
                         id: '2bd4ef2d7d9f4140878ff05adb2e92cb';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'user';
                             language: 'en';
                         };
@@ -855,7 +855,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -874,7 +874,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '2d184a58bedc4308ac085e93ccf995ee';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -888,7 +888,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '2d8d2a07af244e3eba34a6aec28bf108';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'correct_questions';
                         };
                     },
@@ -900,7 +900,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6da04fee733183106fb2f7303ab8b718';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'NULL';
                                     view: 'Default view';
                                     sys_domain: 'global';
@@ -914,7 +914,7 @@ declare global {
                         table: 'sys_index';
                         id: '2f1c142b673a47a8b87a34c369037fcb';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_question';
+                            logical_table_name: 'x_2119443_quiz_sim_question';
                             col_name_string: 'collection';
                         };
                     },
@@ -927,7 +927,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -937,7 +937,7 @@ declare global {
                         id: '30a58f4134e94b009731b85f566b69a6';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -946,7 +946,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '326590b4fcf8474187ff83576e6e5184';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'rationale';
                             language: 'en';
                         };
@@ -958,7 +958,7 @@ declare global {
                             list_id: {
                                 id: 'a1930da59f38462389befa8531167b81';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -978,7 +978,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '347b4137af0644eb84a89c6c74978787';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -991,7 +991,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -1000,7 +1000,7 @@ declare global {
                         table: 'sys_choice';
                         id: '367eaa854f0d48bda54314e2a78c6ed1';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'status';
                             value: 'in_progress';
                         };
@@ -1009,7 +1009,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '370484edf14f4a29bc639479575b6353';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -1024,7 +1024,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '3899356669de4f80af980090be9c0d51';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'collection';
                         };
                     },
@@ -1035,7 +1035,7 @@ declare global {
                             list_id: {
                                 id: '230aa5a8607c4705bcac7db345efb079';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1059,7 +1059,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -1071,7 +1071,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1093,7 +1093,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1112,7 +1112,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '3ddcc3d595624c3a98dd781f4a52ea39';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -1126,7 +1126,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '3ede440b333446efadad80f8c044c542';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'last_attempt_failed_questions';
                             language: 'en';
                         };
@@ -1136,7 +1136,7 @@ declare global {
                         id: '3ef8724b73fd47106fb2f7303ab8b7b2';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                         };
                     },
                     {
@@ -1146,7 +1146,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1168,7 +1168,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1190,7 +1190,7 @@ declare global {
                             list_id: {
                                 id: '230aa5a8607c4705bcac7db345efb079';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1211,14 +1211,14 @@ declare global {
                         id: '423ad4aad7114375bed65afe3b8c8a19';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim.admin';
+                            name: 'x_2119443_quiz_sim.admin';
                         };
                     },
                     {
                         table: 'sys_choice';
                         id: '42bf41fd321a408e9bc0ab7b86caae32';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'type';
                             value: 'multiple';
                         };
@@ -1227,7 +1227,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '44d1b6fa8d564e23844fce3474ecfcea';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'rationale';
                         };
                     },
@@ -1235,7 +1235,7 @@ declare global {
                         table: 'sys_choice_set';
                         id: '46e2d57bd40247959f8be29ffedbe6a2';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'status';
                         };
                     },
@@ -1254,7 +1254,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1276,7 +1276,7 @@ declare global {
                             list_id: {
                                 id: '96c2c4375de44b508ae38e55d631dbfd';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1296,7 +1296,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '4b6150825ae94c989975bf1fec615d74';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'collection';
                         };
                     },
@@ -1304,7 +1304,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '4bba6a35aee34715bc6cab284f8c866c';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'question';
                             language: 'en';
                         };
@@ -1318,7 +1318,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -1327,7 +1327,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '4c3ba64be9db490e915123234193960c';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -1342,7 +1342,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '4c86d9dc66ae4abcacbf2963196c1104';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -1356,7 +1356,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -1365,7 +1365,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '500ef58290dd4155823f32c3dbef4233';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'NULL';
                         };
                     },
@@ -1373,7 +1373,7 @@ declare global {
                         table: 'sys_ui_list';
                         id: '5195b69b080a48d7907e60b5df2a51a8';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -1390,7 +1390,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '5313f0d3843e42b79cd7ed98f70eba50';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'type';
                             language: 'en';
                         };
@@ -1403,7 +1403,7 @@ declare global {
                             sys_ui_section: {
                                 id: '958369ba7375c3106fb2f7303ab8b713';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection_inport';
+                                    name: 'x_2119443_quiz_sim_collection_inport';
                                     caption: 'NULL';
                                     view: 'Default view';
                                     sys_domain: 'global';
@@ -1421,7 +1421,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -1431,7 +1431,7 @@ declare global {
                         id: '578b1de49b014cd0ae60ca1609900758';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             caption: 'Related questions';
                             view: {
                                 id: 'Default view';
@@ -1449,7 +1449,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1468,7 +1468,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '5886531d88334a5ea4b369460a8e9799';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'user_collection';
                         };
                     },
@@ -1479,7 +1479,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1498,7 +1498,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '59303da14668477aaee9f0f3654658d5';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -1512,7 +1512,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -1527,7 +1527,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '5cfe23b8c8d843d791e6d5821599c28c';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             element: 'name';
                         };
                     },
@@ -1539,7 +1539,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -1548,7 +1548,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '5d7c9d20e52545ffb37d3e87220f438f';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'question';
                             language: 'en';
                         };
@@ -1557,7 +1557,7 @@ declare global {
                         table: 'sys_choice';
                         id: '5de308e82f7f4ff5a00f95c7c8b22e0a';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'status';
                             value: 'completed';
                         };
@@ -1566,7 +1566,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '5e005bc2b0bb4b0796a12f0993ff7382';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -1580,7 +1580,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '5e25e05b1bd94f1ba2df9621bc3e5e69';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'NULL';
                         };
                     },
@@ -1588,7 +1588,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '5ec83286fc6c437aa7dda1b678dfe6b9';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'correct_questions';
                             language: 'en';
                         };
@@ -1600,7 +1600,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1622,7 +1622,7 @@ declare global {
                             list_id: {
                                 id: '230aa5a8607c4705bcac7db345efb079';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1642,7 +1642,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '603afb89b1f842488461fbd1c1e9e460';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'user_collection';
                             language: 'en';
                         };
@@ -1651,7 +1651,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '61198a1a41224273ad4b6306133617f9';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'NULL';
                         };
                     },
@@ -1670,7 +1670,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1692,7 +1692,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1714,7 +1714,7 @@ declare global {
                             sys_ui_form: {
                                 id: '59303da14668477aaee9f0f3654658d5';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1727,7 +1727,7 @@ declare global {
                             sys_ui_section: {
                                 id: '83352c54d8144f969fd048934285da7d';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'Questions';
                                     view: {
                                         id: 'Default view';
@@ -1747,7 +1747,7 @@ declare global {
                             list_id: {
                                 id: '1f96123aa6d44057be6fb6300b118bc6';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1770,7 +1770,7 @@ declare global {
                             sys_ui_section: {
                                 id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Question Progress Lists';
                                     view: {
                                         id: 'Default view';
@@ -1792,7 +1792,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1816,7 +1816,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -1830,7 +1830,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -1839,7 +1839,7 @@ declare global {
                         table: 'sys_index';
                         id: '6ae146b4dfd24dac991125ba61857c2b';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_test';
+                            logical_table_name: 'x_2119443_quiz_sim_quiz';
                             col_name_string: 'collection';
                         };
                     },
@@ -1850,7 +1850,7 @@ declare global {
                             list_id: {
                                 id: '5195b69b080a48d7907e60b5df2a51a8';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -1870,7 +1870,7 @@ declare global {
                         table: 'sys_ui_form';
                         id: '6d95d92a4ff9412d9a43b96864169b1b';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -1885,7 +1885,7 @@ declare global {
                         id: '6da04fee733183106fb2f7303ab8b718';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             caption: 'NULL';
                             view: {
                                 id: 'Default view';
@@ -1900,7 +1900,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '6dc5e6921e2d4deba6a84f1687e82dc1';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'question';
                         };
                     },
@@ -1908,7 +1908,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '6e996fd6ac14467b998d99a59add1f79';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -1926,7 +1926,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -1948,7 +1948,7 @@ declare global {
                             sys_ui_section: {
                                 id: '27656469ed674ff288b379bba45ffdcb';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Answers';
                                     view: {
                                         id: 'Default view';
@@ -1959,7 +1959,7 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
-                            element: '12M.x_2119443_test_sim_question.x_2119443_test_sim_answer.question';
+                            element: '12M.x_2119443_quiz_sim_question.x_2119443_quiz_sim_answer.question';
                             position: '0';
                         };
                     },
@@ -1970,7 +1970,7 @@ declare global {
                             sys_ui_section: {
                                 id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Question Progress Lists';
                                     view: {
                                         id: 'Default view';
@@ -2000,7 +2000,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2019,7 +2019,7 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: '774bf874cbbe4751bda2e8a78b4dc770';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                         };
                     },
                     {
@@ -2029,7 +2029,7 @@ declare global {
                             sys_ui_form: {
                                 id: '6d95d92a4ff9412d9a43b96864169b1b';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2042,7 +2042,7 @@ declare global {
                             sys_ui_section: {
                                 id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Question Progress Lists';
                                     view: {
                                         id: 'Default view';
@@ -2059,7 +2059,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '78bfcd2747434fe8b2153029be5f150e';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'last_attempt_failed_questions';
                         };
                     },
@@ -2070,7 +2070,7 @@ declare global {
                             list_id: {
                                 id: 'a1930da59f38462389befa8531167b81';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2093,7 +2093,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2112,7 +2112,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '792a2acaf40a425eba80a5b119cea0be';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'status';
                             language: 'en';
                         };
@@ -2126,7 +2126,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -2139,7 +2139,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2148,7 +2148,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '7a15f812f41447dc926e4930b210e3f5';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'collection';
                             language: 'en';
                         };
@@ -2162,7 +2162,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -2175,7 +2175,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2187,7 +2187,7 @@ declare global {
                             sys_ui_form: {
                                 id: '3ddcc3d595624c3a98dd781f4a52ea39';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2200,7 +2200,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2217,7 +2217,7 @@ declare global {
                         table: 'sys_choice';
                         id: '7cbbb279763842c78369caafe2a37b16';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                             value: 'unanswered';
                         };
@@ -2226,7 +2226,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '80c188b1f96647eebaf1da8f2e04ad32';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'status';
                         };
                     },
@@ -2237,7 +2237,7 @@ declare global {
                             sys_ui_form: {
                                 id: '2d184a58bedc4308ac085e93ccf995ee';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2250,7 +2250,7 @@ declare global {
                             sys_ui_section: {
                                 id: 'fc81537dc534416f8f3f3ed996e75035';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Question Details';
                                     view: {
                                         id: 'Default view';
@@ -2267,7 +2267,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '80e96c185c754689a6e09e790559d22d';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'is_correct';
                             language: 'en';
                         };
@@ -2276,7 +2276,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: '81564a94cded4fc3a5821433fe307b2a';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'type';
                         };
                     },
@@ -2287,7 +2287,7 @@ declare global {
                             list_id: {
                                 id: '230aa5a8607c4705bcac7db345efb079';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2307,7 +2307,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '83352c54d8144f969fd048934285da7d';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             caption: 'Questions';
                             view: {
                                 id: 'Default view';
@@ -2322,7 +2322,7 @@ declare global {
                         table: 'sys_db_object';
                         id: '8423b6219076456eb62c2ab7e71744d8';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                         };
                     },
                     {
@@ -2333,7 +2333,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2342,7 +2342,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '858087198429474c8c34c8d65388e226';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'answer';
                             language: 'en';
                         };
@@ -2351,7 +2351,7 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: '88173451ac494ad5ac5391cee78960a6';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                         };
                     },
                     {
@@ -2361,7 +2361,7 @@ declare global {
                             sys_ui_form: {
                                 id: '0c3ef26c9c464a7fb2051b2766e488a4';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2374,7 +2374,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2395,7 +2395,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2407,7 +2407,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2426,7 +2426,7 @@ declare global {
                         table: 'sys_index';
                         id: '8ba71a6ef2ad4b74a1d8fca05843f8c4';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_test';
+                            logical_table_name: 'x_2119443_quiz_sim_quiz';
                             col_name_string: 'user_collection';
                         };
                     },
@@ -2434,7 +2434,7 @@ declare global {
                         table: 'sys_index';
                         id: '8bcadc60606945d2a333bb5576e5f54c';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_test';
+                            logical_table_name: 'x_2119443_quiz_sim_quiz';
                             col_name_string: 'user';
                         };
                     },
@@ -2447,7 +2447,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -2460,7 +2460,7 @@ declare global {
                             list_id: {
                                 id: '085774ac734e03106fb2f7303ab8b7bc';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection_inport';
+                                    name: 'x_2119443_quiz_sim_collection_inport';
                                     view: 'Default view';
                                     sys_domain: 'global';
                                     element: 'NULL';
@@ -2478,7 +2478,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2501,7 +2501,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2513,7 +2513,7 @@ declare global {
                             list_id: {
                                 id: '5195b69b080a48d7907e60b5df2a51a8';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2536,7 +2536,7 @@ declare global {
                             list_id: {
                                 id: '96c2c4375de44b508ae38e55d631dbfd';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2549,7 +2549,7 @@ declare global {
                                     parent: 'NULL';
                                 };
                             };
-                            element: 'test';
+                            element: 'quiz';
                         };
                     },
                     {
@@ -2559,7 +2559,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2582,13 +2582,13 @@ declare global {
                             sys_ui_section: {
                                 id: '578b1de49b014cd0ae60ca1609900758';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'Related questions';
                                     view: 'Default view';
                                     sys_domain: 'global';
                                 };
                             };
-                            element: '12M.x_2119443_test_sim_collection.x_2119443_test_sim_question.collection';
+                            element: '12M.x_2119443_quiz_sim_collection.x_2119443_quiz_sim_question.collection';
                             position: '0';
                         };
                     },
@@ -2596,7 +2596,7 @@ declare global {
                         table: 'sys_index';
                         id: '93310bf9f6cc4d1aa888697029edbc63';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_test_question';
+                            logical_table_name: 'x_2119443_quiz_sim_quiz_question';
                             col_name_string: 'question';
                         };
                     },
@@ -2607,7 +2607,7 @@ declare global {
                             sys_ui_section: {
                                 id: 'fc81537dc534416f8f3f3ed996e75035';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Question Details';
                                     view: {
                                         id: 'Default view';
@@ -2627,7 +2627,7 @@ declare global {
                         id: '958369ba7375c3106fb2f7303ab8b713';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                             caption: 'NULL';
                             view: {
                                 id: 'Default view';
@@ -2645,7 +2645,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2664,14 +2664,14 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: '95edcac17e4b4dfcb569b28db4045925';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                         };
                     },
                     {
                         table: 'sys_ui_list';
                         id: '96c2c4375de44b508ae38e55d631dbfd';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -2692,7 +2692,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2704,7 +2704,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2727,7 +2727,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2739,7 +2739,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -2762,7 +2762,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2771,7 +2771,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '9a2c7f4a2a5d499b8bdc1900335bd169';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'collection';
                             language: 'en';
                         };
@@ -2781,7 +2781,7 @@ declare global {
                         id: '9a312d367375c3106fb2f7303ab8b783';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -2801,7 +2801,7 @@ declare global {
                             sys_ui_section: {
                                 id: '0c373d6ed4c141af86ea7ef1bfe98df2';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Question Progress Lists';
                                     view: {
                                         id: 'Default view';
@@ -2821,14 +2821,14 @@ declare global {
                         id: '9b2c5d3f95bf45c5bd0e56a0668fa021';
                         deleted: false;
                         key: {
-                            name: 'x_2119443_test_sim/vendor-react-dom--966e429a';
+                            name: 'x_2119443_quiz_sim/vendor-react-dom--966e429a';
                         };
                     },
                     {
                         table: 'sys_ui_list';
                         id: '9c134d6d2d0a486286d513bb3612ff02';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -2845,7 +2845,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: '9d7aa06d56f243e89b38819710fd7386';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             caption: 'Details';
                             view: {
                                 id: 'Default view';
@@ -2863,7 +2863,7 @@ declare global {
                             list_id: {
                                 id: '5195b69b080a48d7907e60b5df2a51a8';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2883,7 +2883,7 @@ declare global {
                         table: 'sys_documentation';
                         id: '9ddf134a256a464795854e16c9760187';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -2895,7 +2895,7 @@ declare global {
                             list_id: {
                                 id: 'a1930da59f38462389befa8531167b81';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -2920,7 +2920,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -2929,7 +2929,7 @@ declare global {
                         table: 'sys_choice_set';
                         id: '9eb4ef6526a94513a4d99d16343dbb9c';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'type';
                         };
                     },
@@ -2937,14 +2937,14 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: '9ef34c57ca294153a8a91dcbc42c3ae6';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                         };
                     },
                     {
                         table: 'sys_dictionary';
                         id: 'a05b1c636b404712aecf7e6a2220c4df';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'NULL';
                         };
                     },
@@ -2956,7 +2956,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -2965,7 +2965,7 @@ declare global {
                         table: 'sys_ui_list';
                         id: 'a1930da59f38462389befa8531167b81';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             view: {
                                 id: 'Default view';
                                 key: {
@@ -2985,7 +2985,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3007,7 +3007,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3029,7 +3029,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3040,7 +3040,7 @@ declare global {
                                     sys_domain: 'global';
                                 };
                             };
-                            element: 'test';
+                            element: 'quiz';
                             position: '1';
                         };
                     },
@@ -3048,7 +3048,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'a606bb1ec04a41ee8d953da260c7f789';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'ever_failed_questions';
                         };
                     },
@@ -3060,7 +3060,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3083,7 +3083,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3095,7 +3095,7 @@ declare global {
                             list_id: {
                                 id: '96c2c4375de44b508ae38e55d631dbfd';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3115,14 +3115,14 @@ declare global {
                         table: 'sys_ux_lib_asset';
                         id: 'a7a1e2a2f1d9441f8da83ca9d7c08d15';
                         key: {
-                            name: 'x_2119443_test_sim/main';
+                            name: 'x_2119443_quiz_sim/main';
                         };
                     },
                     {
                         table: 'sys_documentation';
                         id: 'a8d44c1c570a469baf979c51a256cff1';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'collection';
                             language: 'en';
                         };
@@ -3131,7 +3131,7 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: 'aa789c3ee8dd4ad78bdb932f79092951';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                         };
                     },
                     {
@@ -3141,7 +3141,7 @@ declare global {
                             sys_ui_form: {
                                 id: '6d95d92a4ff9412d9a43b96864169b1b';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3154,7 +3154,7 @@ declare global {
                             sys_ui_section: {
                                 id: '6e996fd6ac14467b998d99a59add1f79';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3171,7 +3171,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'ac7295372b5f4563bbb4695989c04e5d';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'user';
                             language: 'en';
                         };
@@ -3184,7 +3184,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3206,7 +3206,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3229,7 +3229,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3241,7 +3241,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3260,22 +3260,22 @@ declare global {
                         table: 'sys_db_object';
                         id: 'b333045cf9e145a4b280f8c4879aacc8';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                         };
                     },
                     {
                         table: 'sys_index';
                         id: 'b3d1ccf1460944a190d4b138f46233fc';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_test_question';
-                            col_name_string: 'test';
+                            logical_table_name: 'x_2119443_quiz_sim_quiz_question';
+                            col_name_string: 'quiz';
                         };
                     },
                     {
                         table: 'sys_db_object';
                         id: 'b4deba3ee98d469baaa34abf16b1d727';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                         };
                     },
                     {
@@ -3290,7 +3290,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'b672e10cce42469d954d06313fa06dfa';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             element: 'name';
                             language: 'en';
                         };
@@ -3303,7 +3303,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3313,7 +3313,7 @@ declare global {
                         id: 'bab6ec0e4cca43e4ba9d97f85b098f76';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             caption: 'Related answers';
                             view: {
                                 id: 'Default view';
@@ -3331,7 +3331,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3350,7 +3350,7 @@ declare global {
                         table: 'sys_choice';
                         id: 'bcb039712c2b4be6b9cb5b81826019dc';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                             value: 'correct';
                         };
@@ -3363,7 +3363,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3372,7 +3372,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'bef8647c19da49b1b73e411ce9ce6c42';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'docs';
                             language: 'en';
                         };
@@ -3381,7 +3381,7 @@ declare global {
                         table: 'sys_index';
                         id: 'c02432751c254257ba78d38e1e8ceb77';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_user_collection';
+                            logical_table_name: 'x_2119443_quiz_sim_user_collection';
                             col_name_string: 'user';
                         };
                     },
@@ -3392,7 +3392,7 @@ declare global {
                             sys_ui_section: {
                                 id: '370484edf14f4a29bc639479575b6353';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3411,7 +3411,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'c152a633a378454ba42313d5dad67767';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'never_seen_questions';
                             language: 'en';
                         };
@@ -3420,7 +3420,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'c4954f49562a41799995e7716e4e4e96';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'question';
                         };
                     },
@@ -3431,7 +3431,7 @@ declare global {
                             list_id: {
                                 id: '9c134d6d2d0a486286d513bb3612ff02';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3451,7 +3451,7 @@ declare global {
                         table: 'ua_table_licensing_config';
                         id: 'c6568919cf8f4020af12c1eea6482754';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                         };
                     },
                     {
@@ -3461,7 +3461,7 @@ declare global {
                             sys_ui_form: {
                                 id: '2d184a58bedc4308ac085e93ccf995ee';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3474,7 +3474,7 @@ declare global {
                             sys_ui_section: {
                                 id: '04dd1f20f15841b19f38c0ffc170e305';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3496,7 +3496,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -3509,7 +3509,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3518,7 +3518,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'ccba95ebfa8b45899f54ecf9ccb78475';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'NULL';
                         };
                     },
@@ -3529,7 +3529,7 @@ declare global {
                             list_id: {
                                 id: '1f96123aa6d44057be6fb6300b118bc6';
                                 key: {
-                                    name: 'x_2119443_test_sim_user_collection';
+                                    name: 'x_2119443_quiz_sim_user_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3552,7 +3552,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3574,7 +3574,7 @@ declare global {
                             list_id: {
                                 id: '230aa5a8607c4705bcac7db345efb079';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3594,7 +3594,7 @@ declare global {
                         table: 'sys_choice_set';
                         id: 'd090139641c74f5e916004a2c5ec1b57';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                         };
                     },
@@ -3602,7 +3602,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'd0a18bf0a2ef49f8aef5aee856d758b8';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'result';
                             language: 'en';
                         };
@@ -3614,7 +3614,7 @@ declare global {
                             sys_ui_section: {
                                 id: 'fc81537dc534416f8f3f3ed996e75035';
                                 key: {
-                                    name: 'x_2119443_test_sim_test_question';
+                                    name: 'x_2119443_quiz_sim_quiz_question';
                                     caption: 'Question Details';
                                     view: {
                                         id: 'Default view';
@@ -3637,7 +3637,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3646,7 +3646,7 @@ declare global {
                         table: 'sys_ux_lib_asset';
                         id: 'd39c6f1455eb42cfab635a833e37799c';
                         key: {
-                            name: 'x_2119443_test_sim/main.js.map';
+                            name: 'x_2119443_quiz_sim/main.js.map';
                         };
                     },
                     {
@@ -3664,7 +3664,7 @@ declare global {
                             sys_ui_form: {
                                 id: '59303da14668477aaee9f0f3654658d5';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3677,7 +3677,7 @@ declare global {
                             sys_ui_section: {
                                 id: '9d7aa06d56f243e89b38819710fd7386';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3694,7 +3694,7 @@ declare global {
                         table: 'sys_db_object';
                         id: 'd6823fe95d934dcca7efe568fc8fd588';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                         };
                     },
                     {
@@ -3705,7 +3705,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3714,7 +3714,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'dbc088eb20ff4234b11c099c84d9bcd6';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             element: 'NULL';
                         };
                     },
@@ -3723,7 +3723,7 @@ declare global {
                         id: 'dcdcdb4eb46f4c4eb39579c2c2bc008e';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_import';
+                            name: 'x_2119443_quiz_sim_collection_import';
                             element: 'name';
                         };
                     },
@@ -3731,7 +3731,7 @@ declare global {
                         table: 'sn_glider_source_artifact';
                         id: 'e1271c69f51442ff9879aed6a6291428';
                         key: {
-                            name: 'x_2119443_test_sim_app.do - BYOUI Files';
+                            name: 'x_2119443_quiz_sim_app.do - BYOUI Files';
                         };
                     },
                     {
@@ -3739,7 +3739,7 @@ declare global {
                         id: 'e16f658630f44cd49573630e1db7dc6f';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_import';
+                            name: 'x_2119443_quiz_sim_collection_import';
                             element: 'NULL';
                         };
                     },
@@ -3750,7 +3750,7 @@ declare global {
                             sys_ui_form: {
                                 id: '5e005bc2b0bb4b0796a12f0993ff7382';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     view: {
                                         id: 'Default view';
                                         key: {
@@ -3763,7 +3763,7 @@ declare global {
                             sys_ui_section: {
                                 id: '27656469ed674ff288b379bba45ffdcb';
                                 key: {
-                                    name: 'x_2119443_test_sim_question';
+                                    name: 'x_2119443_quiz_sim_question';
                                     caption: 'Answers';
                                     view: {
                                         id: 'Default view';
@@ -3780,7 +3780,7 @@ declare global {
                         table: 'sys_choice';
                         id: 'e3379caf80554ee283f85a420c95afd8';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'status';
                             value: 'failed';
                         };
@@ -3789,7 +3789,7 @@ declare global {
                         table: 'sys_index';
                         id: 'e3f6f75abba24b6da1ee3e90237b37aa';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_answer';
+                            logical_table_name: 'x_2119443_quiz_sim_answer';
                             col_name_string: 'question';
                         };
                     },
@@ -3797,8 +3797,8 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'e3ff86e35f2240e19f3a93d2dddc4081';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
-                            element: 'test';
+                            name: 'x_2119443_quiz_sim_quiz_question';
+                            element: 'quiz';
                         };
                     },
                     {
@@ -3808,7 +3808,7 @@ declare global {
                             sys_ui_section: {
                                 id: '9d7aa06d56f243e89b38819710fd7386';
                                 key: {
-                                    name: 'x_2119443_test_sim_collection';
+                                    name: 'x_2119443_quiz_sim_collection';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3831,7 +3831,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3841,7 +3841,7 @@ declare global {
                         id: 'ead600ec842c4879a2e805723b4a4cfb';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                             element: 'NULL';
                         };
                     },
@@ -3849,7 +3849,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'ed843f8935444de1a96d7a1513f70cde';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             element: 'selected_answers';
                         };
                     },
@@ -3865,7 +3865,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'ef3b426df1f3433e91083c07519ed912';
                         key: {
-                            name: 'x_2119443_test_sim_test';
+                            name: 'x_2119443_quiz_sim_quiz';
                             element: 'user';
                         };
                     },
@@ -3873,7 +3873,7 @@ declare global {
                         table: 'sys_index';
                         id: 'eff322b9d0b9416981ff9f4ac14d8d49';
                         key: {
-                            logical_table_name: 'x_2119443_test_sim_user_collection';
+                            logical_table_name: 'x_2119443_quiz_sim_user_collection';
                             col_name_string: 'collection';
                         };
                     },
@@ -3884,7 +3884,7 @@ declare global {
                             sys_ui_section: {
                                 id: '5ced6aeb9626449daf24df1f5cf1a5d3';
                                 key: {
-                                    name: 'x_2119443_test_sim_test';
+                                    name: 'x_2119443_quiz_sim_quiz';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -3903,7 +3903,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'f26a610877e74325b26e9f925d119367';
                         key: {
-                            name: 'x_2119443_test_sim_question';
+                            name: 'x_2119443_quiz_sim_question';
                             element: 'question';
                         };
                     },
@@ -3911,14 +3911,14 @@ declare global {
                         table: 'sys_ui_page';
                         id: 'f36527aeee9c4f97b76394ef37ba5be7';
                         key: {
-                            endpoint: 'x_2119443_test_sim_app.do';
+                            endpoint: 'x_2119443_quiz_sim_app.do';
                         };
                     },
                     {
                         table: 'sys_documentation';
                         id: 'f522ad188cb4401cb9482c82502ced85';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'ever_failed_questions';
                             language: 'en';
                         };
@@ -3928,7 +3928,7 @@ declare global {
                         id: 'f5ecdd3a7335c3106fb2f7303ab8b72f';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_import';
+                            name: 'x_2119443_quiz_sim_collection_import';
                         };
                     },
                     {
@@ -3939,7 +3939,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3948,7 +3948,7 @@ declare global {
                         table: 'sys_user_role';
                         id: 'f74ee8ed21944ff38fda41fe018e8459';
                         key: {
-                            name: 'x_2119443_test_sim.user';
+                            name: 'x_2119443_quiz_sim.user';
                         };
                     },
                     {
@@ -3959,7 +3959,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };
@@ -3968,7 +3968,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'fa2aeb63b82e4048853f885e3f8a3019';
                         key: {
-                            name: 'x_2119443_test_sim_user_collection';
+                            name: 'x_2119443_quiz_sim_user_collection';
                             element: 'collection';
                         };
                     },
@@ -3976,7 +3976,7 @@ declare global {
                         table: 'sys_dictionary';
                         id: 'fa6dc696cb0346f28d856c0361d04369';
                         key: {
-                            name: 'x_2119443_test_sim_answer';
+                            name: 'x_2119443_quiz_sim_answer';
                             element: 'answer';
                         };
                     },
@@ -3984,7 +3984,7 @@ declare global {
                         table: 'sys_documentation';
                         id: 'fac2b803a08346a7bf41c1ce3ad91e6d';
                         key: {
-                            name: 'x_2119443_test_sim_collection';
+                            name: 'x_2119443_quiz_sim_collection';
                             element: 'NULL';
                             language: 'en';
                         };
@@ -3994,7 +3994,7 @@ declare global {
                         id: 'faef99727375c3106fb2f7303ab8b779';
                         deleted: true;
                         key: {
-                            name: 'x_2119443_test_sim_collection_inport';
+                            name: 'x_2119443_quiz_sim_collection_inport';
                             element: 'name';
                         };
                     },
@@ -4005,7 +4005,7 @@ declare global {
                             sys_ui_section: {
                                 id: '4c3ba64be9db490e915123234193960c';
                                 key: {
-                                    name: 'x_2119443_test_sim_answer';
+                                    name: 'x_2119443_quiz_sim_answer';
                                     caption: 'Details';
                                     view: {
                                         id: 'Default view';
@@ -4024,7 +4024,7 @@ declare global {
                         table: 'sys_ui_section';
                         id: 'fc81537dc534416f8f3f3ed996e75035';
                         key: {
-                            name: 'x_2119443_test_sim_test_question';
+                            name: 'x_2119443_quiz_sim_quiz_question';
                             caption: 'Question Details';
                             view: {
                                 id: 'Default view';
@@ -4044,7 +4044,7 @@ declare global {
                             sys_user_role: {
                                 id: '423ad4aad7114375bed65afe3b8c8a19';
                                 key: {
-                                    name: 'x_2119443_test_sim.admin';
+                                    name: 'x_2119443_quiz_sim.admin';
                                 };
                             };
                         };
@@ -4057,7 +4057,7 @@ declare global {
                             sys_user_role: {
                                 id: 'f74ee8ed21944ff38fda41fe018e8459';
                                 key: {
-                                    name: 'x_2119443_test_sim.user';
+                                    name: 'x_2119443_quiz_sim.user';
                                 };
                             };
                         };

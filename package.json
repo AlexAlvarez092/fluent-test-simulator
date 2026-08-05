@@ -1,7 +1,7 @@
 {
-    "name": "x-2119443-test-simulator",
+    "name": "x-2119443-quiz-simulator",
     "version": "1.0.0",
-    "description": "Test Simulator Webapp",
+    "description": "Quiz Simulator Webapp",
     "license": "UNLICENSED",
     "imports": {
         "#now:*": "./@types/servicenow/fluent/*/index.js"

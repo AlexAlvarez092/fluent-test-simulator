@@ -394,12 +394,12 @@ h2 {
     padding-left: 24px;
 }
 
-.tests-content-slot {
+.quizzes-content-slot {
     min-height: 64px;
     padding-left: 24px;
 }
 
-.tests-empty-message {
+.quizzes-empty-message {
     display: flex;
     align-items: flex-start;
 }
@@ -671,7 +671,7 @@ textarea:focus-visible {
 
 .stats-table th:first-child,
 .stats-table td:first-child,
-.tests-table td:first-child {
+.quizzes-table td:first-child {
     padding-left: 0;
 }
 
@@ -841,11 +841,11 @@ textarea:focus-visible {
     outline: none;
 }
 
-.tests-table td:last-child {
+.quizzes-table td:last-child {
     text-align: right;
 }
 
-.tests-table .tests-action-button {
+.quizzes-table .quizzes-action-button {
     display: inline-block;
     opacity: 0;
     visibility: hidden;
@@ -854,8 +854,8 @@ textarea:focus-visible {
     transition: opacity 120ms ease;
 }
 
-.tests-table .tests-row:hover .tests-action-button,
-.tests-table .tests-row:focus-within .tests-action-button {
+.quizzes-table .quizzes-row:hover .quizzes-action-button,
+.quizzes-table .quizzes-row:focus-within .quizzes-action-button {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;

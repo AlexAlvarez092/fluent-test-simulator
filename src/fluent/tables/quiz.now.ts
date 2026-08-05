@@ -1,16 +1,16 @@
 import { Table, ReferenceColumn, ChoiceColumn, IntegerColumn } from '@servicenow/sdk/core';
 
-export const x_2119443_test_sim_test = Table({
-    name: 'x_2119443_test_sim_test',
-    label: 'Test',
+export const x_2119443_quiz_sim_quiz = Table({
+    name: 'x_2119443_quiz_sim_quiz',
+    label: 'Quiz',
     display: 'collection',
     schema: {
         user_collection: ReferenceColumn({
-            referenceTable: 'x_2119443_test_sim_user_collection',
+            referenceTable: 'x_2119443_quiz_sim_user_collection',
             mandatory: true,
             cascadeRule: 'delete',
         }),
-        collection: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_collection', mandatory: true }),
+        collection: ReferenceColumn({ referenceTable: 'x_2119443_quiz_sim_collection', mandatory: true }),
         user: ReferenceColumn({ referenceTable: 'sys_user', mandatory: true }),
         status: ChoiceColumn({
             mandatory: true,
@@ -50,7 +50,7 @@ export const x_2119443_test_sim_test = Table({
 import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     view: default_view,
     sections: [
         {
@@ -74,7 +74,7 @@ Form({
 });
 
 List({
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     view: default_view,
     columns: ['user_collection', 'collection', 'user', 'status', 'result'],
 });
@@ -82,33 +82,33 @@ List({
 import { Acl } from '@servicenow/sdk/core';
 
 Acl({
-    $id: Now.ID['test_create'],
+    $id: Now.ID['quiz_create'],
     type: 'record',
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     operation: 'create',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_read'],
+    $id: Now.ID['quiz_read'],
     type: 'record',
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     operation: 'read',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_write'],
+    $id: Now.ID['quiz_write'],
     type: 'record',
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     operation: 'write',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_delete'],
+    $id: Now.ID['quiz_delete'],
     type: 'record',
-    table: 'x_2119443_test_sim_test',
+    table: 'x_2119443_quiz_sim_quiz',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });

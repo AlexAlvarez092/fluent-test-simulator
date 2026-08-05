@@ -4,7 +4,7 @@ import CollectionsPage from './components/CollectionsPage';
 import Navigation from './components/Navigation';
 import PublishCollectionPage from './components/PublishCollectionPage';
 import OpenCollectionPage from './components/OpenCollectionPage';
-import TestRunPage from './components/TestRunPage';
+import QuizRunPage from './components/QuizRunPage';
 import CollectionQuestionsPage from './components/CollectionQuestionsPage';
 import ErrorPage from './components/ErrorPage';
 import LoadingSpinnerIcon from './shared/components/LoadingSpinnerIcon';
@@ -22,7 +22,7 @@ type QuestionFilter = 'all' | 'never_seen' | 'correct' | 'ever_failed' | 'last_a
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedCollection, setSelectedCollection] = useState<SelectedCollection | null>(null);
-    const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
+    const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
     const [selectedQuestionFilter, setSelectedQuestionFilter] = useState<QuestionFilter>('all');
     const [accessState, setAccessState] = useState<AccessState>('loading');
     const [hasAppError, setHasAppError] = useState(false);
@@ -64,9 +64,9 @@ export default function App() {
         setCurrentPage('open-collection');
     };
 
-    const handleOpenTest = (testId: string, _createdOn?: string) => {
-        setSelectedTestId(testId);
-        setCurrentPage('test-run');
+    const handleOpenQuiz = (quizId: string, _createdOn?: string) => {
+        setSelectedQuizId(quizId);
+        setCurrentPage('quiz-run');
     };
 
     const handleOpenCollectionQuestions = (filter: QuestionFilter) => {
@@ -124,7 +124,7 @@ export default function App() {
                 {currentPage === 'open-collection' && (
                     <OpenCollectionPage
                         collection={selectedCollection}
-                        onOpenTest={handleOpenTest}
+                        onOpenQuiz={handleOpenQuiz}
                         onOpenQuestions={handleOpenCollectionQuestions}
                         onError={handlePageError}
                     />
@@ -137,9 +137,9 @@ export default function App() {
                         onError={handlePageError}
                     />
                 )}
-                {currentPage === 'test-run' && (
-                    <TestRunPage
-                        testId={selectedTestId}
+                {currentPage === 'quiz-run' && (
+                    <QuizRunPage
+                        quizId={selectedQuizId}
                         onQuizSubmitted={handleQuizSubmitted}
                         onBackToCollection={handleBackToCollection}
                         onError={handlePageError}

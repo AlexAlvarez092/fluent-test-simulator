@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { OpenCollectionOverview, OpenCollectionService } from '../services/OpenCollectionService';
 import CreateQuizModal from './CreateQuizModal';
 import OpenCollectionStatsSection from './OpenCollectionStatsSection';
-import OpenCollectionTestsSection from './OpenCollectionTestsSection';
+import OpenCollectionQuizzesSection from './OpenCollectionQuizzesSection';
 import {
     OpenCollectionStats,
     QuestionCount,
@@ -14,14 +14,14 @@ import { reportAsyncError } from '../shared/services/errorHandling';
 
 interface OpenCollectionPageProps {
     collection: SelectedCollection | null;
-    onOpenTest: (testId: string, createdOn?: string) => void;
+    onOpenQuiz: (quizId: string, createdOn?: string) => void;
     onOpenQuestions: (filter: QuestionFilter) => void;
     onError: () => void;
 }
 
 export default function OpenCollectionPage({
     collection,
-    onOpenTest,
+    onOpenQuiz,
     onOpenQuestions,
     onError,
 }: OpenCollectionPageProps) {
@@ -29,7 +29,7 @@ export default function OpenCollectionPage({
 
     const [overview, setOverview] = useState<OpenCollectionOverview | null>(null);
     const [loading, setLoading] = useState(false);
-    const [creatingTest, setCreatingTest] = useState(false);
+    const [creatingQuiz, setCreatingQuiz] = useState(false);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [questionCount, setQuestionCount] = useState<QuestionCount>('10');
     const [mode, setMode] = useState<QuizMode>('never_seen');
@@ -54,7 +54,7 @@ export default function OpenCollectionPage({
         void loadOverview();
     }, [collection?.sys_id, openCollectionService]);
 
-    const handleCreateTest = async (event: React.FormEvent) => {
+    const handleCreateQuiz = async (event: React.FormEvent) => {
         event.preventDefault();
 
         if (!collection?.sys_id) {
@@ -63,24 +63,24 @@ export default function OpenCollectionPage({
         }
 
         try {
-            setCreatingTest(true);
+            setCreatingQuiz(true);
 
-            const created = await openCollectionService.createTest({
+            const created = await openCollectionService.createQuiz({
                 collection_id: collection.sys_id,
                 question_count: questionCount,
                 mode,
             });
 
-            const createdTestId = created.test_id;
-            if (!createdTestId) {
-                throw new Error('Invalid response contract: test_id is required');
+            const createdQuizId = created.quiz_id;
+            if (!createdQuizId) {
+                throw new Error('Invalid response contract: quiz_id is required');
             }
 
-            onOpenTest(createdTestId, created.created_on);
+            onOpenQuiz(createdQuizId, created.created_on);
         } catch (err: any) {
             reportAsyncError(err, onError);
         } finally {
-            setCreatingTest(false);
+            setCreatingQuiz(false);
         }
     };
 
@@ -106,7 +106,7 @@ export default function OpenCollectionPage({
     };
 
     const handleCloseCreateModal = () => {
-        if (creatingTest) {
+        if (creatingQuiz) {
             return;
         }
 
@@ -125,15 +125,15 @@ export default function OpenCollectionPage({
                 onOpenCreateModal={handleOpenCreateModal}
             />
 
-            <OpenCollectionTestsSection loading={loading} tests={overview?.tests || []} onOpenTest={onOpenTest} />
+            <OpenCollectionQuizzesSection loading={loading} quizzes={overview?.quizzes || []} onOpenQuiz={onOpenQuiz} />
 
             <CreateQuizModal
                 isOpen={isCreateModalOpen}
-                creatingTest={creatingTest}
+                creatingQuiz={creatingQuiz}
                 questionCount={questionCount}
                 mode={mode}
                 onClose={handleCloseCreateModal}
-                onSubmit={handleCreateTest}
+                onSubmit={handleCreateQuiz}
                 onQuestionCountChange={setQuestionCount}
                 onModeChange={setMode}
             />

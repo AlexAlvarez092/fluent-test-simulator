@@ -13,7 +13,7 @@ export class AccessService {
     private readonly currentUserRolesPath: string;
 
     constructor() {
-        this.currentUserRolesPath = '/api/x_2119443_test_sim/test_simulator_api/me/roles';
+        this.currentUserRolesPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/me/roles';
     }
 
     async getCurrentUserRoles(): Promise<CurrentUserRoles> {

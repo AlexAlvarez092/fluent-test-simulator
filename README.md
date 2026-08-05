@@ -1,4 +1,4 @@
-# Test Simulator
+# Quiz Simulator
 
 ServiceNow Fluent application for creating and running quiz sessions from question collections.
 
@@ -53,7 +53,7 @@ ServiceNow Fluent application for creating and running quiz sessions from questi
 - Publish
 - Open Collection
 - Collection Questions
-- Test Run
+- Quiz Run
 - Error page
 
 ## Scripts

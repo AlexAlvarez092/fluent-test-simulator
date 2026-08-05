@@ -1,4 +1,4 @@
-import { CreateTestInput, OpenCollectionStats, OpenCollectionTestSummary } from '../shared/models/OpenCollectionTypes';
+import { CreateQuizInput, OpenCollectionStats, OpenCollectionQuizSummary } from '../shared/models/OpenCollectionTypes';
 
 declare global {
     interface Window {
@@ -26,16 +26,16 @@ export type OpenCollectionOverview = {
             is_correct: boolean;
         }>;
     }>;
-    tests: OpenCollectionTestSummary[];
+    quizzes: OpenCollectionQuizSummary[];
 };
 
 export class OpenCollectionService {
     private readonly overviewPath: string;
-    private readonly createTestPath: string;
+    private readonly createQuizPath: string;
 
     constructor() {
-        this.overviewPath = '/api/x_2119443_test_sim/test_simulator_api/collections/open-overview';
-        this.createTestPath = '/api/x_2119443_test_sim/test_simulator_api/tests/create';
+        this.overviewPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/collections/open-overview';
+        this.createQuizPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/quizzes/create';
     }
 
     private async getErrorMessage(response: Response): Promise<string> {
@@ -116,21 +116,21 @@ export class OpenCollectionService {
                           : [],
                   }))
                 : [],
-            tests: Array.isArray(result?.tests)
-                ? result.tests.map((test: any) => ({
-                      sys_id: String(test?.sys_id || ''),
-                      status: String(test?.status || ''),
-                      result: parseInt(String(test?.result || '0'), 10),
-                      created_on: String(test?.created_on || ''),
-                      correct_count: parseInt(String(test?.correct_count || '0'), 10),
-                      total_questions: parseInt(String(test?.total_questions || '0'), 10),
+            quizzes: Array.isArray(result?.quizzes)
+                ? result.quizzes.map((quiz: any) => ({
+                      sys_id: String(quiz?.sys_id || ''),
+                      status: String(quiz?.status || ''),
+                      result: parseInt(String(quiz?.result || '0'), 10),
+                      created_on: String(quiz?.created_on || ''),
+                      correct_count: parseInt(String(quiz?.correct_count || '0'), 10),
+                      total_questions: parseInt(String(quiz?.total_questions || '0'), 10),
                   }))
                 : [],
         };
     }
 
-    async createTest(input: CreateTestInput) {
-        const response = await fetch(this.createTestPath, {
+    async createQuiz(input: CreateQuizInput) {
+        const response = await fetch(this.createQuizPath, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

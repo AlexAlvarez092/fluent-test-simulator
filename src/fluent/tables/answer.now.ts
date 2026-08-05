@@ -1,12 +1,12 @@
 import { Table, StringColumn, ReferenceColumn, BooleanColumn } from '@servicenow/sdk/core';
 
-export const x_2119443_test_sim_answer = Table({
-    name: 'x_2119443_test_sim_answer',
+export const x_2119443_quiz_sim_answer = Table({
+    name: 'x_2119443_quiz_sim_answer',
     label: 'Answer',
     display: 'answer',
     schema: {
         answer: StringColumn({ mandatory: true, maxLength: 4000 }),
-        question: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_question' }),
+        question: ReferenceColumn({ referenceTable: 'x_2119443_quiz_sim_question' }),
         is_correct: BooleanColumn({}),
     },
     index: [
@@ -21,7 +21,7 @@ export const x_2119443_test_sim_answer = Table({
 import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     view: default_view,
     sections: [
         {
@@ -42,7 +42,7 @@ Form({
 });
 
 List({
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     view: default_view,
     columns: ['answer', 'question', 'is_correct'],
 });
@@ -52,31 +52,31 @@ import { Acl } from '@servicenow/sdk/core';
 Acl({
     $id: Now.ID['answer_create'],
     type: 'record',
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     operation: 'create',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
     $id: Now.ID['answer_read'],
     type: 'record',
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     operation: 'read',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
     $id: Now.ID['answer_write'],
     type: 'record',
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     operation: 'write',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
     $id: Now.ID['answer_delete'],
     type: 'record',
-    table: 'x_2119443_test_sim_answer',
+    table: 'x_2119443_quiz_sim_answer',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });

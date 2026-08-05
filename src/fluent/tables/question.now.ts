@@ -1,12 +1,12 @@
 import { Table, StringColumn, ReferenceColumn, ChoiceColumn, UrlColumn } from '@servicenow/sdk/core'
 
-export const x_2119443_test_sim_question = Table({
-    name: 'x_2119443_test_sim_question',
+export const x_2119443_quiz_sim_question = Table({
+    name: 'x_2119443_quiz_sim_question',
     label: 'Question',
     display: 'question',
     schema: {
         question: StringColumn({ mandatory: true, maxLength: 4000 }),
-        collection: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_collection' }),
+        collection: ReferenceColumn({ referenceTable: 'x_2119443_quiz_sim_collection' }),
         type: ChoiceColumn({
             default: 'single',
             choices: {
@@ -35,7 +35,7 @@ export const x_2119443_test_sim_question = Table({
 import { List, Form, default_view } from '@servicenow/sdk/core'
 
 Form({
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     view: default_view,
     sections: [
         {
@@ -65,7 +65,7 @@ Form({
                         {
                             type: 'list',
                             listType: '12M',
-                            listRef: 'x_2119443_test_sim_answer.question',
+                            listRef: 'x_2119443_quiz_sim_answer.question',
                         },
                     ],
                 },
@@ -75,7 +75,7 @@ Form({
 })
 
 List({
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     view: default_view,
     columns: ['question', 'collection', 'type'],
 })
@@ -85,31 +85,31 @@ import { Acl } from '@servicenow/sdk/core'
 Acl({
     $id: Now.ID['question_create'],
     type: 'record',
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     operation: 'create',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 })
 
 Acl({
     $id: Now.ID['question_read'],
     type: 'record',
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     operation: 'read',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 })
 
 Acl({
     $id: Now.ID['question_write'],
     type: 'record',
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     operation: 'write',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 })
 
 Acl({
     $id: Now.ID['question_delete'],
     type: 'record',
-    table: 'x_2119443_test_sim_question',
+    table: 'x_2119443_quiz_sim_question',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 })

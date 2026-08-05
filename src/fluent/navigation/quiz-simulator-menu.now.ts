@@ -1,23 +1,23 @@
 import { ApplicationMenu, Record } from '@servicenow/sdk/core';
 
-const testSimulatorMenu = ApplicationMenu({
-    $id: Now.ID['test_simulator_menu'],
-    title: 'Test Simulator',
-    hint: 'Test Simulator navigation',
-    description: 'Navigation menu for Test Simulator application',
-    roles: ['x_2119443_test_sim.user'],
+const quizSimulatorMenu = ApplicationMenu({
+    $id: Now.ID['quiz_simulator_menu'],
+    title: 'Quiz Simulator',
+    hint: 'Quiz Simulator navigation',
+    description: 'Navigation menu for Quiz Simulator application',
+    roles: ['x_2119443_quiz_sim.user'],
     active: true,
     category: '',
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_home'],
+    $id: Now.ID['quiz_simulator_menu_module_home'],
     table: 'sys_app_module',
     data: {
-        title: 'Test Simulator',
-        application: testSimulatorMenu,
+        title: 'Quiz Simulator',
+        application: quizSimulatorMenu,
         link_type: 'DIRECT',
-        query: 'x_2119443_test_sim_app.do',
+        query: 'x_2119443_quiz_sim_app.do',
         window_name: '_blank',
         active: true,
         order: 100,
@@ -30,13 +30,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_collections'],
+    $id: Now.ID['quiz_simulator_menu_module_collections'],
     table: 'sys_app_module',
     data: {
         title: 'Collections',
-        application: testSimulatorMenu,
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_collection',
+        name: 'x_2119443_quiz_sim_collection',
         active: true,
         order: 200,
         override_menu_roles: false,
@@ -48,13 +48,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_user_collections'],
+    $id: Now.ID['quiz_simulator_menu_module_user_collections'],
     table: 'sys_app_module',
     data: {
         title: 'User Collections',
-        application: testSimulatorMenu,
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_user_collection',
+        name: 'x_2119443_quiz_sim_user_collection',
         active: true,
         order: 300,
         override_menu_roles: false,
@@ -66,13 +66,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_questions'],
+    $id: Now.ID['quiz_simulator_menu_module_questions'],
     table: 'sys_app_module',
     data: {
         title: 'Questions',
-        application: testSimulatorMenu,
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_question',
+        name: 'x_2119443_quiz_sim_question',
         active: true,
         order: 400,
         override_menu_roles: false,
@@ -84,13 +84,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_answers'],
+    $id: Now.ID['quiz_simulator_menu_module_answers'],
     table: 'sys_app_module',
     data: {
         title: 'Answers',
-        application: testSimulatorMenu,
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_answer',
+        name: 'x_2119443_quiz_sim_answer',
         active: true,
         order: 500,
         override_menu_roles: false,
@@ -102,13 +102,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_tests'],
+    $id: Now.ID['quiz_simulator_menu_module_quizzes'],
     table: 'sys_app_module',
     data: {
-        title: 'Tests',
-        application: testSimulatorMenu,
+        title: 'Quizzes',
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_test',
+        name: 'x_2119443_quiz_sim_quiz',
         active: true,
         order: 600,
         override_menu_roles: false,
@@ -120,13 +120,13 @@ Record({
 });
 
 Record({
-    $id: Now.ID['test_simulator_menu_module_test_questions'],
+    $id: Now.ID['quiz_simulator_menu_module_quiz_questions'],
     table: 'sys_app_module',
     data: {
-        title: 'Test Questions',
-        application: testSimulatorMenu,
+        title: 'Quiz Questions',
+        application: quizSimulatorMenu,
         link_type: 'LIST',
-        name: 'x_2119443_test_sim_test_question',
+        name: 'x_2119443_quiz_sim_quiz_question',
         active: true,
         order: 700,
         override_menu_roles: false,

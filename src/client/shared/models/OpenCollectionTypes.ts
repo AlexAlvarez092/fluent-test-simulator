@@ -16,7 +16,7 @@ export type OpenCollectionStats = {
     last_attempt_failed_count: number;
 };
 
-export type OpenCollectionTestSummary = {
+export type OpenCollectionQuizSummary = {
     sys_id: string;
     status: string;
     result: number;
@@ -25,7 +25,7 @@ export type OpenCollectionTestSummary = {
     total_questions: number;
 };
 
-export type CreateTestInput = {
+export type CreateQuizInput = {
     collection_id: string;
     question_count: QuestionCount;
     mode: QuizMode;

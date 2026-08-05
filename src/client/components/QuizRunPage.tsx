@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { TestDetail, TestService } from '../services/TestService';
+import { QuizDetail, QuizService } from '../services/QuizService';
 import LoadingSpinnerIcon from '../shared/components/LoadingSpinnerIcon';
 import QuestionInfoTooltip from '../shared/components/QuestionInfoTooltip';
 import QuizPageHeader from '../shared/components/QuizPageHeader';
@@ -7,17 +7,17 @@ import { reportAsyncError } from '../shared/services/errorHandling';
 
 type AnswerSelection = Record<string, string[]>;
 
-interface TestRunPageProps {
-    testId: string | null;
+interface QuizRunPageProps {
+    quizId: string | null;
     onQuizSubmitted: () => void;
     onBackToCollection: () => void;
     onError: () => void;
 }
 
-export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollection, onError }: TestRunPageProps) {
-    const testService = useMemo(() => new TestService(), []);
+export default function QuizRunPage({ quizId, onQuizSubmitted, onBackToCollection, onError }: QuizRunPageProps) {
+    const quizService = useMemo(() => new QuizService(), []);
 
-    const [testDetail, setTestDetail] = useState<TestDetail | null>(null);
+    const [quizDetail, setQuizDetail] = useState<QuizDetail | null>(null);
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -28,14 +28,14 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
     useEffect(() => {
         const load = async () => {
-            if (!testId) {
+            if (!quizId) {
                 return;
             }
 
             try {
                 setLoading(true);
-                const detail = await testService.getTestDetail(testId);
-                setTestDetail(detail);
+                const detail = await quizService.getQuizDetail(quizId);
+                setQuizDetail(detail);
                 const nextSelection: AnswerSelection = {};
                 for (let i = 0; i < detail.questions.length; i += 1) {
                     const question = detail.questions[i];
@@ -51,7 +51,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
         };
 
         void load();
-    }, [testId, testService]);
+    }, [quizId, quizService]);
 
     const setSingleAnswer = (questionId: string, answerId: string) => {
         setSelection((previous) => ({
@@ -75,7 +75,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
     };
 
     useEffect(() => {
-        if (!testDetail || testDetail.test.status === 'completed' || !hasPendingAutoSave || submitting) {
+        if (!quizDetail || quizDetail.quiz.status === 'completed' || !hasPendingAutoSave || submitting) {
             return;
         }
 
@@ -88,13 +88,13 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 try {
                     setSaving(true);
 
-                    const answers = testDetail.questions.map((question) => ({
+                    const answers = quizDetail.questions.map((question) => ({
                         question_id: question.question_id,
                         selected_answer_ids: selection[question.question_id] || [],
                     }));
 
-                    await testService.saveTestProgress({
-                        test_id: testDetail.test.sys_id,
+                    await quizService.saveQuizProgress({
+                        quiz_id: quizDetail.quiz.sys_id,
                         answers,
                     });
                     setHasPendingAutoSave(false);
@@ -113,10 +113,10 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 clearTimeout(autoSaveTimerRef.current);
             }
         };
-    }, [hasPendingAutoSave, selection, submitting, testDetail, testService]);
+    }, [hasPendingAutoSave, selection, submitting, quizDetail, quizService]);
 
     const handleSubmit = async () => {
-        if (!testDetail) {
+        if (!quizDetail) {
             return;
         }
 
@@ -128,13 +128,13 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                 clearTimeout(autoSaveTimerRef.current);
             }
 
-            const answers = testDetail.questions.map((question) => ({
+            const answers = quizDetail.questions.map((question) => ({
                 question_id: question.question_id,
                 selected_answer_ids: selection[question.question_id] || [],
             }));
 
-            await testService.submitTest({
-                test_id: testDetail.test.sys_id,
+            await quizService.submitQuiz({
+                quiz_id: quizDetail.quiz.sys_id,
                 answers,
             });
             onQuizSubmitted();
@@ -149,7 +149,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
         <QuizPageHeader title="Quiz" loading={isHeaderLoading} onBackToCollection={onBackToCollection} />
     );
 
-    if (!testId) {
+    if (!quizId) {
         return (
             <div>
                 {quizHeader}
@@ -164,18 +164,18 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
 
             {loading ? (
                 <div className="inline-loading-state" aria-live="polite" aria-label="Loading quiz" />
-            ) : !testDetail ? (
+            ) : !quizDetail ? (
                 <div>Quiz not found.</div>
             ) : (
                 <div>
-                    {testDetail.questions.map((question, index) => {
+                    {quizDetail.questions.map((question, index) => {
                         const selected = selection[question.question_id] || [];
                         const isMultiple = question.type === 'multiple';
-                        const isLocked = submitting || saving || testDetail.test.status === 'completed';
-                        const isCompleted = testDetail.test.status === 'completed';
+                        const isLocked = submitting || saving || quizDetail.quiz.status === 'completed';
+                        const isCompleted = quizDetail.quiz.status === 'completed';
 
                         return (
-                            <div key={question.test_question_id}>
+                            <div key={question.quiz_question_id}>
                                 <h3 className="question-title-with-info">
                                     <span>
                                         {index + 1}. {question.question}
@@ -221,7 +221,7 @@ export default function TestRunPage({ testId, onQuizSubmitted, onBackToCollectio
                         );
                     })}
 
-                    {testDetail.test.status !== 'completed' && (
+                    {quizDetail.quiz.status !== 'completed' && (
                         <button
                             type="button"
                             className="submit-with-spinner quiz-submit-button"

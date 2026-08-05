@@ -3,11 +3,11 @@ export class UserCollectionService {
     private readonly removeCollectionPath: string;
 
     constructor() {
-        this.saveCollectionPath = '/api/x_2119443_test_sim/test_simulator_api/collections/save';
-        this.removeCollectionPath = '/api/x_2119443_test_sim/test_simulator_api/collections/remove';
+        this.saveCollectionPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/collections/save';
+        this.removeCollectionPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/collections/remove';
     }
 
-    // Save a collection for the authenticated user through the custom Test Simulator API
+    // Save a collection for the authenticated user through the custom Quiz Simulator API
     async saveCollection(collectionId: string) {
         try {
             const response = await fetch(this.saveCollectionPath, {

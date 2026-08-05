@@ -4,7 +4,7 @@ import { QuestionCount, QuizMode } from '../shared/models/OpenCollectionTypes';
 
 interface CreateQuizModalProps {
     isOpen: boolean;
-    creatingTest: boolean;
+    creatingQuiz: boolean;
     questionCount: QuestionCount;
     mode: QuizMode;
     onClose: () => void;
@@ -15,7 +15,7 @@ interface CreateQuizModalProps {
 
 export default function CreateQuizModal({
     isOpen,
-    creatingTest,
+    creatingQuiz,
     questionCount,
     mode,
     onClose,
@@ -33,18 +33,18 @@ export default function CreateQuizModal({
                 className="app-modal"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="create-test-modal-title"
+                aria-labelledby="create-quiz-modal-title"
                 onClick={(event) => event.stopPropagation()}
             >
                 <div className="app-modal-header">
-                    <h2 id="create-test-modal-title">Create new quiz</h2>
+                    <h2 id="create-quiz-modal-title">Create new quiz</h2>
                     <button
                         type="button"
                         className="text-action-button"
                         data-label="Close"
                         title="Close dialog"
                         onClick={onClose}
-                        disabled={creatingTest}
+                        disabled={creatingQuiz}
                     >
                         <span className="submit-button-content">
                             <span className="button-leading-icon" aria-hidden="true">
@@ -81,9 +81,9 @@ export default function CreateQuizModal({
                     </div>
 
                     <div className="modal-form-row">
-                        <label htmlFor="test-mode">Quiz mode</label>
+                        <label htmlFor="quiz-mode">Quiz mode</label>
                         <select
-                            id="test-mode"
+                            id="quiz-mode"
                             value={mode}
                             onChange={(event) => onModeChange(event.target.value as QuizMode)}
                         >
@@ -99,9 +99,9 @@ export default function CreateQuizModal({
                         className="submit-with-spinner"
                         data-label="Create quiz"
                         title="Create quiz"
-                        disabled={creatingTest}
+                        disabled={creatingQuiz}
                     >
-                        {creatingTest ? (
+                        {creatingQuiz ? (
                             <LoadingSpinnerIcon className="button-loading-icon" />
                         ) : (
                             <span className="submit-button-content">

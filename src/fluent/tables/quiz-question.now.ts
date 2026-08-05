@@ -1,13 +1,13 @@
 import { Table, ReferenceColumn, ChoiceColumn, ListColumn } from '@servicenow/sdk/core';
 
-export const x_2119443_test_sim_test_question = Table({
-    name: 'x_2119443_test_sim_test_question',
-    label: 'Test Question',
+export const x_2119443_quiz_sim_quiz_question = Table({
+    name: 'x_2119443_quiz_sim_quiz_question',
+    label: 'Quiz Question',
     display: 'question',
     schema: {
-        question: ReferenceColumn({ referenceTable: 'x_2119443_test_sim_question', mandatory: true }),
-        test: ReferenceColumn({
-            referenceTable: 'x_2119443_test_sim_test',
+        question: ReferenceColumn({ referenceTable: 'x_2119443_quiz_sim_question', mandatory: true }),
+        quiz: ReferenceColumn({
+            referenceTable: 'x_2119443_quiz_sim_quiz',
             mandatory: true,
             cascadeRule: 'delete',
         }),
@@ -29,7 +29,7 @@ export const x_2119443_test_sim_test_question = Table({
                 },
             },
         }),
-        selected_answers: ListColumn({ referenceTable: 'x_2119443_test_sim_answer' }),
+        selected_answers: ListColumn({ referenceTable: 'x_2119443_quiz_sim_answer' }),
     },
     index: [
         {
@@ -40,7 +40,7 @@ export const x_2119443_test_sim_test_question = Table({
         {
             name: 'index2',
             unique: false,
-            element: 'test',
+            element: 'quiz',
         },
     ],
 });
@@ -48,7 +48,7 @@ export const x_2119443_test_sim_test_question = Table({
 import { List, Form, default_view } from '@servicenow/sdk/core';
 
 Form({
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     view: default_view,
     sections: [
         {
@@ -56,7 +56,7 @@ Form({
             content: [
                 {
                     layout: 'two-column',
-                    leftElements: [{ field: 'test', type: 'table_field' }],
+                    leftElements: [{ field: 'quiz', type: 'table_field' }],
                     rightElements: [{ field: 'status', type: 'table_field' }],
                 },
             ],
@@ -77,41 +77,41 @@ Form({
 });
 
 List({
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     view: default_view,
-    columns: ['test', 'question', 'status'],
+    columns: ['quiz', 'question', 'status'],
 });
 
 import { Acl } from '@servicenow/sdk/core';
 
 Acl({
-    $id: Now.ID['test_question_create'],
+    $id: Now.ID['quiz_question_create'],
     type: 'record',
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     operation: 'create',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_question_read'],
+    $id: Now.ID['quiz_question_read'],
     type: 'record',
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     operation: 'read',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_question_write'],
+    $id: Now.ID['quiz_question_write'],
     type: 'record',
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     operation: 'write',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });
 
 Acl({
-    $id: Now.ID['test_question_delete'],
+    $id: Now.ID['quiz_question_delete'],
     type: 'record',
-    table: 'x_2119443_test_sim_test_question',
+    table: 'x_2119443_quiz_sim_quiz_question',
     operation: 'delete',
-    roles: ['x_2119443_test_sim.user'],
+    roles: ['x_2119443_quiz_sim.user'],
 });

@@ -9,8 +9,8 @@ export class CollectionService {
     private readonly publishCollectionPath: string;
 
     constructor() {
-        this.collectionsListPath = '/api/x_2119443_test_sim/test_simulator_api/collections';
-        this.publishCollectionPath = '/api/x_2119443_test_sim/test_simulator_api/collections/publish';
+        this.collectionsListPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/collections';
+        this.publishCollectionPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/collections/publish';
     }
 
     async list(options?: { savedOnly?: boolean }) {

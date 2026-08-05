@@ -4,8 +4,8 @@ declare global {
     }
 }
 
-export type TestDetail = {
-    test: {
+export type QuizDetail = {
+    quiz: {
         sys_id: string;
         collection_id: string;
         collection_name: string;
@@ -14,7 +14,7 @@ export type TestDetail = {
         result: number;
     };
     questions: Array<{
-        test_question_id: string;
+        quiz_question_id: string;
         question_id: string;
         status: string;
         question: string;
@@ -30,16 +30,16 @@ export type TestDetail = {
     }>;
 };
 
-export type SubmitTestPayload = {
-    test_id: string;
+export type SubmitQuizPayload = {
+    quiz_id: string;
     answers: Array<{
         question_id: string;
         selected_answer_ids: string[];
     }>;
 };
 
-export type SubmitTestResult = {
-    test_id: string;
+export type SubmitQuizResult = {
+    quiz_id: string;
     total_questions: number;
     correct_count: number;
     failed_count: number;
@@ -50,35 +50,35 @@ export type SubmitTestResult = {
     }>;
 };
 
-export type SaveTestProgressPayload = {
-    test_id: string;
+export type SaveQuizProgressPayload = {
+    quiz_id: string;
     answers: Array<{
         question_id: string;
         selected_answer_ids: string[];
     }>;
 };
 
-export type SaveTestProgressResult = {
-    test_id: string;
+export type SaveQuizProgressResult = {
+    quiz_id: string;
     saved_questions_count: number;
 };
 
-export class TestService {
-    private readonly testDetailPath: string;
+export class QuizService {
+    private readonly quizDetailPath: string;
     private readonly saveProgressPath: string;
     private readonly submitPath: string;
 
     constructor() {
-        this.testDetailPath = '/api/x_2119443_test_sim/test_simulator_api/tests/detail';
-        this.saveProgressPath = '/api/x_2119443_test_sim/test_simulator_api/tests/save-progress';
-        this.submitPath = '/api/x_2119443_test_sim/test_simulator_api/tests/submit';
+        this.quizDetailPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/quizzes/detail';
+        this.saveProgressPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/quizzes/save-progress';
+        this.submitPath = '/api/x_2119443_quiz_sim/quiz_simulator_api/quizzes/submit';
     }
 
-    async getTestDetail(testId: string): Promise<TestDetail> {
+    async getQuizDetail(quizId: string): Promise<QuizDetail> {
         const query = new URLSearchParams();
-        query.set('test_id', testId);
+        query.set('quiz_id', quizId);
 
-        const response = await fetch(`${this.testDetailPath}?${query.toString()}`, {
+        const response = await fetch(`${this.quizDetailPath}?${query.toString()}`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
@@ -96,20 +96,20 @@ export class TestService {
             throw new Error('Invalid response contract: expected result object');
         }
 
-        const result = payload.result as TestDetail;
+        const result = payload.result as QuizDetail;
 
         return {
-            test: {
-                sys_id: String(result?.test?.sys_id || ''),
-                collection_id: String(result?.test?.collection_id || ''),
-                collection_name: String(result?.test?.collection_name || ''),
-                created_on: String(result?.test?.created_on || ''),
-                status: String(result?.test?.status || ''),
-                result: parseInt(String(result?.test?.result || '0'), 10),
+            quiz: {
+                sys_id: String(result?.quiz?.sys_id || ''),
+                collection_id: String(result?.quiz?.collection_id || ''),
+                collection_name: String(result?.quiz?.collection_name || ''),
+                created_on: String(result?.quiz?.created_on || ''),
+                status: String(result?.quiz?.status || ''),
+                result: parseInt(String(result?.quiz?.result || '0'), 10),
             },
             questions: Array.isArray(result?.questions)
                 ? result.questions.map((question: any) => ({
-                      test_question_id: String(question?.test_question_id || ''),
+                      quiz_question_id: String(question?.quiz_question_id || ''),
                       question_id: String(question?.question_id || ''),
                       status: String(question?.status || ''),
                       question: String(question?.question || ''),
@@ -131,7 +131,7 @@ export class TestService {
         };
     }
 
-    async saveTestProgress(payload: SaveTestProgressPayload): Promise<SaveTestProgressResult> {
+    async saveQuizProgress(payload: SaveQuizProgressPayload): Promise<SaveQuizProgressResult> {
         const response = await fetch(this.saveProgressPath, {
             method: 'POST',
             headers: {
@@ -153,12 +153,12 @@ export class TestService {
         }
 
         return {
-            test_id: String(data.result?.test_id || ''),
+            quiz_id: String(data.result?.quiz_id || ''),
             saved_questions_count: parseInt(String(data.result?.saved_questions_count || '0'), 10),
         };
     }
 
-    async submitTest(payload: SubmitTestPayload): Promise<SubmitTestResult> {
+    async submitQuiz(payload: SubmitQuizPayload): Promise<SubmitQuizResult> {
         const response = await fetch(this.submitPath, {
             method: 'POST',
             headers: {
@@ -180,7 +180,7 @@ export class TestService {
         }
 
         return {
-            test_id: String(data.result?.test_id || ''),
+            quiz_id: String(data.result?.quiz_id || ''),
             total_questions: parseInt(String(data.result?.total_questions || '0'), 10),
             correct_count: parseInt(String(data.result?.correct_count || '0'), 10),
             failed_count: parseInt(String(data.result?.failed_count || '0'), 10),

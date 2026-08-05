@@ -58,7 +58,7 @@ function getQueryParam(request: any, name: string): string | undefined {
 function getCollectionQuestionIds(collectionId: string): string[] {
     const questionIds: string[] = [];
 
-    const question = new GlideRecord('x_2119443_test_sim_question');
+    const question = new GlideRecord('x_2119443_quiz_sim_question');
     question.addQuery('collection', collectionId);
     question.query();
 
@@ -141,7 +141,7 @@ function isStringArray(value: any): value is string[] {
 }
 
 export function getCurrentUserRoles(request: any, response: any) {
-    const isUser = gs.hasRole('x_2119443_test_sim.user');
+    const isUser = gs.hasRole('x_2119443_quiz_sim.user');
     const access: 'user' | 'none' = isUser ? 'user' : 'none';
 
     response.setBody({
@@ -156,7 +156,7 @@ export function getCollectionsList(request: any, response: any) {
     const savedOnly = toBoolean(savedOnlyParam);
     const savedByCollection: Record<string, boolean> = {};
 
-    const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
+    const userCollection = new GlideRecord('x_2119443_quiz_sim_user_collection');
     userCollection.addQuery('user', currentUserId);
     userCollection.query();
 
@@ -167,7 +167,7 @@ export function getCollectionsList(request: any, response: any) {
         }
     }
 
-    const collection = new GlideRecord('x_2119443_test_sim_collection');
+    const collection = new GlideRecord('x_2119443_quiz_sim_collection');
     collection.orderByDesc('name');
     collection.query();
 
@@ -202,7 +202,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
         return;
     }
 
-    const existing = new GlideRecord('x_2119443_test_sim_user_collection');
+    const existing = new GlideRecord('x_2119443_quiz_sim_user_collection');
     existing.addQuery('user', currentUserId);
     existing.addQuery('collection', collectionId);
     existing.query();
@@ -225,7 +225,7 @@ export function saveCollectionForCurrentUser(request: any, response: any) {
         return;
     }
 
-    const record = new GlideRecord('x_2119443_test_sim_user_collection');
+    const record = new GlideRecord('x_2119443_quiz_sim_user_collection');
     record.initialize();
     record.setValue('user', currentUserId);
     record.setValue('collection', collectionId);
@@ -252,18 +252,18 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
         return;
     }
 
-    const existing = new GlideRecord('x_2119443_test_sim_user_collection');
+    const existing = new GlideRecord('x_2119443_quiz_sim_user_collection');
     existing.addQuery('user', currentUserId);
     existing.addQuery('collection', collectionId);
     existing.query();
 
-    const legacyTests = new GlideRecord('x_2119443_test_sim_test');
-    legacyTests.addQuery('user', currentUserId);
-    legacyTests.addQuery('collection', collectionId);
-    legacyTests.query();
+    const legacyQuizzes = new GlideRecord('x_2119443_quiz_sim_quiz');
+    legacyQuizzes.addQuery('user', currentUserId);
+    legacyQuizzes.addQuery('collection', collectionId);
+    legacyQuizzes.query();
 
-    while (legacyTests.next()) {
-        legacyTests.deleteRecord();
+    while (legacyQuizzes.next()) {
+        legacyQuizzes.deleteRecord();
     }
 
     let removed = 0;
@@ -280,9 +280,9 @@ export function removeCollectionForCurrentUser(request: any, response: any) {
 }
 
 export function publishCollection(request: any, response: any) {
-    if (!gs.hasRole('x_2119443_test_sim.user')) {
+    if (!gs.hasRole('x_2119443_quiz_sim.user')) {
         response.setStatus(403);
-        response.setBody({ error: 'Only users with role x_2119443_test_sim.user can publish collections' });
+        response.setBody({ error: 'Only users with role x_2119443_quiz_sim.user can publish collections' });
         return;
     }
 
@@ -313,7 +313,7 @@ export function publishCollection(request: any, response: any) {
     let createdCollectionId = '';
 
     try {
-        const collection = new GlideRecord('x_2119443_test_sim_collection');
+        const collection = new GlideRecord('x_2119443_quiz_sim_collection');
         collection.initialize();
         collection.setValue('name', String(collectionPayload.name));
         createdCollectionId = String(collection.insert());
@@ -329,7 +329,7 @@ export function publishCollection(request: any, response: any) {
                 throw new Error(`Question at index ${qIndex} must include at least one answer`);
             }
 
-            const question = new GlideRecord('x_2119443_test_sim_question');
+            const question = new GlideRecord('x_2119443_quiz_sim_question');
             question.initialize();
             question.setValue('collection', createdCollectionId);
             question.setValue('question', String(questionPayload.question));
@@ -369,7 +369,7 @@ export function publishCollection(request: any, response: any) {
                     hasCorrectAnswer = true;
                 }
 
-                const answer = new GlideRecord('x_2119443_test_sim_answer');
+                const answer = new GlideRecord('x_2119443_quiz_sim_answer');
                 answer.initialize();
                 answer.setValue('question', createdQuestionId);
                 answer.setValue('answer', String(answerPayload.answer));
@@ -391,21 +391,21 @@ export function publishCollection(request: any, response: any) {
         });
     } catch (error: any) {
         for (let i = createdAnswerIds.length - 1; i >= 0; i -= 1) {
-            const grAnswer = new GlideRecord('x_2119443_test_sim_answer');
+            const grAnswer = new GlideRecord('x_2119443_quiz_sim_answer');
             if (grAnswer.get(createdAnswerIds[i])) {
                 grAnswer.deleteRecord();
             }
         }
 
         for (let i = createdQuestionIds.length - 1; i >= 0; i -= 1) {
-            const grQuestion = new GlideRecord('x_2119443_test_sim_question');
+            const grQuestion = new GlideRecord('x_2119443_quiz_sim_question');
             if (grQuestion.get(createdQuestionIds[i])) {
                 grQuestion.deleteRecord();
             }
         }
 
         if (createdCollectionId) {
-            const grCollection = new GlideRecord('x_2119443_test_sim_collection');
+            const grCollection = new GlideRecord('x_2119443_quiz_sim_collection');
             if (grCollection.get(createdCollectionId)) {
                 grCollection.deleteRecord();
             }
@@ -426,7 +426,7 @@ export function getOpenCollectionOverview(request: any, response: any) {
         return;
     }
 
-    const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
+    const userCollection = new GlideRecord('x_2119443_quiz_sim_user_collection');
     userCollection.addQuery('user', currentUserId);
     userCollection.addQuery('collection', collectionId);
     userCollection.query();
@@ -450,7 +450,7 @@ export function getOpenCollectionOverview(request: any, response: any) {
         answers: Array<{ sys_id: string; answer: string; is_correct: string }>;
     }> = [];
 
-    const tests: Array<{
+    const quizzes: Array<{
         sys_id: string;
         status: string;
         result: string;
@@ -458,40 +458,40 @@ export function getOpenCollectionOverview(request: any, response: any) {
         correct_count: string;
         total_questions: string;
     }> = [];
-    const test = new GlideRecord('x_2119443_test_sim_test');
-    test.addQuery('user', currentUserId);
-    test.addQuery('collection', collectionId);
-    test.orderByDesc('sys_created_on');
-    test.query();
+    const quiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+    quiz.addQuery('user', currentUserId);
+    quiz.addQuery('collection', collectionId);
+    quiz.orderByDesc('sys_created_on');
+    quiz.query();
 
-    while (test.next()) {
-        const testId = test.getUniqueValue();
+    while (quiz.next()) {
+        const quizId = quiz.getUniqueValue();
         let totalQuestions = 0;
         let correctCount = 0;
 
-        const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-        testQuestion.addQuery('test', testId);
-        testQuestion.query();
+        const quizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+        quizQuestion.addQuery('quiz', quizId);
+        quizQuestion.query();
 
-        while (testQuestion.next()) {
+        while (quizQuestion.next()) {
             totalQuestions += 1;
 
-            if ((testQuestion.getValue('status') || '') === 'correct') {
+            if ((quizQuestion.getValue('status') || '') === 'correct') {
                 correctCount += 1;
             }
         }
 
-        tests.push({
-            sys_id: testId,
-            status: test.getValue('status') || 'in_progress',
-            result: String(parseInt(test.getValue('result') || '0', 10)),
-            created_on: test.getValue('sys_created_on') || '',
+        quizzes.push({
+            sys_id: quizId,
+            status: quiz.getValue('status') || 'in_progress',
+            result: String(parseInt(quiz.getValue('result') || '0', 10)),
+            created_on: quiz.getValue('sys_created_on') || '',
             correct_count: String(correctCount),
             total_questions: String(totalQuestions),
         });
     }
 
-    const question = new GlideRecord('x_2119443_test_sim_question');
+    const question = new GlideRecord('x_2119443_quiz_sim_question');
     question.addQuery('collection', collectionId);
     question.orderBy('sys_created_on');
     question.query();
@@ -499,7 +499,7 @@ export function getOpenCollectionOverview(request: any, response: any) {
     while (question.next()) {
         const questionId = question.getUniqueValue();
         const answers: Array<{ sys_id: string; answer: string; is_correct: string }> = [];
-        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        const answer = new GlideRecord('x_2119443_quiz_sim_answer');
         answer.addQuery('question', questionId);
         answer.orderBy('sys_created_on');
         answer.query();
@@ -535,12 +535,12 @@ export function getOpenCollectionOverview(request: any, response: any) {
             ever_failed: everFailed,
             last_attempt_failed: lastAttemptFailed,
         },
-        tests,
+        quizzes,
         questions,
     });
 }
 
-export function createCollectionTest(request: any, response: any) {
+export function createCollectionQuiz(request: any, response: any) {
     const currentUserId = gs.getUserID();
     const body: any = parseBody(request);
 
@@ -567,7 +567,7 @@ export function createCollectionTest(request: any, response: any) {
         return;
     }
 
-    const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
+    const userCollection = new GlideRecord('x_2119443_quiz_sim_user_collection');
     userCollection.addQuery('user', currentUserId);
     userCollection.addQuery('collection', collectionId);
     userCollection.query();
@@ -599,42 +599,42 @@ export function createCollectionTest(request: any, response: any) {
     const selectedQuestionIds = pickRandomItems(sourceQuestionIds, Math.min(requestedCount, sourceQuestionIds.length));
     if (selectedQuestionIds.length === 0) {
         response.setStatus(400);
-        response.setBody({ error: 'Unable to select questions for the new test' });
+        response.setBody({ error: 'Unable to select questions for the new quiz' });
         return;
     }
 
-    const createdTestQuestionIds: string[] = [];
-    let createdTestId = '';
+    const createdQuizQuestionIds: string[] = [];
+    let createdQuizId = '';
     let createdOn = '';
 
     try {
-        const test = new GlideRecord('x_2119443_test_sim_test');
-        test.initialize();
-        test.setValue('user_collection', userCollection.getUniqueValue());
-        test.setValue('collection', collectionId);
-        test.setValue('user', currentUserId);
-        test.setValue('status', 'in_progress');
-        test.setValue('result', 0);
-        createdTestId = String(test.insert());
+        const quiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+        quiz.initialize();
+        quiz.setValue('user_collection', userCollection.getUniqueValue());
+        quiz.setValue('collection', collectionId);
+        quiz.setValue('user', currentUserId);
+        quiz.setValue('status', 'in_progress');
+        quiz.setValue('result', 0);
+        createdQuizId = String(quiz.insert());
 
-        const createdTest = new GlideRecord('x_2119443_test_sim_test');
-        if (createdTest.get(createdTestId)) {
-            createdOn = createdTest.getValue('sys_created_on') || '';
+        const createdQuiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+        if (createdQuiz.get(createdQuizId)) {
+            createdOn = createdQuiz.getValue('sys_created_on') || '';
         }
 
         for (let i = 0; i < selectedQuestionIds.length; i += 1) {
-            const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-            testQuestion.initialize();
-            testQuestion.setValue('test', createdTestId);
-            testQuestion.setValue('question', selectedQuestionIds[i]);
-            testQuestion.setValue('status', 'unanswered');
-            const createdTestQuestionId = String(testQuestion.insert());
-            createdTestQuestionIds.push(createdTestQuestionId);
+            const quizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+            quizQuestion.initialize();
+            quizQuestion.setValue('quiz', createdQuizId);
+            quizQuestion.setValue('question', selectedQuestionIds[i]);
+            quizQuestion.setValue('status', 'unanswered');
+            const createdQuizQuestionId = String(quizQuestion.insert());
+            createdQuizQuestionIds.push(createdQuizQuestionId);
         }
 
         response.setStatus(201);
         response.setBody({
-            test_id: createdTestId,
+            quiz_id: createdQuizId,
             collection_id: collectionId,
             created_on: createdOn,
             mode,
@@ -642,59 +642,59 @@ export function createCollectionTest(request: any, response: any) {
             selected_question_count: String(selectedQuestionIds.length),
         });
     } catch (error: any) {
-        for (let i = createdTestQuestionIds.length - 1; i >= 0; i -= 1) {
-            const grTestQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-            if (grTestQuestion.get(createdTestQuestionIds[i])) {
-                grTestQuestion.deleteRecord();
+        for (let i = createdQuizQuestionIds.length - 1; i >= 0; i -= 1) {
+            const grQuizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+            if (grQuizQuestion.get(createdQuizQuestionIds[i])) {
+                grQuizQuestion.deleteRecord();
             }
         }
 
-        if (createdTestId) {
-            const grTest = new GlideRecord('x_2119443_test_sim_test');
-            if (grTest.get(createdTestId)) {
-                grTest.deleteRecord();
+        if (createdQuizId) {
+            const grQuiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+            if (grQuiz.get(createdQuizId)) {
+                grQuiz.deleteRecord();
             }
         }
 
         response.setStatus(400);
-        response.setBody({ error: error?.message || 'Failed to create test' });
+        response.setBody({ error: error?.message || 'Failed to create quiz' });
     }
 }
 
-export function getTestDetail(request: any, response: any) {
+export function getQuizDetail(request: any, response: any) {
     const currentUserId = gs.getUserID();
-    const testId = getQueryParam(request, 'test_id');
+    const quizId = getQueryParam(request, 'quiz_id');
 
-    if (!testId) {
+    if (!quizId) {
         response.setStatus(400);
-        response.setBody({ error: 'test_id is required' });
+        response.setBody({ error: 'quiz_id is required' });
         return;
     }
 
-    const test = new GlideRecord('x_2119443_test_sim_test');
-    test.addQuery('sys_id', testId);
-    test.addQuery('user', currentUserId);
-    test.query();
+    const quiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+    quiz.addQuery('sys_id', quizId);
+    quiz.addQuery('user', currentUserId);
+    quiz.query();
 
-    if (!test.next()) {
+    if (!quiz.next()) {
         response.setStatus(404);
-        response.setBody({ error: 'Test not found for current user' });
+        response.setBody({ error: 'Quiz not found for current user' });
         return;
     }
 
-    const isCompletedTest = (test.getValue('status') || 'in_progress') === 'completed';
+    const isCompletedQuiz = (quiz.getValue('status') || 'in_progress') === 'completed';
 
     const result = {
-        test: {
-            sys_id: test.getUniqueValue(),
-            collection_id: test.getValue('collection') || '',
-            collection_name: test.getDisplayValue('collection') || '',
-            created_on: test.getValue('sys_created_on') || '',
-            status: test.getValue('status') || 'in_progress',
-            result: String(parseInt(test.getValue('result') || '0', 10)),
+        quiz: {
+            sys_id: quiz.getUniqueValue(),
+            collection_id: quiz.getValue('collection') || '',
+            collection_name: quiz.getDisplayValue('collection') || '',
+            created_on: quiz.getValue('sys_created_on') || '',
+            status: quiz.getValue('status') || 'in_progress',
+            result: String(parseInt(quiz.getValue('result') || '0', 10)),
         },
         questions: [] as Array<{
-            test_question_id: string;
+            quiz_question_id: string;
             question_id: string;
             status: string;
             question: string;
@@ -706,24 +706,24 @@ export function getTestDetail(request: any, response: any) {
         }>,
     };
 
-    const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-    testQuestion.addQuery('test', testId);
-    testQuestion.orderBy('sys_created_on');
-    testQuestion.query();
+    const quizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+    quizQuestion.addQuery('quiz', quizId);
+    quizQuestion.orderBy('sys_created_on');
+    quizQuestion.query();
 
-    while (testQuestion.next()) {
-        const questionId = testQuestion.getValue('question');
+    while (quizQuestion.next()) {
+        const questionId = quizQuestion.getValue('question');
         if (!questionId) {
             continue;
         }
 
-        const question = new GlideRecord('x_2119443_test_sim_question');
+        const question = new GlideRecord('x_2119443_quiz_sim_question');
         if (!question.get(questionId)) {
             continue;
         }
 
         const answers: Array<{ sys_id: string; answer: string; is_correct?: string }> = [];
-        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        const answer = new GlideRecord('x_2119443_quiz_sim_answer');
         answer.addQuery('question', questionId);
         answer.orderBy('sys_created_on');
         answer.query();
@@ -734,7 +734,7 @@ export function getTestDetail(request: any, response: any) {
                 answer: answer.getValue('answer') || '',
             };
 
-            if (isCompletedTest) {
+            if (isCompletedQuiz) {
                 answerRow.is_correct = String(toBoolean(answer.getValue('is_correct')));
             }
 
@@ -742,14 +742,14 @@ export function getTestDetail(request: any, response: any) {
         }
 
         result.questions.push({
-            test_question_id: testQuestion.getUniqueValue(),
+            quiz_question_id: quizQuestion.getUniqueValue(),
             question_id: questionId,
-            status: testQuestion.getValue('status') || 'unanswered',
+            status: quizQuestion.getValue('status') || 'unanswered',
             question: question.getValue('question') || '',
             type: question.getValue('type') || 'single',
             rationale: question.getValue('rationale') || '',
             docs: question.getValue('docs') || '',
-            selected_answer_ids: parseGlideList(testQuestion.getValue('selected_answers')),
+            selected_answer_ids: parseGlideList(quizQuestion.getValue('selected_answers')),
             answers,
         });
     }
@@ -757,16 +757,16 @@ export function getTestDetail(request: any, response: any) {
     response.setBody(result);
 }
 
-export function saveTestProgress(request: any, response: any) {
+export function saveQuizProgress(request: any, response: any) {
     const currentUserId = gs.getUserID();
     const body: any = parseBody(request);
 
-    const testId = body.test_id;
+    const quizId = body.quiz_id;
     const answers = body.answers;
 
-    if (!testId || typeof testId !== 'string') {
+    if (!quizId || typeof quizId !== 'string') {
         response.setStatus(400);
-        response.setBody({ error: 'test_id is required' });
+        response.setBody({ error: 'quiz_id is required' });
         return;
     }
 
@@ -776,38 +776,38 @@ export function saveTestProgress(request: any, response: any) {
         return;
     }
 
-    const test = new GlideRecord('x_2119443_test_sim_test');
-    test.addQuery('sys_id', testId);
-    test.addQuery('user', currentUserId);
-    test.query();
+    const quiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+    quiz.addQuery('sys_id', quizId);
+    quiz.addQuery('user', currentUserId);
+    quiz.query();
 
-    if (!test.next()) {
+    if (!quiz.next()) {
         response.setStatus(404);
-        response.setBody({ error: 'Test not found for current user' });
+        response.setBody({ error: 'Quiz not found for current user' });
         return;
     }
 
-    if (test.getValue('status') !== 'in_progress') {
+    if (quiz.getValue('status') !== 'in_progress') {
         response.setStatus(409);
-        response.setBody({ error: 'Test is already completed' });
+        response.setBody({ error: 'Quiz is already completed' });
         return;
     }
 
     const expectedByQuestionId: Record<string, string> = {};
-    const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-    testQuestion.addQuery('test', testId);
-    testQuestion.query();
+    const quizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+    quizQuestion.addQuery('quiz', quizId);
+    quizQuestion.query();
 
-    while (testQuestion.next()) {
-        const questionId = testQuestion.getValue('question') || '';
+    while (quizQuestion.next()) {
+        const questionId = quizQuestion.getValue('question') || '';
         if (questionId) {
-            expectedByQuestionId[questionId] = testQuestion.getUniqueValue();
+            expectedByQuestionId[questionId] = quizQuestion.getUniqueValue();
         }
     }
 
     if (Object.keys(expectedByQuestionId).length === 0) {
         response.setStatus(400);
-        response.setBody({ error: 'Test has no questions' });
+        response.setBody({ error: 'Quiz has no questions' });
         return;
     }
 
@@ -831,10 +831,10 @@ export function saveTestProgress(request: any, response: any) {
             return;
         }
 
-        const testQuestionId = expectedByQuestionId[questionId];
-        if (!testQuestionId) {
+        const quizQuestionId = expectedByQuestionId[questionId];
+        if (!quizQuestionId) {
             response.setStatus(400);
-            response.setBody({ error: `Question '${questionId}' is not part of this test` });
+            response.setBody({ error: `Question '${questionId}' is not part of this quiz` });
             return;
         }
 
@@ -845,7 +845,7 @@ export function saveTestProgress(request: any, response: any) {
         }
 
         const validAnswerIdsMap: Record<string, true> = {};
-        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        const answer = new GlideRecord('x_2119443_quiz_sim_answer');
         answer.addQuery('question', questionId);
         answer.query();
 
@@ -862,35 +862,35 @@ export function saveTestProgress(request: any, response: any) {
             }
         }
 
-        const testQuestionToUpdate = new GlideRecord('x_2119443_test_sim_test_question');
-        if (!testQuestionToUpdate.get(testQuestionId)) {
+        const quizQuestionToUpdate = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+        if (!quizQuestionToUpdate.get(quizQuestionId)) {
             response.setStatus(400);
-            response.setBody({ error: `Test question '${testQuestionId}' not found` });
+            response.setBody({ error: `Quiz question '${quizQuestionId}' not found` });
             return;
         }
 
-        testQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
-        testQuestionToUpdate.update();
+        quizQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
+        quizQuestionToUpdate.update();
 
         updatedQuestionIds.push(questionId);
     }
 
     response.setBody({
-        test_id: testId,
+        quiz_id: quizId,
         saved_questions_count: String(updatedQuestionIds.length),
     });
 }
 
-export function submitTest(request: any, response: any) {
+export function submitQuiz(request: any, response: any) {
     const currentUserId = gs.getUserID();
     const body: any = parseBody(request);
 
-    const testId = body.test_id;
+    const quizId = body.quiz_id;
     const answers = body.answers;
 
-    if (!testId || typeof testId !== 'string') {
+    if (!quizId || typeof quizId !== 'string') {
         response.setStatus(400);
-        response.setBody({ error: 'test_id is required' });
+        response.setBody({ error: 'quiz_id is required' });
         return;
     }
 
@@ -900,25 +900,25 @@ export function submitTest(request: any, response: any) {
         return;
     }
 
-    const test = new GlideRecord('x_2119443_test_sim_test');
-    test.addQuery('sys_id', testId);
-    test.addQuery('user', currentUserId);
-    test.query();
+    const quiz = new GlideRecord('x_2119443_quiz_sim_quiz');
+    quiz.addQuery('sys_id', quizId);
+    quiz.addQuery('user', currentUserId);
+    quiz.query();
 
-    if (!test.next()) {
+    if (!quiz.next()) {
         response.setStatus(404);
-        response.setBody({ error: 'Test not found for current user' });
+        response.setBody({ error: 'Quiz not found for current user' });
         return;
     }
 
-    if (test.getValue('status') !== 'in_progress') {
+    if (quiz.getValue('status') !== 'in_progress') {
         response.setStatus(409);
-        response.setBody({ error: 'Test is already completed' });
+        response.setBody({ error: 'Quiz is already completed' });
         return;
     }
 
-    const collectionId = test.getValue('collection') || '';
-    const userCollection = new GlideRecord('x_2119443_test_sim_user_collection');
+    const collectionId = quiz.getValue('collection') || '';
+    const userCollection = new GlideRecord('x_2119443_quiz_sim_user_collection');
     userCollection.addQuery('user', currentUserId);
     userCollection.addQuery('collection', collectionId);
     userCollection.query();
@@ -930,21 +930,21 @@ export function submitTest(request: any, response: any) {
     }
 
     const expectedByQuestionId: Record<string, string> = {};
-    const testQuestion = new GlideRecord('x_2119443_test_sim_test_question');
-    testQuestion.addQuery('test', testId);
-    testQuestion.query();
+    const quizQuestion = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+    quizQuestion.addQuery('quiz', quizId);
+    quizQuestion.query();
 
-    while (testQuestion.next()) {
-        const questionId = testQuestion.getValue('question') || '';
+    while (quizQuestion.next()) {
+        const questionId = quizQuestion.getValue('question') || '';
         if (questionId) {
-            expectedByQuestionId[questionId] = testQuestion.getUniqueValue();
+            expectedByQuestionId[questionId] = quizQuestion.getUniqueValue();
         }
     }
 
     const expectedQuestionIds = Object.keys(expectedByQuestionId);
     if (expectedQuestionIds.length === 0) {
         response.setStatus(400);
-        response.setBody({ error: 'Test has no questions' });
+        response.setBody({ error: 'Quiz has no questions' });
         return;
     }
 
@@ -970,7 +970,7 @@ export function submitTest(request: any, response: any) {
 
         if (!expectedByQuestionId[questionId]) {
             response.setStatus(400);
-            response.setBody({ error: `Question '${questionId}' is not part of this test` });
+            response.setBody({ error: `Question '${questionId}' is not part of this quiz` });
             return;
         }
 
@@ -985,7 +985,7 @@ export function submitTest(request: any, response: any) {
 
     if (Object.keys(submittedByQuestionId).length !== expectedQuestionIds.length) {
         response.setStatus(400);
-        response.setBody({ error: 'All test questions must be answered in submit payload' });
+        response.setBody({ error: 'All quiz questions must be answered in submit payload' });
         return;
     }
 
@@ -1003,7 +1003,7 @@ export function submitTest(request: any, response: any) {
         const validAnswerIdsMap: Record<string, true> = {};
         const correctAnswerIdsMap: Record<string, true> = {};
 
-        const answer = new GlideRecord('x_2119443_test_sim_answer');
+        const answer = new GlideRecord('x_2119443_quiz_sim_answer');
         answer.addQuery('question', questionId);
         answer.query();
 
@@ -1040,17 +1040,17 @@ export function submitTest(request: any, response: any) {
             }
         }
 
-        const testQuestionId = expectedByQuestionId[questionId];
-        const testQuestionToUpdate = new GlideRecord('x_2119443_test_sim_test_question');
-        if (!testQuestionToUpdate.get(testQuestionId)) {
+        const quizQuestionId = expectedByQuestionId[questionId];
+        const quizQuestionToUpdate = new GlideRecord('x_2119443_quiz_sim_quiz_question');
+        if (!quizQuestionToUpdate.get(quizQuestionId)) {
             response.setStatus(400);
-            response.setBody({ error: `Test question '${testQuestionId}' not found` });
+            response.setBody({ error: `Quiz question '${quizQuestionId}' not found` });
             return;
         }
 
-        testQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
-        testQuestionToUpdate.setValue('status', isCorrect ? 'correct' : 'failed');
-        testQuestionToUpdate.update();
+        quizQuestionToUpdate.setValue('selected_answers', selectedAnswerIds.join(','));
+        quizQuestionToUpdate.setValue('status', isCorrect ? 'correct' : 'failed');
+        quizQuestionToUpdate.update();
 
         processedQuestionIds.push(questionId);
         if (isCorrect) {
@@ -1066,9 +1066,9 @@ export function submitTest(request: any, response: any) {
 
     const scorePercent = Math.round((correctCount / expectedQuestionIds.length) * 100);
 
-    test.setValue('status', 'completed');
-    test.setValue('result', scorePercent);
-    test.update();
+    quiz.setValue('status', 'completed');
+    quiz.setValue('result', scorePercent);
+    quiz.update();
 
     const neverSeenMap = toMembershipMap(parseGlideList(userCollection.getValue('never_seen_questions')));
     const correctMap = toMembershipMap(parseGlideList(userCollection.getValue('correct_questions')));
@@ -1100,7 +1100,7 @@ export function submitTest(request: any, response: any) {
     userCollection.update();
 
     response.setBody({
-        test_id: testId,
+        quiz_id: quizId,
         total_questions: String(expectedQuestionIds.length),
         correct_count: String(correctCount),
         failed_count: String(failedCount),
