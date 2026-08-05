@@ -101,9 +101,9 @@ export default function CollectionQuestionsPage({
             ) : !filteredQuestions.length ? (
                 <div>No questions found for this filter.</div>
             ) : (
-                <div>
+                <div className="quiz-questions-list">
                     {filteredQuestions.map((question, index) => (
-                        <div key={question.sys_id}>
+                        <div key={question.sys_id} className="quiz-question-item">
                             <h3 className="question-title-with-info">
                                 <span>
                                     {index + 1}. {question.question}
