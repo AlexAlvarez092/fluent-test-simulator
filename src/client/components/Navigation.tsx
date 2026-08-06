@@ -19,7 +19,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                 <button
                     type="button"
                     data-label="Home"
-                    className={currentPage === 'home' ? 'app-nav-link is-active' : 'app-nav-link'}
+                    className={currentPage === 'home' ? 'text-action-button is-active' : 'text-action-button'}
                     title="Open home"
                     onClick={() => onNavigate('home')}
                 >
@@ -28,7 +28,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                 <button
                     type="button"
                     data-label="Collections"
-                    className={currentPage === 'collections' ? 'app-nav-link is-active' : 'app-nav-link'}
+                    className={currentPage === 'collections' ? 'text-action-button is-active' : 'text-action-button'}
                     title="Open collections"
                     onClick={() => onNavigate('collections')}
                 >
@@ -37,7 +37,7 @@ export default function Navigation({ onNavigate, currentPage }: NavigationProps)
                 <button
                     type="button"
                     data-label="Publish collection"
-                    className={currentPage === 'publish' ? 'app-nav-link is-active' : 'app-nav-link'}
+                    className={currentPage === 'publish' ? 'text-action-button is-active' : 'text-action-button'}
                     title="Open publish collection"
                     onClick={() => onNavigate('publish')}
                 >

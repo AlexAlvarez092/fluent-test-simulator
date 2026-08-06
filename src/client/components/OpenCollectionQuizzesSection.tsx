@@ -8,7 +8,11 @@ interface OpenCollectionQuizzesSectionProps {
     onOpenQuiz: (quizId: string, createdOn?: string) => void;
 }
 
-export default function OpenCollectionQuizzesSection({ loading, quizzes, onOpenQuiz }: OpenCollectionQuizzesSectionProps) {
+export default function OpenCollectionQuizzesSection({
+    loading,
+    quizzes,
+    onOpenQuiz,
+}: OpenCollectionQuizzesSectionProps) {
     const formatStatus = (status: string) => {
         const normalized = status.replaceAll('_', ' ').toLowerCase();
         return normalized.charAt(0).toUpperCase() + normalized.slice(1);
@@ -23,7 +27,7 @@ export default function OpenCollectionQuizzesSection({ loading, quizzes, onOpenQ
             {loading ? (
                 <div className="quizzes-content-slot" aria-hidden="true"></div>
             ) : !quizzes.length ? (
-                <div className="quizzes-content-slot quizzes-empty-message">No quizzes yet for this collection.</div>
+                <div className="quizzes-content-slot">No quizzes yet for this collection.</div>
             ) : (
                 <div className="quizzes-content-slot">
                     <table className="quizzes-table">

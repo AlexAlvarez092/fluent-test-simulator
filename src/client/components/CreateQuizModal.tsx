@@ -47,7 +47,7 @@ export default function CreateQuizModal({
                         disabled={creatingQuiz}
                     >
                         <span className="submit-button-content">
-                            <span className="button-leading-icon" aria-hidden="true">
+                            <span className="icon-stack" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-default">
                                     <path
                                         fill="currentColor"
@@ -105,7 +105,7 @@ export default function CreateQuizModal({
                             <LoadingSpinnerIcon className="button-loading-icon" />
                         ) : (
                             <span className="submit-button-content">
-                                <span className="button-leading-icon" aria-hidden="true">
+                                <span className="icon-stack" aria-hidden="true">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
