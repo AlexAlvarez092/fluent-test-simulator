@@ -1,10 +1,8 @@
 node_modules
 dist
-docs
 target
 .now
-.github
 *.tsbuildinfo
 .jest_cache
-.DS_Store
 package-lock.json
+.DS_Store
