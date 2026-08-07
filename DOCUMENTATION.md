@@ -13,7 +13,7 @@ Use it to avoid duplicate content across repository documentation.
 | Runtime architecture, data model, security model, API structure, build/deploy architecture | ARCH.md                                         | Reference ARCH.md, avoid restating details                            |
 | Visual language, UI patterns, accessibility and interaction style                          | STYLE.md                                        | Reference STYLE.md, avoid style duplication                           |
 | Quick product overview and developer entry points                                          | README.md                                       | Keep brief and link to detailed docs                                  |
-| Development workflow, branches, commits, and contribution process                          | CONTRIBUTING.md                                 | Reference CONTRIBUTING.md, keep only brief pointers elsewhere          |
+| Development workflow, branches, commits, and contribution process                          | CONTRIBUTING.md                                 | Reference CONTRIBUTING.md, keep only brief pointers elsewhere         |
 | Agent and implementation guardrails for this repository                                    | .github/instructions/guidelines.instructions.md | Follow instructions, do not duplicate design or architecture chapters |
 
 ## Authoring Rules
