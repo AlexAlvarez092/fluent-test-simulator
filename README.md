@@ -2,49 +2,24 @@
 
 ServiceNow Fluent application for creating and running quiz sessions from question collections.
 
-## What is implemented
+## Documentation
 
-### Collections
+- Source-of-truth map: [DOCUMENTATION.md](DOCUMENTATION.md)
+- Product requirements and scope: [PRD.md](PRD.md)
+- Technical architecture: [ARCH.md](ARCH.md)
+- UI and interaction style guide: [STYLE.md](STYLE.md)
+- Agent implementation guardrails: [.github/instructions/guidelines.instructions.md](.github/instructions/guidelines.instructions.md)
 
-- Browse all available collections
-- Save a collection for the current user
-- Remove a saved collection
-- Open a collection and review its current stats
+## What is implemented (Summary)
 
-### Open collection view
+- Collections browsing and per-user save/remove
+- Open collection overview with stats and filtered question groups
+- Quiz creation by mode and question count
+- Quiz run with autosave and submit
+- Completed quiz review with correctness highlighting
+- Collection publish from JSON payload
 
-- See question counters by group:
-    - Never Seen
-    - Correct
-    - Ever Failed
-    - Last Attempt Failed
-    - All
-- Open filtered question lists for each group
-- See previous quizzes and continue/review them
-- Create a new quiz from the selected collection
-
-### Quiz creation
-
-- Question counts: 10, 20, 40
-- Modes:
-    - never_seen
-    - random
-    - last_attempt_failed
-    - ever_failed
-
-### Quiz run
-
-- Supports single and multiple choice questions
-- Autosaves progress while answering
-- Submit quiz and view completed results state
-- Correct/incorrect answer highlighting in completed quizzes
-- Hover info icon next to each question title when data exists:
-    - shows rationale text
-    - shows documentation link when present
-
-### Publish page
-
-- Publish a collection payload (collection, questions, answers) to the backend API
+For complete behavior and acceptance details, see [PRD.md](PRD.md).
 
 ## Frontend pages
 
@@ -70,3 +45,4 @@ ServiceNow Fluent application for creating and running quiz sessions from questi
 
 - API calls use ServiceNow token header X-UserToken from window.g_ck.
 - Error handling in page-level flows redirects to the app error page when requests fail.
+- API/data/security details are owned by [ARCH.md](ARCH.md) to avoid duplication.
