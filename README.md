@@ -5,6 +5,7 @@ ServiceNow Fluent application for creating and running quiz sessions from questi
 ## Documentation
 
 - Source-of-truth map: [DOCUMENTATION.md](DOCUMENTATION.md)
+- Contribution workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Product requirements and scope: [PRD.md](PRD.md)
 - Technical architecture: [ARCH.md](ARCH.md)
 - UI and interaction style guide: [STYLE.md](STYLE.md)
