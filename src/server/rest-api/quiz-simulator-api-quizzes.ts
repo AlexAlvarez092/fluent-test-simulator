@@ -64,7 +64,12 @@ function getValidAnswerIdsMap(questionId: string) {
     return validAnswerIdsMap;
 }
 
-export function createQuizForCollection(currentUserId: string, collectionId: string, requestedCount: number, mode: string) {
+export function createQuizForCollection(
+    currentUserId: string,
+    collectionId: string,
+    requestedCount: number,
+    mode: string
+) {
     const userCollection = findUserCollection(currentUserId, collectionId);
     if (!userCollection) {
         return { error: 'Saved collection not found for current user', status: 404 };
